@@ -1,0 +1,170 @@
+<?php
+
+namespace EBay\MarketingAndPromotions\Generated\Marketing\Models;
+
+use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
+use Microsoft\Kiota\Abstractions\Serialization\Parsable;
+use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
+use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
+use Microsoft\Kiota\Abstractions\Types\TypeUtils;
+
+/**
+ * This type defines either the selections rules or the list of listing IDs for the discount. The "listing IDs" are are either the seller's item IDs or the eBay listing IDs.
+*/
+class InventoryCriterion implements AdditionalDataHolder, Parsable 
+{
+    /**
+     * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    */
+    private ?array $additionalData = null;
+    
+    /**
+     * @var string|null $inventoryCriterionType Indicates how the items to be discounted are selected. You can include inventory by ID, using rules, or globally include all your inventory.  For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:InventoryCriterionEnum'>eBay API documentation</a>
+    */
+    private ?string $inventoryCriterionType = null;
+    
+    /**
+     * @var array<InventoryItem>|null $inventoryItems An array of containers for the seller's inventory reference IDs (also known as an "SKU" or "custom label") to be added to the discount.<br><p class="tablenote"><b>Note:</b> The request can have either <b>inventoryItems</b> or <b>listingIds</b>, but not both.</p><br><b>Maximum:</b> 2000 parent items <br><br><b>Maximum SKU or custom label length:</b> 50 characters <br><br><i>Required if</i> <b>InventoryCriterionType</b> is set to <code>INVENTORY_BY_VALUE</code>, you must specify either <b>inventoryItems</b> or <b>listingIds</b>.
+    */
+    private ?array $inventoryItems = null;
+    
+    /**
+     * @var array<string>|null $listingIds An array of eBay listing IDs to be discounted. <br><p class="tablenote"><b>Note:</b> The request can have either <b>inventoryItems</b> or <b>listingIds</b>, but not both.</p>  <br><b>Required:</b> All listings being discounted must offer an electronic payment method.<br><br><b>Maximum:</b> 2000 parent items <br><br><b>Maximum SKU or custom label length:</b> 50 characters <br><br><i>Required if</i> <b>InventoryCriterionType</b> is set to <code>INVENTORY_BY_VALUE</code>, you must specify either <b>inventoryItems</b> or <b>listingIds</b>.
+    */
+    private ?array $listingIds = null;
+    
+    /**
+     * @var RuleCriteria|null $ruleCriteria This type defines the fields for a set of inventory selection rules.  <br><br><b>Required:</b> When <b>inventoryCriterionType</b> is set to <code>INVENTORY_BY_RULE</code> or <code>INVENTORY_ANY</code>.
+    */
+    private ?RuleCriteria $ruleCriteria = null;
+    
+    /**
+     * Instantiates a new InventoryCriterion and sets the default values.
+    */
+    public function __construct() {
+        $this->setAdditionalData([]);
+    }
+
+    /**
+     * Creates a new instance of the appropriate class based on discriminator value
+     * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
+     * @return InventoryCriterion
+    */
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): InventoryCriterion {
+        return new InventoryCriterion();
+    }
+
+    /**
+     * Gets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @return array<string, mixed>|null
+    */
+    public function getAdditionalData(): ?array {
+        return $this->additionalData;
+    }
+
+    /**
+     * The deserialization information for the current model
+     * @return array<string, callable(ParseNode): void>
+    */
+    public function getFieldDeserializers(): array {
+        $o = $this;
+        return  [
+            'inventoryCriterionType' => fn(ParseNode $n) => $o->setInventoryCriterionType($n->getStringValue()),
+            'inventoryItems' => fn(ParseNode $n) => $o->setInventoryItems($n->getCollectionOfObjectValues([InventoryItem::class, 'createFromDiscriminatorValue'])),
+            'listingIds' => function (ParseNode $n) {
+                $val = $n->getCollectionOfPrimitiveValues();
+                if (is_array($val)) {
+                    TypeUtils::validateCollectionValues($val, 'string');
+                }
+                /** @var array<string>|null $val */
+                $this->setListingIds($val);
+            },
+            'ruleCriteria' => fn(ParseNode $n) => $o->setRuleCriteria($n->getObjectValue([RuleCriteria::class, 'createFromDiscriminatorValue'])),
+        ];
+    }
+
+    /**
+     * Gets the inventoryCriterionType property value. Indicates how the items to be discounted are selected. You can include inventory by ID, using rules, or globally include all your inventory.  For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:InventoryCriterionEnum'>eBay API documentation</a>
+     * @return string|null
+    */
+    public function getInventoryCriterionType(): ?string {
+        return $this->inventoryCriterionType;
+    }
+
+    /**
+     * Gets the inventoryItems property value. An array of containers for the seller's inventory reference IDs (also known as an "SKU" or "custom label") to be added to the discount.<br><p class="tablenote"><b>Note:</b> The request can have either <b>inventoryItems</b> or <b>listingIds</b>, but not both.</p><br><b>Maximum:</b> 2000 parent items <br><br><b>Maximum SKU or custom label length:</b> 50 characters <br><br><i>Required if</i> <b>InventoryCriterionType</b> is set to <code>INVENTORY_BY_VALUE</code>, you must specify either <b>inventoryItems</b> or <b>listingIds</b>.
+     * @return array<InventoryItem>|null
+    */
+    public function getInventoryItems(): ?array {
+        return $this->inventoryItems;
+    }
+
+    /**
+     * Gets the listingIds property value. An array of eBay listing IDs to be discounted. <br><p class="tablenote"><b>Note:</b> The request can have either <b>inventoryItems</b> or <b>listingIds</b>, but not both.</p>  <br><b>Required:</b> All listings being discounted must offer an electronic payment method.<br><br><b>Maximum:</b> 2000 parent items <br><br><b>Maximum SKU or custom label length:</b> 50 characters <br><br><i>Required if</i> <b>InventoryCriterionType</b> is set to <code>INVENTORY_BY_VALUE</code>, you must specify either <b>inventoryItems</b> or <b>listingIds</b>.
+     * @return array<string>|null
+    */
+    public function getListingIds(): ?array {
+        return $this->listingIds;
+    }
+
+    /**
+     * Gets the ruleCriteria property value. This type defines the fields for a set of inventory selection rules.  <br><br><b>Required:</b> When <b>inventoryCriterionType</b> is set to <code>INVENTORY_BY_RULE</code> or <code>INVENTORY_ANY</code>.
+     * @return RuleCriteria|null
+    */
+    public function getRuleCriteria(): ?RuleCriteria {
+        return $this->ruleCriteria;
+    }
+
+    /**
+     * Serializes information the current object
+     * @param SerializationWriter $writer Serialization writer to use to serialize this model
+    */
+    public function serialize(SerializationWriter $writer): void {
+        $writer->writeStringValue('inventoryCriterionType', $this->getInventoryCriterionType());
+        $writer->writeCollectionOfObjectValues('inventoryItems', $this->getInventoryItems());
+        $writer->writeCollectionOfPrimitiveValues('listingIds', $this->getListingIds());
+        $writer->writeObjectValue('ruleCriteria', $this->getRuleCriteria());
+        $writer->writeAdditionalData($this->getAdditionalData());
+    }
+
+    /**
+     * Sets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @param array<string,mixed> $value Value to set for the AdditionalData property.
+    */
+    public function setAdditionalData(?array $value): void {
+        $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the inventoryCriterionType property value. Indicates how the items to be discounted are selected. You can include inventory by ID, using rules, or globally include all your inventory.  For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:InventoryCriterionEnum'>eBay API documentation</a>
+     * @param string|null $value Value to set for the inventoryCriterionType property.
+    */
+    public function setInventoryCriterionType(?string $value): void {
+        $this->inventoryCriterionType = $value;
+    }
+
+    /**
+     * Sets the inventoryItems property value. An array of containers for the seller's inventory reference IDs (also known as an "SKU" or "custom label") to be added to the discount.<br><p class="tablenote"><b>Note:</b> The request can have either <b>inventoryItems</b> or <b>listingIds</b>, but not both.</p><br><b>Maximum:</b> 2000 parent items <br><br><b>Maximum SKU or custom label length:</b> 50 characters <br><br><i>Required if</i> <b>InventoryCriterionType</b> is set to <code>INVENTORY_BY_VALUE</code>, you must specify either <b>inventoryItems</b> or <b>listingIds</b>.
+     * @param array<InventoryItem>|null $value Value to set for the inventoryItems property.
+    */
+    public function setInventoryItems(?array $value): void {
+        $this->inventoryItems = $value;
+    }
+
+    /**
+     * Sets the listingIds property value. An array of eBay listing IDs to be discounted. <br><p class="tablenote"><b>Note:</b> The request can have either <b>inventoryItems</b> or <b>listingIds</b>, but not both.</p>  <br><b>Required:</b> All listings being discounted must offer an electronic payment method.<br><br><b>Maximum:</b> 2000 parent items <br><br><b>Maximum SKU or custom label length:</b> 50 characters <br><br><i>Required if</i> <b>InventoryCriterionType</b> is set to <code>INVENTORY_BY_VALUE</code>, you must specify either <b>inventoryItems</b> or <b>listingIds</b>.
+     * @param array<string>|null $value Value to set for the listingIds property.
+    */
+    public function setListingIds(?array $value): void {
+        $this->listingIds = $value;
+    }
+
+    /**
+     * Sets the ruleCriteria property value. This type defines the fields for a set of inventory selection rules.  <br><br><b>Required:</b> When <b>inventoryCriterionType</b> is set to <code>INVENTORY_BY_RULE</code> or <code>INVENTORY_ANY</code>.
+     * @param RuleCriteria|null $value Value to set for the ruleCriteria property.
+    */
+    public function setRuleCriteria(?RuleCriteria $value): void {
+        $this->ruleCriteria = $value;
+    }
+
+}

@@ -1,0 +1,254 @@
+<?php
+
+namespace EBay\MarketingAndPromotions\Generated\Marketing\Models;
+
+use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
+use Microsoft\Kiota\Abstractions\Serialization\Parsable;
+use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
+use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
+
+/**
+ * A type that defines the fields for an ad.
+*/
+class Ad implements AdditionalDataHolder, Parsable 
+{
+    /**
+     * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    */
+    private ?array $additionalData = null;
+    
+    /**
+     * @var string|null $adGroupId A unique eBay-assigned ID for an ad group in a campaign that uses the Cost Per Click (CPC) funding model. This ID is created after a successful <a href="/api-docs/sell/marketing/resources/adgroup/methods/createAdGroup">createAdGroup</a> call, and all ad groups must be associated with a CPC campaign.
+    */
+    private ?string $adGroupId = null;
+    
+    /**
+     * @var string|null $adId A unique eBay-assigned ID that is generated when the ad is created.
+    */
+    private ?string $adId = null;
+    
+    /**
+     * @var string|null $adStatus The current status of the CPC ad.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul><span class="tablenote"><b>Note:</b> This type only applies to the Cost Per Click (CPC) funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdStatusEnum'>eBay API documentation</a>
+    */
+    private ?string $adStatus = null;
+    
+    /**
+     * @var array<Alert>|null $alerts An array containing alert messages for the ad.
+    */
+    private ?array $alerts = null;
+    
+    /**
+     * @var string|null $bidPercentage The user-defined <b>bid percentage</b> (also known as the <i>ad rate</i>) sets the level that eBay increases the visibility in search results for the associated listing. The higher the <b>bidPercentage</b> value, the more eBay promotes the listing.  <br><br>The value specified here is also used to calculate the Promoted Listings fee. This percentage value is multiplied by the final sales price to determine the fee. <br><br>The Promoted Listings fee is determined at the time the transaction completes and the seller is assessed the fee only when an item sells through a Promoted Listings ad campaign. <br><br>The <b>bidPercentage</b> is a single precision value that is guided by the following rules: <ul><li>These values are <b>valid</b>:<br>&nbsp;&nbsp;&nbsp;<code>4.1</code>, &nbsp;&nbsp;&nbsp;<code>5.0</code>, &nbsp;&nbsp;&nbsp;<code>5.5</code>, ...</li>  <li>These values are <b>not valid</b>:<br /> &nbsp;&nbsp;&nbsp;<code>0.01</code>, &nbsp;&nbsp;&nbsp;<code>10.75</code>, &nbsp;&nbsp;&nbsp;<code>99.99</code>,<br /> &nbsp;&nbsp;&nbsp;and so on.</li></ul>This is default bid percentage for the campaigns using the Cost Per Sale (CPS) funding model, and this value will be overridden by any ads in the campaign that have their own set bid percentages.<br /><br />If a bid percentage is not provided for an ad, eBay uses the default bid percentage of the associated campaign.<br /><br /><span class="tablenote"><b>Note:</b>This field will always be returned for campaigns that use the Cost Per Sale (CPS) funding model. It will not be returned for campaigns that use the Cost Per Click (CPC) funding model.</span><br /><br><span class="tablenote"><b>Note:</b> This field has a minimum value of <code>2.0</code> and a maximum value of <code>100.0</code>.</span>
+    */
+    private ?string $bidPercentage = null;
+    
+    /**
+     * @var string|null $inventoryReferenceId An ID that identifies a single-item listing or multiple-variation listing that is managed with the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference">Inventory API</a>. <p>The <i>inventory reference ID</i> is a seller-defined value that can be either an <b>SKU</b> for a single-item listing or an <b>inventoryItemGroupKey</b> for a multiple-value listing.</p>  <p>An <i>inventoryItemGroupKey</i> is a value that the seller defines to indicate a listing that's the parent of an inventory item group (a multiple-variation listing, such as a listing for a shirt that's available in multiple sizes and colors).</p><p>This field is only returned if the ad is associated with a SKU or an inventory item group value.</p>
+    */
+    private ?string $inventoryReferenceId = null;
+    
+    /**
+     * @var string|null $inventoryReferenceType The enumeration value returned here indicates the type of listing the inventoryReferenceId references. The value returned here will be <code>INVENTORY_ITEM</code> for a single-variation listing, or <code>INVENTORY_ITEM_GROUP</code> for a multiple-variation listing. <p>This field is only returned if the ad is associated with a SKU or an inventory item group value.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
+    */
+    private ?string $inventoryReferenceType = null;
+    
+    /**
+     * @var string|null $listingId A unique eBay-assigned ID that is generated when a listing is created.
+    */
+    private ?string $listingId = null;
+    
+    /**
+     * Instantiates a new Ad and sets the default values.
+    */
+    public function __construct() {
+        $this->setAdditionalData([]);
+    }
+
+    /**
+     * Creates a new instance of the appropriate class based on discriminator value
+     * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
+     * @return Ad
+    */
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): Ad {
+        return new Ad();
+    }
+
+    /**
+     * Gets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @return array<string, mixed>|null
+    */
+    public function getAdditionalData(): ?array {
+        return $this->additionalData;
+    }
+
+    /**
+     * Gets the adGroupId property value. A unique eBay-assigned ID for an ad group in a campaign that uses the Cost Per Click (CPC) funding model. This ID is created after a successful <a href="/api-docs/sell/marketing/resources/adgroup/methods/createAdGroup">createAdGroup</a> call, and all ad groups must be associated with a CPC campaign.
+     * @return string|null
+    */
+    public function getAdGroupId(): ?string {
+        return $this->adGroupId;
+    }
+
+    /**
+     * Gets the adId property value. A unique eBay-assigned ID that is generated when the ad is created.
+     * @return string|null
+    */
+    public function getAdId(): ?string {
+        return $this->adId;
+    }
+
+    /**
+     * Gets the adStatus property value. The current status of the CPC ad.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul><span class="tablenote"><b>Note:</b> This type only applies to the Cost Per Click (CPC) funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdStatusEnum'>eBay API documentation</a>
+     * @return string|null
+    */
+    public function getAdStatus(): ?string {
+        return $this->adStatus;
+    }
+
+    /**
+     * Gets the alerts property value. An array containing alert messages for the ad.
+     * @return array<Alert>|null
+    */
+    public function getAlerts(): ?array {
+        return $this->alerts;
+    }
+
+    /**
+     * Gets the bidPercentage property value. The user-defined <b>bid percentage</b> (also known as the <i>ad rate</i>) sets the level that eBay increases the visibility in search results for the associated listing. The higher the <b>bidPercentage</b> value, the more eBay promotes the listing.  <br><br>The value specified here is also used to calculate the Promoted Listings fee. This percentage value is multiplied by the final sales price to determine the fee. <br><br>The Promoted Listings fee is determined at the time the transaction completes and the seller is assessed the fee only when an item sells through a Promoted Listings ad campaign. <br><br>The <b>bidPercentage</b> is a single precision value that is guided by the following rules: <ul><li>These values are <b>valid</b>:<br>&nbsp;&nbsp;&nbsp;<code>4.1</code>, &nbsp;&nbsp;&nbsp;<code>5.0</code>, &nbsp;&nbsp;&nbsp;<code>5.5</code>, ...</li>  <li>These values are <b>not valid</b>:<br /> &nbsp;&nbsp;&nbsp;<code>0.01</code>, &nbsp;&nbsp;&nbsp;<code>10.75</code>, &nbsp;&nbsp;&nbsp;<code>99.99</code>,<br /> &nbsp;&nbsp;&nbsp;and so on.</li></ul>This is default bid percentage for the campaigns using the Cost Per Sale (CPS) funding model, and this value will be overridden by any ads in the campaign that have their own set bid percentages.<br /><br />If a bid percentage is not provided for an ad, eBay uses the default bid percentage of the associated campaign.<br /><br /><span class="tablenote"><b>Note:</b>This field will always be returned for campaigns that use the Cost Per Sale (CPS) funding model. It will not be returned for campaigns that use the Cost Per Click (CPC) funding model.</span><br /><br><span class="tablenote"><b>Note:</b> This field has a minimum value of <code>2.0</code> and a maximum value of <code>100.0</code>.</span>
+     * @return string|null
+    */
+    public function getBidPercentage(): ?string {
+        return $this->bidPercentage;
+    }
+
+    /**
+     * The deserialization information for the current model
+     * @return array<string, callable(ParseNode): void>
+    */
+    public function getFieldDeserializers(): array {
+        $o = $this;
+        return  [
+            'adGroupId' => fn(ParseNode $n) => $o->setAdGroupId($n->getStringValue()),
+            'adId' => fn(ParseNode $n) => $o->setAdId($n->getStringValue()),
+            'adStatus' => fn(ParseNode $n) => $o->setAdStatus($n->getStringValue()),
+            'alerts' => fn(ParseNode $n) => $o->setAlerts($n->getCollectionOfObjectValues([Alert::class, 'createFromDiscriminatorValue'])),
+            'bidPercentage' => fn(ParseNode $n) => $o->setBidPercentage($n->getStringValue()),
+            'inventoryReferenceId' => fn(ParseNode $n) => $o->setInventoryReferenceId($n->getStringValue()),
+            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getStringValue()),
+            'listingId' => fn(ParseNode $n) => $o->setListingId($n->getStringValue()),
+        ];
+    }
+
+    /**
+     * Gets the inventoryReferenceId property value. An ID that identifies a single-item listing or multiple-variation listing that is managed with the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference">Inventory API</a>. <p>The <i>inventory reference ID</i> is a seller-defined value that can be either an <b>SKU</b> for a single-item listing or an <b>inventoryItemGroupKey</b> for a multiple-value listing.</p>  <p>An <i>inventoryItemGroupKey</i> is a value that the seller defines to indicate a listing that's the parent of an inventory item group (a multiple-variation listing, such as a listing for a shirt that's available in multiple sizes and colors).</p><p>This field is only returned if the ad is associated with a SKU or an inventory item group value.</p>
+     * @return string|null
+    */
+    public function getInventoryReferenceId(): ?string {
+        return $this->inventoryReferenceId;
+    }
+
+    /**
+     * Gets the inventoryReferenceType property value. The enumeration value returned here indicates the type of listing the inventoryReferenceId references. The value returned here will be <code>INVENTORY_ITEM</code> for a single-variation listing, or <code>INVENTORY_ITEM_GROUP</code> for a multiple-variation listing. <p>This field is only returned if the ad is associated with a SKU or an inventory item group value.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
+     * @return string|null
+    */
+    public function getInventoryReferenceType(): ?string {
+        return $this->inventoryReferenceType;
+    }
+
+    /**
+     * Gets the listingId property value. A unique eBay-assigned ID that is generated when a listing is created.
+     * @return string|null
+    */
+    public function getListingId(): ?string {
+        return $this->listingId;
+    }
+
+    /**
+     * Serializes information the current object
+     * @param SerializationWriter $writer Serialization writer to use to serialize this model
+    */
+    public function serialize(SerializationWriter $writer): void {
+        $writer->writeStringValue('adGroupId', $this->getAdGroupId());
+        $writer->writeStringValue('adId', $this->getAdId());
+        $writer->writeStringValue('adStatus', $this->getAdStatus());
+        $writer->writeCollectionOfObjectValues('alerts', $this->getAlerts());
+        $writer->writeStringValue('bidPercentage', $this->getBidPercentage());
+        $writer->writeStringValue('inventoryReferenceId', $this->getInventoryReferenceId());
+        $writer->writeStringValue('inventoryReferenceType', $this->getInventoryReferenceType());
+        $writer->writeStringValue('listingId', $this->getListingId());
+        $writer->writeAdditionalData($this->getAdditionalData());
+    }
+
+    /**
+     * Sets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @param array<string,mixed> $value Value to set for the AdditionalData property.
+    */
+    public function setAdditionalData(?array $value): void {
+        $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the adGroupId property value. A unique eBay-assigned ID for an ad group in a campaign that uses the Cost Per Click (CPC) funding model. This ID is created after a successful <a href="/api-docs/sell/marketing/resources/adgroup/methods/createAdGroup">createAdGroup</a> call, and all ad groups must be associated with a CPC campaign.
+     * @param string|null $value Value to set for the adGroupId property.
+    */
+    public function setAdGroupId(?string $value): void {
+        $this->adGroupId = $value;
+    }
+
+    /**
+     * Sets the adId property value. A unique eBay-assigned ID that is generated when the ad is created.
+     * @param string|null $value Value to set for the adId property.
+    */
+    public function setAdId(?string $value): void {
+        $this->adId = $value;
+    }
+
+    /**
+     * Sets the adStatus property value. The current status of the CPC ad.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul><span class="tablenote"><b>Note:</b> This type only applies to the Cost Per Click (CPC) funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdStatusEnum'>eBay API documentation</a>
+     * @param string|null $value Value to set for the adStatus property.
+    */
+    public function setAdStatus(?string $value): void {
+        $this->adStatus = $value;
+    }
+
+    /**
+     * Sets the alerts property value. An array containing alert messages for the ad.
+     * @param array<Alert>|null $value Value to set for the alerts property.
+    */
+    public function setAlerts(?array $value): void {
+        $this->alerts = $value;
+    }
+
+    /**
+     * Sets the bidPercentage property value. The user-defined <b>bid percentage</b> (also known as the <i>ad rate</i>) sets the level that eBay increases the visibility in search results for the associated listing. The higher the <b>bidPercentage</b> value, the more eBay promotes the listing.  <br><br>The value specified here is also used to calculate the Promoted Listings fee. This percentage value is multiplied by the final sales price to determine the fee. <br><br>The Promoted Listings fee is determined at the time the transaction completes and the seller is assessed the fee only when an item sells through a Promoted Listings ad campaign. <br><br>The <b>bidPercentage</b> is a single precision value that is guided by the following rules: <ul><li>These values are <b>valid</b>:<br>&nbsp;&nbsp;&nbsp;<code>4.1</code>, &nbsp;&nbsp;&nbsp;<code>5.0</code>, &nbsp;&nbsp;&nbsp;<code>5.5</code>, ...</li>  <li>These values are <b>not valid</b>:<br /> &nbsp;&nbsp;&nbsp;<code>0.01</code>, &nbsp;&nbsp;&nbsp;<code>10.75</code>, &nbsp;&nbsp;&nbsp;<code>99.99</code>,<br /> &nbsp;&nbsp;&nbsp;and so on.</li></ul>This is default bid percentage for the campaigns using the Cost Per Sale (CPS) funding model, and this value will be overridden by any ads in the campaign that have their own set bid percentages.<br /><br />If a bid percentage is not provided for an ad, eBay uses the default bid percentage of the associated campaign.<br /><br /><span class="tablenote"><b>Note:</b>This field will always be returned for campaigns that use the Cost Per Sale (CPS) funding model. It will not be returned for campaigns that use the Cost Per Click (CPC) funding model.</span><br /><br><span class="tablenote"><b>Note:</b> This field has a minimum value of <code>2.0</code> and a maximum value of <code>100.0</code>.</span>
+     * @param string|null $value Value to set for the bidPercentage property.
+    */
+    public function setBidPercentage(?string $value): void {
+        $this->bidPercentage = $value;
+    }
+
+    /**
+     * Sets the inventoryReferenceId property value. An ID that identifies a single-item listing or multiple-variation listing that is managed with the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference">Inventory API</a>. <p>The <i>inventory reference ID</i> is a seller-defined value that can be either an <b>SKU</b> for a single-item listing or an <b>inventoryItemGroupKey</b> for a multiple-value listing.</p>  <p>An <i>inventoryItemGroupKey</i> is a value that the seller defines to indicate a listing that's the parent of an inventory item group (a multiple-variation listing, such as a listing for a shirt that's available in multiple sizes and colors).</p><p>This field is only returned if the ad is associated with a SKU or an inventory item group value.</p>
+     * @param string|null $value Value to set for the inventoryReferenceId property.
+    */
+    public function setInventoryReferenceId(?string $value): void {
+        $this->inventoryReferenceId = $value;
+    }
+
+    /**
+     * Sets the inventoryReferenceType property value. The enumeration value returned here indicates the type of listing the inventoryReferenceId references. The value returned here will be <code>INVENTORY_ITEM</code> for a single-variation listing, or <code>INVENTORY_ITEM_GROUP</code> for a multiple-variation listing. <p>This field is only returned if the ad is associated with a SKU or an inventory item group value.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
+     * @param string|null $value Value to set for the inventoryReferenceType property.
+    */
+    public function setInventoryReferenceType(?string $value): void {
+        $this->inventoryReferenceType = $value;
+    }
+
+    /**
+     * Sets the listingId property value. A unique eBay-assigned ID that is generated when a listing is created.
+     * @param string|null $value Value to set for the listingId property.
+    */
+    public function setListingId(?string $value): void {
+        $this->listingId = $value;
+    }
+
+}

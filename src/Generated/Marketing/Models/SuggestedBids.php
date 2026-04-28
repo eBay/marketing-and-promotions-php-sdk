@@ -1,0 +1,139 @@
+<?php
+
+namespace EBay\MarketingAndPromotions\Generated\Marketing\Models;
+
+use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
+use Microsoft\Kiota\Abstractions\Serialization\Parsable;
+use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
+use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
+
+/**
+ * The suggested bid rate for the item.
+*/
+class SuggestedBids implements AdditionalDataHolder, Parsable 
+{
+    /**
+     * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    */
+    private ?array $additionalData = null;
+    
+    /**
+     * @var string|null $keywordText The text for the keyword.
+    */
+    private ?string $keywordText = null;
+    
+    /**
+     * @var string|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
+    */
+    private ?string $matchType = null;
+    
+    /**
+     * @var ProposedBid|null $proposedBid A type that defines the data for a payment amount, such as the sale price.
+    */
+    private ?ProposedBid $proposedBid = null;
+    
+    /**
+     * Instantiates a new SuggestedBids and sets the default values.
+    */
+    public function __construct() {
+        $this->setAdditionalData([]);
+    }
+
+    /**
+     * Creates a new instance of the appropriate class based on discriminator value
+     * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
+     * @return SuggestedBids
+    */
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): SuggestedBids {
+        return new SuggestedBids();
+    }
+
+    /**
+     * Gets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @return array<string, mixed>|null
+    */
+    public function getAdditionalData(): ?array {
+        return $this->additionalData;
+    }
+
+    /**
+     * The deserialization information for the current model
+     * @return array<string, callable(ParseNode): void>
+    */
+    public function getFieldDeserializers(): array {
+        $o = $this;
+        return  [
+            'keywordText' => fn(ParseNode $n) => $o->setKeywordText($n->getStringValue()),
+            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getStringValue()),
+            'proposedBid' => fn(ParseNode $n) => $o->setProposedBid($n->getObjectValue([ProposedBid::class, 'createFromDiscriminatorValue'])),
+        ];
+    }
+
+    /**
+     * Gets the keywordText property value. The text for the keyword.
+     * @return string|null
+    */
+    public function getKeywordText(): ?string {
+        return $this->keywordText;
+    }
+
+    /**
+     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
+     * @return string|null
+    */
+    public function getMatchType(): ?string {
+        return $this->matchType;
+    }
+
+    /**
+     * Gets the proposedBid property value. A type that defines the data for a payment amount, such as the sale price.
+     * @return ProposedBid|null
+    */
+    public function getProposedBid(): ?ProposedBid {
+        return $this->proposedBid;
+    }
+
+    /**
+     * Serializes information the current object
+     * @param SerializationWriter $writer Serialization writer to use to serialize this model
+    */
+    public function serialize(SerializationWriter $writer): void {
+        $writer->writeStringValue('keywordText', $this->getKeywordText());
+        $writer->writeStringValue('matchType', $this->getMatchType());
+        $writer->writeObjectValue('proposedBid', $this->getProposedBid());
+        $writer->writeAdditionalData($this->getAdditionalData());
+    }
+
+    /**
+     * Sets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @param array<string,mixed> $value Value to set for the AdditionalData property.
+    */
+    public function setAdditionalData(?array $value): void {
+        $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the keywordText property value. The text for the keyword.
+     * @param string|null $value Value to set for the keywordText property.
+    */
+    public function setKeywordText(?string $value): void {
+        $this->keywordText = $value;
+    }
+
+    /**
+     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
+     * @param string|null $value Value to set for the matchType property.
+    */
+    public function setMatchType(?string $value): void {
+        $this->matchType = $value;
+    }
+
+    /**
+     * Sets the proposedBid property value. A type that defines the data for a payment amount, such as the sale price.
+     * @param ProposedBid|null $value Value to set for the proposedBid property.
+    */
+    public function setProposedBid(?ProposedBid $value): void {
+        $this->proposedBid = $value;
+    }
+
+}

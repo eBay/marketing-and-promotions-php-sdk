@@ -1,0 +1,185 @@
+<?php
+
+namespace EBay\MarketingAndPromotions\Generated\Marketing\Models;
+
+use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
+use Microsoft\Kiota\Abstractions\Serialization\Parsable;
+use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
+use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
+
+/**
+ * A type that contains the response fields used by the <b>UpdateAdsByInventoryReference</b> method.
+*/
+class UpdateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Parsable 
+{
+    /**
+     * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    */
+    private ?array $additionalData = null;
+    
+    /**
+     * @var array<AdReference>|null $ads A list of ad IDs and links to retrieve them.
+    */
+    private ?array $ads = null;
+    
+    /**
+     * @var array<Error>|null $errors A container for all of the errors associated with the specified inventory reference ID.
+    */
+    private ?array $errors = null;
+    
+    /**
+     * @var string|null $inventoryReferenceId The reference ID associated with the ad. The reference ID could be a SKU number or Inventory Item Group, depending on value of <code>inventoryReferenceType</code>.
+    */
+    private ?string $inventoryReferenceId = null;
+    
+    /**
+     * @var string|null $inventoryReferenceType The inventory reference type associated with the ad. The inventory reference type could be a SKU number or Inventory Item Group. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
+    */
+    private ?string $inventoryReferenceType = null;
+    
+    /**
+     * @var int|null $statusCode An HTTP status code that indicates whether or not the CPS ad was successfully updated.
+    */
+    private ?int $statusCode = null;
+    
+    /**
+     * Instantiates a new UpdateAdsByInventoryReferenceResponse and sets the default values.
+    */
+    public function __construct() {
+        $this->setAdditionalData([]);
+    }
+
+    /**
+     * Creates a new instance of the appropriate class based on discriminator value
+     * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
+     * @return UpdateAdsByInventoryReferenceResponse
+    */
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): UpdateAdsByInventoryReferenceResponse {
+        return new UpdateAdsByInventoryReferenceResponse();
+    }
+
+    /**
+     * Gets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @return array<string, mixed>|null
+    */
+    public function getAdditionalData(): ?array {
+        return $this->additionalData;
+    }
+
+    /**
+     * Gets the ads property value. A list of ad IDs and links to retrieve them.
+     * @return array<AdReference>|null
+    */
+    public function getAds(): ?array {
+        return $this->ads;
+    }
+
+    /**
+     * Gets the errors property value. A container for all of the errors associated with the specified inventory reference ID.
+     * @return array<Error>|null
+    */
+    public function getErrors(): ?array {
+        return $this->errors;
+    }
+
+    /**
+     * The deserialization information for the current model
+     * @return array<string, callable(ParseNode): void>
+    */
+    public function getFieldDeserializers(): array {
+        $o = $this;
+        return  [
+            'ads' => fn(ParseNode $n) => $o->setAds($n->getCollectionOfObjectValues([AdReference::class, 'createFromDiscriminatorValue'])),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'inventoryReferenceId' => fn(ParseNode $n) => $o->setInventoryReferenceId($n->getStringValue()),
+            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getStringValue()),
+            'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
+        ];
+    }
+
+    /**
+     * Gets the inventoryReferenceId property value. The reference ID associated with the ad. The reference ID could be a SKU number or Inventory Item Group, depending on value of <code>inventoryReferenceType</code>.
+     * @return string|null
+    */
+    public function getInventoryReferenceId(): ?string {
+        return $this->inventoryReferenceId;
+    }
+
+    /**
+     * Gets the inventoryReferenceType property value. The inventory reference type associated with the ad. The inventory reference type could be a SKU number or Inventory Item Group. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
+     * @return string|null
+    */
+    public function getInventoryReferenceType(): ?string {
+        return $this->inventoryReferenceType;
+    }
+
+    /**
+     * Gets the statusCode property value. An HTTP status code that indicates whether or not the CPS ad was successfully updated.
+     * @return int|null
+    */
+    public function getStatusCode(): ?int {
+        return $this->statusCode;
+    }
+
+    /**
+     * Serializes information the current object
+     * @param SerializationWriter $writer Serialization writer to use to serialize this model
+    */
+    public function serialize(SerializationWriter $writer): void {
+        $writer->writeCollectionOfObjectValues('ads', $this->getAds());
+        $writer->writeCollectionOfObjectValues('errors', $this->getErrors());
+        $writer->writeStringValue('inventoryReferenceId', $this->getInventoryReferenceId());
+        $writer->writeStringValue('inventoryReferenceType', $this->getInventoryReferenceType());
+        $writer->writeIntegerValue('statusCode', $this->getStatusCode());
+        $writer->writeAdditionalData($this->getAdditionalData());
+    }
+
+    /**
+     * Sets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @param array<string,mixed> $value Value to set for the AdditionalData property.
+    */
+    public function setAdditionalData(?array $value): void {
+        $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the ads property value. A list of ad IDs and links to retrieve them.
+     * @param array<AdReference>|null $value Value to set for the ads property.
+    */
+    public function setAds(?array $value): void {
+        $this->ads = $value;
+    }
+
+    /**
+     * Sets the errors property value. A container for all of the errors associated with the specified inventory reference ID.
+     * @param array<Error>|null $value Value to set for the errors property.
+    */
+    public function setErrors(?array $value): void {
+        $this->errors = $value;
+    }
+
+    /**
+     * Sets the inventoryReferenceId property value. The reference ID associated with the ad. The reference ID could be a SKU number or Inventory Item Group, depending on value of <code>inventoryReferenceType</code>.
+     * @param string|null $value Value to set for the inventoryReferenceId property.
+    */
+    public function setInventoryReferenceId(?string $value): void {
+        $this->inventoryReferenceId = $value;
+    }
+
+    /**
+     * Sets the inventoryReferenceType property value. The inventory reference type associated with the ad. The inventory reference type could be a SKU number or Inventory Item Group. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
+     * @param string|null $value Value to set for the inventoryReferenceType property.
+    */
+    public function setInventoryReferenceType(?string $value): void {
+        $this->inventoryReferenceType = $value;
+    }
+
+    /**
+     * Sets the statusCode property value. An HTTP status code that indicates whether or not the CPS ad was successfully updated.
+     * @param int|null $value Value to set for the statusCode property.
+    */
+    public function setStatusCode(?int $value): void {
+        $this->statusCode = $value;
+    }
+
+}

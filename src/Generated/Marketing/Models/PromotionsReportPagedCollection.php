@@ -1,0 +1,231 @@
+<?php
+
+namespace EBay\MarketingAndPromotions\Generated\Marketing\Models;
+
+use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
+use Microsoft\Kiota\Abstractions\Serialization\Parsable;
+use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
+use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
+
+/**
+ * <span class="tablenote"><b>Note:</b> As of July 8th 2024, <i>promotions</i> are now being referred to as <i>discounts</i> on Seller Hub and eBay help pages. Sell Marketing API documentation has been updated to reflect this product name change, but note that no API interface changes have been made.</span><br>This type defines the fields in a paginated result set of discount-level reports. The response consists of 0 or more sequenced pages that are returned from the complete <i>result set</i>, where each page consists of 0 or more items.
+*/
+class PromotionsReportPagedCollection implements AdditionalDataHolder, Parsable 
+{
+    /**
+     * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    */
+    private ?array $additionalData = null;
+    
+    /**
+     * @var string|null $href The URI of the current page of results from the result set.
+    */
+    private ?string $href = null;
+    
+    /**
+     * @var int|null $limit The number of items returned on a single page from the result set. This value can be set in the request with the <b>limit</b> query parameter.
+    */
+    private ?int $limit = null;
+    
+    /**
+     * @var string|null $next The URI for the following page of results. This value is returned only if there is an additional page of results to display from the result set. <br><br><b>Max length</b>: 2048
+    */
+    private ?string $next = null;
+    
+    /**
+     * @var int|null $offset The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <b>offset</b> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
+    */
+    private ?int $offset = null;
+    
+    /**
+     * @var string|null $prev The URI for the preceding page of results. This value is returned only if there is a previous page of results to display from the result set. <br><br><b>Max length</b>: 2048
+    */
+    private ?string $prev = null;
+    
+    /**
+     * @var array<PromotionReportDetail>|null $promotionReports A list of <b>promotionReports</b> contained in the paginated result set.
+    */
+    private ?array $promotionReports = null;
+    
+    /**
+     * @var int|null $total The total number of items retrieved in the result set.  <br><br>If no items are found, this field is returned with a value of <code>0</code>.
+    */
+    private ?int $total = null;
+    
+    /**
+     * Instantiates a new PromotionsReportPagedCollection and sets the default values.
+    */
+    public function __construct() {
+        $this->setAdditionalData([]);
+    }
+
+    /**
+     * Creates a new instance of the appropriate class based on discriminator value
+     * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
+     * @return PromotionsReportPagedCollection
+    */
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): PromotionsReportPagedCollection {
+        return new PromotionsReportPagedCollection();
+    }
+
+    /**
+     * Gets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @return array<string, mixed>|null
+    */
+    public function getAdditionalData(): ?array {
+        return $this->additionalData;
+    }
+
+    /**
+     * The deserialization information for the current model
+     * @return array<string, callable(ParseNode): void>
+    */
+    public function getFieldDeserializers(): array {
+        $o = $this;
+        return  [
+            'href' => fn(ParseNode $n) => $o->setHref($n->getStringValue()),
+            'limit' => fn(ParseNode $n) => $o->setLimit($n->getIntegerValue()),
+            'next' => fn(ParseNode $n) => $o->setNext($n->getStringValue()),
+            'offset' => fn(ParseNode $n) => $o->setOffset($n->getIntegerValue()),
+            'prev' => fn(ParseNode $n) => $o->setPrev($n->getStringValue()),
+            'promotionReports' => fn(ParseNode $n) => $o->setPromotionReports($n->getCollectionOfObjectValues([PromotionReportDetail::class, 'createFromDiscriminatorValue'])),
+            'total' => fn(ParseNode $n) => $o->setTotal($n->getIntegerValue()),
+        ];
+    }
+
+    /**
+     * Gets the href property value. The URI of the current page of results from the result set.
+     * @return string|null
+    */
+    public function getHref(): ?string {
+        return $this->href;
+    }
+
+    /**
+     * Gets the limit property value. The number of items returned on a single page from the result set. This value can be set in the request with the <b>limit</b> query parameter.
+     * @return int|null
+    */
+    public function getLimit(): ?int {
+        return $this->limit;
+    }
+
+    /**
+     * Gets the next property value. The URI for the following page of results. This value is returned only if there is an additional page of results to display from the result set. <br><br><b>Max length</b>: 2048
+     * @return string|null
+    */
+    public function getNext(): ?string {
+        return $this->next;
+    }
+
+    /**
+     * Gets the offset property value. The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <b>offset</b> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
+     * @return int|null
+    */
+    public function getOffset(): ?int {
+        return $this->offset;
+    }
+
+    /**
+     * Gets the prev property value. The URI for the preceding page of results. This value is returned only if there is a previous page of results to display from the result set. <br><br><b>Max length</b>: 2048
+     * @return string|null
+    */
+    public function getPrev(): ?string {
+        return $this->prev;
+    }
+
+    /**
+     * Gets the promotionReports property value. A list of <b>promotionReports</b> contained in the paginated result set.
+     * @return array<PromotionReportDetail>|null
+    */
+    public function getPromotionReports(): ?array {
+        return $this->promotionReports;
+    }
+
+    /**
+     * Gets the total property value. The total number of items retrieved in the result set.  <br><br>If no items are found, this field is returned with a value of <code>0</code>.
+     * @return int|null
+    */
+    public function getTotal(): ?int {
+        return $this->total;
+    }
+
+    /**
+     * Serializes information the current object
+     * @param SerializationWriter $writer Serialization writer to use to serialize this model
+    */
+    public function serialize(SerializationWriter $writer): void {
+        $writer->writeStringValue('href', $this->getHref());
+        $writer->writeIntegerValue('limit', $this->getLimit());
+        $writer->writeStringValue('next', $this->getNext());
+        $writer->writeIntegerValue('offset', $this->getOffset());
+        $writer->writeStringValue('prev', $this->getPrev());
+        $writer->writeCollectionOfObjectValues('promotionReports', $this->getPromotionReports());
+        $writer->writeIntegerValue('total', $this->getTotal());
+        $writer->writeAdditionalData($this->getAdditionalData());
+    }
+
+    /**
+     * Sets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @param array<string,mixed> $value Value to set for the AdditionalData property.
+    */
+    public function setAdditionalData(?array $value): void {
+        $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the href property value. The URI of the current page of results from the result set.
+     * @param string|null $value Value to set for the href property.
+    */
+    public function setHref(?string $value): void {
+        $this->href = $value;
+    }
+
+    /**
+     * Sets the limit property value. The number of items returned on a single page from the result set. This value can be set in the request with the <b>limit</b> query parameter.
+     * @param int|null $value Value to set for the limit property.
+    */
+    public function setLimit(?int $value): void {
+        $this->limit = $value;
+    }
+
+    /**
+     * Sets the next property value. The URI for the following page of results. This value is returned only if there is an additional page of results to display from the result set. <br><br><b>Max length</b>: 2048
+     * @param string|null $value Value to set for the next property.
+    */
+    public function setNext(?string $value): void {
+        $this->next = $value;
+    }
+
+    /**
+     * Sets the offset property value. The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <b>offset</b> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
+     * @param int|null $value Value to set for the offset property.
+    */
+    public function setOffset(?int $value): void {
+        $this->offset = $value;
+    }
+
+    /**
+     * Sets the prev property value. The URI for the preceding page of results. This value is returned only if there is a previous page of results to display from the result set. <br><br><b>Max length</b>: 2048
+     * @param string|null $value Value to set for the prev property.
+    */
+    public function setPrev(?string $value): void {
+        $this->prev = $value;
+    }
+
+    /**
+     * Sets the promotionReports property value. A list of <b>promotionReports</b> contained in the paginated result set.
+     * @param array<PromotionReportDetail>|null $value Value to set for the promotionReports property.
+    */
+    public function setPromotionReports(?array $value): void {
+        $this->promotionReports = $value;
+    }
+
+    /**
+     * Sets the total property value. The total number of items retrieved in the result set.  <br><br>If no items are found, this field is returned with a value of <code>0</code>.
+     * @param int|null $value Value to set for the total property.
+    */
+    public function setTotal(?int $value): void {
+        $this->total = $value;
+    }
+
+}
