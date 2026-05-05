@@ -4,15 +4,11 @@ namespace EBay\MarketingAndPromotions;
 
 use EBay\MarketingAndPromotions\Clients\Rest\MarketingClient;
 use EBay\MarketingAndPromotions\Clients\Rest\RecommendationClient;
-use EBay\MarketingAndPromotions\Configuration\HeadersContext;
 use EBay\MarketingAndPromotions\Configuration\KiotaAuthProvider;
 use EBay\MarketingAndPromotions\Configuration\MarketingAndPromotionsConfiguration;
 use EBay\MarketingAndPromotions\Generated\Marketing\MarketingApiClient;
 use EBay\MarketingAndPromotions\Generated\Recommendation\RecommendationApiClient;
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware as GuzzleMiddleware;
-use GuzzleHttp\Utils;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 use Microsoft\Kiota\Http\KiotaClientFactory;
@@ -42,24 +38,12 @@ final class MarketingAndPromotionsClient
     }
 
     /**
-     * Build the shared Guzzle client, adding:
-     *  - A headers-injection middleware that reads from HeadersContext on every request.
-     *  - An optional diagnostic middleware that logs non-2xx responses to STDERR.
+     * Build the shared Guzzle client, adding an optional diagnostic middleware
+     * that logs non-2xx responses to STDERR.
      */
     private static function buildGuzzleClient(MarketingAndPromotionsConfiguration $config): GuzzleClient
     {
         $stack = KiotaClientFactory::getDefaultHandlerStack();
-
-        // Inject per-request custom headers from HeadersContext (set by the REST clients).
-        $stack->push(GuzzleMiddleware::mapRequest(static function (RequestInterface $request): RequestInterface {
-            foreach (HeadersContext::get() as $name => $value) {
-                if (!$request->hasHeader($name)) {
-                    $request = $request->withHeader($name, $value);
-                }
-            }
-            HeadersContext::clear();
-            return $request;
-        }), 'ebay_custom_headers');
 
         if ($config->diagnosticLogging) {
             $stack->push(static function (callable $handler): callable {

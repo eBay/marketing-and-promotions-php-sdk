@@ -2,7 +2,6 @@
 
 namespace EBay\MarketingAndPromotions\Clients\Rest;
 
-use EBay\MarketingAndPromotions\Configuration\HeadersContext;
 use EBay\MarketingAndPromotions\Configuration\MarketingAndPromotionsConfiguration;
 use EBay\MarketingAndPromotions\Configuration\RequestOptions;
 use EBay\MarketingAndPromotions\Configuration\TokenContext;
@@ -18,21 +17,16 @@ final class RecommendationClient
         private readonly MarketingAndPromotionsConfiguration $config
     ) {}
 
-    /**
-     * Merge default + per-call headers and publish them to HeadersContext so the
-     * Guzzle middleware (installed in the facade) can inject them on the wire.
-     */
-    private function applyHeaders(?RequestOptions $requestOptions): void
+    /** @return array<string,string> */
+    private function mergedHeaders(?RequestOptions $requestOptions): array
     {
-        $merged = $this->config->defaultRequestOptions->headers;
-        if ($requestOptions !== null) {
-            foreach ($requestOptions->headers as $key => $value) {
-                if (!array_key_exists($key, $merged)) {
-                    $merged[$key] = $value;
-                }
+        $headers = $this->config->defaultRequestOptions->headers;
+        foreach ($requestOptions?->headers ?? [] as $key => $value) {
+            if (!array_key_exists($key, $headers)) {
+                $headers[$key] = $value;
             }
         }
-        HeadersContext::set($merged);
+        return $headers;
     }
 
     public function findListingRecommendations(
@@ -44,8 +38,8 @@ final class RecommendationClient
         ?RequestOptions $requestOptions = null
     ): ?PagedListingRecommendationCollection {
         TokenContext::set($accessToken);
-        $this->applyHeaders($requestOptions);
         $config = new FindRequestBuilderPostRequestConfiguration(
+            headers: $this->mergedHeaders($requestOptions),
             queryParameters: FindRequestBuilderPostRequestConfiguration::createQueryParameters(
                 filter: $filter,
                 limit: $limit,
