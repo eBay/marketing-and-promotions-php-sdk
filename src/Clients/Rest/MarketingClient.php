@@ -8,6 +8,27 @@ use EBay\MarketingAndPromotions\Configuration\RequestOptions;
 use EBay\MarketingAndPromotions\Configuration\TokenContext;
 use EBay\MarketingAndPromotions\Generated\Marketing\MarketingApiClient;
 
+// Request configurations for query parameters
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Ad_campaignRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Find_campaign_by_ad_reference\Find_campaign_by_ad_referenceRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Get_campaign_by_name\Get_campaign_by_nameRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\AdRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Get_ads_by_inventory_reference\Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Ad_groupRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Suggest_items\Suggest_itemsRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Keyword\KeywordRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\Negative_keywordRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Email_campaignRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Report\ReportRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Audience\AudienceRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Promotion\PromotionRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Promotion\Item\Get_listing_set\Get_listing_setRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Promotion_report\Promotion_reportRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Promotion_summary_report\Promotion_summary_reportRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_metadata\Ad_report_metadataRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_metadata\Item\WithReport_typeItemRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_task\Ad_report_taskRequestBuilderGetRequestConfiguration;
+
 // Models — bulk operations
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\BulkCreateAdsByInventoryReferenceRequest;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\BulkCreateAdsByInventoryReferenceResponse;
@@ -92,6 +113,8 @@ use EBay\MarketingAndPromotions\Generated\Marketing\Models\UpdateEmailCampaignRe
 
 // Models — promotions
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\ItemPriceMarkdown;
+use EBay\MarketingAndPromotions\Generated\Marketing\Item_price_markdown\Item_price_markdownPostResponse;
+use EBay\MarketingAndPromotions\Generated\Marketing\Item_price_markdown\Item\WithPromotion_PutResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\ItemPromotion;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\ItemPromotionResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\BaseResponse;
@@ -322,12 +345,22 @@ final class MarketingClient
     }
 
     public function findCampaignByAdReference(
+        ?string $inventoryReferenceId = null,
+        ?string $inventoryReferenceType = null,
+        ?string $listingId = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?Campaigns {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->ad_campaign()->find_campaign_by_ad_reference()->get()->wait();
+        $config = new Find_campaign_by_ad_referenceRequestBuilderGetRequestConfiguration(
+            queryParameters: Find_campaign_by_ad_referenceRequestBuilderGetRequestConfiguration::createQueryParameters(
+                inventory_reference_id: $inventoryReferenceId,
+                inventory_reference_type: $inventoryReferenceType,
+                listing_id: $listingId,
+            )
+        );
+        return $this->kiota->ad_campaign()->find_campaign_by_ad_reference()->get($config)->wait();
     }
 
     public function getCampaign(
@@ -341,21 +374,49 @@ final class MarketingClient
     }
 
     public function getCampaignByName(
+        ?string $campaignName = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?Campaign {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->ad_campaign()->get_campaign_by_name()->get()->wait();
+        $config = new Get_campaign_by_nameRequestBuilderGetRequestConfiguration(
+            queryParameters: Get_campaign_by_nameRequestBuilderGetRequestConfiguration::createQueryParameters(
+                campaign_name: $campaignName,
+            )
+        );
+        return $this->kiota->ad_campaign()->get_campaign_by_name()->get($config)->wait();
     }
 
     public function getCampaigns(
+        ?string $campaignName = null,
+        ?string $campaignStatus = null,
+        ?string $campaignTargetingTypes = null,
+        ?string $channels = null,
+        ?string $endDateRange = null,
+        ?string $fundingStrategy = null,
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $startDateRange = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?CampaignPagedCollectionResponse {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->ad_campaign()->get()->wait();
+        $config = new Ad_campaignRequestBuilderGetRequestConfiguration(
+            queryParameters: Ad_campaignRequestBuilderGetRequestConfiguration::createQueryParameters(
+                campaign_name: $campaignName,
+                campaign_status: $campaignStatus,
+                campaign_targeting_types: $campaignTargetingTypes,
+                channels: $channels,
+                end_date_range: $endDateRange,
+                funding_strategy: $fundingStrategy,
+                limit: $limit,
+                offset: $offset,
+                start_date_range: $startDateRange,
+            )
+        );
+        return $this->kiota->ad_campaign()->get($config)->wait();
     }
 
     public function pauseCampaign(
@@ -506,23 +567,45 @@ final class MarketingClient
 
     public function getAds(
         string $campaignId,
+        ?string $adGroupIds = null,
+        ?string $adStatus = null,
+        ?string $limit = null,
+        ?string $listingIds = null,
+        ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?AdPagedCollectionResponse {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad()->get()->wait();
+        $config = new AdRequestBuilderGetRequestConfiguration(
+            queryParameters: AdRequestBuilderGetRequestConfiguration::createQueryParameters(
+                ad_group_ids: $adGroupIds,
+                ad_status: $adStatus,
+                limit: $limit,
+                listing_ids: $listingIds,
+                offset: $offset,
+            )
+        );
+        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad()->get($config)->wait();
     }
 
     public function getAdsByInventoryReference(
         string $campaignId,
+        ?string $inventoryReferenceId = null,
+        ?string $inventoryReferenceType = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?Ads {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
+        $config = new Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration(
+            queryParameters: Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration::createQueryParameters(
+                inventory_reference_id: $inventoryReferenceId,
+                inventory_reference_type: $inventoryReferenceType,
+            )
+        );
         return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->get_ads_by_inventory_reference()->get()->wait();
+            ->get_ads_by_inventory_reference()->get($config)->wait();
     }
 
     public function updateBid(
@@ -565,12 +648,22 @@ final class MarketingClient
 
     public function getAdGroups(
         string $campaignId,
+        ?string $adGroupStatus = null,
+        ?string $limit = null,
+        ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?AdGroupPagedCollectionResponse {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad_group()->get()->wait();
+        $config = new Ad_groupRequestBuilderGetRequestConfiguration(
+            queryParameters: Ad_groupRequestBuilderGetRequestConfiguration::createQueryParameters(
+                ad_group_status: $adGroupStatus,
+                limit: $limit,
+                offset: $offset,
+            )
+        );
+        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad_group()->get($config)->wait();
     }
 
     public function updateAdGroup(
@@ -601,12 +694,22 @@ final class MarketingClient
 
     public function suggestItems(
         string $campaignId,
+        ?string $categoryIds = null,
+        ?string $limit = null,
+        ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?TargetedAdsPagedCollection {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->suggest_items()->get()->wait();
+        $config = new Suggest_itemsRequestBuilderGetRequestConfiguration(
+            queryParameters: Suggest_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                category_ids: $categoryIds,
+                limit: $limit,
+                offset: $offset,
+            )
+        );
+        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->suggest_items()->get($config)->wait();
     }
 
     public function suggestKeywords(
@@ -649,12 +752,24 @@ final class MarketingClient
 
     public function getKeywords(
         string $campaignId,
+        ?string $adGroupIds = null,
+        ?string $keywordStatus = null,
+        ?string $limit = null,
+        ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?KeywordPagedCollectionResponse {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->keyword()->get()->wait();
+        $config = new KeywordRequestBuilderGetRequestConfiguration(
+            queryParameters: KeywordRequestBuilderGetRequestConfiguration::createQueryParameters(
+                ad_group_ids: $adGroupIds,
+                keyword_status: $keywordStatus,
+                limit: $limit,
+                offset: $offset,
+            )
+        );
+        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->keyword()->get($config)->wait();
     }
 
     public function updateKeyword(
@@ -693,12 +808,26 @@ final class MarketingClient
     }
 
     public function getNegativeKeywords(
+        ?string $adGroupIds = null,
+        ?string $campaignIds = null,
+        ?string $limit = null,
+        ?string $negativeKeywordStatus = null,
+        ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?NegativeKeywordPagedCollectionResponse {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->negative_keyword()->get()->wait();
+        $config = new Negative_keywordRequestBuilderGetRequestConfiguration(
+            queryParameters: Negative_keywordRequestBuilderGetRequestConfiguration::createQueryParameters(
+                ad_group_ids: $adGroupIds,
+                campaign_ids: $campaignIds,
+                limit: $limit,
+                negative_keyword_status: $negativeKeywordStatus,
+                offset: $offset,
+            )
+        );
+        return $this->kiota->negative_keyword()->get($config)->wait();
     }
 
     public function updateNegativeKeyword(
@@ -745,12 +874,24 @@ final class MarketingClient
     }
 
     public function getEmailCampaigns(
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $q = null,
+        ?string $sort = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?GetEmailCampaignsResponse {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->email_campaign()->get()->wait();
+        $config = new Email_campaignRequestBuilderGetRequestConfiguration(
+            queryParameters: Email_campaignRequestBuilderGetRequestConfiguration::createQueryParameters(
+                limit: $limit,
+                offset: $offset,
+                q: $q,
+                sort: $sort,
+            )
+        );
+        return $this->kiota->email_campaign()->get($config)->wait();
     }
 
     public function getEmailPreview(
@@ -765,21 +906,39 @@ final class MarketingClient
     }
 
     public function getEmailReport(
+        ?string $startDate = null,
+        ?string $endDate = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?GetEmailReportResponse {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->email_campaign()->report()->get()->wait();
+        $config = new ReportRequestBuilderGetRequestConfiguration(
+            queryParameters: ReportRequestBuilderGetRequestConfiguration::createQueryParameters(
+                endDate: $endDate,
+                startDate: $startDate,
+            )
+        );
+        return $this->kiota->email_campaign()->report()->get($config)->wait();
     }
 
     public function getAudiences(
+        ?string $emailCampaignType = null,
+        ?string $limit = null,
+        ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?GetEmailCampaignAudiencesResponse {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->email_campaign()->audience()->get()->wait();
+        $config = new AudienceRequestBuilderGetRequestConfiguration(
+            queryParameters: AudienceRequestBuilderGetRequestConfiguration::createQueryParameters(
+                emailCampaignType: $emailCampaignType,
+                limit: $limit,
+                offset: $offset,
+            )
+        );
+        return $this->kiota->email_campaign()->audience()->get($config)->wait();
     }
 
     public function updateEmailCampaign(
@@ -799,7 +958,7 @@ final class MarketingClient
         ItemPriceMarkdown $body,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
-    ): ?ItemPriceMarkdown {
+    ): ?Item_price_markdownPostResponse {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
         return $this->kiota->item_price_markdown()->post($body)->wait();
@@ -830,7 +989,7 @@ final class MarketingClient
         ItemPriceMarkdown $body,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
-    ): ?ItemPriceMarkdown {
+    ): ?WithPromotion_PutResponse {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
         return $this->kiota->item_price_markdown()->byPromotion_id($promotionId)->put($body)->wait();
@@ -878,22 +1037,54 @@ final class MarketingClient
     }
 
     public function getPromotions(
+        ?string $limit = null,
+        ?string $marketplaceId = null,
+        ?string $offset = null,
+        ?string $promotionStatus = null,
+        ?string $promotionType = null,
+        ?string $q = null,
+        ?string $sort = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?PromotionsPagedCollection {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->promotion()->get()->wait();
+        $config = new PromotionRequestBuilderGetRequestConfiguration(
+            queryParameters: PromotionRequestBuilderGetRequestConfiguration::createQueryParameters(
+                limit: $limit,
+                marketplace_id: $marketplaceId,
+                offset: $offset,
+                promotion_status: $promotionStatus,
+                promotion_type: $promotionType,
+                q: $q,
+                sort: $sort,
+            )
+        );
+        return $this->kiota->promotion()->get($config)->wait();
     }
 
     public function getListingSet(
         string $promotionId,
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $q = null,
+        ?string $sort = null,
+        ?string $status = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?ItemsPagedCollection {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->promotion()->byPromotion_id($promotionId)->get_listing_set()->get()->wait();
+        $config = new Get_listing_setRequestBuilderGetRequestConfiguration(
+            queryParameters: Get_listing_setRequestBuilderGetRequestConfiguration::createQueryParameters(
+                limit: $limit,
+                offset: $offset,
+                q: $q,
+                sort: $sort,
+                status: $status,
+            )
+        );
+        return $this->kiota->promotion()->byPromotion_id($promotionId)->get_listing_set()->get($config)->wait();
     }
 
     public function pausePromotion(
@@ -917,21 +1108,43 @@ final class MarketingClient
     }
 
     public function getPromotionReports(
+        ?string $limit = null,
+        ?string $marketplaceId = null,
+        ?string $offset = null,
+        ?string $promotionStatus = null,
+        ?string $promotionType = null,
+        ?string $q = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?PromotionsReportPagedCollection {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->promotion_report()->get()->wait();
+        $config = new Promotion_reportRequestBuilderGetRequestConfiguration(
+            queryParameters: Promotion_reportRequestBuilderGetRequestConfiguration::createQueryParameters(
+                limit: $limit,
+                marketplace_id: $marketplaceId,
+                offset: $offset,
+                promotion_status: $promotionStatus,
+                promotion_type: $promotionType,
+                q: $q,
+            )
+        );
+        return $this->kiota->promotion_report()->get($config)->wait();
     }
 
     public function getPromotionSummaryReport(
+        ?string $marketplaceId = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?SummaryReportResponse {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->promotion_summary_report()->get()->wait();
+        $config = new Promotion_summary_reportRequestBuilderGetRequestConfiguration(
+            queryParameters: Promotion_summary_reportRequestBuilderGetRequestConfiguration::createQueryParameters(
+                marketplace_id: $marketplaceId,
+            )
+        );
+        return $this->kiota->promotion_summary_report()->get($config)->wait();
     }
 
     // ─── Reports ─────────────────────────────────────────────────────────────────
@@ -967,22 +1180,38 @@ final class MarketingClient
     }
 
     public function getReportMetadata(
+        ?string $channel = null,
+        ?string $fundingModel = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?ReportMetadatas {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->ad_report_metadata()->get()->wait();
+        $config = new Ad_report_metadataRequestBuilderGetRequestConfiguration(
+            queryParameters: Ad_report_metadataRequestBuilderGetRequestConfiguration::createQueryParameters(
+                channel: $channel,
+                funding_model: $fundingModel,
+            )
+        );
+        return $this->kiota->ad_report_metadata()->get($config)->wait();
     }
 
     public function getReportMetadataForReportType(
         string $reportType,
+        ?string $channel = null,
+        ?string $fundingModel = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?ReportMetadata {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->ad_report_metadata()->byReport_type($reportType)->get()->wait();
+        $config = new WithReport_typeItemRequestBuilderGetRequestConfiguration(
+            queryParameters: WithReport_typeItemRequestBuilderGetRequestConfiguration::createQueryParameters(
+                channel: $channel,
+                funding_model: $fundingModel,
+            )
+        );
+        return $this->kiota->ad_report_metadata()->byReport_type($reportType)->get($config)->wait();
     }
 
     public function getReportTask(
@@ -996,11 +1225,21 @@ final class MarketingClient
     }
 
     public function getReportTasks(
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $reportTaskStatuses = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?ReportTaskPagedCollection {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->ad_report_task()->get()->wait();
+        $config = new Ad_report_taskRequestBuilderGetRequestConfiguration(
+            queryParameters: Ad_report_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                limit: $limit,
+                offset: $offset,
+                report_task_statuses: $reportTaskStatuses,
+            )
+        );
+        return $this->kiota->ad_report_task()->get($config)->wait();
     }
 }

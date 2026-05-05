@@ -9,6 +9,7 @@ use EBay\MarketingAndPromotions\Configuration\TokenContext;
 use EBay\MarketingAndPromotions\Generated\Recommendation\RecommendationApiClient;
 use EBay\MarketingAndPromotions\Generated\Recommendation\Models\FindListingRecommendationRequest;
 use EBay\MarketingAndPromotions\Generated\Recommendation\Models\PagedListingRecommendationCollection;
+use EBay\MarketingAndPromotions\Generated\Recommendation\Find\FindRequestBuilderPostRequestConfiguration;
 
 final class RecommendationClient
 {
@@ -36,11 +37,21 @@ final class RecommendationClient
 
     public function findListingRecommendations(
         FindListingRecommendationRequest $body,
+        ?string $filter = null,
+        ?string $limit = null,
+        ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?PagedListingRecommendationCollection {
         TokenContext::set($accessToken);
         $this->applyHeaders($requestOptions);
-        return $this->kiota->find()->post($body)->wait();
+        $config = new FindRequestBuilderPostRequestConfiguration(
+            queryParameters: FindRequestBuilderPostRequestConfiguration::createQueryParameters(
+                filter: $filter,
+                limit: $limit,
+                offset: $offset,
+            )
+        );
+        return $this->kiota->find()->post($body, $config)->wait();
     }
 }
