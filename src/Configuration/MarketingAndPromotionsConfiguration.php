@@ -4,8 +4,8 @@ namespace EBay\MarketingAndPromotions\Configuration;
 
 final class MarketingAndPromotionsConfiguration
 {
-    public string $marketingBaseUrl      = 'https://api.ebay.com';
-    public string $recommendationBaseUrl = 'https://api.ebay.com';
+    public string $marketingBaseUrl      = 'https://api.ebay.com/sell/marketing/v1';
+    public string $recommendationBaseUrl = 'https://api.ebay.com/sell/recommendation/v1';
 
     /** Static fallback; per-call token takes precedence. */
     public ?string $accessToken = null;
