@@ -51,15 +51,13 @@ final class RecommendationClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?PagedListingRecommendationCollection {
-        TokenContext::set($accessToken);
-        $config = new FindRequestBuilderPostRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->find()->post($body, new FindRequestBuilderPostRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: FindRequestBuilderPostRequestConfiguration::createQueryParameters(
                 filter: $filter,
                 limit: $limit,
                 offset: $offset,
             )
-        );
-        return $this->kiota->find()->post($body, $config)->wait();
+        ))->wait());
     }
 }

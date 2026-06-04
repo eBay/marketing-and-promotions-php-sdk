@@ -231,9 +231,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BulkCreateAdsByInventoryReferenceResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->bulk_create_ads_by_inventory_reference()->post($body, new Bulk_create_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->bulk_create_ads_by_inventory_reference()->post($body, new Bulk_create_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function bulkCreateAdsByListingId(
@@ -242,9 +241,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BulkAdResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->bulk_create_ads_by_listing_id()->post($body, new Bulk_create_ads_by_listing_idRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->bulk_create_ads_by_listing_id()->post($body, new Bulk_create_ads_by_listing_idRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function bulkDeleteAdsByInventoryReference(
@@ -253,9 +251,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BulkDeleteAdsByInventoryReferenceResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->bulk_delete_ads_by_inventory_reference()->post($body, new Bulk_delete_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->bulk_delete_ads_by_inventory_reference()->post($body, new Bulk_delete_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function bulkDeleteAdsByListingId(
@@ -264,9 +261,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BulkDeleteAdResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->bulk_delete_ads_by_listing_id()->post($body, new Bulk_delete_ads_by_listing_idRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->bulk_delete_ads_by_listing_id()->post($body, new Bulk_delete_ads_by_listing_idRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function bulkUpdateAdsBidByInventoryReference(
@@ -275,9 +271,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BulkUpdateAdsByInventoryReferenceResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->bulk_update_ads_bid_by_inventory_reference()->post($body, new Bulk_update_ads_bid_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->bulk_update_ads_bid_by_inventory_reference()->post($body, new Bulk_update_ads_bid_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function bulkUpdateAdsBidByListingId(
@@ -286,9 +281,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BulkAdUpdateResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->bulk_update_ads_bid_by_listing_id()->post($body, new Bulk_update_ads_bid_by_listing_idRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->bulk_update_ads_bid_by_listing_id()->post($body, new Bulk_update_ads_bid_by_listing_idRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function bulkUpdateAdsStatus(
@@ -297,9 +291,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BulkAdUpdateStatusResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->bulk_update_ads_status()->post($body, new Bulk_update_ads_statusRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->bulk_update_ads_status()->post($body, new Bulk_update_ads_statusRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function bulkUpdateAdsStatusByListingId(
@@ -308,9 +301,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BulkAdUpdateStatusByListingIdResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->bulk_update_ads_status_by_listing_id()->post($body, new Bulk_update_ads_status_by_listing_idRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->bulk_update_ads_status_by_listing_id()->post($body, new Bulk_update_ads_status_by_listing_idRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     // ─── Bulk Keywords ───────────────────────────────────────────────────────────
@@ -321,9 +313,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BulkCreateKeywordResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->bulk_create_keyword()->post($body, new Bulk_create_keywordRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->bulk_create_keyword()->post($body, new Bulk_create_keywordRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function bulkUpdateKeyword(
@@ -332,9 +323,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BulkUpdateKeywordResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->bulk_update_keyword()->post($body, new Bulk_update_keywordRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->bulk_update_keyword()->post($body, new Bulk_update_keywordRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     // ─── Bulk Negative Keywords ───────────────────────────────────────────────
@@ -344,8 +334,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BulkCreateNegativeKeywordResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->bulk_create_negative_keyword()->post($body, new Bulk_create_negative_keywordRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->bulk_create_negative_keyword()->post($body, new Bulk_create_negative_keywordRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function bulkUpdateNegativeKeyword(
@@ -353,8 +342,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BulkUpdateNegativeKeywordResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->bulk_update_negative_keyword()->post($body, new Bulk_update_negative_keywordRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->bulk_update_negative_keyword()->post($body, new Bulk_update_negative_keywordRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     // ─── Campaigns ───────────────────────────────────────────────────────────────
@@ -365,9 +353,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->escapedClone()->post($body, new CloneRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->escapedClone()->post($body, new CloneRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function createCampaign(
@@ -375,8 +362,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->post($body, new Ad_campaignRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->post($body, new Ad_campaignRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function deleteCampaign(
@@ -384,8 +370,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_campaign()->byCampaign_id($campaignId)->delete(new WithCampaign_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->delete(new WithCampaign_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function endCampaign(
@@ -393,8 +378,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_campaign()->byCampaign_id($campaignId)->end()->post(new EndRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->end()->post(new EndRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function findCampaignByAdReference(
@@ -404,16 +388,14 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?Campaigns {
-        TokenContext::set($accessToken);
-        $config = new Find_campaign_by_ad_referenceRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->find_campaign_by_ad_reference()->get(new Find_campaign_by_ad_referenceRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: Find_campaign_by_ad_referenceRequestBuilderGetRequestConfiguration::createQueryParameters(
                 inventory_reference_id: $inventoryReferenceId,
                 inventory_reference_type: $inventoryReferenceType,
                 listing_id: $listingId,
             )
-        );
-        return $this->kiota->ad_campaign()->find_campaign_by_ad_reference()->get($config)->wait();
+        ))->wait());
     }
 
     public function getCampaign(
@@ -421,8 +403,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?Campaign {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->get(new WithCampaign_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->get(new WithCampaign_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getCampaignByName(
@@ -430,14 +411,12 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?Campaign {
-        TokenContext::set($accessToken);
-        $config = new Get_campaign_by_nameRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->get_campaign_by_name()->get(new Get_campaign_by_nameRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: Get_campaign_by_nameRequestBuilderGetRequestConfiguration::createQueryParameters(
                 campaign_name: $campaignName,
             )
-        );
-        return $this->kiota->ad_campaign()->get_campaign_by_name()->get($config)->wait();
+        ))->wait());
     }
 
     public function getCampaigns(
@@ -453,8 +432,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?CampaignPagedCollectionResponse {
-        TokenContext::set($accessToken);
-        $config = new Ad_campaignRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->get(new Ad_campaignRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: Ad_campaignRequestBuilderGetRequestConfiguration::createQueryParameters(
                 campaign_name: $campaignName,
@@ -467,8 +445,7 @@ final class MarketingClient
                 offset: $offset,
                 start_date_range: $startDateRange,
             )
-        );
-        return $this->kiota->ad_campaign()->get($config)->wait();
+        ))->wait());
     }
 
     public function pauseCampaign(
@@ -476,8 +453,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_campaign()->byCampaign_id($campaignId)->pause()->post(new PauseRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->pause()->post(new PauseRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function resumeCampaign(
@@ -485,8 +461,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_campaign()->byCampaign_id($campaignId)->resume()->post(new ResumeRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->resume()->post(new ResumeRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function updateAdRateStrategy(
@@ -495,9 +470,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->update_ad_rate_strategy()->post($body, new Update_ad_rate_strategyRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->update_ad_rate_strategy()->post($body, new Update_ad_rate_strategyRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function updateBiddingStrategy(
@@ -506,9 +480,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->update_bidding_strategy()->post($body, new Update_bidding_strategyRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->update_bidding_strategy()->post($body, new Update_bidding_strategyRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function updateCampaignBudget(
@@ -517,9 +490,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->update_campaign_budget()->post($body, new Update_campaign_budgetRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->update_campaign_budget()->post($body, new Update_campaign_budgetRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function updateCampaignIdentification(
@@ -528,17 +500,15 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->update_campaign_identification()->post($body, new Update_campaign_identificationRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->update_campaign_identification()->post($body, new Update_campaign_identificationRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function suggestBudget(
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?SuggestBudgetResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->suggest_budget()->get(new Suggest_budgetRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->suggest_budget()->get(new Suggest_budgetRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function suggestMaxCpc(
@@ -546,8 +516,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?SuggestMaxCpcResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->suggest_max_cpc()->post($body, new Suggest_max_cpcRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->suggest_max_cpc()->post($body, new Suggest_max_cpcRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     // ─── Ads ─────────────────────────────────────────────────────────────────────
@@ -558,8 +527,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad()->post($body, new AdRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad()->post($body, new AdRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function createAdsByInventoryReference(
@@ -568,9 +536,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?AdReferences {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->create_ads_by_inventory_reference()->post($body, new Create_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->create_ads_by_inventory_reference()->post($body, new Create_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function deleteAd(
@@ -579,8 +546,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad()->byAd_id($adId)->delete(new WithAd_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad()->byAd_id($adId)->delete(new WithAd_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function deleteAdsByInventoryReference(
@@ -589,9 +555,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?AdIds {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->delete_ads_by_inventory_reference()->post($body, new Delete_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->delete_ads_by_inventory_reference()->post($body, new Delete_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getAd(
@@ -600,8 +565,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?Ad {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad()->byAd_id($adId)->get(new WithAd_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad()->byAd_id($adId)->get(new WithAd_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getAds(
@@ -614,8 +578,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?AdPagedCollectionResponse {
-        TokenContext::set($accessToken);
-        $config = new AdRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad()->get(new AdRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: AdRequestBuilderGetRequestConfiguration::createQueryParameters(
                 ad_group_ids: $adGroupIds,
@@ -624,8 +587,7 @@ final class MarketingClient
                 listing_ids: $listingIds,
                 offset: $offset,
             )
-        );
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad()->get($config)->wait();
+        ))->wait());
     }
 
     public function getAdsByInventoryReference(
@@ -635,16 +597,14 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?Ads {
-        TokenContext::set($accessToken);
-        $config = new Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration(
-            headers: $this->mergedHeaders($requestOptions),
-            queryParameters: Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration::createQueryParameters(
-                inventory_reference_id: $inventoryReferenceId,
-                inventory_reference_type: $inventoryReferenceType,
-            )
-        );
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->get_ads_by_inventory_reference()->get($config)->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->get_ads_by_inventory_reference()->get(new Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    inventory_reference_id: $inventoryReferenceId,
+                    inventory_reference_type: $inventoryReferenceType,
+                )
+            ))->wait());
     }
 
     public function updateBid(
@@ -654,9 +614,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad()->byAd_id($adId)
-            ->update_bid()->post($body, new Update_bidRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad()->byAd_id($adId)
+            ->update_bid()->post($body, new Update_bidRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     // ─── Ad Groups ───────────────────────────────────────────────────────────────
@@ -667,8 +626,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad_group()->post($body, new Ad_groupRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad_group()->post($body, new Ad_groupRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getAdGroup(
@@ -677,9 +635,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?AdGroup {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->ad_group()->byAd_group_id($adGroupId)->get(new WithAd_group_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->ad_group()->byAd_group_id($adGroupId)->get(new WithAd_group_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getAdGroups(
@@ -690,16 +647,14 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?AdGroupPagedCollectionResponse {
-        TokenContext::set($accessToken);
-        $config = new Ad_groupRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad_group()->get(new Ad_groupRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: Ad_groupRequestBuilderGetRequestConfiguration::createQueryParameters(
                 ad_group_status: $adGroupStatus,
                 limit: $limit,
                 offset: $offset,
             )
-        );
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->ad_group()->get($config)->wait();
+        ))->wait());
     }
 
     public function updateAdGroup(
@@ -709,9 +664,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->ad_group()->byAd_group_id($adGroupId)->put($body, new WithAd_group_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->ad_group()->byAd_group_id($adGroupId)->put($body, new WithAd_group_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function suggestBids(
@@ -721,9 +675,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?TargetedBidsPagedCollection {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->ad_group()->byAd_group_id($adGroupId)->suggest_bids()->post($body, new Suggest_bidsRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->ad_group()->byAd_group_id($adGroupId)->suggest_bids()->post($body, new Suggest_bidsRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function suggestItems(
@@ -734,16 +687,14 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?TargetedAdsPagedCollection {
-        TokenContext::set($accessToken);
-        $config = new Suggest_itemsRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->suggest_items()->get(new Suggest_itemsRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: Suggest_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
                 category_ids: $categoryIds,
                 limit: $limit,
                 offset: $offset,
             )
-        );
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->suggest_items()->get($config)->wait();
+        ))->wait());
     }
 
     public function suggestKeywords(
@@ -753,9 +704,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?TargetedKeywordsPagedCollection {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->ad_group()->byAd_group_id($adGroupId)->suggest_keywords()->post($body, new Suggest_keywordsRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->ad_group()->byAd_group_id($adGroupId)->suggest_keywords()->post($body, new Suggest_keywordsRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     // ─── Keywords ────────────────────────────────────────────────────────────────
@@ -766,8 +716,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->keyword()->post($body, new KeywordRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->keyword()->post($body, new KeywordRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getKeyword(
@@ -776,9 +725,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?Keyword {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->keyword()->byKeyword_id($keywordId)->get(new WithKeyword_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->keyword()->byKeyword_id($keywordId)->get(new WithKeyword_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getKeywords(
@@ -790,8 +738,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?KeywordPagedCollectionResponse {
-        TokenContext::set($accessToken);
-        $config = new KeywordRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)->keyword()->get(new KeywordRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: KeywordRequestBuilderGetRequestConfiguration::createQueryParameters(
                 ad_group_ids: $adGroupIds,
@@ -799,8 +746,7 @@ final class MarketingClient
                 limit: $limit,
                 offset: $offset,
             )
-        );
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)->keyword()->get($config)->wait();
+        ))->wait());
     }
 
     public function updateKeyword(
@@ -810,9 +756,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?UpdateKeywordResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_campaign()->byCampaign_id($campaignId)
-            ->keyword()->byKeyword_id($keywordId)->put($body, new WithKeyword_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_campaign()->byCampaign_id($campaignId)
+            ->keyword()->byKeyword_id($keywordId)->put($body, new WithKeyword_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     // ─── Negative Keywords ───────────────────────────────────────────────────────
@@ -822,8 +767,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        TokenContext::set($accessToken);
-        return $this->kiota->negative_keyword()->post($body, new Negative_keywordRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->negative_keyword()->post($body, new Negative_keywordRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getNegativeKeyword(
@@ -831,8 +775,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?NegativeKeyword {
-        TokenContext::set($accessToken);
-        return $this->kiota->negative_keyword()->byNegative_keyword_id($negativeKeywordId)->get(new WithNegative_keyword_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->negative_keyword()->byNegative_keyword_id($negativeKeywordId)->get(new WithNegative_keyword_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getNegativeKeywords(
@@ -844,8 +787,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?NegativeKeywordPagedCollectionResponse {
-        TokenContext::set($accessToken);
-        $config = new Negative_keywordRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->negative_keyword()->get(new Negative_keywordRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: Negative_keywordRequestBuilderGetRequestConfiguration::createQueryParameters(
                 ad_group_ids: $adGroupIds,
@@ -854,8 +796,7 @@ final class MarketingClient
                 negative_keyword_status: $negativeKeywordStatus,
                 offset: $offset,
             )
-        );
-        return $this->kiota->negative_keyword()->get($config)->wait();
+        ))->wait());
     }
 
     public function updateNegativeKeyword(
@@ -864,8 +805,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->negative_keyword()->byNegative_keyword_id($negativeKeywordId)->put($body, new WithNegative_keyword_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->negative_keyword()->byNegative_keyword_id($negativeKeywordId)->put($body, new WithNegative_keyword_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     // ─── Email Campaigns ─────────────────────────────────────────────────────────
@@ -875,8 +815,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?CreateEmailCampaignResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->email_campaign()->post($body, new Email_campaignRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->email_campaign()->post($body, new Email_campaignRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function deleteEmailCampaign(
@@ -884,8 +823,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->email_campaign()->byEmail_campaign_id($emailCampaignId)->delete(new WithEmail_campaign_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->email_campaign()->byEmail_campaign_id($emailCampaignId)->delete(new WithEmail_campaign_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getEmailCampaign(
@@ -893,8 +831,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?GetEmailCampaignResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->email_campaign()->byEmail_campaign_id($emailCampaignId)->get(new WithEmail_campaign_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->email_campaign()->byEmail_campaign_id($emailCampaignId)->get(new WithEmail_campaign_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getEmailCampaigns(
@@ -905,8 +842,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?GetEmailCampaignsResponse {
-        TokenContext::set($accessToken);
-        $config = new Email_campaignRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->email_campaign()->get(new Email_campaignRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: Email_campaignRequestBuilderGetRequestConfiguration::createQueryParameters(
                 limit: $limit,
@@ -914,8 +850,7 @@ final class MarketingClient
                 q: $q,
                 sort: $sort,
             )
-        );
-        return $this->kiota->email_campaign()->get($config)->wait();
+        ))->wait());
     }
 
     public function getEmailPreview(
@@ -923,9 +858,8 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?GetEmailPreviewResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->email_campaign()->byEmail_campaign_id($emailCampaignId)
-            ->email_preview()->get(new Email_previewRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->email_campaign()->byEmail_campaign_id($emailCampaignId)
+            ->email_preview()->get(new Email_previewRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getEmailReport(
@@ -934,15 +868,13 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?GetEmailReportResponse {
-        TokenContext::set($accessToken);
-        $config = new ReportRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->email_campaign()->report()->get(new ReportRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: ReportRequestBuilderGetRequestConfiguration::createQueryParameters(
                 endDate: $endDate,
                 startDate: $startDate,
             )
-        );
-        return $this->kiota->email_campaign()->report()->get($config)->wait();
+        ))->wait());
     }
 
     public function getAudiences(
@@ -952,16 +884,14 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?GetEmailCampaignAudiencesResponse {
-        TokenContext::set($accessToken);
-        $config = new AudienceRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->email_campaign()->audience()->get(new AudienceRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: AudienceRequestBuilderGetRequestConfiguration::createQueryParameters(
                 emailCampaignType: $emailCampaignType,
                 limit: $limit,
                 offset: $offset,
             )
-        );
-        return $this->kiota->email_campaign()->audience()->get($config)->wait();
+        ))->wait());
     }
 
     public function updateEmailCampaign(
@@ -970,8 +900,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?UpdateEmailCampaignResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->email_campaign()->byEmail_campaign_id($emailCampaignId)->put($body, new WithEmail_campaign_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->email_campaign()->byEmail_campaign_id($emailCampaignId)->put($body, new WithEmail_campaign_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     // ─── Promotions ───────────────────────────────────────────────────────────────
@@ -981,8 +910,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?Item_price_markdownPostResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->item_price_markdown()->post($body, new Item_price_markdownRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->item_price_markdown()->post($body, new Item_price_markdownRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function deleteItemPriceMarkdownPromotion(
@@ -990,8 +918,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->item_price_markdown()->byPromotion_id($promotionId)->delete(new ItemPriceMarkdownWithPromotion_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->item_price_markdown()->byPromotion_id($promotionId)->delete(new ItemPriceMarkdownWithPromotion_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getItemPriceMarkdownPromotion(
@@ -999,8 +926,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?ItemPriceMarkdown {
-        TokenContext::set($accessToken);
-        return $this->kiota->item_price_markdown()->byPromotion_id($promotionId)->get(new ItemPriceMarkdownWithPromotion_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->item_price_markdown()->byPromotion_id($promotionId)->get(new ItemPriceMarkdownWithPromotion_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function updateItemPriceMarkdownPromotion(
@@ -1009,8 +935,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?WithPromotion_PutResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->item_price_markdown()->byPromotion_id($promotionId)->put($body, new ItemPriceMarkdownWithPromotion_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->item_price_markdown()->byPromotion_id($promotionId)->put($body, new ItemPriceMarkdownWithPromotion_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function createItemPromotion(
@@ -1018,8 +943,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BaseResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->item_promotion()->post($body, new Item_promotionRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->item_promotion()->post($body, new Item_promotionRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function deleteItemPromotion(
@@ -1027,8 +951,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->item_promotion()->byPromotion_id($promotionId)->delete(new ItemPromotionWithPromotion_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->item_promotion()->byPromotion_id($promotionId)->delete(new ItemPromotionWithPromotion_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getItemPromotion(
@@ -1036,8 +959,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?ItemPromotionResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->item_promotion()->byPromotion_id($promotionId)->get(new ItemPromotionWithPromotion_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->item_promotion()->byPromotion_id($promotionId)->get(new ItemPromotionWithPromotion_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function updateItemPromotion(
@@ -1046,8 +968,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?BaseResponse {
-        TokenContext::set($accessToken);
-        return $this->kiota->item_promotion()->byPromotion_id($promotionId)->put($body, new ItemPromotionWithPromotion_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->item_promotion()->byPromotion_id($promotionId)->put($body, new ItemPromotionWithPromotion_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getPromotions(
@@ -1061,8 +982,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?PromotionsPagedCollection {
-        TokenContext::set($accessToken);
-        $config = new PromotionRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->promotion()->get(new PromotionRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: PromotionRequestBuilderGetRequestConfiguration::createQueryParameters(
                 limit: $limit,
@@ -1073,8 +993,7 @@ final class MarketingClient
                 q: $q,
                 sort: $sort,
             )
-        );
-        return $this->kiota->promotion()->get($config)->wait();
+        ))->wait());
     }
 
     public function getListingSet(
@@ -1087,8 +1006,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?ItemsPagedCollection {
-        TokenContext::set($accessToken);
-        $config = new Get_listing_setRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->promotion()->byPromotion_id($promotionId)->get_listing_set()->get(new Get_listing_setRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: Get_listing_setRequestBuilderGetRequestConfiguration::createQueryParameters(
                 limit: $limit,
@@ -1097,8 +1015,7 @@ final class MarketingClient
                 sort: $sort,
                 status: $status,
             )
-        );
-        return $this->kiota->promotion()->byPromotion_id($promotionId)->get_listing_set()->get($config)->wait();
+        ))->wait());
     }
 
     public function pausePromotion(
@@ -1106,8 +1023,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->promotion()->byPromotion_id($promotionId)->pause()->post(new PromotionPauseRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->promotion()->byPromotion_id($promotionId)->pause()->post(new PromotionPauseRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function resumePromotion(
@@ -1115,8 +1031,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->promotion()->byPromotion_id($promotionId)->resume()->post(new PromotionResumeRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->promotion()->byPromotion_id($promotionId)->resume()->post(new PromotionResumeRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getPromotionReports(
@@ -1129,8 +1044,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?PromotionsReportPagedCollection {
-        TokenContext::set($accessToken);
-        $config = new Promotion_reportRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->promotion_report()->get(new Promotion_reportRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: Promotion_reportRequestBuilderGetRequestConfiguration::createQueryParameters(
                 limit: $limit,
@@ -1140,8 +1054,7 @@ final class MarketingClient
                 promotion_type: $promotionType,
                 q: $q,
             )
-        );
-        return $this->kiota->promotion_report()->get($config)->wait();
+        ))->wait());
     }
 
     public function getPromotionSummaryReport(
@@ -1149,14 +1062,12 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?SummaryReportResponse {
-        TokenContext::set($accessToken);
-        $config = new Promotion_summary_reportRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->promotion_summary_report()->get(new Promotion_summary_reportRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: Promotion_summary_reportRequestBuilderGetRequestConfiguration::createQueryParameters(
                 marketplace_id: $marketplaceId,
             )
-        );
-        return $this->kiota->promotion_summary_report()->get($config)->wait();
+        ))->wait());
     }
 
     // ─── Reports ─────────────────────────────────────────────────────────────────
@@ -1166,8 +1077,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_report_task()->post($body, new Ad_report_taskRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_report_task()->post($body, new Ad_report_taskRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function deleteReportTask(
@@ -1175,8 +1085,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): void {
-        TokenContext::set($accessToken);
-        $this->kiota->ad_report_task()->byReport_task_id($reportTaskId)->delete(new WithReport_task_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        TokenContext::runWith($accessToken, fn() => $this->kiota->ad_report_task()->byReport_task_id($reportTaskId)->delete(new WithReport_task_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getReport(
@@ -1184,8 +1093,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_report()->byReport_id($reportId)->get(new WithReport_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_report()->byReport_id($reportId)->get(new WithReport_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getReportMetadata(
@@ -1194,15 +1102,13 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?ReportMetadatas {
-        TokenContext::set($accessToken);
-        $config = new Ad_report_metadataRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_report_metadata()->get(new Ad_report_metadataRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: Ad_report_metadataRequestBuilderGetRequestConfiguration::createQueryParameters(
                 channel: $channel,
                 funding_model: $fundingModel,
             )
-        );
-        return $this->kiota->ad_report_metadata()->get($config)->wait();
+        ))->wait());
     }
 
     public function getReportMetadataForReportType(
@@ -1212,15 +1118,13 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?ReportMetadata {
-        TokenContext::set($accessToken);
-        $config = new WithReport_typeItemRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_report_metadata()->byReport_type($reportType)->get(new WithReport_typeItemRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: WithReport_typeItemRequestBuilderGetRequestConfiguration::createQueryParameters(
                 channel: $channel,
                 funding_model: $fundingModel,
             )
-        );
-        return $this->kiota->ad_report_metadata()->byReport_type($reportType)->get($config)->wait();
+        ))->wait());
     }
 
     public function getReportTask(
@@ -1228,8 +1132,7 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?ReportTask {
-        TokenContext::set($accessToken);
-        return $this->kiota->ad_report_task()->byReport_task_id($reportTaskId)->get(new WithReport_task_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait();
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_report_task()->byReport_task_id($reportTaskId)->get(new WithReport_task_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions)))->wait());
     }
 
     public function getReportTasks(
@@ -1239,15 +1142,13 @@ final class MarketingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?ReportTaskPagedCollection {
-        TokenContext::set($accessToken);
-        $config = new Ad_report_taskRequestBuilderGetRequestConfiguration(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->ad_report_task()->get(new Ad_report_taskRequestBuilderGetRequestConfiguration(
             headers: $this->mergedHeaders($requestOptions),
             queryParameters: Ad_report_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
                 limit: $limit,
                 offset: $offset,
                 report_task_statuses: $reportTaskStatuses,
             )
-        );
-        return $this->kiota->ad_report_task()->get($config)->wait();
+        ))->wait());
     }
 }
