@@ -214,13 +214,10 @@ final class MarketingClient
     /** @return array<string,string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
     {
-        $headers = $this->config->defaultRequestOptions->headers;
-        foreach ($requestOptions?->headers ?? [] as $key => $value) {
-            if (!array_key_exists($key, $headers)) {
-                $headers[$key] = $value;
-            }
-        }
-        return $headers;
+        return array_merge(
+            $this->config->defaultRequestOptions->headers,
+            $requestOptions?->headers ?? []
+        );
     }
 
     // ─── Bulk Ads ───────────────────────────────────────────────────────────────
