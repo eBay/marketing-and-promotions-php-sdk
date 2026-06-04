@@ -67,7 +67,7 @@ final class MarketingAndPromotionsClient
                         $status = $response->getStatusCode();
                         if ($status < 200 || $status >= 300) {
                             $method = $request->getMethod();
-                            $uri    = (string) $request->getUri();
+                            $uri    = str_replace(["\r", "\n"], ' ', (string) $request->getUri());
                             fwrite(STDERR, sprintf(
                                 "[MarketingAndPromotions] %s %s => HTTP %d\n",
                                 $method,
