@@ -18,13 +18,8 @@ namespace EBay\MarketingAndPromotions;
 
 use EBay\MarketingAndPromotions\Clients\Rest\MarketingClient;
 use EBay\MarketingAndPromotions\Clients\Rest\RecommendationClient;
-use EBay\MarketingAndPromotions\Configuration\KiotaAuthProvider;
 use EBay\MarketingAndPromotions\Configuration\MarketingAndPromotionsConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\MarketingApiClient;
-use EBay\MarketingAndPromotions\Generated\Recommendation\RecommendationApiClient;
 use GuzzleHttp\Client as GuzzleClient;
-use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
-use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 use Microsoft\Kiota\Http\KiotaClientFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -40,15 +35,8 @@ final class MarketingAndPromotionsClient
     ) {
         $guzzle ??= self::buildGuzzleClient($config);
 
-        $auth = new BaseBearerTokenAuthenticationProvider(new KiotaAuthProvider($config));
-
-        $marketingAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $marketingAdapter->setBaseUrl($config->marketingBaseUrl);
-        $this->marketing = new MarketingClient(new MarketingApiClient($marketingAdapter), $config);
-
-        $recommendationAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $recommendationAdapter->setBaseUrl($config->recommendationBaseUrl);
-        $this->recommendation = new RecommendationClient(new RecommendationApiClient($recommendationAdapter), $config);
+        $this->marketing = new MarketingClient($guzzle, $config);
+        $this->recommendation = new RecommendationClient($guzzle, $config);
     }
 
     /**

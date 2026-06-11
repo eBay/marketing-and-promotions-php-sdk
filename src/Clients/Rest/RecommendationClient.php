@@ -16,20 +16,40 @@
 
 namespace EBay\MarketingAndPromotions\Clients\Rest;
 
+use EBay\MarketingAndPromotions\Configuration\KiotaAuthProvider;
 use EBay\MarketingAndPromotions\Configuration\MarketingAndPromotionsConfiguration;
 use EBay\MarketingAndPromotions\Configuration\RequestOptions;
-use EBay\MarketingAndPromotions\Configuration\TokenContext;
 use EBay\MarketingAndPromotions\Generated\Recommendation\RecommendationApiClient;
 use EBay\MarketingAndPromotions\Generated\Recommendation\Models\FindListingRecommendationRequest;
 use EBay\MarketingAndPromotions\Generated\Recommendation\Models\PagedListingRecommendationCollection;
 use EBay\MarketingAndPromotions\Generated\Recommendation\Find\FindRequestBuilderPostRequestConfiguration;
+use GuzzleHttp\Client as GuzzleClient;
+use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
+use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
 final class RecommendationClient
 {
     public function __construct(
-        private readonly RecommendationApiClient $kiota,
-        private readonly MarketingAndPromotionsConfiguration $config
+        private readonly GuzzleClient $guzzle,
+        private readonly MarketingAndPromotionsConfiguration $config,
     ) {}
+
+    private function call(?string $accessToken, callable $op): mixed
+    {
+        $token = $accessToken ?? $this->config->accessToken
+            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set MarketingAndPromotionsConfiguration::$accessToken.');
+        return $op($this->buildApiClient($token));
+    }
+
+    private function buildApiClient(string $token): RecommendationApiClient
+    {
+        $auth = new BaseBearerTokenAuthenticationProvider(
+            new KiotaAuthProvider($token, $this->config->getAllowedHosts())
+        );
+        $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
+        $adapter->setBaseUrl($this->config->recommendationBaseUrl);
+        return new RecommendationApiClient($adapter);
+    }
 
     /** @return array<string,string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
@@ -48,13 +68,16 @@ final class RecommendationClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null
     ): ?PagedListingRecommendationCollection {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->find()->post($body, new FindRequestBuilderPostRequestConfiguration(
-            headers: $this->mergedHeaders($requestOptions),
-            queryParameters: FindRequestBuilderPostRequestConfiguration::createQueryParameters(
-                filter: $filter,
-                limit: $limit,
-                offset: $offset,
-            )
-        ))->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->find()->post($body, new FindRequestBuilderPostRequestConfiguration(
+                headers: $headers,
+                queryParameters: FindRequestBuilderPostRequestConfiguration::createQueryParameters(
+                    filter: $filter,
+                    limit: $limit,
+                    offset: $offset,
+                )
+            ))->wait()
+        );
     }
 }
