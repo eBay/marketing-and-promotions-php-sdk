@@ -216,8 +216,8 @@ final class MarketingClient
 
     private function call(?string $accessToken, callable $op): mixed
     {
-        $token = $accessToken ?? $this->config->accessToken
-            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set MarketingAndPromotionsConfiguration::$accessToken.');
+        $token = ($accessToken ?? $this->config->accessToken)
+            ?: throw new \RuntimeException('No access token. Pass $accessToken per-call or set MarketingAndPromotionsConfiguration::$accessToken.');
         return $op($this->buildApiClient($token));
     }
 
