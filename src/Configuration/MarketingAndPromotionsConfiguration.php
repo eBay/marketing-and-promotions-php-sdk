@@ -18,18 +18,14 @@ namespace EBay\MarketingAndPromotions\Configuration;
 
 final class MarketingAndPromotionsConfiguration
 {
-    public string $marketingBaseUrl      = 'https://api.ebay.com/sell/marketing/v1';
-    public string $recommendationBaseUrl = 'https://api.ebay.com/sell/recommendation/v1';
+    public readonly RequestOptions $defaultRequestOptions;
 
-    /** Static fallback; per-call token takes precedence. */
-    public ?string $accessToken = null;
-
-    public bool $diagnosticLogging = false;
-
-    public RequestOptions $defaultRequestOptions;
-
-    public function __construct()
-    {
+    public function __construct(
+        public readonly string  $marketingBaseUrl      = 'https://api.ebay.com/sell/marketing/v1',
+        public readonly string  $recommendationBaseUrl = 'https://api.ebay.com/sell/recommendation/v1',
+        public readonly ?string $accessToken           = null,
+        public readonly bool    $diagnosticLogging     = false,
+    ) {
         $this->defaultRequestOptions = new RequestOptions();
     }
 
