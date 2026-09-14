@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields for the <b>updateBid</b> request.
+ * This type specifies the bid percentage for an ad campaign.
 */
 class UpdateBidPercentageRequest implements AdditionalDataHolder, Parsable 
 {

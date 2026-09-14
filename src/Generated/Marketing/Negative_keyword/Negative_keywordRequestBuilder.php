@@ -18,6 +18,7 @@ namespace EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword;
 
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\CreateNegativeKeywordRequest;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\ErrorDetailV3;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\NegativeKeywordPagedCollectionResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\Item\WithNegative_keyword_ItemRequestBuilder;
 use Exception;
@@ -34,7 +35,7 @@ class Negative_keywordRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/MarketingAndPromotions/Generated/Marketing.negative_keyword.item collection
-     * @param string $negative_keyword_id This path parameter specifies the unique identifier for the negative keyword being retrieved.<br /><br />Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-negative_keyword-getnegativekeywords"> getNegativeKeywords</a> method to retrieve negative keyword IDs.
+     * @param string $negative_keyword_id This path parameter specifies the unique identifier for the negative keyword being retrieved.<br /><br />Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-negative_keyword-getnegativekeywords">getNegativeKeywords</a> method to retrieve negative keyword IDs.
      * @return WithNegative_keyword_ItemRequestBuilder
     */
     public function byNegative_keyword_id(string $negative_keyword_id): WithNegative_keyword_ItemRequestBuilder {
@@ -49,7 +50,7 @@ class Negative_keywordRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/negative_keyword?ad_group_ids={ad_group_ids}{&campaign_ids*,limit*,negative_keyword_status*,offset*}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/negative_keyword{?campaign_ids*,limit*,negative_keyword_status*,offset*}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {
@@ -66,11 +67,11 @@ class Negative_keywordRequestBuilder extends BaseRequestBuilder
     public function get(?Negative_keywordRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
                 '403' => [Error::class, 'createFromDiscriminatorValue'],
                 '404' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [NegativeKeywordPagedCollectionResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
@@ -85,10 +86,11 @@ class Negative_keywordRequestBuilder extends BaseRequestBuilder
     public function post(CreateNegativeKeywordRequest $body, ?Negative_keywordRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
                 '403' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [Negative_keywordPostResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
@@ -100,7 +102,7 @@ class Negative_keywordRequestBuilder extends BaseRequestBuilder
     */
     public function toGetRequestInformation(?Negative_keywordRequestBuilderGetRequestConfiguration $requestConfiguration = null): RequestInformation {
         $requestInfo = new RequestInformation();
-        $requestInfo->urlTemplate = $this->urlTemplate;
+        $requestInfo->urlTemplate = '{+baseurl}/negative_keyword?ad_group_ids={ad_group_ids}{&campaign_ids*,limit*,negative_keyword_status*,offset*}';
         $requestInfo->pathParameters = $this->pathParameters;
         $requestInfo->httpMethod = HttpMethod::GET;
         if ($requestConfiguration !== null) {
@@ -122,7 +124,7 @@ class Negative_keywordRequestBuilder extends BaseRequestBuilder
     */
     public function toPostRequestInformation(CreateNegativeKeywordRequest $body, ?Negative_keywordRequestBuilderPostRequestConfiguration $requestConfiguration = null): RequestInformation {
         $requestInfo = new RequestInformation();
-        $requestInfo->urlTemplate = '{+baseurl}/negative_keyword';
+        $requestInfo->urlTemplate = $this->urlTemplate;
         $requestInfo->pathParameters = $this->pathParameters;
         $requestInfo->httpMethod = HttpMethod::POST;
         if ($requestConfiguration !== null) {

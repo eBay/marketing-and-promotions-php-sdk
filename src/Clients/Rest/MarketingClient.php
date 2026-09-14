@@ -52,6 +52,8 @@ use EBay\MarketingAndPromotions\Generated\Marketing\Models\BulkUpdateKeywordRequ
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\BulkUpdateKeywordResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\BulkUpdateNegativeKeywordRequest;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\BulkUpdateNegativeKeywordResponse;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\BulkUpsertVideoAdsPreferencesRequest;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\BulkUpsertVideoAdsPreferencesResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Campaign;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\CampaignPagedCollectionResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Campaigns;
@@ -107,81 +109,8 @@ use EBay\MarketingAndPromotions\Generated\Marketing\Models\UpdateEmailCampaignRe
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\UpdateKeywordRequest;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\UpdateKeywordResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\UpdateNegativeKeywordRequest;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Ad_campaignRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Ad_campaignRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Find_campaign_by_ad_reference\Find_campaign_by_ad_referenceRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Get_campaign_by_name\Get_campaign_by_nameRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Ad_groupRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Ad_groupRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Item\Suggest_bids\Suggest_bidsRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Item\Suggest_keywords\Suggest_keywordsRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Item\WithAd_group_ItemRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Item\WithAd_group_ItemRequestBuilderPutRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\AdRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\AdRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\Item\Update_bid\Update_bidRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\Item\WithAd_ItemRequestBuilderDeleteRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\Item\WithAd_ItemRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_create_ads_by_inventory_reference\Bulk_create_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_create_ads_by_listing_id\Bulk_create_ads_by_listing_idRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_create_keyword\Bulk_create_keywordRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_delete_ads_by_inventory_reference\Bulk_delete_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_delete_ads_by_listing_id\Bulk_delete_ads_by_listing_idRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_ads_bid_by_inventory_reference\Bulk_update_ads_bid_by_inventory_referenceRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_ads_bid_by_listing_id\Bulk_update_ads_bid_by_listing_idRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_ads_status_by_listing_id\Bulk_update_ads_status_by_listing_idRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_ads_status\Bulk_update_ads_statusRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_keyword\Bulk_update_keywordRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Create_ads_by_inventory_reference\Create_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Delete_ads_by_inventory_reference\Delete_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\End\EndRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\EscapedClone\CloneRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Get_ads_by_inventory_reference\Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Keyword\Item\WithKeyword_ItemRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Keyword\Item\WithKeyword_ItemRequestBuilderPutRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Keyword\KeywordRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Keyword\KeywordRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Suggest_items\Suggest_itemsRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Update_ad_rate_strategy\Update_ad_rate_strategyRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Update_bidding_strategy\Update_bidding_strategyRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Update_campaign_budget\Update_campaign_budgetRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Update_campaign_identification\Update_campaign_identificationRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\WithCampaign_ItemRequestBuilderDeleteRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\WithCampaign_ItemRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Suggest_budget\Suggest_budgetRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Suggest_max_cpc\Suggest_max_cpcRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_metadata\Ad_report_metadataRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_metadata\Item\WithReport_typeItemRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_task\Ad_report_taskRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_task\Ad_report_taskRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_task\Item\WithReport_task_ItemRequestBuilderDeleteRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_task\Item\WithReport_task_ItemRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Ad_report\Item\WithReport_ItemRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Bulk_create_negative_keyword\Bulk_create_negative_keywordRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Bulk_update_negative_keyword\Bulk_update_negative_keywordRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Audience\AudienceRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Email_campaignRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Email_campaignRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Item\Email_preview\Email_previewRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Item\WithEmail_campaign_ItemRequestBuilderDeleteRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Item\WithEmail_campaign_ItemRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Item\WithEmail_campaign_ItemRequestBuilderPutRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Report\ReportRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Item_price_markdown\Item_price_markdownRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Item_promotion\Item_promotionRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Item_promotion\Item\WithPromotion_ItemRequestBuilderDeleteRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Item_promotion\Item\WithPromotion_ItemRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Item_promotion\Item\WithPromotion_ItemRequestBuilderPutRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\Item\WithNegative_keyword_ItemRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\Item\WithNegative_keyword_ItemRequestBuilderPutRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\Negative_keywordRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\Negative_keywordRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Promotion_report\Promotion_reportRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Promotion_summary_report\Promotion_summary_reportRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Promotion\Item\Get_listing_set\Get_listing_setRequestBuilderGetRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Promotion\Item\Pause\PauseRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Promotion\Item\Resume\ResumeRequestBuilderPostRequestConfiguration;
-use EBay\MarketingAndPromotions\Generated\Marketing\Promotion\PromotionRequestBuilderGetRequestConfiguration;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\UpsertVideoAdsPreferencesRequest;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\UpsertVideoAdsPreferencesResponse;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -213,7 +142,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->bulk_create_ads_by_inventory_reference()->post(
                 $body,
-                new Bulk_create_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_create_ads_by_inventory_reference\Bulk_create_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -229,7 +158,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->bulk_create_ads_by_listing_id()->post(
                 $body,
-                new Bulk_create_ads_by_listing_idRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_create_ads_by_listing_id\Bulk_create_ads_by_listing_idRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -245,7 +174,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->bulk_delete_ads_by_inventory_reference()->post(
                 $body,
-                new Bulk_delete_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_delete_ads_by_inventory_reference\Bulk_delete_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -261,7 +190,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->bulk_delete_ads_by_listing_id()->post(
                 $body,
-                new Bulk_delete_ads_by_listing_idRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_delete_ads_by_listing_id\Bulk_delete_ads_by_listing_idRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -277,7 +206,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->bulk_update_ads_bid_by_inventory_reference()->post(
                 $body,
-                new Bulk_update_ads_bid_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_ads_bid_by_inventory_reference\Bulk_update_ads_bid_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -293,7 +222,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->bulk_update_ads_bid_by_listing_id()->post(
                 $body,
-                new Bulk_update_ads_bid_by_listing_idRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_ads_bid_by_listing_id\Bulk_update_ads_bid_by_listing_idRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -309,7 +238,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->bulk_update_ads_status()->post(
                 $body,
-                new Bulk_update_ads_statusRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_ads_status\Bulk_update_ads_statusRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -325,7 +254,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->bulk_update_ads_status_by_listing_id()->post(
                 $body,
-                new Bulk_update_ads_status_by_listing_idRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_ads_status_by_listing_id\Bulk_update_ads_status_by_listing_idRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -333,10 +262,11 @@ final class MarketingClient
     public function getAds(
         string $campaignId,
         ?string $adGroupIds = null,
-        ?string $adStatus = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\GetAd_statusQueryParameterType $adStatus = null,
         ?string $limit = null,
         ?string $listingIds = null,
         ?string $offset = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\GetFieldgroupsQueryParameterType $fieldgroups = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?AdPagedCollectionResponse
@@ -344,14 +274,15 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->ad()->get(
-                new AdRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\AdRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: AdRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\AdRequestBuilderGetRequestConfiguration::createQueryParameters(
                         ad_group_ids: $adGroupIds,
                         ad_status: $adStatus,
                         limit: $limit,
                         listing_ids: $listingIds,
                         offset: $offset,
+                        fieldgroups: $fieldgroups,
                     ),
                 )
             )->wait()
@@ -369,7 +300,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->ad()->post(
                 $body,
-                new AdRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\AdRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -385,7 +316,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->create_ads_by_inventory_reference()->post(
                 $body,
-                new Create_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Create_ads_by_inventory_reference\Create_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -393,6 +324,7 @@ final class MarketingClient
     public function getAd(
         string $adId,
         string $campaignId,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\Item\GetFieldgroupsQueryParameterType $fieldgroups = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?Ad
@@ -400,7 +332,12 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->ad()->byAd_id($adId)->get(
-                new WithAd_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\Item\WithAd_ItemRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\Item\WithAd_ItemRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        fieldgroups: $fieldgroups,
+                    ),
+                )
             )->wait()
         );
     }
@@ -415,7 +352,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->ad()->byAd_id($adId)->delete(
-                new WithAd_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\Item\WithAd_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -431,7 +368,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->delete_ads_by_inventory_reference()->post(
                 $body,
-                new Delete_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Delete_ads_by_inventory_reference\Delete_ads_by_inventory_referenceRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -439,7 +376,7 @@ final class MarketingClient
     public function getAdsByInventoryReference(
         string $campaignId,
         ?string $inventoryReferenceId = null,
-        ?string $inventoryReferenceType = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Get_ads_by_inventory_reference\GetInventory_reference_typeQueryParameterType $inventoryReferenceType = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?Ads
@@ -447,9 +384,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->get_ads_by_inventory_reference()->get(
-                new Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Get_ads_by_inventory_reference\Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Get_ads_by_inventory_reference\Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration::createQueryParameters(
                         inventory_reference_id: $inventoryReferenceId,
                         inventory_reference_type: $inventoryReferenceType,
                     ),
@@ -470,14 +407,14 @@ final class MarketingClient
         $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->ad()->byAd_id($adId)->update_bid()->post(
                 $body,
-                new Update_bidRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\Item\Update_bid\Update_bidRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
     public function getAdGroups(
         string $campaignId,
-        ?string $adGroupStatus = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\GetAd_group_statusQueryParameterType $adGroupStatus = null,
         ?string $limit = null,
         ?string $offset = null,
         ?string $accessToken = null,
@@ -487,9 +424,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->ad_group()->get(
-                new Ad_groupRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Ad_groupRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Ad_groupRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Ad_groupRequestBuilderGetRequestConfiguration::createQueryParameters(
                         ad_group_status: $adGroupStatus,
                         limit: $limit,
                         offset: $offset,
@@ -510,7 +447,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->ad_group()->post(
                 $body,
-                new Ad_groupRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Ad_groupRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -525,7 +462,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->ad_group()->byAd_group_id($adGroupId)->get(
-                new WithAd_group_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Item\WithAd_group_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -542,7 +479,7 @@ final class MarketingClient
         $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->ad_group()->byAd_group_id($adGroupId)->put(
                 $body,
-                new WithAd_group_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Item\WithAd_group_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -559,7 +496,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->ad_group()->byAd_group_id($adGroupId)->suggest_bids()->post(
                 $body,
-                new Suggest_bidsRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Item\Suggest_bids\Suggest_bidsRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -576,7 +513,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->ad_group()->byAd_group_id($adGroupId)->suggest_keywords()->post(
                 $body,
-                new Suggest_keywordsRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Item\Suggest_keywords\Suggest_keywordsRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -592,21 +529,22 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->escapedClone()->post(
                 $body,
-                new CloneRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\EscapedClone\CloneRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
     public function getCampaigns(
         ?string $campaignName = null,
-        ?string $campaignStatus = null,
-        ?string $campaignTargetingTypes = null,
-        ?string $channels = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\GetCampaign_statusQueryParameterType $campaignStatus = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\GetCampaign_targeting_typesQueryParameterType $campaignTargetingTypes = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\GetChannelsQueryParameterType $channels = null,
         ?string $endDateRange = null,
-        ?string $fundingStrategy = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\GetFunding_strategyQueryParameterType $fundingStrategy = null,
         ?string $limit = null,
         ?string $offset = null,
         ?string $startDateRange = null,
+        ?string $marketplaceId = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?CampaignPagedCollectionResponse
@@ -614,9 +552,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->get(
-                new Ad_campaignRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Ad_campaignRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Ad_campaignRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Ad_campaignRequestBuilderGetRequestConfiguration::createQueryParameters(
                         campaign_name: $campaignName,
                         campaign_status: $campaignStatus,
                         campaign_targeting_types: $campaignTargetingTypes,
@@ -626,6 +564,7 @@ final class MarketingClient
                         limit: $limit,
                         offset: $offset,
                         start_date_range: $startDateRange,
+                        marketplace_id: $marketplaceId,
                     ),
                 )
             )->wait()
@@ -638,7 +577,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->post(
                 $body,
-                new Ad_campaignRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Ad_campaignRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -648,7 +587,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->get(
-                new WithCampaign_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\WithCampaign_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -658,7 +597,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->delete(
-                new WithCampaign_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\WithCampaign_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -668,14 +607,14 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->end()->post(
-                new EndRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\End\EndRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
     public function findCampaignByAdReference(
         ?string $inventoryReferenceId = null,
-        ?string $inventoryReferenceType = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Find_campaign_by_ad_reference\GetInventory_reference_typeQueryParameterType $inventoryReferenceType = null,
         ?string $listingId = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
@@ -684,9 +623,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->find_campaign_by_ad_reference()->get(
-                new Find_campaign_by_ad_referenceRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Find_campaign_by_ad_reference\Find_campaign_by_ad_referenceRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Find_campaign_by_ad_referenceRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Find_campaign_by_ad_reference\Find_campaign_by_ad_referenceRequestBuilderGetRequestConfiguration::createQueryParameters(
                         inventory_reference_id: $inventoryReferenceId,
                         inventory_reference_type: $inventoryReferenceType,
                         listing_id: $listingId,
@@ -701,9 +640,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->get_campaign_by_name()->get(
-                new Get_campaign_by_nameRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Get_campaign_by_name\Get_campaign_by_nameRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Get_campaign_by_nameRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Get_campaign_by_name\Get_campaign_by_nameRequestBuilderGetRequestConfiguration::createQueryParameters(
                         campaign_name: $campaignName,
                     ),
                 )
@@ -716,7 +655,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->pause()->post(
-                new PauseRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Pause\PauseRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -726,7 +665,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->resume()->post(
-                new ResumeRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Resume\ResumeRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -739,7 +678,7 @@ final class MarketingClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->suggest_budget()->get(
-                new Suggest_budgetRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Suggest_budget\Suggest_budgetRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -756,9 +695,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->suggest_items()->get(
-                new Suggest_itemsRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Suggest_items\Suggest_itemsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Suggest_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Suggest_items\Suggest_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
                         category_ids: $categoryIds,
                         limit: $limit,
                         offset: $offset,
@@ -774,7 +713,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->suggest_max_cpc()->post(
                 $body,
-                new Suggest_max_cpcRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Suggest_max_cpc\Suggest_max_cpcRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -790,7 +729,7 @@ final class MarketingClient
         $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->update_ad_rate_strategy()->post(
                 $body,
-                new Update_ad_rate_strategyRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Update_ad_rate_strategy\Update_ad_rate_strategyRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -806,7 +745,7 @@ final class MarketingClient
         $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->update_bidding_strategy()->post(
                 $body,
-                new Update_bidding_strategyRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Update_bidding_strategy\Update_bidding_strategyRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -822,7 +761,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->update_campaign_budget()->post(
                 $body,
-                new Update_campaign_budgetRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Update_campaign_budget\Update_campaign_budgetRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -838,7 +777,7 @@ final class MarketingClient
         $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->update_campaign_identification()->post(
                 $body,
-                new Update_campaign_identificationRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Update_campaign_identification\Update_campaign_identificationRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -854,7 +793,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->bulk_create_keyword()->post(
                 $body,
-                new Bulk_create_keywordRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_create_keyword\Bulk_create_keywordRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -870,7 +809,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->bulk_update_keyword()->post(
                 $body,
-                new Bulk_update_keywordRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_keyword\Bulk_update_keywordRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -878,7 +817,7 @@ final class MarketingClient
     public function getKeywords(
         string $campaignId,
         ?string $adGroupIds = null,
-        ?string $keywordStatus = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Keyword\GetKeyword_statusQueryParameterType $keywordStatus = null,
         ?string $limit = null,
         ?string $offset = null,
         ?string $accessToken = null,
@@ -888,9 +827,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->keyword()->get(
-                new KeywordRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Keyword\KeywordRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: KeywordRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Keyword\KeywordRequestBuilderGetRequestConfiguration::createQueryParameters(
                         ad_group_ids: $adGroupIds,
                         keyword_status: $keywordStatus,
                         limit: $limit,
@@ -912,7 +851,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->keyword()->post(
                 $body,
-                new KeywordRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Keyword\KeywordRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -927,7 +866,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->keyword()->byKeyword_id($keywordId)->get(
-                new WithKeyword_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Keyword\Item\WithKeyword_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -944,7 +883,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_campaign()->byCampaign_id($campaignId)->keyword()->byKeyword_id($keywordId)->put(
                 $body,
-                new WithKeyword_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Keyword\Item\WithKeyword_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -955,7 +894,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->bulk_create_negative_keyword()->post(
                 $body,
-                new Bulk_create_negative_keywordRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Bulk_create_negative_keyword\Bulk_create_negative_keywordRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -966,7 +905,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->bulk_update_negative_keyword()->post(
                 $body,
-                new Bulk_update_negative_keywordRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Bulk_update_negative_keyword\Bulk_update_negative_keywordRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -975,7 +914,7 @@ final class MarketingClient
         ?string $adGroupIds = null,
         ?string $campaignIds = null,
         ?string $limit = null,
-        ?string $negativeKeywordStatus = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\GetNegative_keyword_statusQueryParameterType $negativeKeywordStatus = null,
         ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
@@ -984,9 +923,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->negative_keyword()->get(
-                new Negative_keywordRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\Negative_keywordRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Negative_keywordRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\Negative_keywordRequestBuilderGetRequestConfiguration::createQueryParameters(
                         ad_group_ids: $adGroupIds,
                         campaign_ids: $campaignIds,
                         limit: $limit,
@@ -1004,7 +943,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->negative_keyword()->post(
                 $body,
-                new Negative_keywordRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\Negative_keywordRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1014,7 +953,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->negative_keyword()->byNegative_keyword_id($negativeKeywordId)->get(
-                new WithNegative_keyword_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\Item\WithNegative_keyword_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1030,7 +969,7 @@ final class MarketingClient
         $this->call($accessToken, fn($api) =>
             $api->negative_keyword()->byNegative_keyword_id($negativeKeywordId)->put(
                 $body,
-                new WithNegative_keyword_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\Item\WithNegative_keyword_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1040,7 +979,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->ad_report()->byReport_id($reportId)->get(
-                new WithReport_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_report\Item\WithReport_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1055,9 +994,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_report_metadata()->get(
-                new Ad_report_metadataRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_metadata\Ad_report_metadataRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Ad_report_metadataRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_metadata\Ad_report_metadataRequestBuilderGetRequestConfiguration::createQueryParameters(
                         funding_model: $fundingModel,
                         channel: $channel,
                     ),
@@ -1077,9 +1016,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_report_metadata()->byReport_type($reportType)->get(
-                new WithReport_typeItemRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_metadata\Item\WithReport_typeItemRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: WithReport_typeItemRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_metadata\Item\WithReport_typeItemRequestBuilderGetRequestConfiguration::createQueryParameters(
                         funding_model: $fundingModel,
                         channel: $channel,
                     ),
@@ -1099,9 +1038,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_report_task()->get(
-                new Ad_report_taskRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_task\Ad_report_taskRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Ad_report_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_task\Ad_report_taskRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         offset: $offset,
                         report_task_statuses: $reportTaskStatuses,
@@ -1117,7 +1056,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->ad_report_task()->post(
                 $body,
-                new Ad_report_taskRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_task\Ad_report_taskRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1127,7 +1066,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->ad_report_task()->byReport_task_id($reportTaskId)->get(
-                new WithReport_task_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_task\Item\WithReport_task_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1137,7 +1076,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->ad_report_task()->byReport_task_id($reportTaskId)->delete(
-                new WithReport_task_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_task\Item\WithReport_task_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1148,7 +1087,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->item_price_markdown()->post(
                 $body,
-                new Item_price_markdownRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Item_price_markdown\Item_price_markdownRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1158,7 +1097,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->item_price_markdown()->byPromotion_id($promotionId)->get(
-                new WithPromotion_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Item_price_markdown\Item\WithPromotion_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1168,13 +1107,13 @@ final class MarketingClient
         ItemPriceMarkdown $body,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): mixed
+    ): ?BaseResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->item_price_markdown()->byPromotion_id($promotionId)->put(
                 $body,
-                new WithPromotion_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Item_price_markdown\Item\WithPromotion_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1184,7 +1123,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->item_price_markdown()->byPromotion_id($promotionId)->delete(
-                new WithPromotion_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Item_price_markdown\Item\WithPromotion_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1195,7 +1134,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->item_promotion()->post(
                 $body,
-                new Item_promotionRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Item_promotion\Item_promotionRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1205,7 +1144,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->item_promotion()->byPromotion_id($promotionId)->get(
-                new WithPromotion_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Item_promotion\Item\WithPromotion_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1221,7 +1160,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->item_promotion()->byPromotion_id($promotionId)->put(
                 $body,
-                new WithPromotion_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Item_promotion\Item\WithPromotion_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1231,7 +1170,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->item_promotion()->byPromotion_id($promotionId)->delete(
-                new WithPromotion_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Item_promotion\Item\WithPromotion_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1242,7 +1181,7 @@ final class MarketingClient
         ?string $offset = null,
         ?string $q = null,
         ?string $sort = null,
-        ?string $status = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Models\ItemMarkdownStatusEnum $status = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?ItemsPagedCollection
@@ -1250,9 +1189,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->promotion()->byPromotion_id($promotionId)->get_listing_set()->get(
-                new Get_listing_setRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Promotion\Item\Get_listing_set\Get_listing_setRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Get_listing_setRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Promotion\Item\Get_listing_set\Get_listing_setRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         offset: $offset,
                         q: $q,
@@ -1279,9 +1218,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->promotion()->get(
-                new PromotionRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Promotion\PromotionRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: PromotionRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Promotion\PromotionRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         marketplace_id: $marketplaceId,
                         offset: $offset,
@@ -1300,7 +1239,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->promotion()->byPromotion_id($promotionId)->pause()->post(
-                new PauseRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Promotion\Item\Pause\PauseRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1310,7 +1249,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->promotion()->byPromotion_id($promotionId)->resume()->post(
-                new ResumeRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Promotion\Item\Resume\ResumeRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1329,9 +1268,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->promotion_report()->get(
-                new Promotion_reportRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Promotion_report\Promotion_reportRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Promotion_reportRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Promotion_report\Promotion_reportRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         marketplace_id: $marketplaceId,
                         offset: $offset,
@@ -1349,9 +1288,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->promotion_summary_report()->get(
-                new Promotion_summary_reportRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Promotion_summary_report\Promotion_summary_reportRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Promotion_summary_reportRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Promotion_summary_report\Promotion_summary_reportRequestBuilderGetRequestConfiguration::createQueryParameters(
                         marketplace_id: $marketplaceId,
                     ),
                 )
@@ -1371,9 +1310,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->email_campaign()->get(
-                new Email_campaignRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Email_campaignRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Email_campaignRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Email_campaignRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         offset: $offset,
                         q: $q,
@@ -1398,7 +1337,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->email_campaign()->post(
                 $body,
-                new Email_campaignRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Email_campaignRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1408,7 +1347,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->email_campaign()->byEmail_campaign_id($emailCampaignId)->get(
-                new WithEmail_campaign_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Item\WithEmail_campaign_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1424,7 +1363,7 @@ final class MarketingClient
         return $this->call($accessToken, fn($api) =>
             $api->email_campaign()->byEmail_campaign_id($emailCampaignId)->put(
                 $body,
-                new WithEmail_campaign_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Item\WithEmail_campaign_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1434,7 +1373,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->email_campaign()->byEmail_campaign_id($emailCampaignId)->delete(
-                new WithEmail_campaign_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Item\WithEmail_campaign_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1450,9 +1389,9 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->email_campaign()->audience()->get(
-                new AudienceRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Audience\AudienceRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: AudienceRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Audience\AudienceRequestBuilderGetRequestConfiguration::createQueryParameters(
                         emailCampaignType: $emailCampaignType,
                         limit: $limit,
                         offset: $offset,
@@ -1467,7 +1406,7 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->email_campaign()->byEmail_campaign_id($emailCampaignId)->email_preview()->get(
-                new Email_previewRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Item\Email_preview\Email_previewRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -1482,13 +1421,45 @@ final class MarketingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->email_campaign()->report()->get(
-                new ReportRequestBuilderGetRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Report\ReportRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: ReportRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Report\ReportRequestBuilderGetRequestConfiguration::createQueryParameters(
                         endDate: $endDate,
                         startDate: $startDate,
                     ),
                 )
+            )->wait()
+        );
+    }
+
+    public function upsertVideoAdsPreferences(
+        string $campaignId,
+        UpsertVideoAdsPreferencesRequest $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?UpsertVideoAdsPreferencesResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->ad_campaign()->byCampaign_id($campaignId)->upsert_video_ads_preferences()->put(
+                $body,
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Upsert_video_ads_preferences\Upsert_video_ads_preferencesRequestBuilderPutRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function bulkUpsertVideoAdsPreferences(
+        string $campaignId,
+        BulkUpsertVideoAdsPreferencesRequest $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?BulkUpsertVideoAdsPreferencesResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->ad_campaign()->byCampaign_id($campaignId)->bulk_upsert_video_ads_preferences()->put(
+                $body,
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_upsert_video_ads_preferences\Bulk_upsert_video_ads_preferencesRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

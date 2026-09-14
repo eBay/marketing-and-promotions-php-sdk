@@ -17,6 +17,7 @@
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Keyword\Item;
 
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\ErrorDetailV3;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Keyword;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\UpdateKeywordRequest;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\UpdateKeywordResponse;
@@ -56,9 +57,9 @@ class WithKeyword_ItemRequestBuilder extends BaseRequestBuilder
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
         $errorMappings = [
                 '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '404' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [Keyword::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
@@ -73,10 +74,10 @@ class WithKeyword_ItemRequestBuilder extends BaseRequestBuilder
     public function put(UpdateKeywordRequest $body, ?WithKeyword_ItemRequestBuilderPutRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPutRequestInformation($body, $requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '404' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [UpdateKeywordResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }

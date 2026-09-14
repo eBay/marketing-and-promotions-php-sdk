@@ -19,7 +19,7 @@ namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad;
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\Item\WithAd_ItemRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\AdPagedCollectionResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\CreateAdRequest;
-use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\ErrorDetailV3;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -49,7 +49,7 @@ class AdRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/ad_campaign/{campaign_id}/ad{?ad_group_ids*,ad_status*,limit*,listing_ids*,offset*}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/ad_campaign/{campaign_id}/ad{?ad_group_ids*,ad_status*,fieldgroups*,limit*,listing_ids*,offset*}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {
@@ -58,7 +58,7 @@ class AdRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method retrieves Promoted Listings ads that are associated with listings created with either the <a href="/Devzone/XML/docs/Reference/eBay/index.html" title="Trading API Reference" target="_blank">Trading API</a> or the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference" target="_blank">Inventory API</a>. <p>The method retrieves ads related to the specified campaign. Specify the Promoted Listings campaign to target with the <b>campaign_id</b> path parameter.</p>  <p>Because of the large number of possible results, you can use query parameters to paginate the result set by specifying a <b>limit</b>, which dictates how many ads to return on each page of the response. You can also specify how many ads to skip in the result set before returning the first result using the <b>offset</b> path parameter.</p>  <p>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> to retrieve the current campaign IDs for the seller.</p>
+     * This method retrieves Promoted Listings ads that are associated with listings created with either the <a href="/Devzone/XML/docs/Reference/eBay/index.html" title="Trading API Reference" target="_blank">Trading API</a> or the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference" target="_blank">Inventory API</a>. <p>The method retrieves ads related to the specified campaign. Specify the Promoted Listings campaign to target with the <b>campaign_id</b> path parameter.</p>  <p>Because of the large number of possible results, you can use query parameters to paginate the result set by specifying a <b>limit</b>, which dictates how many ads to return on each page of the response. You can also specify how many ads to skip in the result set before returning the first result using the <b>offset</b> path parameter.</p><p>To retrieve video ads preference information for each ad, set the <b>fieldgroups</b> query parameter to <code>VIDEO</code>.</p> <p>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> to retrieve the current campaign IDs for the seller.</p>
      * @param AdRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<AdPagedCollectionResponse|null>
      * @throws Exception
@@ -66,10 +66,10 @@ class AdRequestBuilder extends BaseRequestBuilder
     public function get(?AdRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '404' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [AdPagedCollectionResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
@@ -84,16 +84,16 @@ class AdRequestBuilder extends BaseRequestBuilder
     public function post(CreateAdRequest $body, ?AdRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '404' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [AdPostResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method retrieves Promoted Listings ads that are associated with listings created with either the <a href="/Devzone/XML/docs/Reference/eBay/index.html" title="Trading API Reference" target="_blank">Trading API</a> or the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference" target="_blank">Inventory API</a>. <p>The method retrieves ads related to the specified campaign. Specify the Promoted Listings campaign to target with the <b>campaign_id</b> path parameter.</p>  <p>Because of the large number of possible results, you can use query parameters to paginate the result set by specifying a <b>limit</b>, which dictates how many ads to return on each page of the response. You can also specify how many ads to skip in the result set before returning the first result using the <b>offset</b> path parameter.</p>  <p>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> to retrieve the current campaign IDs for the seller.</p>
+     * This method retrieves Promoted Listings ads that are associated with listings created with either the <a href="/Devzone/XML/docs/Reference/eBay/index.html" title="Trading API Reference" target="_blank">Trading API</a> or the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference" target="_blank">Inventory API</a>. <p>The method retrieves ads related to the specified campaign. Specify the Promoted Listings campaign to target with the <b>campaign_id</b> path parameter.</p>  <p>Because of the large number of possible results, you can use query parameters to paginate the result set by specifying a <b>limit</b>, which dictates how many ads to return on each page of the response. You can also specify how many ads to skip in the result set before returning the first result using the <b>offset</b> path parameter.</p><p>To retrieve video ads preference information for each ad, set the <b>fieldgroups</b> query parameter to <code>VIDEO</code>.</p> <p>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> to retrieve the current campaign IDs for the seller.</p>
      * @param AdRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

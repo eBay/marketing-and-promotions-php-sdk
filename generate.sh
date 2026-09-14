@@ -22,14 +22,14 @@ echo "Regenerating REST clients via Kiota..."
 rm -rf src/Generated
 
 kiota generate -l php \
-  -d specs/openapi/marketing.yaml \
+  -d specs/openapi/marketing.json \
   -c MarketingApiClient \
   -n 'EBay\MarketingAndPromotions\Generated\Marketing' \
   -o src/Generated/Marketing \
   --ebc --co
 
 kiota generate -l php \
-  -d specs/openapi/recommendation.yaml \
+  -d specs/openapi/recommendation.json \
   -c RecommendationApiClient \
   -n 'EBay\MarketingAndPromotions\Generated\Recommendation' \
   -o src/Generated/Recommendation \

@@ -23,7 +23,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * update email campaign request
+ * This type defines the update email campaign request payload.
 */
 class UpdateCampaignRequest implements AdditionalDataHolder, Parsable 
 {

@@ -19,7 +19,7 @@ namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_gr
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Item\WithAd_group_ItemRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\AdGroupPagedCollectionResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\CreateAdGroupRequest;
-use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\ErrorDetailV3;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -66,10 +66,10 @@ class Ad_groupRequestBuilder extends BaseRequestBuilder
     public function get(?Ad_groupRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '404' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [AdGroupPagedCollectionResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
@@ -84,10 +84,10 @@ class Ad_groupRequestBuilder extends BaseRequestBuilder
     public function post(CreateAdGroupRequest $body, ?Ad_groupRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '404' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [Ad_groupPostResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }

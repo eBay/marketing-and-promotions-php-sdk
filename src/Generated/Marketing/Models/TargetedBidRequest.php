@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The data requested to retrieve the suggested bids.
+ * A type that defines the targeted bid.
 */
 class TargetedBidRequest implements AdditionalDataHolder, Parsable 
 {

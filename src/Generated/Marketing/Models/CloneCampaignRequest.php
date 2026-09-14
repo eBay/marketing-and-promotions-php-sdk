@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields for a clone campaign request.
+ * This type defines the fields needed for a clone-campaign request.
 */
 class CloneCampaignRequest implements AdditionalDataHolder, Parsable 
 {

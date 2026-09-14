@@ -17,7 +17,7 @@
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Get_ads_by_inventory_reference;
 
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Ads;
-use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\ErrorDetailV3;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -53,10 +53,10 @@ class Get_ads_by_inventory_referenceRequestBuilder extends BaseRequestBuilder
     public function get(?Get_ads_by_inventory_referenceRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '404' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [Ads::class, 'createFromDiscriminatorValue'], $errorMappings);
     }

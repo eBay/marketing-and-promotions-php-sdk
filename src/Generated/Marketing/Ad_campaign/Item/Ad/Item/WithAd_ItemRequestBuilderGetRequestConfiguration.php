@@ -25,12 +25,28 @@ use Microsoft\Kiota\Abstractions\RequestOption;
 class WithAd_ItemRequestBuilderGetRequestConfiguration extends BaseRequestConfiguration 
 {
     /**
+     * @var WithAd_ItemRequestBuilderGetQueryParameters|null $queryParameters Request query parameters
+    */
+    public ?WithAd_ItemRequestBuilderGetQueryParameters $queryParameters = null;
+    
+    /**
      * Instantiates a new WithAd_ItemRequestBuilderGetRequestConfiguration and sets the default values.
      * @param array<string, array<string>|string>|null $headers Request headers
      * @param array<RequestOption>|null $options Request options
+     * @param WithAd_ItemRequestBuilderGetQueryParameters|null $queryParameters Request query parameters
     */
-    public function __construct(?array $headers = null, ?array $options = null) {
+    public function __construct(?array $headers = null, ?array $options = null, ?WithAd_ItemRequestBuilderGetQueryParameters $queryParameters = null) {
         parent::__construct($headers ?? [], $options ?? []);
+        $this->queryParameters = $queryParameters;
+    }
+
+    /**
+     * Instantiates a new WithAd_ItemRequestBuilderGetQueryParameters.
+     * @param GetFieldgroupsQueryParameterType|null $fieldgroups A comma-separated list of values that controls what is returned in the response. If not provided, standard ad fields are returned. <ul><li><b>DEFAULT</b>: Returns the standard ad fields. The <b>videoAdsPreferences</b> container is not included in the response.</li><li><b>VIDEO</b>: Adds the <b>videoAdsPreferences</b> container to the response, including video ads preferences for each ad.</li></ul>
+     * @return WithAd_ItemRequestBuilderGetQueryParameters
+    */
+    public static function createQueryParameters(?GetFieldgroupsQueryParameterType $fieldgroups = null): WithAd_ItemRequestBuilderGetQueryParameters {
+        return new WithAd_ItemRequestBuilderGetQueryParameters($fieldgroups);
     }
 
 }

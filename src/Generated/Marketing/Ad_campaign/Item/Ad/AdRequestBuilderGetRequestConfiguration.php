@@ -43,14 +43,15 @@ class AdRequestBuilderGetRequestConfiguration extends BaseRequestConfiguration
     /**
      * Instantiates a new AdRequestBuilderGetQueryParameters.
      * @param string|null $ad_group_ids A comma-separated list of ad group IDs. The results will be filtered to only include active ads for these ad groups.<br><br>Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group ID for the ad group.<br /><br /><span class="tablenote"><b>Note:</b> This field only applies to the Cost Per Click (CPC) funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
-     * @param string|null $ad_status A comma-separated list of ad statuses. The results will be filtered to only include the given statuses of the ad. If none are provided, all ads are returned.<br><br>See <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getads.adstatusenum">AdStatusEnum</a> for supported values.
+     * @param GetAd_statusQueryParameterType|null $ad_status A comma-separated list of ad statuses. The results will be filtered to only include the given statuses of the ad. If none are provided, all ads are returned.<br><br>See <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getads.adstatusenum">AdStatusEnum</a> for supported values.
+     * @param GetFieldgroupsQueryParameterType|null $fieldgroups A comma-separated list of values that controls what is returned in the response. If not provided, standard ad fields are returned. <ul><li><b>DEFAULT</b>: Returns the standard ad fields. The <b>videoAdsPreferences</b> container is not included in the response.</li><li><b>VIDEO</b>: Adds the <b>videoAdsPreferences</b> container to the response, including video ads preferences for each ad.</li></ul>
      * @param string|null $limit Specifies the maximum number of ads to return on a page in the paginated response.<br><br><b>Default: </b>10 <br><br><b>Maximum:</b> 500
      * @param string|null $listing_ids A comma-separated list of listing IDs. <br><br><span class="tablenote"><b>Note:</b> The response includes only active ads. The results do not include listing IDs that are excluded by other conditions.</span>
      * @param string|null $offset Specifies the number of ads to skip in the result set before returning the first ad in the paginated response.  <p>Combine <b>offset</b> with the <b>limit</b> query parameter to control the items returned in the response. For example, if you supply an <b>offset</b> of <code>0</code> and a <b>limit</b> of <code>10</code>, the first page of the response contains the first 10 items from the complete list of items retrieved by the call. If <b>offset</b> is <code>10</code> and <b>limit</b> is <code>20</code>, the first page of the response contains items 11-30 from the complete result set.</p> <p><b>Default:</b> 0</p>
      * @return AdRequestBuilderGetQueryParameters
     */
-    public static function createQueryParameters(?string $ad_group_ids = null, ?string $ad_status = null, ?string $limit = null, ?string $listing_ids = null, ?string $offset = null): AdRequestBuilderGetQueryParameters {
-        return new AdRequestBuilderGetQueryParameters($ad_group_ids, $ad_status, $limit, $listing_ids, $offset);
+    public static function createQueryParameters(?string $ad_group_ids = null, ?GetAd_statusQueryParameterType $ad_status = null, ?GetFieldgroupsQueryParameterType $fieldgroups = null, ?string $limit = null, ?string $listing_ids = null, ?string $offset = null): AdRequestBuilderGetQueryParameters {
+        return new AdRequestBuilderGetQueryParameters($ad_group_ids, $ad_status, $fieldgroups, $limit, $listing_ids, $offset);
     }
 
 }

@@ -29,16 +29,16 @@ class Get_ads_by_inventory_referenceRequestBuilderGetQueryParameters
     
     /**
      * @QueryParameter("inventory_reference_type")
-     * @var string|null $inventoryReferenceType This query parameter specifies the type of the item the <b>inventory_reference_id</b> references.<br><br><b>Valid values</b>:<ul><li>INVENTORY_ITEM</li><li>INVENTORY_ITEM_GROUP</li></ul><br>See <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getadsbyinventoryreference.inventoryreferencetypeenum">InventoryReferenceType</a> for more information.
+     * @var GetInventory_reference_typeQueryParameterType|null $inventoryReferenceType This query parameter specifies the type of the item the <b>inventory_reference_id</b> references.<br><br><b>Valid values</b>:<ul><li>INVENTORY_ITEM</li><li>INVENTORY_ITEM_GROUP</li></ul><br>See <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getadsbyinventoryreference.inventoryreferencetypeenum">InventoryReferenceType</a> for more information.
     */
-    public ?string $inventoryReferenceType = null;
+    public ?GetInventory_reference_typeQueryParameterType $inventoryReferenceType = null;
     
     /**
      * Instantiates a new Get_ads_by_inventory_referenceRequestBuilderGetQueryParameters and sets the default values.
      * @param string|null $inventory_reference_id This query parameter specifies the unique identifier of a single-item listing or a multi-variation listing.<br><br>To retrieve an ad for a single-item listing, set the <b>inventoryReferenceType</b> value to <code>INVENTORY_ITEM</code> and specify an item ID or a SKU (if the SKU is defined in the listing).<br><br>To retrieve an ad for a multi-variation listing, set the <b>inventoryReferenceType</b> value to <code>INVENTORY_ITEM_GROUP</code> and specify the item ID for the multi-variation listing or the <b>inventoryitemGroupKey</b> value as defined in the Inventory API.
-     * @param string|null $inventory_reference_type This query parameter specifies the type of the item the <b>inventory_reference_id</b> references.<br><br><b>Valid values</b>:<ul><li>INVENTORY_ITEM</li><li>INVENTORY_ITEM_GROUP</li></ul><br>See <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getadsbyinventoryreference.inventoryreferencetypeenum">InventoryReferenceType</a> for more information.
+     * @param GetInventory_reference_typeQueryParameterType|null $inventory_reference_type This query parameter specifies the type of the item the <b>inventory_reference_id</b> references.<br><br><b>Valid values</b>:<ul><li>INVENTORY_ITEM</li><li>INVENTORY_ITEM_GROUP</li></ul><br>See <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getadsbyinventoryreference.inventoryreferencetypeenum">InventoryReferenceType</a> for more information.
     */
-    public function __construct(?string $inventory_reference_id = null, ?string $inventory_reference_type = null) {
+    public function __construct(?string $inventory_reference_id = null, ?GetInventory_reference_typeQueryParameterType $inventory_reference_type = null) {
         $this->inventoryReferenceId = $inventory_reference_id;
         $this->inventoryReferenceType = $inventory_reference_type;
     }

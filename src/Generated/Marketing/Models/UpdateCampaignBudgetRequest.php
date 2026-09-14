@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the request fields for the budget details that shall be updated.
+ * A type that contains the fields for the <b>UpdateCampaignBudget</b> request.
 */
 class UpdateCampaignBudgetRequest implements AdditionalDataHolder, Parsable 
 {

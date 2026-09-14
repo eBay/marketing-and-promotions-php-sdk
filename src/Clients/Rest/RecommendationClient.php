@@ -23,7 +23,6 @@ use EBay\MarketingAndPromotions\Configuration\MarketingAndPromotionsConfiguratio
 use EBay\MarketingAndPromotions\Configuration\RequestOptions;
 use EBay\MarketingAndPromotions\Generated\Recommendation\RecommendationApiClient;
 use EBay\MarketingAndPromotions\Generated\Recommendation\Models\FindListingRecommendationRequest;
-use EBay\MarketingAndPromotions\Generated\Recommendation\Find\FindRequestBuilderPostRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -47,8 +46,8 @@ final class RecommendationClient
     public function findListingRecommendations(
         FindListingRecommendationRequest $body,
         ?string $filter = null,
-        ?string $limit = null,
-        ?string $offset = null,
+        ?int $limit = null,
+        ?int $offset = null,
         ?string $xEBAYCMARKETPLACEID = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
@@ -61,9 +60,9 @@ final class RecommendationClient
         $this->call($accessToken, fn($api) =>
             $api->find()->post(
                 $body,
-                new FindRequestBuilderPostRequestConfiguration(
+                new \EBay\MarketingAndPromotions\Generated\Recommendation\Find\FindRequestBuilderPostRequestConfiguration(
                     headers: $headers,
-                    queryParameters: FindRequestBuilderPostRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\MarketingAndPromotions\Generated\Recommendation\Find\FindRequestBuilderPostRequestConfiguration::createQueryParameters(
                         filter: $filter,
                         limit: $limit,
                         offset: $offset,

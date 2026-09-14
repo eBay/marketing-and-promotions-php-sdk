@@ -18,6 +18,7 @@ namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Get_campai
 
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Campaign;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\ErrorDetailV3;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -54,9 +55,9 @@ class Get_campaign_by_nameRequestBuilder extends BaseRequestBuilder
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
         $errorMappings = [
                 '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
                 '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [Campaign::class, 'createFromDiscriminatorValue'], $errorMappings);
     }

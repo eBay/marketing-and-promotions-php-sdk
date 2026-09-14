@@ -23,7 +23,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * A container that defines either the listing IDs or the selection rules that specify the items to include in the discount. Listing IDs can be either eBay listing IDs or a list of the seller's inventory reference IDs (know as SKUs or custom labels). See the <b>selectionRules</b> container for the rule criteria you can use to select inventory.  <p class="tablenote"><b>Note:</b> All listings in Discounts Manager discounts must support an electronic payment method.</p>
+ * This type defines either the selections rules or the list of listing IDs for the discount. The "listing IDs" are either the seller's item IDs or the eBay listing IDs.
 */
 class InventoryCriterion implements AdditionalDataHolder, Parsable 
 {

@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that defines the fields for the bulk request to create negative keywords.
+ * A type that contains the fields for the bulk request to create negative keywords.
 */
 class BulkCreateNegativeKeywordRequest implements AdditionalDataHolder, Parsable 
 {

@@ -37,7 +37,7 @@ class ListingRecommendation implements AdditionalDataHolder, Parsable
     private ?string $listingId = null;
     
     /**
-     * @var MarketingRecommendation|null $marketing A complex type that contains information about how a seller can improve their listing configurations. The <code>AD</code> object contains Promoted Listings recommendations and information, which the seller can use to improve buyer conversions. The response can also contain an optional message about the returned data.
+     * @var MarketingRecommendation|null $marketing This return object provides the eBay recommendations and information related to the associated listing ID.  <br><br>The container currently returns the <code>AD</code> recommendation type, which contains information that sellers can use to configure Promoted Listings ad campaigns.  <br><br>This container is returned with each <b>ListingRecommendation</b> object, <i>except</i> when: <ul><li>The listing ID is not eligible for Promoted Listings</li> <li>The listing ID is currently in a Promoted Listings campaign</li> <li>The listing ID is invalid</li></ul>
     */
     private ?MarketingRecommendation $marketing = null;
     
@@ -86,7 +86,7 @@ class ListingRecommendation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the marketing property value. A complex type that contains information about how a seller can improve their listing configurations. The <code>AD</code> object contains Promoted Listings recommendations and information, which the seller can use to improve buyer conversions. The response can also contain an optional message about the returned data.
+     * Gets the marketing property value. This return object provides the eBay recommendations and information related to the associated listing ID.  <br><br>The container currently returns the <code>AD</code> recommendation type, which contains information that sellers can use to configure Promoted Listings ad campaigns.  <br><br>This container is returned with each <b>ListingRecommendation</b> object, <i>except</i> when: <ul><li>The listing ID is not eligible for Promoted Listings</li> <li>The listing ID is currently in a Promoted Listings campaign</li> <li>The listing ID is invalid</li></ul>
      * @return MarketingRecommendation|null
     */
     public function getMarketing(): ?MarketingRecommendation {
@@ -120,7 +120,7 @@ class ListingRecommendation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketing property value. A complex type that contains information about how a seller can improve their listing configurations. The <code>AD</code> object contains Promoted Listings recommendations and information, which the seller can use to improve buyer conversions. The response can also contain an optional message about the returned data.
+     * Sets the marketing property value. This return object provides the eBay recommendations and information related to the associated listing ID.  <br><br>The container currently returns the <code>AD</code> recommendation type, which contains information that sellers can use to configure Promoted Listings ad campaigns.  <br><br>This container is returned with each <b>ListingRecommendation</b> object, <i>except</i> when: <ul><li>The listing ID is not eligible for Promoted Listings</li> <li>The listing ID is currently in a Promoted Listings campaign</li> <li>The listing ID is invalid</li></ul>
      * @param MarketingRecommendation|null $value Value to set for the marketing property.
     */
     public function setMarketing(?MarketingRecommendation $value): void {

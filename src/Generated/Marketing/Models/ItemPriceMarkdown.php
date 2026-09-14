@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields that describe an item price markdown discount.
+ * This type defines the fields used to describe an item price markdown discount.
 */
 class ItemPriceMarkdown implements AdditionalDataHolder, Parsable 
 {

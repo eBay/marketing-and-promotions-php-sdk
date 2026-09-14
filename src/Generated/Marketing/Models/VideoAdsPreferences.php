@@ -14,14 +14,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace EBay\MarketingAndPromotions\Generated\Marketing\Item_price_markdown\Item;
+namespace EBay\MarketingAndPromotions\Generated\Marketing\Models;
 
 use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
-class WithPromotion_PutResponse implements AdditionalDataHolder, Parsable 
+/**
+ * This request type defines the video ads preference settings to apply to a single listing in a Promoted Listings campaign that uses the CPC funding model. It is used as the <b>videoAdsPreferences</b> field value in both <b>bulkUpsertVideoAdsPreferences</b> and <b>upsertVideoAdsPreferences</b>.
+*/
+class VideoAdsPreferences implements AdditionalDataHolder, Parsable 
 {
     /**
      * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
@@ -29,7 +32,12 @@ class WithPromotion_PutResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * Instantiates a new WithPromotion_PutResponse and sets the default values.
+     * @var bool|null $videoAdsEnabled When <code>true</code>, video ads are enabled for the specified listing in the campaign, and any ads associated with that listing ID within the campaign are opted into video ads. When <code>false</code>, any ads associated with the specified listing ID within the campaign are opted out of video ads.
+    */
+    private ?bool $videoAdsEnabled = null;
+    
+    /**
+     * Instantiates a new VideoAdsPreferences and sets the default values.
     */
     public function __construct() {
         $this->setAdditionalData([]);
@@ -38,10 +46,10 @@ class WithPromotion_PutResponse implements AdditionalDataHolder, Parsable
     /**
      * Creates a new instance of the appropriate class based on discriminator value
      * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
-     * @return WithPromotion_PutResponse
+     * @return VideoAdsPreferences
     */
-    public static function createFromDiscriminatorValue(ParseNode $parseNode): WithPromotion_PutResponse {
-        return new WithPromotion_PutResponse();
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): VideoAdsPreferences {
+        return new VideoAdsPreferences();
     }
 
     /**
@@ -59,7 +67,16 @@ class WithPromotion_PutResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
+            'videoAdsEnabled' => fn(ParseNode $n) => $o->setVideoAdsEnabled($n->getBooleanValue()),
         ];
+    }
+
+    /**
+     * Gets the videoAdsEnabled property value. When <code>true</code>, video ads are enabled for the specified listing in the campaign, and any ads associated with that listing ID within the campaign are opted into video ads. When <code>false</code>, any ads associated with the specified listing ID within the campaign are opted out of video ads.
+     * @return bool|null
+    */
+    public function getVideoAdsEnabled(): ?bool {
+        return $this->videoAdsEnabled;
     }
 
     /**
@@ -67,6 +84,7 @@ class WithPromotion_PutResponse implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
+        $writer->writeBooleanValue('videoAdsEnabled', $this->getVideoAdsEnabled());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -76,6 +94,14 @@ class WithPromotion_PutResponse implements AdditionalDataHolder, Parsable
     */
     public function setAdditionalData(?array $value): void {
         $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the videoAdsEnabled property value. When <code>true</code>, video ads are enabled for the specified listing in the campaign, and any ads associated with that listing ID within the campaign are opted into video ads. When <code>false</code>, any ads associated with the specified listing ID within the campaign are opted out of video ads.
+     * @param bool|null $value Value to set for the videoAdsEnabled property.
+    */
+    public function setVideoAdsEnabled(?bool $value): void {
+        $this->videoAdsEnabled = $value;
     }
 
 }

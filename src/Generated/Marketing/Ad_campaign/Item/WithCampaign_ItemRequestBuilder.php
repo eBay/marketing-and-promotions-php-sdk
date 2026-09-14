@@ -28,6 +28,7 @@ use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_ads_status_by_listing_id\Bulk_update_ads_status_by_listing_idRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_ads_status\Bulk_update_ads_statusRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_update_keyword\Bulk_update_keywordRequestBuilder;
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_upsert_video_ads_preferences\Bulk_upsert_video_ads_preferencesRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Create_ads_by_inventory_reference\Create_ads_by_inventory_referenceRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Delete_ads_by_inventory_reference\Delete_ads_by_inventory_referenceRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\End\EndRequestBuilder;
@@ -41,8 +42,10 @@ use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Update_ad_r
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Update_bidding_strategy\Update_bidding_strategyRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Update_campaign_budget\Update_campaign_budgetRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Update_campaign_identification\Update_campaign_identificationRequestBuilder;
+use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Upsert_video_ads_preferences\Upsert_video_ads_preferencesRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Campaign;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\ErrorDetailV3;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -140,6 +143,13 @@ class WithCampaign_ItemRequestBuilder extends BaseRequestBuilder
     }
     
     /**
+     * The bulk_upsert_video_ads_preferences property
+    */
+    public function bulk_upsert_video_ads_preferences(): Bulk_upsert_video_ads_preferencesRequestBuilder {
+        return new Bulk_upsert_video_ads_preferencesRequestBuilder($this->pathParameters, $this->requestAdapter);
+    }
+    
+    /**
      * The create_ads_by_inventory_reference property
     */
     public function create_ads_by_inventory_reference(): Create_ads_by_inventory_referenceRequestBuilder {
@@ -231,6 +241,13 @@ class WithCampaign_ItemRequestBuilder extends BaseRequestBuilder
     }
     
     /**
+     * The upsert_video_ads_preferences property
+    */
+    public function upsert_video_ads_preferences(): Upsert_video_ads_preferencesRequestBuilder {
+        return new Upsert_video_ads_preferencesRequestBuilder($this->pathParameters, $this->requestAdapter);
+    }
+    
+    /**
      * Instantiates a new WithCampaign_ItemRequestBuilder and sets the default values.
      * @param array<string, mixed>|string $pathParametersOrRawUrl Path parameters for the request or a String representing the raw URL.
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
@@ -254,9 +271,9 @@ class WithCampaign_ItemRequestBuilder extends BaseRequestBuilder
         $requestInfo = $this->toDeleteRequestInformation($requestConfiguration);
         $errorMappings = [
                 '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '404' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
@@ -271,9 +288,9 @@ class WithCampaign_ItemRequestBuilder extends BaseRequestBuilder
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
         $errorMappings = [
                 '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
                 '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [Campaign::class, 'createFromDiscriminatorValue'], $errorMappings);
     }

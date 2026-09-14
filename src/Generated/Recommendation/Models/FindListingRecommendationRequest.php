@@ -23,7 +23,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * An list of listing ID values for which you want Promoted Listings ad configuration information.
+ * This type defines the list of listing ID values for which you want Promoted Listings ad configuration information.
 */
 class FindListingRecommendationRequest implements AdditionalDataHolder, Parsable 
 {

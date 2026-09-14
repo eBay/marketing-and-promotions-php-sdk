@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This container defines the discount as either a monetary amount or a percentage applied to the sales price.
+ * This type defines the discount as either a monetary amount or a percentage of the sales price.  <p class="tablenote"><b>Important!:</b> You must populate one and only one of the fields in this container: <ul><li><b>amountOffItem</b></li> <li><b>amountOffOrder</b></li> <li><b>percentageOffItem</b></li> <li><b>percentageOffOrder</b></li></ul></p>  <p class="tablenote"><b>Tip:</b> Refer to <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html" target="_blank">Configuring discounts for threshold discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> values to create different types of discounts.</p>
 */
 class DiscountBenefit implements AdditionalDataHolder, Parsable 
 {

@@ -47,7 +47,7 @@ class UpdateKeywordResponse implements AdditionalDataHolder, Parsable
     private ?int $statusCode = null;
     
     /**
-     * @var array<ErrorDetailV3>|null $warnings List of warnings associated with this operation
+     * @var array<ErrorDetailV3>|null $warnings A list of warnings associated with this operation.
     */
     private ?array $warnings = null;
     
@@ -114,7 +114,7 @@ class UpdateKeywordResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the warnings property value. List of warnings associated with this operation
+     * Gets the warnings property value. A list of warnings associated with this operation.
      * @return array<ErrorDetailV3>|null
     */
     public function getWarnings(): ?array {
@@ -166,7 +166,7 @@ class UpdateKeywordResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the warnings property value. List of warnings associated with this operation
+     * Sets the warnings property value. A list of warnings associated with this operation.
      * @param array<ErrorDetailV3>|null $value Value to set for the warnings property.
     */
     public function setWarnings(?array $value): void {

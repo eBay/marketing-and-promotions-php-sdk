@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The bulk request to update the ads.
+ * A type that defines the fields for the <b>BulkUpdateAdStatus</b> request.
 */
 class BulkUpdateAdStatusRequest implements AdditionalDataHolder, Parsable 
 {

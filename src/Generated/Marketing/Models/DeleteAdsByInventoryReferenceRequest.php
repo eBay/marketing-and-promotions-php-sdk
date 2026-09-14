@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This request object defines the fields for the <b>deleteAdsByInventoryReference</b> request.
+ * This type defines the fields needed to delete an ad by its inventory reference ID.  You must always supply both <b>inventory_reference_id</b> and <b>inventory_reference_type</b>.
 */
 class DeleteAdsByInventoryReferenceRequest implements AdditionalDataHolder, Parsable 
 {

@@ -23,7 +23,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * This type defines the fields used in the <b>suggestMaxCpc</b> request.
+ * This type defines the fields used in the <b>suggestMaxCpc</b> request. To retrieve the suggested <b>maxCpc</b> value for a smart targeting campaign, a seller must specify the listings associated with the campaign, as well as the marketplace on which the campaign is hosted.
 */
 class SuggestMaxCpcRequest implements AdditionalDataHolder, Parsable 
 {

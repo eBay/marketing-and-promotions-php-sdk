@@ -32,9 +32,9 @@ class BidPercentages implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $basis The basis by which the ad rate is calculated.<br /><br /><b>Valid Values:</b> <code>ITEM</code> and <code>TRENDING</code> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/recommendation/types/api:Basis'>eBay API documentation</a>
+     * @var Basis|null $basis The basis by which the ad rate is calculated.<br /><br /><b>Valid Values:</b> <code>ITEM</code> and <code>TRENDING</code>
     */
-    private ?string $basis = null;
+    private ?Basis $basis = null;
     
     /**
      * @var string|null $value The bid percentage data is a single precision value, as calculated by the associated basis. <p>In Promoted listings ad campaigns, the <b>bid percentage</b> (also known as the <i>ad rate</i>) is a user-defined value that sets the level that eBay raises the visibility of the listing in the marketplace. It is also the rate that is used to calculate the Promoted Listings fee.</p> <p><b>Minimum value:</b> 1.0 &nbsp; <b>Maximum value:</b> 100.0</p>
@@ -66,10 +66,10 @@ class BidPercentages implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the basis property value. The basis by which the ad rate is calculated.<br /><br /><b>Valid Values:</b> <code>ITEM</code> and <code>TRENDING</code> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/recommendation/types/api:Basis'>eBay API documentation</a>
-     * @return string|null
+     * Gets the basis property value. The basis by which the ad rate is calculated.<br /><br /><b>Valid Values:</b> <code>ITEM</code> and <code>TRENDING</code>
+     * @return Basis|null
     */
-    public function getBasis(): ?string {
+    public function getBasis(): ?Basis {
         return $this->basis;
     }
 
@@ -80,7 +80,7 @@ class BidPercentages implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'basis' => fn(ParseNode $n) => $o->setBasis($n->getStringValue()),
+            'basis' => fn(ParseNode $n) => $o->setBasis($n->getEnumValue(Basis::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
     }
@@ -98,7 +98,7 @@ class BidPercentages implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('basis', $this->getBasis());
+        $writer->writeEnumValue('basis', $this->getBasis());
         $writer->writeStringValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class BidPercentages implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the basis property value. The basis by which the ad rate is calculated.<br /><br /><b>Valid Values:</b> <code>ITEM</code> and <code>TRENDING</code> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/recommendation/types/api:Basis'>eBay API documentation</a>
-     * @param string|null $value Value to set for the basis property.
+     * Sets the basis property value. The basis by which the ad rate is calculated.<br /><br /><b>Valid Values:</b> <code>ITEM</code> and <code>TRENDING</code>
+     * @param Basis|null $value Value to set for the basis property.
     */
-    public function setBasis(?string $value): void {
+    public function setBasis(?Basis $value): void {
         $this->basis = $value;
     }
 

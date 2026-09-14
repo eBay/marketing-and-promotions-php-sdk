@@ -19,6 +19,7 @@ namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\It
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad\Item\Update_bid\Update_bidRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Ad;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\ErrorDetailV3;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -44,7 +45,7 @@ class WithAd_ItemRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/ad_campaign/{campaign_id}/ad/{ad_id}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/ad_campaign/{campaign_id}/ad/{ad_id}{?fieldgroups*}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {
@@ -61,16 +62,16 @@ class WithAd_ItemRequestBuilder extends BaseRequestBuilder
     public function delete(?WithAd_ItemRequestBuilderDeleteRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toDeleteRequestInformation($requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '404' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
-     * This method retrieves the specified ad from the specified campaign.  <p>In the request, supply the <b>campaign_id</b> and <b>ad_id</b> as path parameters.</p> <p>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> to retrieve a list of the seller's current campaign IDs and call <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getads">getAds</a> to retrieve their current ad IDs.</p>
+     * This method retrieves the specified ad from the specified campaign.  <p>In the request, supply the <b>campaign_id</b> and <b>ad_id</b> as path parameters.</p><p>To retrieve video ads preference information for the ad, set the <b>fieldgroups</b> query parameter to <code>VIDEO</code>.</p> <p>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> to retrieve a list of the seller's current campaign IDs and call <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getads">getAds</a> to retrieve their current ad IDs.</p>
      * @param WithAd_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<Ad|null>
      * @throws Exception
@@ -78,10 +79,10 @@ class WithAd_ItemRequestBuilder extends BaseRequestBuilder
     public function get(?WithAd_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
                 '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [Ad::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
@@ -105,7 +106,7 @@ class WithAd_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method retrieves the specified ad from the specified campaign.  <p>In the request, supply the <b>campaign_id</b> and <b>ad_id</b> as path parameters.</p> <p>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> to retrieve a list of the seller's current campaign IDs and call <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getads">getAds</a> to retrieve their current ad IDs.</p>
+     * This method retrieves the specified ad from the specified campaign.  <p>In the request, supply the <b>campaign_id</b> and <b>ad_id</b> as path parameters.</p><p>To retrieve video ads preference information for the ad, set the <b>fieldgroups</b> query parameter to <code>VIDEO</code>.</p> <p>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> to retrieve a list of the seller's current campaign IDs and call <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getads">getAds</a> to retrieve their current ad IDs.</p>
      * @param WithAd_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -116,6 +117,9 @@ class WithAd_ItemRequestBuilder extends BaseRequestBuilder
         $requestInfo->httpMethod = HttpMethod::GET;
         if ($requestConfiguration !== null) {
             $requestInfo->addHeaders($requestConfiguration->headers);
+            if ($requestConfiguration->queryParameters !== null) {
+                $requestInfo->setQueryParameters($requestConfiguration->queryParameters);
+            }
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
         $requestInfo->tryAddHeader('Accept', "application/json");

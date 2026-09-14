@@ -27,7 +27,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 class MarketingRecommendation implements AdditionalDataHolder, Parsable 
 {
     /**
-     * @var Ad|null $ad A complex type that contains recommendations and information on how to configure Promoted Listings ad campaigns.
+     * @var Ad|null $ad An object that contains Promoted Listings recommendations and information related to the associated listing ID.
     */
     private ?Ad $ad = null;
     
@@ -58,7 +58,7 @@ class MarketingRecommendation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the ad property value. A complex type that contains recommendations and information on how to configure Promoted Listings ad campaigns.
+     * Gets the ad property value. An object that contains Promoted Listings recommendations and information related to the associated listing ID.
      * @return Ad|null
     */
     public function getAd(): ?Ad {
@@ -104,7 +104,7 @@ class MarketingRecommendation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the ad property value. A complex type that contains recommendations and information on how to configure Promoted Listings ad campaigns.
+     * Sets the ad property value. An object that contains Promoted Listings recommendations and information related to the associated listing ID.
      * @param Ad|null $value Value to set for the ad property.
     */
     public function setAd(?Ad $value): void {

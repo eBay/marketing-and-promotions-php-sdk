@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields for the <b>createAdGroup</b> request.
+ * A type that defines the fields for the <b>CreateAdGroup</b> request.
 */
 class CreateAdGroupRequest implements AdditionalDataHolder, Parsable 
 {

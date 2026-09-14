@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This container includes parameters that define an ad campaign funding strategy. The set of seller-configurable parameters depends on the selected <b>fundingModel</b> value.<br/><br/>Currently, the supported funding models are <code>COST_PER_SALE</code> (CPS) and <code>COST_PER_CLICK</code> (CPC). For onsite ads, the CPC model supports two bidding strategies: <code>FIXED</code> and <code>DYNAMIC</code>.
+ * This type defines how the Promoted Listings fee is calculated for a Promoted Listings ad campaign.
 */
 class FundingStrategy implements AdditionalDataHolder, Parsable 
 {
