@@ -72,6 +72,11 @@ class Ad implements AdditionalDataHolder, Parsable
     private ?string $listingId = null;
     
     /**
+     * @var VideoAdsPreferences|null $videoAdsPreferences A container for the details of video ads that are associated with an ad. This container is returned only when the <b>fieldgroups</b> query parameter is set to <code>VIDEO</code>.
+    */
+    private ?VideoAdsPreferences $videoAdsPreferences = null;
+    
+    /**
      * Instantiates a new Ad and sets the default values.
     */
     public function __construct() {
@@ -150,6 +155,7 @@ class Ad implements AdditionalDataHolder, Parsable
             'inventoryReferenceId' => fn(ParseNode $n) => $o->setInventoryReferenceId($n->getStringValue()),
             'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getEnumValue(InventoryReferenceTypeEnum::class)),
             'listingId' => fn(ParseNode $n) => $o->setListingId($n->getStringValue()),
+            'videoAdsPreferences' => fn(ParseNode $n) => $o->setVideoAdsPreferences($n->getObjectValue([VideoAdsPreferences::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
@@ -178,6 +184,14 @@ class Ad implements AdditionalDataHolder, Parsable
     }
 
     /**
+     * Gets the videoAdsPreferences property value. A container for the details of video ads that are associated with an ad. This container is returned only when the <b>fieldgroups</b> query parameter is set to <code>VIDEO</code>.
+     * @return VideoAdsPreferences|null
+    */
+    public function getVideoAdsPreferences(): ?VideoAdsPreferences {
+        return $this->videoAdsPreferences;
+    }
+
+    /**
      * Serializes information the current object
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
@@ -190,6 +204,7 @@ class Ad implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('inventoryReferenceId', $this->getInventoryReferenceId());
         $writer->writeEnumValue('inventoryReferenceType', $this->getInventoryReferenceType());
         $writer->writeStringValue('listingId', $this->getListingId());
+        $writer->writeObjectValue('videoAdsPreferences', $this->getVideoAdsPreferences());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -263,6 +278,14 @@ class Ad implements AdditionalDataHolder, Parsable
     */
     public function setListingId(?string $value): void {
         $this->listingId = $value;
+    }
+
+    /**
+     * Sets the videoAdsPreferences property value. A container for the details of video ads that are associated with an ad. This container is returned only when the <b>fieldgroups</b> query parameter is set to <code>VIDEO</code>.
+     * @param VideoAdsPreferences|null $value Value to set for the videoAdsPreferences property.
+    */
+    public function setVideoAdsPreferences(?VideoAdsPreferences $value): void {
+        $this->videoAdsPreferences = $value;
     }
 
 }

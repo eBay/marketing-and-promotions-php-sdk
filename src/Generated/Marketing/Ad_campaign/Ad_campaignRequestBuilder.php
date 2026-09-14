@@ -23,7 +23,7 @@ use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Suggest_budget\S
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Suggest_max_cpc\Suggest_max_cpcRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\CampaignPagedCollectionResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\CreateCampaignRequest;
-use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\ErrorDetailV3;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -81,7 +81,7 @@ class Ad_campaignRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/ad_campaign{?campaign_name*,campaign_status*,campaign_targeting_types*,channels*,end_date_range*,funding_strategy*,limit*,offset*,start_date_range*}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/ad_campaign{?campaign_name*,campaign_status*,campaign_targeting_types*,channels*,end_date_range*,funding_strategy*,limit*,marketplace_id*,offset*,start_date_range*}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {
@@ -98,9 +98,9 @@ class Ad_campaignRequestBuilder extends BaseRequestBuilder
     public function get(?Ad_campaignRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [CampaignPagedCollectionResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
@@ -115,9 +115,9 @@ class Ad_campaignRequestBuilder extends BaseRequestBuilder
     public function post(CreateCampaignRequest $body, ?Ad_campaignRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [Ad_campaignPostResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }

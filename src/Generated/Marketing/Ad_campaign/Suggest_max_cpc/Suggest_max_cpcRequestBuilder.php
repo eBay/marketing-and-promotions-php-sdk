@@ -17,6 +17,7 @@
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Suggest_max_cpc;
 
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\ErrorDetailV3;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\SuggestMaxCpcRequest;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\SuggestMaxCpcResponse;
 use Exception;
@@ -55,10 +56,10 @@ class Suggest_max_cpcRequestBuilder extends BaseRequestBuilder
     public function post(SuggestMaxCpcRequest $body, ?Suggest_max_cpcRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
         $errorMappings = [
-                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '400' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
                 '404' => [Error::class, 'createFromDiscriminatorValue'],
-                '409' => [Error::class, 'createFromDiscriminatorValue'],
-                '500' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorDetailV3::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [SuggestMaxCpcResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }

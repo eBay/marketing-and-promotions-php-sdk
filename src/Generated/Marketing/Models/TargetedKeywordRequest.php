@@ -23,7 +23,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * The required data to retrieve suggested keywords.
+ * A type that provides details for the targeted keywords.
 */
 class TargetedKeywordRequest implements AdditionalDataHolder, Parsable 
 {

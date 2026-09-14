@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The configuration of a coded coupon discount.
+ * This type defines a coded coupon discount. It is required if the discount type is <code>CODED_COUPON</code>.
 */
 class CouponConfiguration implements AdditionalDataHolder, Parsable 
 {

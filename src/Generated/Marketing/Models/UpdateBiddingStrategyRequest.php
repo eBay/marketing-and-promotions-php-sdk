@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type specifies the new value for the bidding strategy.
+ * This type defines the fields used in the <b>updatedBiddingStrategy</b> request.
 */
 class UpdateBiddingStrategyRequest implements AdditionalDataHolder, Parsable 
 {

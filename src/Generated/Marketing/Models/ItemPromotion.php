@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields that describe an item discount.
+ * <span class="tablenote"><b>Note:</b> As of July 8th 2024, <i>promotions</i> are now being referred to as <i>discounts</i> on Seller Hub and eBay help pages. Sell Marketing API documentation has been updated to reflect this product name change, but note that no API interface changes have been made.</span><br>This type defines the fields that describe a threshold discount and includes the discount, the items being discounted, and the rules that specify when the discount is applied.
 */
 class ItemPromotion implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var bool|null $applyDiscountToSingleItemOnly This flag is relevant in only when <b>promotionType</b> is set to <code>VOLUME_DISCOUNT</code>. For details on volume pricing discounts, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html" target="_blank">Configuring volume pricing discounts</a>.  <br><br>If set to <code>true</code>, the discount is applied only when the buyer purchases multiple quantities of a single item that is being discounted. Otherwise, the discount applies to multiple quantities of any the items being discounted. Different variations of a multi-variation item are considered to be the same item. Note that this flag is not relevant if the <b>inventoryCriterion</b> container identifies a single listing ID for the discount.
+     * @var bool|null $applyDiscountToSingleItemOnly This flag is relevant only when <b>promotionType</b> is set to <code>VOLUME_DISCOUNT</code>. For details on volume pricing discounts, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html" target="_blank">Configuring volume pricing discounts</a>.  <br><br>If set to <code>true</code>, the discount is applied only when the buyer purchases multiple quantities of a single item that is being discounted. Otherwise, the discount applies to multiple quantities of any the items being discounted. Different variations of a multi-variation item are considered to be the same item. Note that this flag is not relevant if the <b>inventoryCriterion</b> container identifies a single listing ID for the discount.
     */
     private ?bool $applyDiscountToSingleItemOnly = null;
     
@@ -126,7 +126,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the applyDiscountToSingleItemOnly property value. This flag is relevant in only when <b>promotionType</b> is set to <code>VOLUME_DISCOUNT</code>. For details on volume pricing discounts, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html" target="_blank">Configuring volume pricing discounts</a>.  <br><br>If set to <code>true</code>, the discount is applied only when the buyer purchases multiple quantities of a single item that is being discounted. Otherwise, the discount applies to multiple quantities of any the items being discounted. Different variations of a multi-variation item are considered to be the same item. Note that this flag is not relevant if the <b>inventoryCriterion</b> container identifies a single listing ID for the discount.
+     * Gets the applyDiscountToSingleItemOnly property value. This flag is relevant only when <b>promotionType</b> is set to <code>VOLUME_DISCOUNT</code>. For details on volume pricing discounts, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html" target="_blank">Configuring volume pricing discounts</a>.  <br><br>If set to <code>true</code>, the discount is applied only when the buyer purchases multiple quantities of a single item that is being discounted. Otherwise, the discount applies to multiple quantities of any the items being discounted. Different variations of a multi-variation item are considered to be the same item. Note that this flag is not relevant if the <b>inventoryCriterion</b> container identifies a single listing ID for the discount.
      * @return bool|null
     */
     public function getApplyDiscountToSingleItemOnly(): ?bool {
@@ -292,7 +292,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the applyDiscountToSingleItemOnly property value. This flag is relevant in only when <b>promotionType</b> is set to <code>VOLUME_DISCOUNT</code>. For details on volume pricing discounts, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html" target="_blank">Configuring volume pricing discounts</a>.  <br><br>If set to <code>true</code>, the discount is applied only when the buyer purchases multiple quantities of a single item that is being discounted. Otherwise, the discount applies to multiple quantities of any the items being discounted. Different variations of a multi-variation item are considered to be the same item. Note that this flag is not relevant if the <b>inventoryCriterion</b> container identifies a single listing ID for the discount.
+     * Sets the applyDiscountToSingleItemOnly property value. This flag is relevant only when <b>promotionType</b> is set to <code>VOLUME_DISCOUNT</code>. For details on volume pricing discounts, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html" target="_blank">Configuring volume pricing discounts</a>.  <br><br>If set to <code>true</code>, the discount is applied only when the buyer purchases multiple quantities of a single item that is being discounted. Otherwise, the discount applies to multiple quantities of any the items being discounted. Different variations of a multi-variation item are considered to be the same item. Note that this flag is not relevant if the <b>inventoryCriterion</b> container identifies a single listing ID for the discount.
      * @param bool|null $value Value to set for the applyDiscountToSingleItemOnly property.
     */
     public function setApplyDiscountToSingleItemOnly(?bool $value): void {

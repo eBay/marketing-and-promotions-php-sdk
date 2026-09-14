@@ -23,9 +23,9 @@ class Ad_groupRequestBuilderGetQueryParameters
 {
     /**
      * @QueryParameter("ad_group_status")
-     * @var string|null $adGroupStatus A comma-separated list of ad group statuses. The results will be filtered to only include the given statuses of the ad group.<br><br> See <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups.adgroupstatusenum">AdGroupStatusEnum</a> for supported values.
+     * @var GetAd_group_statusQueryParameterType|null $adGroupStatus A comma-separated list of ad group statuses. The results will be filtered to only include the given statuses of the ad group.<br><br> See <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups.adgroupstatusenum">AdGroupStatusEnum</a> for supported values.
     */
-    public ?string $adGroupStatus = null;
+    public ?GetAd_group_statusQueryParameterType $adGroupStatus = null;
     
     /**
      * @var string|null $limit The number of results, from the current result set, to be returned in a single page.
@@ -39,11 +39,11 @@ class Ad_groupRequestBuilderGetQueryParameters
     
     /**
      * Instantiates a new Ad_groupRequestBuilderGetQueryParameters and sets the default values.
-     * @param string|null $ad_group_status A comma-separated list of ad group statuses. The results will be filtered to only include the given statuses of the ad group.<br><br> See <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups.adgroupstatusenum">AdGroupStatusEnum</a> for supported values.
+     * @param GetAd_group_statusQueryParameterType|null $ad_group_status A comma-separated list of ad group statuses. The results will be filtered to only include the given statuses of the ad group.<br><br> See <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups.adgroupstatusenum">AdGroupStatusEnum</a> for supported values.
      * @param string|null $limit The number of results, from the current result set, to be returned in a single page.
      * @param string|null $offset The number of results that will be skipped in the result set. This is used with the <b>limit</b> field to control the pagination of the output.<br /><br />For example, if the <b>offset</b> is set to <code>0</code> and the <b>limit</b> is set to <code>10</code>, the method will retrieve items 1 through 10 from the list of items returned. If the <b>offset</b> is set to <code>10</code> and the <b>limit</b> is set to <code>10</code>, the method will retrieve items 11 through 20 from the list of items returned.<br><br><b>Default</b>: <code>0</code>
     */
-    public function __construct(?string $ad_group_status = null, ?string $limit = null, ?string $offset = null) {
+    public function __construct(?GetAd_group_statusQueryParameterType $ad_group_status = null, ?string $limit = null, ?string $offset = null) {
         $this->adGroupStatus = $ad_group_status;
         $this->limit = $limit;
         $this->offset = $offset;

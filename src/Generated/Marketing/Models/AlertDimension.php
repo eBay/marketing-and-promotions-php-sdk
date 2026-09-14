@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The dimension information of the alert including keys and values.
+ * A type that contains the dimension fields.
 */
 class AlertDimension implements AdditionalDataHolder, Parsable 
 {

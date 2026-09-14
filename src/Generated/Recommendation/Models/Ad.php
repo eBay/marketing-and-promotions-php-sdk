@@ -37,9 +37,9 @@ class Ad implements AdditionalDataHolder, Parsable
     private ?array $bidPercentages = null;
     
     /**
-     * @var string|null $promoteWithAd An enum whose values describe whether or not eBay recommends you place the associated listing in a Promoted Listings ad campaign.  <br><br>IDs deemed <code>RECOMMENDED</code> by eBay are the listings with the highest potential of benefiting from being promoted. The recommendation calculation is based on marketplace trends, like buyer demand and the competition in the item’s category.  <p class="tablenote"><b>Note:</b> A <b>promoteWithAd</b> value cannot be calculated for listings that are part of Promoted Listings campaigns.  <br><br>Because of this, if you call <b>findListingRecommendations</b> with a specific set of listing IDs, the <b>promoteWithAd</b> field is not returned for any of the listings that are involved in a promotion. However, as long as they are eligible, the trending <b>bidPercentage</b> <i>is</i> returned for all specified listings, even if they are part of an ad campaign.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/recommendation/types/api:PromoteWithAd'>eBay API documentation</a>
+     * @var PromoteWithAd|null $promoteWithAd An enum whose values describe whether or not eBay recommends you place the associated listing in a Promoted Listings ad campaign.  <br><br>IDs deemed <code>RECOMMENDED</code> by eBay are the listings with the highest potential of benefiting from being promoted. The recommendation calculation is based on marketplace trends, like buyer demand and the competition in the item’s category.  <p class="tablenote"><b>Note:</b> A <b>promoteWithAd</b> value cannot be calculated for listings that are part of Promoted Listings campaigns.  <br><br>Because of this, if you call <b>findListingRecommendations</b> with a specific set of listing IDs, the <b>promoteWithAd</b> field is not returned for any of the listings that are involved in a promotion. However, as long as they are eligible, the trending <b>bidPercentage</b> <i>is</i> returned for all specified listings, even if they are part of an ad campaign.</p>
     */
-    private ?string $promoteWithAd = null;
+    private ?PromoteWithAd $promoteWithAd = null;
     
     /**
      * Instantiates a new Ad and sets the default values.
@@ -81,15 +81,15 @@ class Ad implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'bidPercentages' => fn(ParseNode $n) => $o->setBidPercentages($n->getCollectionOfObjectValues([BidPercentages::class, 'createFromDiscriminatorValue'])),
-            'promoteWithAd' => fn(ParseNode $n) => $o->setPromoteWithAd($n->getStringValue()),
+            'promoteWithAd' => fn(ParseNode $n) => $o->setPromoteWithAd($n->getEnumValue(PromoteWithAd::class)),
         ];
     }
 
     /**
-     * Gets the promoteWithAd property value. An enum whose values describe whether or not eBay recommends you place the associated listing in a Promoted Listings ad campaign.  <br><br>IDs deemed <code>RECOMMENDED</code> by eBay are the listings with the highest potential of benefiting from being promoted. The recommendation calculation is based on marketplace trends, like buyer demand and the competition in the item’s category.  <p class="tablenote"><b>Note:</b> A <b>promoteWithAd</b> value cannot be calculated for listings that are part of Promoted Listings campaigns.  <br><br>Because of this, if you call <b>findListingRecommendations</b> with a specific set of listing IDs, the <b>promoteWithAd</b> field is not returned for any of the listings that are involved in a promotion. However, as long as they are eligible, the trending <b>bidPercentage</b> <i>is</i> returned for all specified listings, even if they are part of an ad campaign.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/recommendation/types/api:PromoteWithAd'>eBay API documentation</a>
-     * @return string|null
+     * Gets the promoteWithAd property value. An enum whose values describe whether or not eBay recommends you place the associated listing in a Promoted Listings ad campaign.  <br><br>IDs deemed <code>RECOMMENDED</code> by eBay are the listings with the highest potential of benefiting from being promoted. The recommendation calculation is based on marketplace trends, like buyer demand and the competition in the item’s category.  <p class="tablenote"><b>Note:</b> A <b>promoteWithAd</b> value cannot be calculated for listings that are part of Promoted Listings campaigns.  <br><br>Because of this, if you call <b>findListingRecommendations</b> with a specific set of listing IDs, the <b>promoteWithAd</b> field is not returned for any of the listings that are involved in a promotion. However, as long as they are eligible, the trending <b>bidPercentage</b> <i>is</i> returned for all specified listings, even if they are part of an ad campaign.</p>
+     * @return PromoteWithAd|null
     */
-    public function getPromoteWithAd(): ?string {
+    public function getPromoteWithAd(): ?PromoteWithAd {
         return $this->promoteWithAd;
     }
 
@@ -99,7 +99,7 @@ class Ad implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfObjectValues('bidPercentages', $this->getBidPercentages());
-        $writer->writeStringValue('promoteWithAd', $this->getPromoteWithAd());
+        $writer->writeEnumValue('promoteWithAd', $this->getPromoteWithAd());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class Ad implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the promoteWithAd property value. An enum whose values describe whether or not eBay recommends you place the associated listing in a Promoted Listings ad campaign.  <br><br>IDs deemed <code>RECOMMENDED</code> by eBay are the listings with the highest potential of benefiting from being promoted. The recommendation calculation is based on marketplace trends, like buyer demand and the competition in the item’s category.  <p class="tablenote"><b>Note:</b> A <b>promoteWithAd</b> value cannot be calculated for listings that are part of Promoted Listings campaigns.  <br><br>Because of this, if you call <b>findListingRecommendations</b> with a specific set of listing IDs, the <b>promoteWithAd</b> field is not returned for any of the listings that are involved in a promotion. However, as long as they are eligible, the trending <b>bidPercentage</b> <i>is</i> returned for all specified listings, even if they are part of an ad campaign.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/recommendation/types/api:PromoteWithAd'>eBay API documentation</a>
-     * @param string|null $value Value to set for the promoteWithAd property.
+     * Sets the promoteWithAd property value. An enum whose values describe whether or not eBay recommends you place the associated listing in a Promoted Listings ad campaign.  <br><br>IDs deemed <code>RECOMMENDED</code> by eBay are the listings with the highest potential of benefiting from being promoted. The recommendation calculation is based on marketplace trends, like buyer demand and the competition in the item’s category.  <p class="tablenote"><b>Note:</b> A <b>promoteWithAd</b> value cannot be calculated for listings that are part of Promoted Listings campaigns.  <br><br>Because of this, if you call <b>findListingRecommendations</b> with a specific set of listing IDs, the <b>promoteWithAd</b> field is not returned for any of the listings that are involved in a promotion. However, as long as they are eligible, the trending <b>bidPercentage</b> <i>is</i> returned for all specified listings, even if they are part of an ad campaign.</p>
+     * @param PromoteWithAd|null $value Value to set for the promoteWithAd property.
     */
-    public function setPromoteWithAd(?string $value): void {
+    public function setPromoteWithAd(?PromoteWithAd $value): void {
         $this->promoteWithAd = $value;
     }
 

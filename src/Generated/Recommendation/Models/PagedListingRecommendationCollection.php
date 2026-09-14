@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The high-level object used to return a set of Promoted Listings ad recommendations.
+ * This type defines the set of Promoted Listings ad recommendations.
 */
 class PagedListingRecommendationCollection implements AdditionalDataHolder, Parsable 
 {

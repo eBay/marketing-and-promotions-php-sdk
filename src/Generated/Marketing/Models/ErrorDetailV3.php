@@ -16,6 +16,7 @@
 
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Models;
 
+use Microsoft\Kiota\Abstractions\ApiException;
 use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
@@ -23,9 +24,9 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * This type defines the elements of error and warning messages.
+ * This type defines the fields returned in an error condition.
 */
-class ErrorDetailV3 implements AdditionalDataHolder, Parsable 
+class ErrorDetailV3 extends ApiException implements AdditionalDataHolder, Parsable 
 {
     /**
      * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
@@ -48,32 +49,32 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
     private ?int $errorId = null;
     
     /**
-     * @var array<string>|null $inputRefIds Identifies specific request elements associated with the error, if any. inputRefId's response is format specific. For JSON, use <i>JSONPath</i> notation.
+     * @var string|null $escapedMessage A short description of the condition that caused the error or warning. This value is at most 50 characters long and, if applicable, is localized in the end user's requested locale.
+    */
+    private ?string $escapedMessage = null;
+    
+    /**
+     * @var array<string>|null $inputRefIds An array of reference IDs that identify the specific request elements most closely associated to the error or warning, if any. For JSON, use <i>JSONPath</i> notation.
     */
     private ?array $inputRefIds = null;
     
     /**
-     * @var string|null $longMessage An expanded version of message that should be around 100-200 characters long, but is not required to be such.
+     * @var string|null $longMessage A detailed description of the condition that caused the error or warning and information on what to do to correct the problem. The string is normally 100-200 characters in length, but is not required to be such.
     */
     private ?string $longMessage = null;
     
     /**
-     * @var string|null $message An end user and app developer friendly device agnostic message. It explains what the error or warning is, and how to fix it (in a general sense). Its value is at most 50 characters long. If applicable, the value is localized in the end user's requested locale.
-    */
-    private ?string $message = null;
-    
-    /**
-     * @var array<string>|null $outputRefIds Identifies specific response elements associated with the error, if any. Path format is the same as <code>inputRefId</code>.
+     * @var array<string>|null $outputRefIds An array of reference IDs that identify the specific response elements most closely associated to the error or warning, if any. The path format is the same as <code>inputRefId</code>.
     */
     private ?array $outputRefIds = null;
     
     /**
-     * @var array<ErrorParameterV3>|null $parameters This optional complex field type contains a list of one or more context-specific <code>ErrorParameter</code> objects, with each item in the list entry being a parameter (or input field name) that caused an error condition. Each <code>ErrorParameter</code> object consists of two fields, a <code>name</code> and a <code>value</code>.
+     * @var array<ErrorParameterV3>|null $parameters An array that contains contextual information about the error or warning. The list often includes the parameter or input fields that triggered the warning or error condition.
     */
     private ?array $parameters = null;
     
     /**
-     * @var string|null $subdomain Name of the domain's subsystem or subdivision. For example, checkout is a subdomain in the buying domain.
+     * @var string|null $subdomain The name of the subdomain in which the error or warning occurred. For example, checkout is a subdomain in the buying domain.
     */
     private ?string $subdomain = null;
     
@@ -91,6 +92,14 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
     */
     public static function createFromDiscriminatorValue(ParseNode $parseNode): ErrorDetailV3 {
         return new ErrorDetailV3();
+    }
+
+    /**
+     * Gets the message property value. A short description of the condition that caused the error or warning. This value is at most 50 characters long and, if applicable, is localized in the end user's requested locale.
+     * @return string|null
+    */
+    public function escapedGetMessage(): ?string {
+        return $this->escapedMessage;
     }
 
     /**
@@ -135,6 +144,7 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
             'category' => fn(ParseNode $n) => $o->setCategory($n->getStringValue()),
             'domain' => fn(ParseNode $n) => $o->setDomain($n->getStringValue()),
             'errorId' => fn(ParseNode $n) => $o->setErrorId($n->getIntegerValue()),
+            'message' => fn(ParseNode $n) => $o->setMessage($n->getStringValue()),
             'inputRefIds' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
                 if (is_array($val)) {
@@ -144,7 +154,6 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
                 $this->setInputRefIds($val);
             },
             'longMessage' => fn(ParseNode $n) => $o->setLongMessage($n->getStringValue()),
-            'message' => fn(ParseNode $n) => $o->setMessage($n->getStringValue()),
             'outputRefIds' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
                 if (is_array($val)) {
@@ -159,7 +168,7 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the inputRefIds property value. Identifies specific request elements associated with the error, if any. inputRefId's response is format specific. For JSON, use <i>JSONPath</i> notation.
+     * Gets the inputRefIds property value. An array of reference IDs that identify the specific request elements most closely associated to the error or warning, if any. For JSON, use <i>JSONPath</i> notation.
      * @return array<string>|null
     */
     public function getInputRefIds(): ?array {
@@ -167,7 +176,7 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the longMessage property value. An expanded version of message that should be around 100-200 characters long, but is not required to be such.
+     * Gets the longMessage property value. A detailed description of the condition that caused the error or warning and information on what to do to correct the problem. The string is normally 100-200 characters in length, but is not required to be such.
      * @return string|null
     */
     public function getLongMessage(): ?string {
@@ -175,15 +184,7 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the message property value. An end user and app developer friendly device agnostic message. It explains what the error or warning is, and how to fix it (in a general sense). Its value is at most 50 characters long. If applicable, the value is localized in the end user's requested locale.
-     * @return string|null
-    */
-    public function getMessage(): ?string {
-        return $this->message;
-    }
-
-    /**
-     * Gets the outputRefIds property value. Identifies specific response elements associated with the error, if any. Path format is the same as <code>inputRefId</code>.
+     * Gets the outputRefIds property value. An array of reference IDs that identify the specific response elements most closely associated to the error or warning, if any. The path format is the same as <code>inputRefId</code>.
      * @return array<string>|null
     */
     public function getOutputRefIds(): ?array {
@@ -191,7 +192,7 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the parameters property value. This optional complex field type contains a list of one or more context-specific <code>ErrorParameter</code> objects, with each item in the list entry being a parameter (or input field name) that caused an error condition. Each <code>ErrorParameter</code> object consists of two fields, a <code>name</code> and a <code>value</code>.
+     * Gets the parameters property value. An array that contains contextual information about the error or warning. The list often includes the parameter or input fields that triggered the warning or error condition.
      * @return array<ErrorParameterV3>|null
     */
     public function getParameters(): ?array {
@@ -199,7 +200,15 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the subdomain property value. Name of the domain's subsystem or subdivision. For example, checkout is a subdomain in the buying domain.
+     * The primary error message.
+     * @return string
+    */
+    public function getPrimaryErrorMessage(): string {
+        return parent::getMessage();
+    }
+
+    /**
+     * Gets the subdomain property value. The name of the subdomain in which the error or warning occurred. For example, checkout is a subdomain in the buying domain.
      * @return string|null
     */
     public function getSubdomain(): ?string {
@@ -214,9 +223,9 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('category', $this->getCategory());
         $writer->writeStringValue('domain', $this->getDomain());
         $writer->writeIntegerValue('errorId', $this->getErrorId());
+        $writer->writeStringValue('message', $this->escapedGetMessage());
         $writer->writeCollectionOfPrimitiveValues('inputRefIds', $this->getInputRefIds());
         $writer->writeStringValue('longMessage', $this->getLongMessage());
-        $writer->writeStringValue('message', $this->getMessage());
         $writer->writeCollectionOfPrimitiveValues('outputRefIds', $this->getOutputRefIds());
         $writer->writeCollectionOfObjectValues('parameters', $this->getParameters());
         $writer->writeStringValue('subdomain', $this->getSubdomain());
@@ -256,7 +265,7 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the inputRefIds property value. Identifies specific request elements associated with the error, if any. inputRefId's response is format specific. For JSON, use <i>JSONPath</i> notation.
+     * Sets the inputRefIds property value. An array of reference IDs that identify the specific request elements most closely associated to the error or warning, if any. For JSON, use <i>JSONPath</i> notation.
      * @param array<string>|null $value Value to set for the inputRefIds property.
     */
     public function setInputRefIds(?array $value): void {
@@ -264,7 +273,7 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the longMessage property value. An expanded version of message that should be around 100-200 characters long, but is not required to be such.
+     * Sets the longMessage property value. A detailed description of the condition that caused the error or warning and information on what to do to correct the problem. The string is normally 100-200 characters in length, but is not required to be such.
      * @param string|null $value Value to set for the longMessage property.
     */
     public function setLongMessage(?string $value): void {
@@ -272,15 +281,15 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the message property value. An end user and app developer friendly device agnostic message. It explains what the error or warning is, and how to fix it (in a general sense). Its value is at most 50 characters long. If applicable, the value is localized in the end user's requested locale.
+     * Sets the message property value. A short description of the condition that caused the error or warning. This value is at most 50 characters long and, if applicable, is localized in the end user's requested locale.
      * @param string|null $value Value to set for the message property.
     */
     public function setMessage(?string $value): void {
-        $this->message = $value;
+        $this->escapedMessage = $value;
     }
 
     /**
-     * Sets the outputRefIds property value. Identifies specific response elements associated with the error, if any. Path format is the same as <code>inputRefId</code>.
+     * Sets the outputRefIds property value. An array of reference IDs that identify the specific response elements most closely associated to the error or warning, if any. The path format is the same as <code>inputRefId</code>.
      * @param array<string>|null $value Value to set for the outputRefIds property.
     */
     public function setOutputRefIds(?array $value): void {
@@ -288,7 +297,7 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the parameters property value. This optional complex field type contains a list of one or more context-specific <code>ErrorParameter</code> objects, with each item in the list entry being a parameter (or input field name) that caused an error condition. Each <code>ErrorParameter</code> object consists of two fields, a <code>name</code> and a <code>value</code>.
+     * Sets the parameters property value. An array that contains contextual information about the error or warning. The list often includes the parameter or input fields that triggered the warning or error condition.
      * @param array<ErrorParameterV3>|null $value Value to set for the parameters property.
     */
     public function setParameters(?array $value): void {
@@ -296,7 +305,7 @@ class ErrorDetailV3 implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the subdomain property value. Name of the domain's subsystem or subdivision. For example, checkout is a subdomain in the buying domain.
+     * Sets the subdomain property value. The name of the subdomain in which the error or warning occurred. For example, checkout is a subdomain in the buying domain.
      * @param string|null $value Value to set for the subdomain property.
     */
     public function setSubdomain(?string $value): void {

@@ -37,7 +37,7 @@ class ErrorParameterV3 implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var string|null $value A description of the error.
+     * @var string|null $value The value that was set for the element specified in the <b>name</b> field.
     */
     private ?string $value = null;
     
@@ -86,7 +86,7 @@ class ErrorParameterV3 implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the value property value. A description of the error.
+     * Gets the value property value. The value that was set for the element specified in the <b>name</b> field.
      * @return string|null
     */
     public function getValue(): ?string {
@@ -120,7 +120,7 @@ class ErrorParameterV3 implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the value property value. A description of the error.
+     * Sets the value property value. The value that was set for the element specified in the <b>name</b> field.
      * @param string|null $value Value to set for the value property.
     */
     public function setValue(?string $value): void {

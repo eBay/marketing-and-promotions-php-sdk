@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The total revenue from all the purchased items that were part of a discount but <i>did not trigger</i> a discount during the discount period.
+ * A complex type that describes the value of a monetary amount as represented by a global currency.
 */
 class Amount implements AdditionalDataHolder, Parsable 
 {

@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The allocated daily budget for the Cost Per Click (CPC) Promoted Listings campaign.<br><br><i>Required if</i> the campaign funding model is CPC.
+ * A container for the details of a Promoted Listings campaign that uses the Cost Per Click (CPC) funding model.
 */
 class CampaignBudgetRequest implements AdditionalDataHolder, Parsable 
 {

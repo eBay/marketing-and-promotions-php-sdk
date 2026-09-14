@@ -34,7 +34,7 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $category Identifies the type of erro.
+     * @var string|null $category Identifies the type of error.
     */
     private ?string $category = null;
     
@@ -82,7 +82,6 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
      * Instantiates a new Error and sets the default values.
     */
     public function __construct() {
-        parent::__construct();
         $this->setAdditionalData([]);
     }
 
@@ -112,7 +111,7 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the category property value. Identifies the type of erro.
+     * Gets the category property value. Identifies the type of error.
      * @return string|null
     */
     public function getCategory(): ?string {
@@ -242,7 +241,7 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the category property value. Identifies the type of erro.
+     * Sets the category property value. Identifies the type of error.
      * @param string|null $value Value to set for the category property.
     */
     public function setCategory(?string $value): void {

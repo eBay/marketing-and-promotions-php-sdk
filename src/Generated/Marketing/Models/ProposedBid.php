@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The suggested bid associated with the keyword. 
+ * A type that defines the data for a payment amount, such as the sale price.
 */
 class ProposedBid implements AdditionalDataHolder, Parsable 
 {

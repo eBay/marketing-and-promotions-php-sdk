@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The maximum amount for which the eBay suggested bid can be adjusted. This value represents the most a seller is willing to pay for each click on their ad. The adjusted bid will never exceed this amount.<br><br>This field is required for smart targeting campaigns.<br><br><span class="tablenote"><b>Note:</b> The maximum cost-per-click has a minimum value of 0.02 and a maximum value of 100.</span>
+ * This type defines the max CPC amount for a campaign.
 */
 class MaxCpc implements AdditionalDataHolder, Parsable 
 {

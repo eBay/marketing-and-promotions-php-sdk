@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This request works with listings created via the <a href="/api-docs/sell/inventory/resources/methods" target="_blank">Inventory API</a>.<br /><br />The request is to delete a set of ads in bulk, as specified by a list of inventory reference IDs from the specified campaign.
+ * This type defines the request fields that <b>bulkDeleteAdsByInventoryReference</b> uses to delete ads in bulk.
 */
 class BulkDeleteAdsByInventoryReferenceRequest implements AdditionalDataHolder, Parsable 
 {

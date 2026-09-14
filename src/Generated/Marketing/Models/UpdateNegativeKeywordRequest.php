@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that defines the fields for the request to update a negative keyword.
+ * A type that contains the fields for the <b>UpdateNegativeKeyword</b> request.
 */
 class UpdateNegativeKeywordRequest implements AdditionalDataHolder, Parsable 
 {

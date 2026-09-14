@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The aspect information of the alert including keys and values.
+ * A type that contains the aspect fields.
 */
 class Aspect implements AdditionalDataHolder, Parsable 
 {
