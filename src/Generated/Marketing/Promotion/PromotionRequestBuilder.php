@@ -16,6 +16,7 @@
 
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Promotion;
 
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\PromotionsPagedCollection;
 use EBay\MarketingAndPromotions\Generated\Marketing\Promotion\Item\WithPromotion_ItemRequestBuilder;
 use Exception;
@@ -32,7 +33,7 @@ class PromotionRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/MarketingAndPromotions/Generated/Marketing.promotion.item collection
-     * @param string $promotion_id This path parameter takes a concatenation of the ID of the discount associated with the listing set plus the marketplace ID on which the discount is hosted. Concatenate the two values by separating them with an "at sign" (<b>@</b>). <br><br>The ID of the discount (<b>promotionId</b>) is a unique eBay-assigned value that's generated when the discount is created. The Marketplace ID is the ENUM value of eBay marketplace where the discount is hosted.<br><br> Use the <a href="/api-docs/sell/marketing/resources/promotion/methods/getPromotions">getPromotions</a> method to retrieve promotion Ids. See <a href="/api-docs/sell/marketing/types/ba:MarketplaceIdEnum">MarketplaceIdEnum</a> for supported Marketplace ID values.<br><br><b>Example:</b> <code>1********5@EBAY_US</code>
+     * @param string $promotion_id This path parameter takes a concatenation of the ID of the discount associated with the listing set plus the marketplace ID on which the discount is hosted. Concatenate the two values by separating them with an "at sign" (<b>@</b>). <br><br>The ID of the discount (<b>promotionId</b>) is a unique eBay-assigned value that's generated when the discount is created. The Marketplace ID is the ENUM value of eBay marketplace where the discount is hosted.<br><br> Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-promotion-getpromotions">getPromotions</a> method to retrieve promotion Ids. See <a href="/develop/api/sell/request_headers#marketplace-id-values" target="_blank">Marketplace ID values</a> for supported Marketplace ID values.<br><br><b>Example:</b> <code>1********5@EBAY_US</code>
      * @return WithPromotion_ItemRequestBuilder
     */
     public function byPromotion_id(string $promotion_id): WithPromotion_ItemRequestBuilder {
@@ -63,7 +64,11 @@ class PromotionRequestBuilder extends BaseRequestBuilder
     */
     public function get(?PromotionRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [PromotionsPagedCollection::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [PromotionsPagedCollection::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

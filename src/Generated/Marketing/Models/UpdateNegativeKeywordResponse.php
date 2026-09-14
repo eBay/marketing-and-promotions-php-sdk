@@ -32,7 +32,7 @@ class UpdateNegativeKeywordResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<Error>|null $errors A container that will be returned if there are one or more issues associated with modifying the corresponding negative keyword.
+     * @var array<ErrorDetailV3>|null $errors A container that will be returned if there are one or more issues associated with modifying the corresponding negative keyword.
     */
     private ?array $errors = null;
     
@@ -72,7 +72,7 @@ class UpdateNegativeKeywordResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the errors property value. A container that will be returned if there are one or more issues associated with modifying the corresponding negative keyword.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -85,7 +85,7 @@ class UpdateNegativeKeywordResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
             'negativeKeywordId' => fn(ParseNode $n) => $o->setNegativeKeywordId($n->getStringValue()),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
         ];
@@ -128,7 +128,7 @@ class UpdateNegativeKeywordResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the errors property value. A container that will be returned if there are one or more issues associated with modifying the corresponding negative keyword.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;

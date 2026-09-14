@@ -37,7 +37,7 @@ class UpdateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
     private ?array $ads = null;
     
     /**
-     * @var array<Error>|null $errors A container for all of the errors associated with the specified inventory reference ID.
+     * @var array<ErrorDetailV3>|null $errors A container for all of the errors associated with the specified inventory reference ID.
     */
     private ?array $errors = null;
     
@@ -47,9 +47,9 @@ class UpdateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
     private ?string $inventoryReferenceId = null;
     
     /**
-     * @var string|null $inventoryReferenceType The inventory reference type associated with the ad. The inventory reference type could be a SKU number or Inventory Item Group. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
+     * @var InventoryReferenceTypeEnum|null $inventoryReferenceType The inventory reference type associated with the ad. The inventory reference type could be a SKU number or Inventory Item Group.
     */
-    private ?string $inventoryReferenceType = null;
+    private ?InventoryReferenceTypeEnum $inventoryReferenceType = null;
     
     /**
      * @var int|null $statusCode An HTTP status code that indicates whether or not the CPS ad was successfully updated.
@@ -90,7 +90,7 @@ class UpdateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
 
     /**
      * Gets the errors property value. A container for all of the errors associated with the specified inventory reference ID.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -104,9 +104,9 @@ class UpdateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
         $o = $this;
         return  [
             'ads' => fn(ParseNode $n) => $o->setAds($n->getCollectionOfObjectValues([AdReference::class, 'createFromDiscriminatorValue'])),
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
             'inventoryReferenceId' => fn(ParseNode $n) => $o->setInventoryReferenceId($n->getStringValue()),
-            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getStringValue()),
+            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getEnumValue(InventoryReferenceTypeEnum::class)),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
         ];
     }
@@ -120,10 +120,10 @@ class UpdateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
     }
 
     /**
-     * Gets the inventoryReferenceType property value. The inventory reference type associated with the ad. The inventory reference type could be a SKU number or Inventory Item Group. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the inventoryReferenceType property value. The inventory reference type associated with the ad. The inventory reference type could be a SKU number or Inventory Item Group.
+     * @return InventoryReferenceTypeEnum|null
     */
-    public function getInventoryReferenceType(): ?string {
+    public function getInventoryReferenceType(): ?InventoryReferenceTypeEnum {
         return $this->inventoryReferenceType;
     }
 
@@ -143,7 +143,7 @@ class UpdateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
         $writer->writeCollectionOfObjectValues('ads', $this->getAds());
         $writer->writeCollectionOfObjectValues('errors', $this->getErrors());
         $writer->writeStringValue('inventoryReferenceId', $this->getInventoryReferenceId());
-        $writer->writeStringValue('inventoryReferenceType', $this->getInventoryReferenceType());
+        $writer->writeEnumValue('inventoryReferenceType', $this->getInventoryReferenceType());
         $writer->writeIntegerValue('statusCode', $this->getStatusCode());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -166,7 +166,7 @@ class UpdateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
 
     /**
      * Sets the errors property value. A container for all of the errors associated with the specified inventory reference ID.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;
@@ -181,10 +181,10 @@ class UpdateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
     }
 
     /**
-     * Sets the inventoryReferenceType property value. The inventory reference type associated with the ad. The inventory reference type could be a SKU number or Inventory Item Group. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the inventoryReferenceType property.
+     * Sets the inventoryReferenceType property value. The inventory reference type associated with the ad. The inventory reference type could be a SKU number or Inventory Item Group.
+     * @param InventoryReferenceTypeEnum|null $value Value to set for the inventoryReferenceType property.
     */
-    public function setInventoryReferenceType(?string $value): void {
+    public function setInventoryReferenceType(?InventoryReferenceTypeEnum $value): void {
         $this->inventoryReferenceType = $value;
     }
 

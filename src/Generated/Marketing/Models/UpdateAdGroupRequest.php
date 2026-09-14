@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that contains the fields used by the <b>UpdateAdGroup</b> request.
+ * This type defines the fields for the <b>UpdateAdGroup</b> request.
 */
 class UpdateAdGroupRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,12 +32,12 @@ class UpdateAdGroupRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $adGroupStatus An enumeration value representing the current status of the ad group.<p>If the status of the ad is currently <code>ACTIVE</code>, you can change status to <code>PAUSED</code> or <code>ARCHIVED</code>. If ad group is currently in <code>PAUSED</code> status, you can change the status back to <code>ACTIVE</code>. Ads that are currently in <code>ARCHIVED</code> status cannot be made <code>ACTIVE</code> again.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdGroupStatusEnum'>eBay API documentation</a>
+     * @var AdGroupStatusEnum|null $adGroupStatus An enumeration value representing the current status of the ad group.<p>If the status of the ad is currently <code>ACTIVE</code>, you can change status to <code>PAUSED</code> or <code>ARCHIVED</code>. If ad group is currently in <code>PAUSED</code> status, you can change the status back to <code>ACTIVE</code>. Ads that are currently in <code>ARCHIVED</code> status cannot be made <code>ACTIVE</code> again.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul>
     */
-    private ?string $adGroupStatus = null;
+    private ?AdGroupStatusEnum $adGroupStatus = null;
     
     /**
-     * @var Amount|null $defaultBid A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $defaultBid A bid amount that applies to all of the keywords in an ad group that do not have individual bids.
     */
     private ?Amount $defaultBid = null;
     
@@ -71,15 +71,15 @@ class UpdateAdGroupRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adGroupStatus property value. An enumeration value representing the current status of the ad group.<p>If the status of the ad is currently <code>ACTIVE</code>, you can change status to <code>PAUSED</code> or <code>ARCHIVED</code>. If ad group is currently in <code>PAUSED</code> status, you can change the status back to <code>ACTIVE</code>. Ads that are currently in <code>ARCHIVED</code> status cannot be made <code>ACTIVE</code> again.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdGroupStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the adGroupStatus property value. An enumeration value representing the current status of the ad group.<p>If the status of the ad is currently <code>ACTIVE</code>, you can change status to <code>PAUSED</code> or <code>ARCHIVED</code>. If ad group is currently in <code>PAUSED</code> status, you can change the status back to <code>ACTIVE</code>. Ads that are currently in <code>ARCHIVED</code> status cannot be made <code>ACTIVE</code> again.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul>
+     * @return AdGroupStatusEnum|null
     */
-    public function getAdGroupStatus(): ?string {
+    public function getAdGroupStatus(): ?AdGroupStatusEnum {
         return $this->adGroupStatus;
     }
 
     /**
-     * Gets the defaultBid property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the defaultBid property value. A bid amount that applies to all of the keywords in an ad group that do not have individual bids.
      * @return Amount|null
     */
     public function getDefaultBid(): ?Amount {
@@ -93,7 +93,7 @@ class UpdateAdGroupRequest implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'adGroupStatus' => fn(ParseNode $n) => $o->setAdGroupStatus($n->getStringValue()),
+            'adGroupStatus' => fn(ParseNode $n) => $o->setAdGroupStatus($n->getEnumValue(AdGroupStatusEnum::class)),
             'defaultBid' => fn(ParseNode $n) => $o->setDefaultBid($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
         ];
@@ -112,7 +112,7 @@ class UpdateAdGroupRequest implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('adGroupStatus', $this->getAdGroupStatus());
+        $writer->writeEnumValue('adGroupStatus', $this->getAdGroupStatus());
         $writer->writeObjectValue('defaultBid', $this->getDefaultBid());
         $writer->writeStringValue('name', $this->getName());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -127,15 +127,15 @@ class UpdateAdGroupRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adGroupStatus property value. An enumeration value representing the current status of the ad group.<p>If the status of the ad is currently <code>ACTIVE</code>, you can change status to <code>PAUSED</code> or <code>ARCHIVED</code>. If ad group is currently in <code>PAUSED</code> status, you can change the status back to <code>ACTIVE</code>. Ads that are currently in <code>ARCHIVED</code> status cannot be made <code>ACTIVE</code> again.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdGroupStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the adGroupStatus property.
+     * Sets the adGroupStatus property value. An enumeration value representing the current status of the ad group.<p>If the status of the ad is currently <code>ACTIVE</code>, you can change status to <code>PAUSED</code> or <code>ARCHIVED</code>. If ad group is currently in <code>PAUSED</code> status, you can change the status back to <code>ACTIVE</code>. Ads that are currently in <code>ARCHIVED</code> status cannot be made <code>ACTIVE</code> again.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul>
+     * @param AdGroupStatusEnum|null $value Value to set for the adGroupStatus property.
     */
-    public function setAdGroupStatus(?string $value): void {
+    public function setAdGroupStatus(?AdGroupStatusEnum $value): void {
         $this->adGroupStatus = $value;
     }
 
     /**
-     * Sets the defaultBid property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the defaultBid property value. A bid amount that applies to all of the keywords in an ad group that do not have individual bids.
      * @param Amount|null $value Value to set for the defaultBid property.
     */
     public function setDefaultBid(?Amount $value): void {

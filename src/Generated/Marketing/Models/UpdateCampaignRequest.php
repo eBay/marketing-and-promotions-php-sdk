@@ -23,7 +23,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * The update email campaign request payload
+ * update email campaign request
 */
 class UpdateCampaignRequest implements AdditionalDataHolder, Parsable 
 {
@@ -33,7 +33,7 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<string>|null $audienceCodes An array of audience codes for the audiences of the email campaign. At least one audience code is required. There is no limit to the number of audience codes that may be entered.<br><br><b>Example: </b> if the current email campaign contains <code>"audienceCodes": "code1", "code2"</code> and the user wishes to add an audience code <code>code3</code>, set the <code>audienceCodes</code> value to <code>"audienceCodes": "code1", "code2", "code3"</code>.<br><br>To retrieve seller audiences, call <a href="/api-docs/sell/marketing/resources/email_campaign/methods/getAudiences" target="_blank">getAudiences</a>. Use the code values in the response to populate audienceCodes.
+     * @var array<string>|null $audienceCodes An array of audience codes for the audiences of the email campaign. At least one audience code is required. There is no limit to the number of audience codes that may be entered.<br><br><b>Example: </b> if the current email campaign contains <code>"audienceCodes": "code1", "code2"</code> and the user wishes to add an audience code <code>code3</code>, set the <code>audienceCodes</code> value to <code>"audienceCodes": "code1", "code2", "code3"</code>.<br><br>To retrieve seller audiences, call <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getaudiences">getAudiences</a>. Use the code values in the response to populate audienceCodes.
     */
     private ?array $audienceCodes = null;
     
@@ -43,19 +43,19 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     private ?string $categoryId = null;
     
     /**
-     * @var string|null $categoryType This field must be set when applying an email campaign to a specific eBay category or store category. The enumeration value used indicates which type of category the <b>categoryId</b> belongs to. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:CategoryTypeEnum'>eBay API documentation</a>
+     * @var CategoryTypeEnum|null $categoryType This field must be set when applying an email campaign to a specific eBay category or store category. The enumeration value used indicates which type of category the <b>categoryId</b> belongs to.
     */
-    private ?string $categoryType = null;
+    private ?CategoryTypeEnum $categoryType = null;
     
     /**
-     * @var array<string>|null $itemIds An array of unique identifiers for the listings displayed in an email campaign. Used if the seller wishes to select the eBay listings in the email campaign rather than have eBay automatically select them.<br><br>Call <a href="/DevZone/XML/docs/Reference/eBay/GetSellerList.html#GetSellerList">getSellerList</a> to retrieve all seller listings. Each <b>Item</b> result contains an <b>ItemID</b> value. Use this value in <b>itemIds</b> to feature that listing.<br><br>The maximum number of <b>itemIds</b> for the <code>COUPON</code> campaign type is 4, and for every other campaign type is 10.<br><br><b>itemSelectMode</b> must be set to <code>MANUAL</code> in order to use this field.
+     * @var array<string>|null $itemIds An array of unique identifiers for the listings displayed in an email campaign. Used if the seller wishes to select the eBay listings in the email campaign rather than have eBay automatically select them.<br><br>Call <a href="/DevZone/XML/docs/Reference/eBay/GetSellerList.html#GetSellerList" target="_blank">getSellerList</a> to retrieve all seller listings. Each <b>Item</b> result contains an <b>ItemID</b> value. Use this value in <b>itemIds</b> to feature that listing.<br><br>The maximum number of <b>itemIds</b> for the <code>COUPON</code> campaign type is 4, and for every other campaign type is 10.<br><br><b>itemSelectMode</b> must be set to <code>MANUAL</code> in order to use this field.
     */
     private ?array $itemIds = null;
     
     /**
-     * @var string|null $itemSelectMode Determines whether listings featured in an email campaign are selected by the seller or by eBay.<br><br>If <b>itemSelectMode</b> is set to <code>AUTO</code>, eBay automatically choses listings based on values set for <b>sort</b>, <b>categoryType</b>, <b>categoryId</b>, and <b>priceRange</b>.<br><br>If <b>itemSelectMode</b> is set to <code>MANUAL</code>, listings are set by the seller by populating the <code>itemIds</code> array.<br><br><span class="tablenote"><b>Note: </b><b>itemSelectMode</b> is always set to <code>AUTO</code> for <code>WELCOME</code> email campaigns.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ItemSelectModeEnum'>eBay API documentation</a>
+     * @var ItemSelectModeEnum|null $itemSelectMode Determines whether listings featured in an email campaign are selected by the seller or by eBay.<br><br>If <b>itemSelectMode</b> is set to <code>AUTO</code>, eBay automatically choses listings based on values set for <b>sort</b>, <b>categoryType</b>, <b>categoryId</b>, and <b>priceRange</b>.<br><br>If <b>itemSelectMode</b> is set to <code>MANUAL</code>, listings are set by the seller by populating the <code>itemIds</code> array.<br><br><span class="tablenote"><b>Note: </b><b>itemSelectMode</b> is always set to <code>AUTO</code> for <code>WELCOME</code> email campaigns.</span>
     */
-    private ?string $itemSelectMode = null;
+    private ?ItemSelectModeEnum $itemSelectMode = null;
     
     /**
      * @var string|null $personalizedMessage The body of the email campaign. Accepts HTML and CSS. The maximum length is 1000 characters
@@ -63,19 +63,19 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     private ?string $personalizedMessage = null;
     
     /**
-     * @var PriceRange|null $priceRange The price range.
+     * @var PriceRange|null $priceRange This container is used if the seller wants to apply the email campaign to listings based on a price range.<br><br>The <b>priceRange</b> container consists of the <b>currency</b>, <b>gte</b>, and <b>lte</b> fields.<br><br>"gte" stands for "greater than or equal to" and "lte" stands for "less than or equal to". Either <b>gte</b>, <b>lte</b>, or both must be used if the seller wishes to include a price range.<br><br><span class="tablenote"><b>Note: </b>Use this object when the <b>itemSelectMode</b> is set to <code>AUTO</code>.</span>
     */
     private ?PriceRange $priceRange = null;
     
     /**
-     * @var string|null $promotionId The ID of the discount used for an email campaign if the <b>emailCampaignType</b> is set to <code>COUPON</code>, <code>SALE_EVENT</code>, or <code>ORDER_DISCOUNT</code>, and <b>promotionSelectModeEnum</b> is set to <code>MANUAL</code>.<br><br>To find a discount, call <a href="/api-docs/sell/marketing/resources/promotion/methods/getPromotions" target="_blank">getPromotions</a> to retrieve a list of the seller's discounts. Use the <b>promotionId</b> from an individual <b>PromotionDetail</b> result for the request.
+     * @var string|null $promotionId The ID of the discount used for an email campaign if the <b>emailCampaignType</b> is set to <code>COUPON</code>, <code>SALE_EVENT</code>, or <code>ORDER_DISCOUNT</code>, and <b>promotionSelectModeEnum</b> is set to <code>MANUAL</code>.<br><br>To find a discount, call <a href="/develop/api/sell/marketing_api#sell-marketing_api-promotion-getpromotions" target="_blank">getPromotions</a> to retrieve a list of the seller's discounts. Use the <b>promotionId</b> from an individual <b>PromotionDetail</b> result for the request.
     */
     private ?string $promotionId = null;
     
     /**
-     * @var string|null $promotionSelectModeEnum The selection mode for the discount used. If set to <code>AUTO</code>, eBay will choose the discount to include in the email campaign. If set to <code>MANUAL</code>, the seller must specify the discount in the <b>promotionId</b> field.<br><br>This field is required if the <b>emailCampaignType</b> is set to <code>COUPON</code>, <code>SALE_EVENT</code>, or <code>ORDER_DISCOUNT</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:PromotionSelectModeEnum'>eBay API documentation</a>
+     * @var PromotionSelectModeEnum|null $promotionSelectModeEnum The selection mode for the discount used. If set to <code>AUTO</code>, eBay will choose the discount to include in the email campaign. If set to <code>MANUAL</code>, the seller must specify the discount in the <b>promotionId</b> field.<br><br>This field is required if the <b>emailCampaignType</b> is set to <code>COUPON</code>, <code>SALE_EVENT</code>, or <code>ORDER_DISCOUNT</code>.
     */
-    private ?string $promotionSelectModeEnum = null;
+    private ?PromotionSelectModeEnum $promotionSelectModeEnum = null;
     
     /**
      * @var string|null $scheduleDate The date and time that the email campaign newsletter will be sent, given in UTC format. Example: 2023-05-20T03:13:35Z<br><br>This field should be used if the seller wishes to send the email campaign on a future date. If no <b>scheduleDate</b> is set, the email campaign will send once it is created or updated.
@@ -83,9 +83,9 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     private ?string $scheduleDate = null;
     
     /**
-     * @var string|null $sort The sort rule is used to display the listings featured in the email campaign.<br><br>Sort rules are only used if <b>itemSelectMode</b> is set to <code>AUTO</code>. If <b>itemSelectMode</b> is <code>MANUAL</code>, listings are displayed in the order in which they are listed in the <b>itemIds</b> array.<br><br>The following sort rules are available:<ul><li><code>ENDING_FIRST</code> displays listings by ending date, from soonest to latest.</li><li><code>LOWEST_PRICED</code> displays listings by price, from lowest to highest.</li><li><code>HIGHEST_PRICED</code> displays listings by price, from highest to lowest.</li><li><code>NEWLY_LISTED</code> displays listings by date listed, with the newest first.</li></ul><br><br>The default sort rule is <code>NEWLY_LISTED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ItemSortEnum'>eBay API documentation</a>
+     * @var ItemSortEnum|null $sort The sort rule is used to display the listings featured in the email campaign.<br><br>Sort rules are only used if <b>itemSelectMode</b> is set to <code>AUTO</code>. If <b>itemSelectMode</b> is <code>MANUAL</code>, listings are displayed in the order in which they are listed in the <b>itemIds</b> array.<br><br>The following sort rules are available:<ul><li><code>ENDING_FIRST</code> displays listings by ending date, from soonest to latest.</li><li><code>LOWEST_PRICED</code> displays listings by price, from lowest to highest.</li><li><code>HIGHEST_PRICED</code> displays listings by price, from highest to lowest.</li><li><code>NEWLY_LISTED</code> displays listings by date listed, with the newest first.</li></ul><br><br>The default sort rule is <code>NEWLY_LISTED</code>.
     */
-    private ?string $sort = null;
+    private ?ItemSortEnum $sort = null;
     
     /**
      * @var string|null $subject The email campaign subject. The maximum length is 70 characters.
@@ -117,7 +117,7 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the audienceCodes property value. An array of audience codes for the audiences of the email campaign. At least one audience code is required. There is no limit to the number of audience codes that may be entered.<br><br><b>Example: </b> if the current email campaign contains <code>"audienceCodes": "code1", "code2"</code> and the user wishes to add an audience code <code>code3</code>, set the <code>audienceCodes</code> value to <code>"audienceCodes": "code1", "code2", "code3"</code>.<br><br>To retrieve seller audiences, call <a href="/api-docs/sell/marketing/resources/email_campaign/methods/getAudiences" target="_blank">getAudiences</a>. Use the code values in the response to populate audienceCodes.
+     * Gets the audienceCodes property value. An array of audience codes for the audiences of the email campaign. At least one audience code is required. There is no limit to the number of audience codes that may be entered.<br><br><b>Example: </b> if the current email campaign contains <code>"audienceCodes": "code1", "code2"</code> and the user wishes to add an audience code <code>code3</code>, set the <code>audienceCodes</code> value to <code>"audienceCodes": "code1", "code2", "code3"</code>.<br><br>To retrieve seller audiences, call <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getaudiences">getAudiences</a>. Use the code values in the response to populate audienceCodes.
      * @return array<string>|null
     */
     public function getAudienceCodes(): ?array {
@@ -133,10 +133,10 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the categoryType property value. This field must be set when applying an email campaign to a specific eBay category or store category. The enumeration value used indicates which type of category the <b>categoryId</b> belongs to. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:CategoryTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the categoryType property value. This field must be set when applying an email campaign to a specific eBay category or store category. The enumeration value used indicates which type of category the <b>categoryId</b> belongs to.
+     * @return CategoryTypeEnum|null
     */
-    public function getCategoryType(): ?string {
+    public function getCategoryType(): ?CategoryTypeEnum {
         return $this->categoryType;
     }
 
@@ -156,7 +156,7 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
                 $this->setAudienceCodes($val);
             },
             'categoryId' => fn(ParseNode $n) => $o->setCategoryId($n->getStringValue()),
-            'categoryType' => fn(ParseNode $n) => $o->setCategoryType($n->getStringValue()),
+            'categoryType' => fn(ParseNode $n) => $o->setCategoryType($n->getEnumValue(CategoryTypeEnum::class)),
             'itemIds' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
                 if (is_array($val)) {
@@ -165,19 +165,19 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
                 /** @var array<string>|null $val */
                 $this->setItemIds($val);
             },
-            'itemSelectMode' => fn(ParseNode $n) => $o->setItemSelectMode($n->getStringValue()),
+            'itemSelectMode' => fn(ParseNode $n) => $o->setItemSelectMode($n->getEnumValue(ItemSelectModeEnum::class)),
             'personalizedMessage' => fn(ParseNode $n) => $o->setPersonalizedMessage($n->getStringValue()),
             'priceRange' => fn(ParseNode $n) => $o->setPriceRange($n->getObjectValue([PriceRange::class, 'createFromDiscriminatorValue'])),
             'promotionId' => fn(ParseNode $n) => $o->setPromotionId($n->getStringValue()),
-            'promotionSelectModeEnum' => fn(ParseNode $n) => $o->setPromotionSelectModeEnum($n->getStringValue()),
+            'promotionSelectModeEnum' => fn(ParseNode $n) => $o->setPromotionSelectModeEnum($n->getEnumValue(PromotionSelectModeEnum::class)),
             'scheduleDate' => fn(ParseNode $n) => $o->setScheduleDate($n->getStringValue()),
-            'sort' => fn(ParseNode $n) => $o->setSort($n->getStringValue()),
+            'sort' => fn(ParseNode $n) => $o->setSort($n->getEnumValue(ItemSortEnum::class)),
             'subject' => fn(ParseNode $n) => $o->setSubject($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the itemIds property value. An array of unique identifiers for the listings displayed in an email campaign. Used if the seller wishes to select the eBay listings in the email campaign rather than have eBay automatically select them.<br><br>Call <a href="/DevZone/XML/docs/Reference/eBay/GetSellerList.html#GetSellerList">getSellerList</a> to retrieve all seller listings. Each <b>Item</b> result contains an <b>ItemID</b> value. Use this value in <b>itemIds</b> to feature that listing.<br><br>The maximum number of <b>itemIds</b> for the <code>COUPON</code> campaign type is 4, and for every other campaign type is 10.<br><br><b>itemSelectMode</b> must be set to <code>MANUAL</code> in order to use this field.
+     * Gets the itemIds property value. An array of unique identifiers for the listings displayed in an email campaign. Used if the seller wishes to select the eBay listings in the email campaign rather than have eBay automatically select them.<br><br>Call <a href="/DevZone/XML/docs/Reference/eBay/GetSellerList.html#GetSellerList" target="_blank">getSellerList</a> to retrieve all seller listings. Each <b>Item</b> result contains an <b>ItemID</b> value. Use this value in <b>itemIds</b> to feature that listing.<br><br>The maximum number of <b>itemIds</b> for the <code>COUPON</code> campaign type is 4, and for every other campaign type is 10.<br><br><b>itemSelectMode</b> must be set to <code>MANUAL</code> in order to use this field.
      * @return array<string>|null
     */
     public function getItemIds(): ?array {
@@ -185,10 +185,10 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the itemSelectMode property value. Determines whether listings featured in an email campaign are selected by the seller or by eBay.<br><br>If <b>itemSelectMode</b> is set to <code>AUTO</code>, eBay automatically choses listings based on values set for <b>sort</b>, <b>categoryType</b>, <b>categoryId</b>, and <b>priceRange</b>.<br><br>If <b>itemSelectMode</b> is set to <code>MANUAL</code>, listings are set by the seller by populating the <code>itemIds</code> array.<br><br><span class="tablenote"><b>Note: </b><b>itemSelectMode</b> is always set to <code>AUTO</code> for <code>WELCOME</code> email campaigns.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ItemSelectModeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the itemSelectMode property value. Determines whether listings featured in an email campaign are selected by the seller or by eBay.<br><br>If <b>itemSelectMode</b> is set to <code>AUTO</code>, eBay automatically choses listings based on values set for <b>sort</b>, <b>categoryType</b>, <b>categoryId</b>, and <b>priceRange</b>.<br><br>If <b>itemSelectMode</b> is set to <code>MANUAL</code>, listings are set by the seller by populating the <code>itemIds</code> array.<br><br><span class="tablenote"><b>Note: </b><b>itemSelectMode</b> is always set to <code>AUTO</code> for <code>WELCOME</code> email campaigns.</span>
+     * @return ItemSelectModeEnum|null
     */
-    public function getItemSelectMode(): ?string {
+    public function getItemSelectMode(): ?ItemSelectModeEnum {
         return $this->itemSelectMode;
     }
 
@@ -201,7 +201,7 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the priceRange property value. The price range.
+     * Gets the priceRange property value. This container is used if the seller wants to apply the email campaign to listings based on a price range.<br><br>The <b>priceRange</b> container consists of the <b>currency</b>, <b>gte</b>, and <b>lte</b> fields.<br><br>"gte" stands for "greater than or equal to" and "lte" stands for "less than or equal to". Either <b>gte</b>, <b>lte</b>, or both must be used if the seller wishes to include a price range.<br><br><span class="tablenote"><b>Note: </b>Use this object when the <b>itemSelectMode</b> is set to <code>AUTO</code>.</span>
      * @return PriceRange|null
     */
     public function getPriceRange(): ?PriceRange {
@@ -209,7 +209,7 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the promotionId property value. The ID of the discount used for an email campaign if the <b>emailCampaignType</b> is set to <code>COUPON</code>, <code>SALE_EVENT</code>, or <code>ORDER_DISCOUNT</code>, and <b>promotionSelectModeEnum</b> is set to <code>MANUAL</code>.<br><br>To find a discount, call <a href="/api-docs/sell/marketing/resources/promotion/methods/getPromotions" target="_blank">getPromotions</a> to retrieve a list of the seller's discounts. Use the <b>promotionId</b> from an individual <b>PromotionDetail</b> result for the request.
+     * Gets the promotionId property value. The ID of the discount used for an email campaign if the <b>emailCampaignType</b> is set to <code>COUPON</code>, <code>SALE_EVENT</code>, or <code>ORDER_DISCOUNT</code>, and <b>promotionSelectModeEnum</b> is set to <code>MANUAL</code>.<br><br>To find a discount, call <a href="/develop/api/sell/marketing_api#sell-marketing_api-promotion-getpromotions" target="_blank">getPromotions</a> to retrieve a list of the seller's discounts. Use the <b>promotionId</b> from an individual <b>PromotionDetail</b> result for the request.
      * @return string|null
     */
     public function getPromotionId(): ?string {
@@ -217,10 +217,10 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the promotionSelectModeEnum property value. The selection mode for the discount used. If set to <code>AUTO</code>, eBay will choose the discount to include in the email campaign. If set to <code>MANUAL</code>, the seller must specify the discount in the <b>promotionId</b> field.<br><br>This field is required if the <b>emailCampaignType</b> is set to <code>COUPON</code>, <code>SALE_EVENT</code>, or <code>ORDER_DISCOUNT</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:PromotionSelectModeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the promotionSelectModeEnum property value. The selection mode for the discount used. If set to <code>AUTO</code>, eBay will choose the discount to include in the email campaign. If set to <code>MANUAL</code>, the seller must specify the discount in the <b>promotionId</b> field.<br><br>This field is required if the <b>emailCampaignType</b> is set to <code>COUPON</code>, <code>SALE_EVENT</code>, or <code>ORDER_DISCOUNT</code>.
+     * @return PromotionSelectModeEnum|null
     */
-    public function getPromotionSelectModeEnum(): ?string {
+    public function getPromotionSelectModeEnum(): ?PromotionSelectModeEnum {
         return $this->promotionSelectModeEnum;
     }
 
@@ -233,10 +233,10 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sort property value. The sort rule is used to display the listings featured in the email campaign.<br><br>Sort rules are only used if <b>itemSelectMode</b> is set to <code>AUTO</code>. If <b>itemSelectMode</b> is <code>MANUAL</code>, listings are displayed in the order in which they are listed in the <b>itemIds</b> array.<br><br>The following sort rules are available:<ul><li><code>ENDING_FIRST</code> displays listings by ending date, from soonest to latest.</li><li><code>LOWEST_PRICED</code> displays listings by price, from lowest to highest.</li><li><code>HIGHEST_PRICED</code> displays listings by price, from highest to lowest.</li><li><code>NEWLY_LISTED</code> displays listings by date listed, with the newest first.</li></ul><br><br>The default sort rule is <code>NEWLY_LISTED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ItemSortEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the sort property value. The sort rule is used to display the listings featured in the email campaign.<br><br>Sort rules are only used if <b>itemSelectMode</b> is set to <code>AUTO</code>. If <b>itemSelectMode</b> is <code>MANUAL</code>, listings are displayed in the order in which they are listed in the <b>itemIds</b> array.<br><br>The following sort rules are available:<ul><li><code>ENDING_FIRST</code> displays listings by ending date, from soonest to latest.</li><li><code>LOWEST_PRICED</code> displays listings by price, from lowest to highest.</li><li><code>HIGHEST_PRICED</code> displays listings by price, from highest to lowest.</li><li><code>NEWLY_LISTED</code> displays listings by date listed, with the newest first.</li></ul><br><br>The default sort rule is <code>NEWLY_LISTED</code>.
+     * @return ItemSortEnum|null
     */
-    public function getSort(): ?string {
+    public function getSort(): ?ItemSortEnum {
         return $this->sort;
     }
 
@@ -255,15 +255,15 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfPrimitiveValues('audienceCodes', $this->getAudienceCodes());
         $writer->writeStringValue('categoryId', $this->getCategoryId());
-        $writer->writeStringValue('categoryType', $this->getCategoryType());
+        $writer->writeEnumValue('categoryType', $this->getCategoryType());
         $writer->writeCollectionOfPrimitiveValues('itemIds', $this->getItemIds());
-        $writer->writeStringValue('itemSelectMode', $this->getItemSelectMode());
+        $writer->writeEnumValue('itemSelectMode', $this->getItemSelectMode());
         $writer->writeStringValue('personalizedMessage', $this->getPersonalizedMessage());
         $writer->writeObjectValue('priceRange', $this->getPriceRange());
         $writer->writeStringValue('promotionId', $this->getPromotionId());
-        $writer->writeStringValue('promotionSelectModeEnum', $this->getPromotionSelectModeEnum());
+        $writer->writeEnumValue('promotionSelectModeEnum', $this->getPromotionSelectModeEnum());
         $writer->writeStringValue('scheduleDate', $this->getScheduleDate());
-        $writer->writeStringValue('sort', $this->getSort());
+        $writer->writeEnumValue('sort', $this->getSort());
         $writer->writeStringValue('subject', $this->getSubject());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -277,7 +277,7 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the audienceCodes property value. An array of audience codes for the audiences of the email campaign. At least one audience code is required. There is no limit to the number of audience codes that may be entered.<br><br><b>Example: </b> if the current email campaign contains <code>"audienceCodes": "code1", "code2"</code> and the user wishes to add an audience code <code>code3</code>, set the <code>audienceCodes</code> value to <code>"audienceCodes": "code1", "code2", "code3"</code>.<br><br>To retrieve seller audiences, call <a href="/api-docs/sell/marketing/resources/email_campaign/methods/getAudiences" target="_blank">getAudiences</a>. Use the code values in the response to populate audienceCodes.
+     * Sets the audienceCodes property value. An array of audience codes for the audiences of the email campaign. At least one audience code is required. There is no limit to the number of audience codes that may be entered.<br><br><b>Example: </b> if the current email campaign contains <code>"audienceCodes": "code1", "code2"</code> and the user wishes to add an audience code <code>code3</code>, set the <code>audienceCodes</code> value to <code>"audienceCodes": "code1", "code2", "code3"</code>.<br><br>To retrieve seller audiences, call <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getaudiences">getAudiences</a>. Use the code values in the response to populate audienceCodes.
      * @param array<string>|null $value Value to set for the audienceCodes property.
     */
     public function setAudienceCodes(?array $value): void {
@@ -293,15 +293,15 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the categoryType property value. This field must be set when applying an email campaign to a specific eBay category or store category. The enumeration value used indicates which type of category the <b>categoryId</b> belongs to. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:CategoryTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the categoryType property.
+     * Sets the categoryType property value. This field must be set when applying an email campaign to a specific eBay category or store category. The enumeration value used indicates which type of category the <b>categoryId</b> belongs to.
+     * @param CategoryTypeEnum|null $value Value to set for the categoryType property.
     */
-    public function setCategoryType(?string $value): void {
+    public function setCategoryType(?CategoryTypeEnum $value): void {
         $this->categoryType = $value;
     }
 
     /**
-     * Sets the itemIds property value. An array of unique identifiers for the listings displayed in an email campaign. Used if the seller wishes to select the eBay listings in the email campaign rather than have eBay automatically select them.<br><br>Call <a href="/DevZone/XML/docs/Reference/eBay/GetSellerList.html#GetSellerList">getSellerList</a> to retrieve all seller listings. Each <b>Item</b> result contains an <b>ItemID</b> value. Use this value in <b>itemIds</b> to feature that listing.<br><br>The maximum number of <b>itemIds</b> for the <code>COUPON</code> campaign type is 4, and for every other campaign type is 10.<br><br><b>itemSelectMode</b> must be set to <code>MANUAL</code> in order to use this field.
+     * Sets the itemIds property value. An array of unique identifiers for the listings displayed in an email campaign. Used if the seller wishes to select the eBay listings in the email campaign rather than have eBay automatically select them.<br><br>Call <a href="/DevZone/XML/docs/Reference/eBay/GetSellerList.html#GetSellerList" target="_blank">getSellerList</a> to retrieve all seller listings. Each <b>Item</b> result contains an <b>ItemID</b> value. Use this value in <b>itemIds</b> to feature that listing.<br><br>The maximum number of <b>itemIds</b> for the <code>COUPON</code> campaign type is 4, and for every other campaign type is 10.<br><br><b>itemSelectMode</b> must be set to <code>MANUAL</code> in order to use this field.
      * @param array<string>|null $value Value to set for the itemIds property.
     */
     public function setItemIds(?array $value): void {
@@ -309,10 +309,10 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the itemSelectMode property value. Determines whether listings featured in an email campaign are selected by the seller or by eBay.<br><br>If <b>itemSelectMode</b> is set to <code>AUTO</code>, eBay automatically choses listings based on values set for <b>sort</b>, <b>categoryType</b>, <b>categoryId</b>, and <b>priceRange</b>.<br><br>If <b>itemSelectMode</b> is set to <code>MANUAL</code>, listings are set by the seller by populating the <code>itemIds</code> array.<br><br><span class="tablenote"><b>Note: </b><b>itemSelectMode</b> is always set to <code>AUTO</code> for <code>WELCOME</code> email campaigns.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ItemSelectModeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the itemSelectMode property.
+     * Sets the itemSelectMode property value. Determines whether listings featured in an email campaign are selected by the seller or by eBay.<br><br>If <b>itemSelectMode</b> is set to <code>AUTO</code>, eBay automatically choses listings based on values set for <b>sort</b>, <b>categoryType</b>, <b>categoryId</b>, and <b>priceRange</b>.<br><br>If <b>itemSelectMode</b> is set to <code>MANUAL</code>, listings are set by the seller by populating the <code>itemIds</code> array.<br><br><span class="tablenote"><b>Note: </b><b>itemSelectMode</b> is always set to <code>AUTO</code> for <code>WELCOME</code> email campaigns.</span>
+     * @param ItemSelectModeEnum|null $value Value to set for the itemSelectMode property.
     */
-    public function setItemSelectMode(?string $value): void {
+    public function setItemSelectMode(?ItemSelectModeEnum $value): void {
         $this->itemSelectMode = $value;
     }
 
@@ -325,7 +325,7 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the priceRange property value. The price range.
+     * Sets the priceRange property value. This container is used if the seller wants to apply the email campaign to listings based on a price range.<br><br>The <b>priceRange</b> container consists of the <b>currency</b>, <b>gte</b>, and <b>lte</b> fields.<br><br>"gte" stands for "greater than or equal to" and "lte" stands for "less than or equal to". Either <b>gte</b>, <b>lte</b>, or both must be used if the seller wishes to include a price range.<br><br><span class="tablenote"><b>Note: </b>Use this object when the <b>itemSelectMode</b> is set to <code>AUTO</code>.</span>
      * @param PriceRange|null $value Value to set for the priceRange property.
     */
     public function setPriceRange(?PriceRange $value): void {
@@ -333,7 +333,7 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the promotionId property value. The ID of the discount used for an email campaign if the <b>emailCampaignType</b> is set to <code>COUPON</code>, <code>SALE_EVENT</code>, or <code>ORDER_DISCOUNT</code>, and <b>promotionSelectModeEnum</b> is set to <code>MANUAL</code>.<br><br>To find a discount, call <a href="/api-docs/sell/marketing/resources/promotion/methods/getPromotions" target="_blank">getPromotions</a> to retrieve a list of the seller's discounts. Use the <b>promotionId</b> from an individual <b>PromotionDetail</b> result for the request.
+     * Sets the promotionId property value. The ID of the discount used for an email campaign if the <b>emailCampaignType</b> is set to <code>COUPON</code>, <code>SALE_EVENT</code>, or <code>ORDER_DISCOUNT</code>, and <b>promotionSelectModeEnum</b> is set to <code>MANUAL</code>.<br><br>To find a discount, call <a href="/develop/api/sell/marketing_api#sell-marketing_api-promotion-getpromotions" target="_blank">getPromotions</a> to retrieve a list of the seller's discounts. Use the <b>promotionId</b> from an individual <b>PromotionDetail</b> result for the request.
      * @param string|null $value Value to set for the promotionId property.
     */
     public function setPromotionId(?string $value): void {
@@ -341,10 +341,10 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the promotionSelectModeEnum property value. The selection mode for the discount used. If set to <code>AUTO</code>, eBay will choose the discount to include in the email campaign. If set to <code>MANUAL</code>, the seller must specify the discount in the <b>promotionId</b> field.<br><br>This field is required if the <b>emailCampaignType</b> is set to <code>COUPON</code>, <code>SALE_EVENT</code>, or <code>ORDER_DISCOUNT</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:PromotionSelectModeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the promotionSelectModeEnum property.
+     * Sets the promotionSelectModeEnum property value. The selection mode for the discount used. If set to <code>AUTO</code>, eBay will choose the discount to include in the email campaign. If set to <code>MANUAL</code>, the seller must specify the discount in the <b>promotionId</b> field.<br><br>This field is required if the <b>emailCampaignType</b> is set to <code>COUPON</code>, <code>SALE_EVENT</code>, or <code>ORDER_DISCOUNT</code>.
+     * @param PromotionSelectModeEnum|null $value Value to set for the promotionSelectModeEnum property.
     */
-    public function setPromotionSelectModeEnum(?string $value): void {
+    public function setPromotionSelectModeEnum(?PromotionSelectModeEnum $value): void {
         $this->promotionSelectModeEnum = $value;
     }
 
@@ -357,10 +357,10 @@ class UpdateCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sort property value. The sort rule is used to display the listings featured in the email campaign.<br><br>Sort rules are only used if <b>itemSelectMode</b> is set to <code>AUTO</code>. If <b>itemSelectMode</b> is <code>MANUAL</code>, listings are displayed in the order in which they are listed in the <b>itemIds</b> array.<br><br>The following sort rules are available:<ul><li><code>ENDING_FIRST</code> displays listings by ending date, from soonest to latest.</li><li><code>LOWEST_PRICED</code> displays listings by price, from lowest to highest.</li><li><code>HIGHEST_PRICED</code> displays listings by price, from highest to lowest.</li><li><code>NEWLY_LISTED</code> displays listings by date listed, with the newest first.</li></ul><br><br>The default sort rule is <code>NEWLY_LISTED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ItemSortEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the sort property.
+     * Sets the sort property value. The sort rule is used to display the listings featured in the email campaign.<br><br>Sort rules are only used if <b>itemSelectMode</b> is set to <code>AUTO</code>. If <b>itemSelectMode</b> is <code>MANUAL</code>, listings are displayed in the order in which they are listed in the <b>itemIds</b> array.<br><br>The following sort rules are available:<ul><li><code>ENDING_FIRST</code> displays listings by ending date, from soonest to latest.</li><li><code>LOWEST_PRICED</code> displays listings by price, from lowest to highest.</li><li><code>HIGHEST_PRICED</code> displays listings by price, from highest to lowest.</li><li><code>NEWLY_LISTED</code> displays listings by date listed, with the newest first.</li></ul><br><br>The default sort rule is <code>NEWLY_LISTED</code>.
+     * @param ItemSortEnum|null $value Value to set for the sort property.
     */
-    public function setSort(?string $value): void {
+    public function setSort(?ItemSortEnum $value): void {
         $this->sort = $value;
     }
 

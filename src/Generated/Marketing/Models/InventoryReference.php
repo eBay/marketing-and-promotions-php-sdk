@@ -37,9 +37,9 @@ class InventoryReference implements AdditionalDataHolder, Parsable
     private ?string $inventoryReferenceId = null;
     
     /**
-     * @var string|null $inventoryReferenceType Indicates the type of item indicated by the <b>inventoryReferenceId</b>.<br><br>This value can be set to either <code>INVENTORY_ITEM</code> or <code>INVENTORY_ITEM_GROUP</code>.<br><br><i>Required if </i> if you supply an <b>inventoryReferenceId</b>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
+     * @var InventoryReferenceTypeEnum|null $inventoryReferenceType Indicates the type of item indicated by the <b>inventoryReferenceId</b>.<br><br>This value can be set to either <code>INVENTORY_ITEM</code> or <code>INVENTORY_ITEM_GROUP</code>.<br><br><i>Required if </i> if you supply an <b>inventoryReferenceId</b>.
     */
-    private ?string $inventoryReferenceType = null;
+    private ?InventoryReferenceTypeEnum $inventoryReferenceType = null;
     
     /**
      * Instantiates a new InventoryReference and sets the default values.
@@ -73,7 +73,7 @@ class InventoryReference implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'inventoryReferenceId' => fn(ParseNode $n) => $o->setInventoryReferenceId($n->getStringValue()),
-            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getStringValue()),
+            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getEnumValue(InventoryReferenceTypeEnum::class)),
         ];
     }
 
@@ -86,10 +86,10 @@ class InventoryReference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the inventoryReferenceType property value. Indicates the type of item indicated by the <b>inventoryReferenceId</b>.<br><br>This value can be set to either <code>INVENTORY_ITEM</code> or <code>INVENTORY_ITEM_GROUP</code>.<br><br><i>Required if </i> if you supply an <b>inventoryReferenceId</b>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the inventoryReferenceType property value. Indicates the type of item indicated by the <b>inventoryReferenceId</b>.<br><br>This value can be set to either <code>INVENTORY_ITEM</code> or <code>INVENTORY_ITEM_GROUP</code>.<br><br><i>Required if </i> if you supply an <b>inventoryReferenceId</b>.
+     * @return InventoryReferenceTypeEnum|null
     */
-    public function getInventoryReferenceType(): ?string {
+    public function getInventoryReferenceType(): ?InventoryReferenceTypeEnum {
         return $this->inventoryReferenceType;
     }
 
@@ -99,7 +99,7 @@ class InventoryReference implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('inventoryReferenceId', $this->getInventoryReferenceId());
-        $writer->writeStringValue('inventoryReferenceType', $this->getInventoryReferenceType());
+        $writer->writeEnumValue('inventoryReferenceType', $this->getInventoryReferenceType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class InventoryReference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the inventoryReferenceType property value. Indicates the type of item indicated by the <b>inventoryReferenceId</b>.<br><br>This value can be set to either <code>INVENTORY_ITEM</code> or <code>INVENTORY_ITEM_GROUP</code>.<br><br><i>Required if </i> if you supply an <b>inventoryReferenceId</b>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the inventoryReferenceType property.
+     * Sets the inventoryReferenceType property value. Indicates the type of item indicated by the <b>inventoryReferenceId</b>.<br><br>This value can be set to either <code>INVENTORY_ITEM</code> or <code>INVENTORY_ITEM_GROUP</code>.<br><br><i>Required if </i> if you supply an <b>inventoryReferenceId</b>.
+     * @param InventoryReferenceTypeEnum|null $value Value to set for the inventoryReferenceType property.
     */
-    public function setInventoryReferenceType(?string $value): void {
+    public function setInventoryReferenceType(?InventoryReferenceTypeEnum $value): void {
         $this->inventoryReferenceType = $value;
     }
 

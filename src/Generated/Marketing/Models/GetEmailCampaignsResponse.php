@@ -21,6 +21,9 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
+/**
+ * This type defines the response payload of the <b>getEmailCampaigns</b> method.
+*/
 class GetEmailCampaignsResponse implements AdditionalDataHolder, Parsable 
 {
     /**

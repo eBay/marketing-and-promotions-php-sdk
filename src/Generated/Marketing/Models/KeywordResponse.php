@@ -37,7 +37,7 @@ class KeywordResponse implements AdditionalDataHolder, Parsable
     private ?string $adGroupId = null;
     
     /**
-     * @var array<Error>|null $errors This container will be returned if there is an issue creating the corresponding keyword and/or adding that keyword to the corresponding ad group.
+     * @var array<ErrorDetailV3>|null $errors This container will be returned if there is an issue creating the corresponding keyword and/or adding that keyword to the corresponding ad group.
     */
     private ?array $errors = null;
     
@@ -57,9 +57,9 @@ class KeywordResponse implements AdditionalDataHolder, Parsable
     private ?string $keywordText = null;
     
     /**
-     * @var string|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
+     * @var MatchTypeEnum|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
     */
-    private ?string $matchType = null;
+    private ?MatchTypeEnum $matchType = null;
     
     /**
      * @var int|null $statusCode An HTTP status code is returned for each keyword to indicate the success or failure of adding that keyword to the ad group.
@@ -67,7 +67,7 @@ class KeywordResponse implements AdditionalDataHolder, Parsable
     private ?int $statusCode = null;
     
     /**
-     * @var array<Error>|null $warnings List of warnings associated with this operation
+     * @var array<ErrorDetailV3>|null $warnings List of warnings associated with this operation
     */
     private ?array $warnings = null;
     
@@ -105,7 +105,7 @@ class KeywordResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the errors property value. This container will be returned if there is an issue creating the corresponding keyword and/or adding that keyword to the corresponding ad group.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -119,13 +119,13 @@ class KeywordResponse implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'adGroupId' => fn(ParseNode $n) => $o->setAdGroupId($n->getStringValue()),
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
             'href' => fn(ParseNode $n) => $o->setHref($n->getStringValue()),
             'keywordId' => fn(ParseNode $n) => $o->setKeywordId($n->getStringValue()),
             'keywordText' => fn(ParseNode $n) => $o->setKeywordText($n->getStringValue()),
-            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getStringValue()),
+            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getEnumValue(MatchTypeEnum::class)),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
-            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
@@ -154,10 +154,10 @@ class KeywordResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @return MatchTypeEnum|null
     */
-    public function getMatchType(): ?string {
+    public function getMatchType(): ?MatchTypeEnum {
         return $this->matchType;
     }
 
@@ -171,7 +171,7 @@ class KeywordResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the warnings property value. List of warnings associated with this operation
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getWarnings(): ?array {
         return $this->warnings;
@@ -187,7 +187,7 @@ class KeywordResponse implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('href', $this->getHref());
         $writer->writeStringValue('keywordId', $this->getKeywordId());
         $writer->writeStringValue('keywordText', $this->getKeywordText());
-        $writer->writeStringValue('matchType', $this->getMatchType());
+        $writer->writeEnumValue('matchType', $this->getMatchType());
         $writer->writeIntegerValue('statusCode', $this->getStatusCode());
         $writer->writeCollectionOfObjectValues('warnings', $this->getWarnings());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -211,7 +211,7 @@ class KeywordResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the errors property value. This container will be returned if there is an issue creating the corresponding keyword and/or adding that keyword to the corresponding ad group.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;
@@ -242,10 +242,10 @@ class KeywordResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the matchType property.
+     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @param MatchTypeEnum|null $value Value to set for the matchType property.
     */
-    public function setMatchType(?string $value): void {
+    public function setMatchType(?MatchTypeEnum $value): void {
         $this->matchType = $value;
     }
 
@@ -259,7 +259,7 @@ class KeywordResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the warnings property value. List of warnings associated with this operation
-     * @param array<Error>|null $value Value to set for the warnings property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the warnings property.
     */
     public function setWarnings(?array $value): void {
         $this->warnings = $value;

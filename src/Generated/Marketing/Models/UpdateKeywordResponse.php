@@ -32,7 +32,7 @@ class UpdateKeywordResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<Error>|null $errors This container will be returned if there are one or more issues associated with modifying the corresponding keyword.
+     * @var array<ErrorDetailV3>|null $errors This container will be returned if there are one or more issues associated with modifying the corresponding keyword.
     */
     private ?array $errors = null;
     
@@ -47,7 +47,7 @@ class UpdateKeywordResponse implements AdditionalDataHolder, Parsable
     private ?int $statusCode = null;
     
     /**
-     * @var array<Error>|null $warnings List of warnings associated with this operation
+     * @var array<ErrorDetailV3>|null $warnings List of warnings associated with this operation
     */
     private ?array $warnings = null;
     
@@ -77,7 +77,7 @@ class UpdateKeywordResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the errors property value. This container will be returned if there are one or more issues associated with modifying the corresponding keyword.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -90,10 +90,10 @@ class UpdateKeywordResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
             'keywordId' => fn(ParseNode $n) => $o->setKeywordId($n->getStringValue()),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
-            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
@@ -115,7 +115,7 @@ class UpdateKeywordResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the warnings property value. List of warnings associated with this operation
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getWarnings(): ?array {
         return $this->warnings;
@@ -143,7 +143,7 @@ class UpdateKeywordResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the errors property value. This container will be returned if there are one or more issues associated with modifying the corresponding keyword.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;
@@ -167,7 +167,7 @@ class UpdateKeywordResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the warnings property value. List of warnings associated with this operation
-     * @param array<Error>|null $value Value to set for the warnings property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the warnings property.
     */
     public function setWarnings(?array $value): void {
         $this->warnings = $value;

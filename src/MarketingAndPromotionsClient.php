@@ -22,10 +22,13 @@ use EBay\MarketingAndPromotions\Clients\Rest\MarketingClient;
 use EBay\MarketingAndPromotions\Clients\Rest\RecommendationClient;
 use EBay\MarketingAndPromotions\Configuration\MarketingAndPromotionsConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
-use Microsoft\Kiota\Http\KiotaClientFactory;
+use GuzzleHttp\HandlerStack;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Main entry point for the eBay Marketing and Promotions PHP SDK.
+ */
 final class MarketingAndPromotionsClient
 {
     public readonly MarketingClient $marketing;
@@ -33,42 +36,47 @@ final class MarketingAndPromotionsClient
 
     public function __construct(
         MarketingAndPromotionsConfiguration $config,
-        ?GuzzleClient $guzzle = null
+        ?GuzzleClient $guzzle = null,
     ) {
-        $guzzle ??= self::buildGuzzleClient($config);
+        $guzzle ??= $this->buildGuzzle($config);
 
         $this->marketing = new MarketingClient($guzzle, $config);
         $this->recommendation = new RecommendationClient($guzzle, $config);
     }
 
     /**
-     * Build the shared Guzzle client, adding an optional diagnostic middleware
-     * that logs non-2xx responses to STDERR.
+     * Build a Guzzle client with optional diagnostic logging middleware.
+     * When $config->diagnosticLogging is true, all non-2xx responses are
+     * logged to STDERR with method, URI, status code, and response body.
      */
-    private static function buildGuzzleClient(MarketingAndPromotionsConfiguration $config): GuzzleClient
+    private function buildGuzzle(MarketingAndPromotionsConfiguration $config): GuzzleClient
     {
-        $stack = KiotaClientFactory::getDefaultHandlerStack();
+        $stack = HandlerStack::create();
 
         if ($config->diagnosticLogging) {
             $stack->push(static function (callable $handler): callable {
                 return static function (RequestInterface $request, array $options) use ($handler): mixed {
-                    $promise = $handler($request, $options);
-                    return $promise->then(static function (ResponseInterface $response) use ($request): ResponseInterface {
-                        $status = $response->getStatusCode();
-                        if ($status < 200 || $status >= 300) {
-                            $method = $request->getMethod();
-                            $uri    = str_replace(["\r", "\n"], ' ', (string) $request->getUri());
-                            fwrite(STDERR, sprintf(
-                                "[MarketingAndPromotions] %s %s => HTTP %d\n",
-                                $method,
-                                $uri,
-                                $status
-                            ));
+                    return $handler($request, $options)->then(
+                        static function (ResponseInterface $response) use ($request): ResponseInterface {
+                            $status = $response->getStatusCode();
+                            if ($status < 200 || $status >= 300) {
+                                $body = (string) $response->getBody();
+                                fwrite(
+                                    STDERR,
+                                    sprintf(
+                                        "[MarketingAndPromotionsSDK] %s %s -> HTTP %d\n%s\n",
+                                        $request->getMethod(),
+                                        str_replace(["\r", "\n"], ' ', (string) $request->getUri()),
+                                        $status,
+                                        $body
+                                    )
+                                );
+                            }
+                            return $response;
                         }
-                        return $response;
-                    });
+                    );
                 };
-            }, 'ebay_diagnostic_logging');
+            });
         }
 
         return new GuzzleClient([

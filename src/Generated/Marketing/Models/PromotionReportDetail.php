@@ -32,22 +32,22 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $averageItemDiscount A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $averageItemDiscount The <i>average item discount</i> is the average discount that has been applied to each item being discounted. This value is calculated as follows:  <br><br><b>totalDiscount</b> / <b>itemsSoldQuantity</b> = <b>averageItemDiscount</b>
     */
     private ?Amount $averageItemDiscount = null;
     
     /**
-     * @var Amount|null $averageItemRevenue A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $averageItemRevenue The <i>average item revenue</i> is the average revenue that has been received for each item being discounted.. This value is calculated as follows:  <br><br><b>totalSales</b> / <b>itemsSoldQuantity</b> = <b>averageItemRevenue</b>
     */
     private ?Amount $averageItemRevenue = null;
     
     /**
-     * @var Amount|null $averageOrderDiscount A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $averageOrderDiscount The <i>average order discount</i> is the average discount that has been applied to each order that has an active discount. This value is calculated as follows:  <br><br><b>totalDiscount</b> / <b>numberOfOrdersSold</b> = <b>averageOrderDiscount</b>
     */
     private ?Amount $averageOrderDiscount = null;
     
     /**
-     * @var Amount|null $averageOrderRevenue A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $averageOrderRevenue The <i>average order revenue</i> is the average revenue that has been received for each order that has an active discount. This value is calculated as follows:  <br><br><b>totalSales</b> / <b>numberOfOrdersSold</b> = <b>averageOrderRevenue</b>
     */
     private ?Amount $averageOrderRevenue = null;
     
@@ -57,7 +57,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     private ?string $averageOrderSize = null;
     
     /**
-     * @var Amount|null $baseSale A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $baseSale This is the monetary amount of items purchased that have been discounted where the threshold <i>wasn't met</i>, so the discount was not applied.  <br><br>For example, suppose you're running a "Buy 1, get 1 at 50%" discount on $5 socks. One buyer purchased only one pair of socks, so they pay the full price of $5. Here, your <b>baseSale</b> amount would be $5.
     */
     private ?Amount $baseSale = null;
     
@@ -92,22 +92,22 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     private ?string $promotionReportId = null;
     
     /**
-     * @var Amount|null $promotionSale A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $promotionSale This is the monetary amount of the items sold in a threshold discount where the threshold <i>has been met</i> and the discount was applied.  <br><br>For example, suppose you're running a "Buy 1, get 1 at 50%" discount on $5 socks. One buyer purchases two pairs of socks, so they pay $7.50 for both pairs (rather than the full price of $10). Your <b>promotionSale</b> amount would be $7.50.
     */
     private ?Amount $promotionSale = null;
     
     /**
-     * @var string|null $promotionType Indicates the type of the discount, either <code>CODED_COUPON</code>, <code>MARKDOWN_SALE</code>, <code>ORDER_DISCOUNT</code>, or <code>VOLUME_DISCOUNT</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionTypeEnum'>eBay API documentation</a>
+     * @var PromotionTypeEnum|null $promotionType Indicates the type of the discount, either <code>CODED_COUPON</code>, <code>MARKDOWN_SALE</code>, <code>ORDER_DISCOUNT</code>, or <code>VOLUME_DISCOUNT</code>.
     */
-    private ?string $promotionType = null;
+    private ?PromotionTypeEnum $promotionType = null;
     
     /**
-     * @var Amount|null $totalDiscount A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $totalDiscount This is the monetary discount amount applied to the sale of items in a threshold discount where the threshold <i>has been met</i> and the discount was applied.  <br><br>For example, suppose you're running a "Buy 1, get 1 at 50%" discount on $5 socks. One buyer purchases two pairs of socks, so they pay $7.50 for both pairs (rather than the full price of $10). Your <b>totalDiscount</b> amount would be $2.50.
     */
     private ?Amount $totalDiscount = null;
     
     /**
-     * @var Amount|null $totalSale A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $totalSale This is the total monetary sales amount of all items sold that were discounted. <br><br>For example, suppose you're running a "Buy 1, get 1 at 50%" discount on $5 socks. You make one sale where the buyer purchases only one pair of socks and they pay the full price of $5 (<b>baseSale</b>). You make a second sale where the buyer purchases two pairs of socks and they pay $7.50, for both pairs (<b>promotionSale</b>). Your <b>totalSale</b> would be $12.50. This value is calculated as follows:  <br><br><b>baseSale</b> + <b>promotionSale</b> = <b>totalSale</b>
     */
     private ?Amount $totalSale = null;
     
@@ -136,7 +136,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the averageItemDiscount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the averageItemDiscount property value. The <i>average item discount</i> is the average discount that has been applied to each item being discounted. This value is calculated as follows:  <br><br><b>totalDiscount</b> / <b>itemsSoldQuantity</b> = <b>averageItemDiscount</b>
      * @return Amount|null
     */
     public function getAverageItemDiscount(): ?Amount {
@@ -144,7 +144,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the averageItemRevenue property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the averageItemRevenue property value. The <i>average item revenue</i> is the average revenue that has been received for each item being discounted.. This value is calculated as follows:  <br><br><b>totalSales</b> / <b>itemsSoldQuantity</b> = <b>averageItemRevenue</b>
      * @return Amount|null
     */
     public function getAverageItemRevenue(): ?Amount {
@@ -152,7 +152,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the averageOrderDiscount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the averageOrderDiscount property value. The <i>average order discount</i> is the average discount that has been applied to each order that has an active discount. This value is calculated as follows:  <br><br><b>totalDiscount</b> / <b>numberOfOrdersSold</b> = <b>averageOrderDiscount</b>
      * @return Amount|null
     */
     public function getAverageOrderDiscount(): ?Amount {
@@ -160,7 +160,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the averageOrderRevenue property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the averageOrderRevenue property value. The <i>average order revenue</i> is the average revenue that has been received for each order that has an active discount. This value is calculated as follows:  <br><br><b>totalSales</b> / <b>numberOfOrdersSold</b> = <b>averageOrderRevenue</b>
      * @return Amount|null
     */
     public function getAverageOrderRevenue(): ?Amount {
@@ -176,7 +176,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the baseSale property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the baseSale property value. This is the monetary amount of items purchased that have been discounted where the threshold <i>wasn't met</i>, so the discount was not applied.  <br><br>For example, suppose you're running a "Buy 1, get 1 at 50%" discount on $5 socks. One buyer purchased only one pair of socks, so they pay the full price of $5. Here, your <b>baseSale</b> amount would be $5.
      * @return Amount|null
     */
     public function getBaseSale(): ?Amount {
@@ -203,7 +203,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
             'promotionId' => fn(ParseNode $n) => $o->setPromotionId($n->getStringValue()),
             'promotionReportId' => fn(ParseNode $n) => $o->setPromotionReportId($n->getStringValue()),
             'promotionSale' => fn(ParseNode $n) => $o->setPromotionSale($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'promotionType' => fn(ParseNode $n) => $o->setPromotionType($n->getStringValue()),
+            'promotionType' => fn(ParseNode $n) => $o->setPromotionType($n->getEnumValue(PromotionTypeEnum::class)),
             'totalDiscount' => fn(ParseNode $n) => $o->setTotalDiscount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'totalSale' => fn(ParseNode $n) => $o->setTotalSale($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
         ];
@@ -258,7 +258,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the promotionSale property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the promotionSale property value. This is the monetary amount of the items sold in a threshold discount where the threshold <i>has been met</i> and the discount was applied.  <br><br>For example, suppose you're running a "Buy 1, get 1 at 50%" discount on $5 socks. One buyer purchases two pairs of socks, so they pay $7.50 for both pairs (rather than the full price of $10). Your <b>promotionSale</b> amount would be $7.50.
      * @return Amount|null
     */
     public function getPromotionSale(): ?Amount {
@@ -266,15 +266,15 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the promotionType property value. Indicates the type of the discount, either <code>CODED_COUPON</code>, <code>MARKDOWN_SALE</code>, <code>ORDER_DISCOUNT</code>, or <code>VOLUME_DISCOUNT</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the promotionType property value. Indicates the type of the discount, either <code>CODED_COUPON</code>, <code>MARKDOWN_SALE</code>, <code>ORDER_DISCOUNT</code>, or <code>VOLUME_DISCOUNT</code>.
+     * @return PromotionTypeEnum|null
     */
-    public function getPromotionType(): ?string {
+    public function getPromotionType(): ?PromotionTypeEnum {
         return $this->promotionType;
     }
 
     /**
-     * Gets the totalDiscount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the totalDiscount property value. This is the monetary discount amount applied to the sale of items in a threshold discount where the threshold <i>has been met</i> and the discount was applied.  <br><br>For example, suppose you're running a "Buy 1, get 1 at 50%" discount on $5 socks. One buyer purchases two pairs of socks, so they pay $7.50 for both pairs (rather than the full price of $10). Your <b>totalDiscount</b> amount would be $2.50.
      * @return Amount|null
     */
     public function getTotalDiscount(): ?Amount {
@@ -282,7 +282,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the totalSale property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the totalSale property value. This is the total monetary sales amount of all items sold that were discounted. <br><br>For example, suppose you're running a "Buy 1, get 1 at 50%" discount on $5 socks. You make one sale where the buyer purchases only one pair of socks and they pay the full price of $5 (<b>baseSale</b>). You make a second sale where the buyer purchases two pairs of socks and they pay $7.50, for both pairs (<b>promotionSale</b>). Your <b>totalSale</b> would be $12.50. This value is calculated as follows:  <br><br><b>baseSale</b> + <b>promotionSale</b> = <b>totalSale</b>
      * @return Amount|null
     */
     public function getTotalSale(): ?Amount {
@@ -307,7 +307,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('promotionId', $this->getPromotionId());
         $writer->writeStringValue('promotionReportId', $this->getPromotionReportId());
         $writer->writeObjectValue('promotionSale', $this->getPromotionSale());
-        $writer->writeStringValue('promotionType', $this->getPromotionType());
+        $writer->writeEnumValue('promotionType', $this->getPromotionType());
         $writer->writeObjectValue('totalDiscount', $this->getTotalDiscount());
         $writer->writeObjectValue('totalSale', $this->getTotalSale());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -322,7 +322,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the averageItemDiscount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the averageItemDiscount property value. The <i>average item discount</i> is the average discount that has been applied to each item being discounted. This value is calculated as follows:  <br><br><b>totalDiscount</b> / <b>itemsSoldQuantity</b> = <b>averageItemDiscount</b>
      * @param Amount|null $value Value to set for the averageItemDiscount property.
     */
     public function setAverageItemDiscount(?Amount $value): void {
@@ -330,7 +330,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the averageItemRevenue property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the averageItemRevenue property value. The <i>average item revenue</i> is the average revenue that has been received for each item being discounted.. This value is calculated as follows:  <br><br><b>totalSales</b> / <b>itemsSoldQuantity</b> = <b>averageItemRevenue</b>
      * @param Amount|null $value Value to set for the averageItemRevenue property.
     */
     public function setAverageItemRevenue(?Amount $value): void {
@@ -338,7 +338,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the averageOrderDiscount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the averageOrderDiscount property value. The <i>average order discount</i> is the average discount that has been applied to each order that has an active discount. This value is calculated as follows:  <br><br><b>totalDiscount</b> / <b>numberOfOrdersSold</b> = <b>averageOrderDiscount</b>
      * @param Amount|null $value Value to set for the averageOrderDiscount property.
     */
     public function setAverageOrderDiscount(?Amount $value): void {
@@ -346,7 +346,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the averageOrderRevenue property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the averageOrderRevenue property value. The <i>average order revenue</i> is the average revenue that has been received for each order that has an active discount. This value is calculated as follows:  <br><br><b>totalSales</b> / <b>numberOfOrdersSold</b> = <b>averageOrderRevenue</b>
      * @param Amount|null $value Value to set for the averageOrderRevenue property.
     */
     public function setAverageOrderRevenue(?Amount $value): void {
@@ -362,7 +362,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the baseSale property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the baseSale property value. This is the monetary amount of items purchased that have been discounted where the threshold <i>wasn't met</i>, so the discount was not applied.  <br><br>For example, suppose you're running a "Buy 1, get 1 at 50%" discount on $5 socks. One buyer purchased only one pair of socks, so they pay the full price of $5. Here, your <b>baseSale</b> amount would be $5.
      * @param Amount|null $value Value to set for the baseSale property.
     */
     public function setBaseSale(?Amount $value): void {
@@ -418,7 +418,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the promotionSale property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the promotionSale property value. This is the monetary amount of the items sold in a threshold discount where the threshold <i>has been met</i> and the discount was applied.  <br><br>For example, suppose you're running a "Buy 1, get 1 at 50%" discount on $5 socks. One buyer purchases two pairs of socks, so they pay $7.50 for both pairs (rather than the full price of $10). Your <b>promotionSale</b> amount would be $7.50.
      * @param Amount|null $value Value to set for the promotionSale property.
     */
     public function setPromotionSale(?Amount $value): void {
@@ -426,15 +426,15 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the promotionType property value. Indicates the type of the discount, either <code>CODED_COUPON</code>, <code>MARKDOWN_SALE</code>, <code>ORDER_DISCOUNT</code>, or <code>VOLUME_DISCOUNT</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the promotionType property.
+     * Sets the promotionType property value. Indicates the type of the discount, either <code>CODED_COUPON</code>, <code>MARKDOWN_SALE</code>, <code>ORDER_DISCOUNT</code>, or <code>VOLUME_DISCOUNT</code>.
+     * @param PromotionTypeEnum|null $value Value to set for the promotionType property.
     */
-    public function setPromotionType(?string $value): void {
+    public function setPromotionType(?PromotionTypeEnum $value): void {
         $this->promotionType = $value;
     }
 
     /**
-     * Sets the totalDiscount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the totalDiscount property value. This is the monetary discount amount applied to the sale of items in a threshold discount where the threshold <i>has been met</i> and the discount was applied.  <br><br>For example, suppose you're running a "Buy 1, get 1 at 50%" discount on $5 socks. One buyer purchases two pairs of socks, so they pay $7.50 for both pairs (rather than the full price of $10). Your <b>totalDiscount</b> amount would be $2.50.
      * @param Amount|null $value Value to set for the totalDiscount property.
     */
     public function setTotalDiscount(?Amount $value): void {
@@ -442,7 +442,7 @@ class PromotionReportDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the totalSale property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the totalSale property value. This is the total monetary sales amount of all items sold that were discounted. <br><br>For example, suppose you're running a "Buy 1, get 1 at 50%" discount on $5 socks. You make one sale where the buyer purchases only one pair of socks and they pay the full price of $5 (<b>baseSale</b>). You make a second sale where the buyer purchases two pairs of socks and they pay $7.50, for both pairs (<b>promotionSale</b>). Your <b>totalSale</b> would be $12.50. This value is calculated as follows:  <br><br><b>baseSale</b> + <b>promotionSale</b> = <b>totalSale</b>
      * @param Amount|null $value Value to set for the totalSale property.
     */
     public function setTotalSale(?Amount $value): void {

@@ -23,10 +23,10 @@ final class MarketingAndPromotionsConfiguration
     public readonly RequestOptions $defaultRequestOptions;
 
     public function __construct(
-        public readonly string  $marketingBaseUrl      = 'https://api.ebay.com/sell/marketing/v1',
-        public readonly string  $recommendationBaseUrl = 'https://api.ebay.com/sell/recommendation/v1',
-        public readonly ?string $accessToken           = null,
-        public readonly bool    $diagnosticLogging     = false,
+        public readonly string $marketingBaseUrl = 'https://api.ebay.com/sell/marketing/v1',
+        public readonly string $recommendationBaseUrl = 'https://api.ebay.com/sell/recommendation/v1',
+        public readonly ?string $accessToken = null,
+        public readonly bool $diagnosticLogging = false,
     ) {
         $this->defaultRequestOptions = new RequestOptions();
     }
@@ -39,18 +39,18 @@ final class MarketingAndPromotionsConfiguration
     }
 
     /**
-     * Hostnames tokens may be sent to — passed to AllowedHostsValidator.
+     * Hostnames tokens may be sent to. Passed to AllowedHostsValidator.
      *
      * @return string[]
      */
     public function getAllowedHosts(): array
     {
-        return array_values(array_filter(
-            array_unique(array_map(
-                fn(string $url) => parse_url($url, PHP_URL_HOST),
-                [$this->marketingBaseUrl, $this->recommendationBaseUrl]
-            )),
-            'is_string'
-        ));
+        return array_values(array_unique(array_filter(array_map(
+            fn(string $url) => parse_url($url, PHP_URL_HOST),
+            [
+                $this->marketingBaseUrl,
+                $this->recommendationBaseUrl,
+            ]
+        ), 'is_string')));
     }
 }

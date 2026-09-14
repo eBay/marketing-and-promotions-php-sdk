@@ -20,7 +20,6 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
  * This type defines the fields that describe an ad campaign.
@@ -38,12 +37,12 @@ class Campaign implements AdditionalDataHolder, Parsable
     private ?array $alerts = null;
     
     /**
-     * @var CampaignBudget|null $budget A type that defines the budget details for a Cost Per Click (CPC) Promoted Listings campaign.
+     * @var CampaignBudget|null $budget The allocated budget for the Cost Per Click (CPC) Promoted Listings campaign.<span class="tablenote"><b>Note:</b> This field will only be returned for campaigns using the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
     */
     private ?CampaignBudget $budget = null;
     
     /**
-     * @var CampaignCriterion|null $campaignCriterion This type defines the fields for specifying the criterion (selection rule) settings of an ad campaign. If you populate the campaignCriterion object in your <b>createCampaign</b> request, ads for the campaign are created by rule for the listings that meet the criteria you specify, and these ads are associated with the newly created campaign.
+     * @var CampaignCriterion|null $campaignCriterion The selection rules (criterion) used to select the listings for a campaign. If you populate the <b>campaignCriterion</b> object in your <b>createCampaign</b> request, ads for the campaign are created by rule for the listings that meet the criteria you specify, and these ads are associated with the campaign.<span class="tablenote"><b>Note:</b> This container is only returned for rules-based campaigns using the Cost Per Sale (CPS) funding model.</span>
     */
     private ?CampaignCriterion $campaignCriterion = null;
     
@@ -58,37 +57,37 @@ class Campaign implements AdditionalDataHolder, Parsable
     private ?string $campaignName = null;
     
     /**
-     * @var string|null $campaignStatus Indicates the status of the campaign, such as <code>RUNNING</code>, <code>PAUSED</code>, and <code>ENDED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:CampaignStatusEnum'>eBay API documentation</a>
+     * @var CampaignStatusEnum|null $campaignStatus Indicates the status of the campaign, such as <code>RUNNING</code>, <code>PAUSED</code>, and <code>ENDED</code>.
     */
-    private ?string $campaignStatus = null;
+    private ?CampaignStatusEnum $campaignStatus = null;
     
     /**
-     * @var string|null $campaignTargetingType The targeting type of the campaign. This value indicates whether the campaign is a manual targeting or smart targeting ad campaign. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:CampaignTargetingTypeEnum'>eBay API documentation</a>
+     * @var CampaignTargetingTypeEnum|null $campaignTargetingType The targeting type of the campaign. This value indicates whether the campaign is a manual targeting or smart targeting ad campaign.
     */
-    private ?string $campaignTargetingType = null;
+    private ?CampaignTargetingTypeEnum $campaignTargetingType = null;
     
     /**
-     * @var array<string>|null $channels The channel for the campaign. This value indicates whether the campaign is an Onsite or Offsite advertising campaign. <br><br><b>Valid Values:</b><ul><li><code>ON_SITE</code></li><li><code>OFF_SITE</code></li></ul>
+     * @var array<ChannelEnum>|null $channels The channel for the campaign. This value indicates whether the campaign is an Onsite or Offsite advertising campaign. <br><br><b>Valid Values:</b><ul><li><code>ON_SITE</code></li><li><code>OFF_SITE</code></li></ul>
     */
     private ?array $channels = null;
     
     /**
-     * @var string|null $endDate The date and time the campaign ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). If this field is omitted, the campaign will have no defined end date, and will not end until the seller makes a decision to end the campaign with an <a href="/api-docs/sell/marketing/resources/campaign/methods/endCampaign">endCampaign</a> call, or if they update the campaign at a later time with an end date.
+     * @var string|null $endDate The date and time the campaign ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). If this field is omitted, the campaign will have no defined end date, and will not end until the seller makes a decision to end the campaign with an <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-endcampaign">endCampaign</a> call, or if they update the campaign at a later time with an end date.
     */
     private ?string $endDate = null;
     
     /**
-     * @var FundingStrategy|null $fundingStrategy This type defines how the Promoted Listings fee is calculated for a Promoted Listings ad campaign.
+     * @var FundingStrategy|null $fundingStrategy This container includes parameters that define an ad campaign funding strategy. The set of seller-configurable parameters depends on the selected <b>fundingModel</b> value.<br/><br/>Currently, the supported funding models are <code>COST_PER_SALE</code> (CPS) and <code>COST_PER_CLICK</code> (CPC). For onsite ads, the CPC model supports two bidding strategies: <code>FIXED</code> and <code>DYNAMIC</code>.
     */
     private ?FundingStrategy $fundingStrategy = null;
     
     /**
-     * @var string|null $marketplaceId The ID of the eBay marketplace where the campaign is hosted. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
+     * @var MarketplaceIdEnum|null $marketplaceId The ID of the eBay marketplace where the campaign is hosted.
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceIdEnum $marketplaceId = null;
     
     /**
-     * @var string|null $startDate The date and time the campaign starts, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). For display purposes, convert this time into the local time of the seller.  <p>On the date specified, the service derives the keywords for each listing in the campaign, creates an ad for each listing, and associates each new ad with the campaign. The campaign starts after this process is completed. The amount of time it takes the service to start the campaign depends on the number of listings in the campaign. Call <a href="/api-docs/sell/marketing/resources/campaign/methods/getCampaign">getCampaign</a> to check the status of the campaign.</p>
+     * @var string|null $startDate The date and time the campaign starts, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). For display purposes, convert this time into the local time of the seller.  <p>On the date specified, the service derives the keywords for each listing in the campaign, creates an ad for each listing, and associates each new ad with the campaign. The campaign starts after this process is completed. The amount of time it takes the service to start the campaign depends on the number of listings in the campaign. Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaign">getCampaign</a> to check the status of the campaign.</p>
     */
     private ?string $startDate = null;
     
@@ -125,7 +124,7 @@ class Campaign implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the budget property value. A type that defines the budget details for a Cost Per Click (CPC) Promoted Listings campaign.
+     * Gets the budget property value. The allocated budget for the Cost Per Click (CPC) Promoted Listings campaign.<span class="tablenote"><b>Note:</b> This field will only be returned for campaigns using the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
      * @return CampaignBudget|null
     */
     public function getBudget(): ?CampaignBudget {
@@ -133,7 +132,7 @@ class Campaign implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the campaignCriterion property value. This type defines the fields for specifying the criterion (selection rule) settings of an ad campaign. If you populate the campaignCriterion object in your <b>createCampaign</b> request, ads for the campaign are created by rule for the listings that meet the criteria you specify, and these ads are associated with the newly created campaign.
+     * Gets the campaignCriterion property value. The selection rules (criterion) used to select the listings for a campaign. If you populate the <b>campaignCriterion</b> object in your <b>createCampaign</b> request, ads for the campaign are created by rule for the listings that meet the criteria you specify, and these ads are associated with the campaign.<span class="tablenote"><b>Note:</b> This container is only returned for rules-based campaigns using the Cost Per Sale (CPS) funding model.</span>
      * @return CampaignCriterion|null
     */
     public function getCampaignCriterion(): ?CampaignCriterion {
@@ -157,31 +156,31 @@ class Campaign implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the campaignStatus property value. Indicates the status of the campaign, such as <code>RUNNING</code>, <code>PAUSED</code>, and <code>ENDED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:CampaignStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the campaignStatus property value. Indicates the status of the campaign, such as <code>RUNNING</code>, <code>PAUSED</code>, and <code>ENDED</code>.
+     * @return CampaignStatusEnum|null
     */
-    public function getCampaignStatus(): ?string {
+    public function getCampaignStatus(): ?CampaignStatusEnum {
         return $this->campaignStatus;
     }
 
     /**
-     * Gets the campaignTargetingType property value. The targeting type of the campaign. This value indicates whether the campaign is a manual targeting or smart targeting ad campaign. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:CampaignTargetingTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the campaignTargetingType property value. The targeting type of the campaign. This value indicates whether the campaign is a manual targeting or smart targeting ad campaign.
+     * @return CampaignTargetingTypeEnum|null
     */
-    public function getCampaignTargetingType(): ?string {
+    public function getCampaignTargetingType(): ?CampaignTargetingTypeEnum {
         return $this->campaignTargetingType;
     }
 
     /**
      * Gets the channels property value. The channel for the campaign. This value indicates whether the campaign is an Onsite or Offsite advertising campaign. <br><br><b>Valid Values:</b><ul><li><code>ON_SITE</code></li><li><code>OFF_SITE</code></li></ul>
-     * @return array<string>|null
+     * @return array<ChannelEnum>|null
     */
     public function getChannels(): ?array {
         return $this->channels;
     }
 
     /**
-     * Gets the endDate property value. The date and time the campaign ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). If this field is omitted, the campaign will have no defined end date, and will not end until the seller makes a decision to end the campaign with an <a href="/api-docs/sell/marketing/resources/campaign/methods/endCampaign">endCampaign</a> call, or if they update the campaign at a later time with an end date.
+     * Gets the endDate property value. The date and time the campaign ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). If this field is omitted, the campaign will have no defined end date, and will not end until the seller makes a decision to end the campaign with an <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-endcampaign">endCampaign</a> call, or if they update the campaign at a later time with an end date.
      * @return string|null
     */
     public function getEndDate(): ?string {
@@ -200,25 +199,18 @@ class Campaign implements AdditionalDataHolder, Parsable
             'campaignCriterion' => fn(ParseNode $n) => $o->setCampaignCriterion($n->getObjectValue([CampaignCriterion::class, 'createFromDiscriminatorValue'])),
             'campaignId' => fn(ParseNode $n) => $o->setCampaignId($n->getStringValue()),
             'campaignName' => fn(ParseNode $n) => $o->setCampaignName($n->getStringValue()),
-            'campaignStatus' => fn(ParseNode $n) => $o->setCampaignStatus($n->getStringValue()),
-            'campaignTargetingType' => fn(ParseNode $n) => $o->setCampaignTargetingType($n->getStringValue()),
-            'channels' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setChannels($val);
-            },
+            'campaignStatus' => fn(ParseNode $n) => $o->setCampaignStatus($n->getEnumValue(CampaignStatusEnum::class)),
+            'campaignTargetingType' => fn(ParseNode $n) => $o->setCampaignTargetingType($n->getEnumValue(CampaignTargetingTypeEnum::class)),
+            'channels' => fn(ParseNode $n) => $o->setChannels($n->getCollectionOfEnumValues(ChannelEnum::class)),
             'endDate' => fn(ParseNode $n) => $o->setEndDate($n->getStringValue()),
             'fundingStrategy' => fn(ParseNode $n) => $o->setFundingStrategy($n->getObjectValue([FundingStrategy::class, 'createFromDiscriminatorValue'])),
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceIdEnum::class)),
             'startDate' => fn(ParseNode $n) => $o->setStartDate($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the fundingStrategy property value. This type defines how the Promoted Listings fee is calculated for a Promoted Listings ad campaign.
+     * Gets the fundingStrategy property value. This container includes parameters that define an ad campaign funding strategy. The set of seller-configurable parameters depends on the selected <b>fundingModel</b> value.<br/><br/>Currently, the supported funding models are <code>COST_PER_SALE</code> (CPS) and <code>COST_PER_CLICK</code> (CPC). For onsite ads, the CPC model supports two bidding strategies: <code>FIXED</code> and <code>DYNAMIC</code>.
      * @return FundingStrategy|null
     */
     public function getFundingStrategy(): ?FundingStrategy {
@@ -226,15 +218,15 @@ class Campaign implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the marketplaceId property value. The ID of the eBay marketplace where the campaign is hosted. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. The ID of the eBay marketplace where the campaign is hosted.
+     * @return MarketplaceIdEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceIdEnum {
         return $this->marketplaceId;
     }
 
     /**
-     * Gets the startDate property value. The date and time the campaign starts, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). For display purposes, convert this time into the local time of the seller.  <p>On the date specified, the service derives the keywords for each listing in the campaign, creates an ad for each listing, and associates each new ad with the campaign. The campaign starts after this process is completed. The amount of time it takes the service to start the campaign depends on the number of listings in the campaign. Call <a href="/api-docs/sell/marketing/resources/campaign/methods/getCampaign">getCampaign</a> to check the status of the campaign.</p>
+     * Gets the startDate property value. The date and time the campaign starts, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). For display purposes, convert this time into the local time of the seller.  <p>On the date specified, the service derives the keywords for each listing in the campaign, creates an ad for each listing, and associates each new ad with the campaign. The campaign starts after this process is completed. The amount of time it takes the service to start the campaign depends on the number of listings in the campaign. Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaign">getCampaign</a> to check the status of the campaign.</p>
      * @return string|null
     */
     public function getStartDate(): ?string {
@@ -251,12 +243,12 @@ class Campaign implements AdditionalDataHolder, Parsable
         $writer->writeObjectValue('campaignCriterion', $this->getCampaignCriterion());
         $writer->writeStringValue('campaignId', $this->getCampaignId());
         $writer->writeStringValue('campaignName', $this->getCampaignName());
-        $writer->writeStringValue('campaignStatus', $this->getCampaignStatus());
-        $writer->writeStringValue('campaignTargetingType', $this->getCampaignTargetingType());
-        $writer->writeCollectionOfPrimitiveValues('channels', $this->getChannels());
+        $writer->writeEnumValue('campaignStatus', $this->getCampaignStatus());
+        $writer->writeEnumValue('campaignTargetingType', $this->getCampaignTargetingType());
+        $writer->writeCollectionOfEnumValues('channels', $this->getChannels());
         $writer->writeStringValue('endDate', $this->getEndDate());
         $writer->writeObjectValue('fundingStrategy', $this->getFundingStrategy());
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeStringValue('startDate', $this->getStartDate());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -278,7 +270,7 @@ class Campaign implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the budget property value. A type that defines the budget details for a Cost Per Click (CPC) Promoted Listings campaign.
+     * Sets the budget property value. The allocated budget for the Cost Per Click (CPC) Promoted Listings campaign.<span class="tablenote"><b>Note:</b> This field will only be returned for campaigns using the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
      * @param CampaignBudget|null $value Value to set for the budget property.
     */
     public function setBudget(?CampaignBudget $value): void {
@@ -286,7 +278,7 @@ class Campaign implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the campaignCriterion property value. This type defines the fields for specifying the criterion (selection rule) settings of an ad campaign. If you populate the campaignCriterion object in your <b>createCampaign</b> request, ads for the campaign are created by rule for the listings that meet the criteria you specify, and these ads are associated with the newly created campaign.
+     * Sets the campaignCriterion property value. The selection rules (criterion) used to select the listings for a campaign. If you populate the <b>campaignCriterion</b> object in your <b>createCampaign</b> request, ads for the campaign are created by rule for the listings that meet the criteria you specify, and these ads are associated with the campaign.<span class="tablenote"><b>Note:</b> This container is only returned for rules-based campaigns using the Cost Per Sale (CPS) funding model.</span>
      * @param CampaignCriterion|null $value Value to set for the campaignCriterion property.
     */
     public function setCampaignCriterion(?CampaignCriterion $value): void {
@@ -310,31 +302,31 @@ class Campaign implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the campaignStatus property value. Indicates the status of the campaign, such as <code>RUNNING</code>, <code>PAUSED</code>, and <code>ENDED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:CampaignStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the campaignStatus property.
+     * Sets the campaignStatus property value. Indicates the status of the campaign, such as <code>RUNNING</code>, <code>PAUSED</code>, and <code>ENDED</code>.
+     * @param CampaignStatusEnum|null $value Value to set for the campaignStatus property.
     */
-    public function setCampaignStatus(?string $value): void {
+    public function setCampaignStatus(?CampaignStatusEnum $value): void {
         $this->campaignStatus = $value;
     }
 
     /**
-     * Sets the campaignTargetingType property value. The targeting type of the campaign. This value indicates whether the campaign is a manual targeting or smart targeting ad campaign. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:CampaignTargetingTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the campaignTargetingType property.
+     * Sets the campaignTargetingType property value. The targeting type of the campaign. This value indicates whether the campaign is a manual targeting or smart targeting ad campaign.
+     * @param CampaignTargetingTypeEnum|null $value Value to set for the campaignTargetingType property.
     */
-    public function setCampaignTargetingType(?string $value): void {
+    public function setCampaignTargetingType(?CampaignTargetingTypeEnum $value): void {
         $this->campaignTargetingType = $value;
     }
 
     /**
      * Sets the channels property value. The channel for the campaign. This value indicates whether the campaign is an Onsite or Offsite advertising campaign. <br><br><b>Valid Values:</b><ul><li><code>ON_SITE</code></li><li><code>OFF_SITE</code></li></ul>
-     * @param array<string>|null $value Value to set for the channels property.
+     * @param array<ChannelEnum>|null $value Value to set for the channels property.
     */
     public function setChannels(?array $value): void {
         $this->channels = $value;
     }
 
     /**
-     * Sets the endDate property value. The date and time the campaign ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). If this field is omitted, the campaign will have no defined end date, and will not end until the seller makes a decision to end the campaign with an <a href="/api-docs/sell/marketing/resources/campaign/methods/endCampaign">endCampaign</a> call, or if they update the campaign at a later time with an end date.
+     * Sets the endDate property value. The date and time the campaign ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). If this field is omitted, the campaign will have no defined end date, and will not end until the seller makes a decision to end the campaign with an <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-endcampaign">endCampaign</a> call, or if they update the campaign at a later time with an end date.
      * @param string|null $value Value to set for the endDate property.
     */
     public function setEndDate(?string $value): void {
@@ -342,7 +334,7 @@ class Campaign implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the fundingStrategy property value. This type defines how the Promoted Listings fee is calculated for a Promoted Listings ad campaign.
+     * Sets the fundingStrategy property value. This container includes parameters that define an ad campaign funding strategy. The set of seller-configurable parameters depends on the selected <b>fundingModel</b> value.<br/><br/>Currently, the supported funding models are <code>COST_PER_SALE</code> (CPS) and <code>COST_PER_CLICK</code> (CPC). For onsite ads, the CPC model supports two bidding strategies: <code>FIXED</code> and <code>DYNAMIC</code>.
      * @param FundingStrategy|null $value Value to set for the fundingStrategy property.
     */
     public function setFundingStrategy(?FundingStrategy $value): void {
@@ -350,15 +342,15 @@ class Campaign implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. The ID of the eBay marketplace where the campaign is hosted. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. The ID of the eBay marketplace where the campaign is hosted.
+     * @param MarketplaceIdEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceIdEnum $value): void {
         $this->marketplaceId = $value;
     }
 
     /**
-     * Sets the startDate property value. The date and time the campaign starts, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). For display purposes, convert this time into the local time of the seller.  <p>On the date specified, the service derives the keywords for each listing in the campaign, creates an ad for each listing, and associates each new ad with the campaign. The campaign starts after this process is completed. The amount of time it takes the service to start the campaign depends on the number of listings in the campaign. Call <a href="/api-docs/sell/marketing/resources/campaign/methods/getCampaign">getCampaign</a> to check the status of the campaign.</p>
+     * Sets the startDate property value. The date and time the campaign starts, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). For display purposes, convert this time into the local time of the seller.  <p>On the date specified, the service derives the keywords for each listing in the campaign, creates an ad for each listing, and associates each new ad with the campaign. The campaign starts after this process is completed. The amount of time it takes the service to start the campaign depends on the number of listings in the campaign. Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaign">getCampaign</a> to check the status of the campaign.</p>
      * @param string|null $value Value to set for the startDate property.
     */
     public function setStartDate(?string $value): void {

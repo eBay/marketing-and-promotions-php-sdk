@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that defines the budget details for a Cost Per Click (CPC) Promoted Listings campaign.
+ * The allocated budget for the Cost Per Click (CPC) Promoted Listings campaign.<span class="tablenote"><b>Note:</b> This field will only be returned for campaigns using the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
 */
 class CampaignBudget implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class CampaignBudget implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Budget|null $daily A container for the budget details of a Promoted Listings campaign that uses the Cost Per Click (CPC) funding model.<br /><br /><span class="tablenote"><b>Note:</b> This container will only be returned for campaigns using the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
+     * @var Budget|null $daily The daily budget limit for the Cost Per Click (CPC) Promoted Listings campaign.<br><br><i>Required if</i> the campaign's funding model is CPC.<br><br>This will be a dollar value. All clicks using the keywords defined for the campaign will go towards expending the daily budget. Once the daily budget is exceeded for the campaign, all Promoted Listings under the campaign will be turned off until the next day.<br><br>When running an offsite campaign, eBay may spend more or less than the seller's daily budget to capitalize on interested buyers, but will not exceed 2x the daily budget. The average over the course of the campaign will not exceed the provided daily budget. This value is used to calculate a total monthly budget by multiplying 30.4 by the provided daily budget. Over the course of the campaign, eBay will not charge more than this total budget per month.<br><br>If a campaign ends prematurely, however, the seller may be charged up to 2x their daily budget on a daily basis, as the campaign may have not had the chance to average the budget out over time.<br><br><b>Valid Values</b>:<ul><li><code>50.00</code></li><li><code>100.00</code></li></ul>
     */
     private ?Budget $daily = null;
     
@@ -61,7 +61,7 @@ class CampaignBudget implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the daily property value. A container for the budget details of a Promoted Listings campaign that uses the Cost Per Click (CPC) funding model.<br /><br /><span class="tablenote"><b>Note:</b> This container will only be returned for campaigns using the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
+     * Gets the daily property value. The daily budget limit for the Cost Per Click (CPC) Promoted Listings campaign.<br><br><i>Required if</i> the campaign's funding model is CPC.<br><br>This will be a dollar value. All clicks using the keywords defined for the campaign will go towards expending the daily budget. Once the daily budget is exceeded for the campaign, all Promoted Listings under the campaign will be turned off until the next day.<br><br>When running an offsite campaign, eBay may spend more or less than the seller's daily budget to capitalize on interested buyers, but will not exceed 2x the daily budget. The average over the course of the campaign will not exceed the provided daily budget. This value is used to calculate a total monthly budget by multiplying 30.4 by the provided daily budget. Over the course of the campaign, eBay will not charge more than this total budget per month.<br><br>If a campaign ends prematurely, however, the seller may be charged up to 2x their daily budget on a daily basis, as the campaign may have not had the chance to average the budget out over time.<br><br><b>Valid Values</b>:<ul><li><code>50.00</code></li><li><code>100.00</code></li></ul>
      * @return Budget|null
     */
     public function getDaily(): ?Budget {
@@ -97,7 +97,7 @@ class CampaignBudget implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the daily property value. A container for the budget details of a Promoted Listings campaign that uses the Cost Per Click (CPC) funding model.<br /><br /><span class="tablenote"><b>Note:</b> This container will only be returned for campaigns using the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
+     * Sets the daily property value. The daily budget limit for the Cost Per Click (CPC) Promoted Listings campaign.<br><br><i>Required if</i> the campaign's funding model is CPC.<br><br>This will be a dollar value. All clicks using the keywords defined for the campaign will go towards expending the daily budget. Once the daily budget is exceeded for the campaign, all Promoted Listings under the campaign will be turned off until the next day.<br><br>When running an offsite campaign, eBay may spend more or less than the seller's daily budget to capitalize on interested buyers, but will not exceed 2x the daily budget. The average over the course of the campaign will not exceed the provided daily budget. This value is used to calculate a total monthly budget by multiplying 30.4 by the provided daily budget. Over the course of the campaign, eBay will not charge more than this total budget per month.<br><br>If a campaign ends prematurely, however, the seller may be charged up to 2x their daily budget on a daily basis, as the campaign may have not had the chance to average the budget out over time.<br><br><b>Valid Values</b>:<ul><li><code>50.00</code></li><li><code>100.00</code></li></ul>
      * @param Budget|null $value Value to set for the daily property.
     */
     public function setDaily(?Budget $value): void {

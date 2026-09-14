@@ -32,9 +32,9 @@ class ItemMarkdownStatus implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $listingMarkdownStatus Indicates the state assigned to the markdown discount using one of the <b>status</b> values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:ItemMarkdownStatusEnum'>eBay API documentation</a>
+     * @var ItemMarkdownStatusEnum|null $listingMarkdownStatus Indicates the state assigned to the markdown discount using one of the <b>status</b> values.
     */
-    private ?string $listingMarkdownStatus = null;
+    private ?ItemMarkdownStatusEnum $listingMarkdownStatus = null;
     
     /**
      * @var string|null $statusChangedDate Identifies the date the last time the state of the discount changed. Both both markdown and markup events can trigger a status change.
@@ -77,17 +77,17 @@ class ItemMarkdownStatus implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'listingMarkdownStatus' => fn(ParseNode $n) => $o->setListingMarkdownStatus($n->getStringValue()),
+            'listingMarkdownStatus' => fn(ParseNode $n) => $o->setListingMarkdownStatus($n->getEnumValue(ItemMarkdownStatusEnum::class)),
             'statusChangedDate' => fn(ParseNode $n) => $o->setStatusChangedDate($n->getStringValue()),
             'statusMessage' => fn(ParseNode $n) => $o->setStatusMessage($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the listingMarkdownStatus property value. Indicates the state assigned to the markdown discount using one of the <b>status</b> values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:ItemMarkdownStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the listingMarkdownStatus property value. Indicates the state assigned to the markdown discount using one of the <b>status</b> values.
+     * @return ItemMarkdownStatusEnum|null
     */
-    public function getListingMarkdownStatus(): ?string {
+    public function getListingMarkdownStatus(): ?ItemMarkdownStatusEnum {
         return $this->listingMarkdownStatus;
     }
 
@@ -112,7 +112,7 @@ class ItemMarkdownStatus implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('listingMarkdownStatus', $this->getListingMarkdownStatus());
+        $writer->writeEnumValue('listingMarkdownStatus', $this->getListingMarkdownStatus());
         $writer->writeStringValue('statusChangedDate', $this->getStatusChangedDate());
         $writer->writeStringValue('statusMessage', $this->getStatusMessage());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -127,10 +127,10 @@ class ItemMarkdownStatus implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingMarkdownStatus property value. Indicates the state assigned to the markdown discount using one of the <b>status</b> values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:ItemMarkdownStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the listingMarkdownStatus property.
+     * Sets the listingMarkdownStatus property value. Indicates the state assigned to the markdown discount using one of the <b>status</b> values.
+     * @param ItemMarkdownStatusEnum|null $value Value to set for the listingMarkdownStatus property.
     */
-    public function setListingMarkdownStatus(?string $value): void {
+    public function setListingMarkdownStatus(?ItemMarkdownStatusEnum $value): void {
         $this->listingMarkdownStatus = $value;
     }
 

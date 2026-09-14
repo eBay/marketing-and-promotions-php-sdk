@@ -32,12 +32,12 @@ class AlertDetails implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Aspect|null $aspect A type that contains the aspect fields.
+     * @var Aspect|null $aspect The aspect information of the alert including keys and values.
     */
     private ?Aspect $aspect = null;
     
     /**
-     * @var AlertDimension|null $dimension A type that contains the dimension fields.
+     * @var AlertDimension|null $dimension The dimension information of the alert including keys and values.
     */
     private ?AlertDimension $dimension = null;
     
@@ -66,7 +66,7 @@ class AlertDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the aspect property value. A type that contains the aspect fields.
+     * Gets the aspect property value. The aspect information of the alert including keys and values.
      * @return Aspect|null
     */
     public function getAspect(): ?Aspect {
@@ -74,7 +74,7 @@ class AlertDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the dimension property value. A type that contains the dimension fields.
+     * Gets the dimension property value. The dimension information of the alert including keys and values.
      * @return AlertDimension|null
     */
     public function getDimension(): ?AlertDimension {
@@ -112,7 +112,7 @@ class AlertDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the aspect property value. A type that contains the aspect fields.
+     * Sets the aspect property value. The aspect information of the alert including keys and values.
      * @param Aspect|null $value Value to set for the aspect property.
     */
     public function setAspect(?Aspect $value): void {
@@ -120,7 +120,7 @@ class AlertDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the dimension property value. A type that contains the dimension fields.
+     * Sets the dimension property value. The dimension information of the alert including keys and values.
      * @param AlertDimension|null $value Value to set for the dimension property.
     */
     public function setDimension(?AlertDimension $value): void {

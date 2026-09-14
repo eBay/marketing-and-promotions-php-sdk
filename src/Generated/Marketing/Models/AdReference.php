@@ -37,7 +37,7 @@ class AdReference implements AdditionalDataHolder, Parsable
     private ?string $adId = null;
     
     /**
-     * @var string|null $href The getAd URI of an ad. You can use this URI to retrieve the ad.
+     * @var string|null $href The <b>getAd</b> URI of an ad. You can use this URI to retrieve the ad.
     */
     private ?string $href = null;
     
@@ -86,7 +86,7 @@ class AdReference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the href property value. The getAd URI of an ad. You can use this URI to retrieve the ad.
+     * Gets the href property value. The <b>getAd</b> URI of an ad. You can use this URI to retrieve the ad.
      * @return string|null
     */
     public function getHref(): ?string {
@@ -120,7 +120,7 @@ class AdReference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the href property value. The getAd URI of an ad. You can use this URI to retrieve the ad.
+     * Sets the href property value. The <b>getAd</b> URI of an ad. You can use this URI to retrieve the ad.
      * @param string|null $value Value to set for the href property.
     */
     public function setHref(?string $value): void {

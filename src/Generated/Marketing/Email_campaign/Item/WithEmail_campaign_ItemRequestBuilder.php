@@ -18,6 +18,7 @@ namespace EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Item;
 
 use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Item\Email_preview\Email_previewRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\DeleteEmailCampaignResponse;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\GetEmailCampaignResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\UpdateCampaignRequest;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\UpdateEmailCampaignResponse;
@@ -55,41 +56,56 @@ class WithEmail_campaign_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method deletes the email campaign specified by the <b>email_campaign_id</b> path parameter.<br><br>Call <a href="/api-docs/sell/marketing/resources/email_campaign/methods/getEmailCampaigns">getEmailCampaigns</a> to retrieve all of the seller's email campaigns. Use the <b>email_campaign_id</b> of the desired email campaign in the response as the path parameter for this request.
+     * This method deletes the email campaign specified by the <b>email_campaign_id</b> path parameter.<br><br>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns">getEmailCampaigns</a> to retrieve all of the seller's email campaigns. Use the <b>email_campaign_id</b> of the desired email campaign in the response as the path parameter for this request.
      * @param WithEmail_campaign_ItemRequestBuilderDeleteRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<DeleteEmailCampaignResponse|null>
      * @throws Exception
     */
     public function delete(?WithEmail_campaign_ItemRequestBuilderDeleteRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toDeleteRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [DeleteEmailCampaignResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [DeleteEmailCampaignResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method returns the details of a single email campaign specified by the <b>email_campaign_id</b> path parameter.<br><br>Call <a href="/api-docs/sell/marketing/resources/campaign/methods/getEmailCampaigns">getEmailCampaigns</a> to retrieve a list of all email campaigns from a seller's eBay store.
+     * This method returns the details of a single email campaign specified by the <b>email_campaign_id</b> path parameter.<br><br>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns">getEmailCampaigns</a> to retrieve a list of all email campaigns from a seller's eBay store.
      * @param WithEmail_campaign_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<GetEmailCampaignResponse|null>
      * @throws Exception
     */
     public function get(?WithEmail_campaign_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetEmailCampaignResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetEmailCampaignResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method lets users update an existing email campaign. Pass the <b>emailCampaignId</b> in the request URL and specify the changes to field values in the request payload.<br><br><span class="tablenote"><b>Note: </b>You can only update the custom fields of an email campaign. Fixed values, such as the <b>emailCampaignType</b>, cannot be changed. For full specifications of fixed values for each email campaign type, see the <a href="/api-docs/sell/marketing/resources/email_campaign/methods/createEmailCampaign">createEmailCampaign</a> method documentation.</span>
-     * @param UpdateCampaignRequest $body The update email campaign request payload
+     * This method lets users update an existing email campaign. Pass the <b>emailCampaignId</b> in the request URL and specify the changes to field values in the request payload.<br><br><span class="tablenote"><b>Note: </b>You can only update the custom fields of an email campaign. Fixed values, such as the <b>emailCampaignType</b>, cannot be changed. For full specifications of fixed values for each email campaign type, see the <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-createemailcampaign">createEmailCampaign</a> method documentation.</span>
+     * @param UpdateCampaignRequest $body update email campaign request
      * @param WithEmail_campaign_ItemRequestBuilderPutRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<UpdateEmailCampaignResponse|null>
      * @throws Exception
     */
     public function put(UpdateCampaignRequest $body, ?WithEmail_campaign_ItemRequestBuilderPutRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPutRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [UpdateEmailCampaignResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [UpdateEmailCampaignResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method deletes the email campaign specified by the <b>email_campaign_id</b> path parameter.<br><br>Call <a href="/api-docs/sell/marketing/resources/email_campaign/methods/getEmailCampaigns">getEmailCampaigns</a> to retrieve all of the seller's email campaigns. Use the <b>email_campaign_id</b> of the desired email campaign in the response as the path parameter for this request.
+     * This method deletes the email campaign specified by the <b>email_campaign_id</b> path parameter.<br><br>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns">getEmailCampaigns</a> to retrieve all of the seller's email campaigns. Use the <b>email_campaign_id</b> of the desired email campaign in the response as the path parameter for this request.
      * @param WithEmail_campaign_ItemRequestBuilderDeleteRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -107,7 +123,7 @@ class WithEmail_campaign_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method returns the details of a single email campaign specified by the <b>email_campaign_id</b> path parameter.<br><br>Call <a href="/api-docs/sell/marketing/resources/campaign/methods/getEmailCampaigns">getEmailCampaigns</a> to retrieve a list of all email campaigns from a seller's eBay store.
+     * This method returns the details of a single email campaign specified by the <b>email_campaign_id</b> path parameter.<br><br>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns">getEmailCampaigns</a> to retrieve a list of all email campaigns from a seller's eBay store.
      * @param WithEmail_campaign_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -125,8 +141,8 @@ class WithEmail_campaign_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method lets users update an existing email campaign. Pass the <b>emailCampaignId</b> in the request URL and specify the changes to field values in the request payload.<br><br><span class="tablenote"><b>Note: </b>You can only update the custom fields of an email campaign. Fixed values, such as the <b>emailCampaignType</b>, cannot be changed. For full specifications of fixed values for each email campaign type, see the <a href="/api-docs/sell/marketing/resources/email_campaign/methods/createEmailCampaign">createEmailCampaign</a> method documentation.</span>
-     * @param UpdateCampaignRequest $body The update email campaign request payload
+     * This method lets users update an existing email campaign. Pass the <b>emailCampaignId</b> in the request URL and specify the changes to field values in the request payload.<br><br><span class="tablenote"><b>Note: </b>You can only update the custom fields of an email campaign. Fixed values, such as the <b>emailCampaignType</b>, cannot be changed. For full specifications of fixed values for each email campaign type, see the <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-createemailcampaign">createEmailCampaign</a> method documentation.</span>
+     * @param UpdateCampaignRequest $body update email campaign request
      * @param WithEmail_campaign_ItemRequestBuilderPutRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

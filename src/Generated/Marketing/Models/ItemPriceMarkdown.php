@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields used to describe an item price markdown discount.
+ * This type defines the fields that describe an item price markdown discount.
 */
 class ItemPriceMarkdown implements AdditionalDataHolder, Parsable 
 {
@@ -57,9 +57,9 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
     private ?string $endDate = null;
     
     /**
-     * @var string|null $marketplaceId The eBay marketplace ID of the site where the markdown discount is hosted. Markdown discounts are supported on all eBay marketplaces. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
+     * @var MarketplaceIdEnum|null $marketplaceId The eBay marketplace ID of the site where the markdown discount is hosted. Markdown discounts are supported on all eBay marketplaces.
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceIdEnum $marketplaceId = null;
     
     /**
      * @var string|null $name The seller-defined name or 'title' of the discount that the seller can use to identify a discount. This label is not displayed in end-user flows.  <br><br><b>Maximum length:</b> 90
@@ -67,9 +67,9 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var string|null $priority This field is ignored in markdown discounts. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionPriorityEnum'>eBay API documentation</a>
+     * @var PromotionPriorityEnum|null $priority This field is ignored in markdown discounts.
     */
-    private ?string $priority = null;
+    private ?PromotionPriorityEnum $priority = null;
     
     /**
      * @var string|null $promotionImageUrl Required for CODED_COUPON, MARKDOWN_SALE, and ORDER_DISCOUNT discounts, populate this field with a URL that points to an image to be used with the discount. This image is displayed on the seller's <b>All Offers</b> page. The URL must point to either JPEG or PNG image and it must be a minimum of 500x500 pixels in dimension and cannot exceed 12Mb in size.
@@ -77,9 +77,9 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
     private ?string $promotionImageUrl = null;
     
     /**
-     * @var string|null $promotionStatus The current status of the discount. When creating a new discount, you must set this value to either <code>DRAFT</code> or <code>SCHEDULED</code>.  <br><br>Note that you must set this value to <code>SCHEDULED</code> when you update a <b>RUNNING</b> discount. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>
+     * @var PromotionStatusEnum|null $promotionStatus The current status of the discount. When creating a new discount, you must set this value to either <code>DRAFT</code> or <code>SCHEDULED</code>.  <br><br>Note that you must set this value to <code>SCHEDULED</code> when you update a <b>RUNNING</b> discount.
     */
-    private ?string $promotionStatus = null;
+    private ?PromotionStatusEnum $promotionStatus = null;
     
     /**
      * @var array<SelectedInventoryDiscount>|null $selectedInventoryDiscounts A list that defines the sets of selected items for the markdown discount.
@@ -167,21 +167,21 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
             'blockPriceIncreaseInItemRevision' => fn(ParseNode $n) => $o->setBlockPriceIncreaseInItemRevision($n->getBooleanValue()),
             'description' => fn(ParseNode $n) => $o->setDescription($n->getStringValue()),
             'endDate' => fn(ParseNode $n) => $o->setEndDate($n->getStringValue()),
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceIdEnum::class)),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
-            'priority' => fn(ParseNode $n) => $o->setPriority($n->getStringValue()),
+            'priority' => fn(ParseNode $n) => $o->setPriority($n->getEnumValue(PromotionPriorityEnum::class)),
             'promotionImageUrl' => fn(ParseNode $n) => $o->setPromotionImageUrl($n->getStringValue()),
-            'promotionStatus' => fn(ParseNode $n) => $o->setPromotionStatus($n->getStringValue()),
+            'promotionStatus' => fn(ParseNode $n) => $o->setPromotionStatus($n->getEnumValue(PromotionStatusEnum::class)),
             'selectedInventoryDiscounts' => fn(ParseNode $n) => $o->setSelectedInventoryDiscounts($n->getCollectionOfObjectValues([SelectedInventoryDiscount::class, 'createFromDiscriminatorValue'])),
             'startDate' => fn(ParseNode $n) => $o->setStartDate($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the marketplaceId property value. The eBay marketplace ID of the site where the markdown discount is hosted. Markdown discounts are supported on all eBay marketplaces. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. The eBay marketplace ID of the site where the markdown discount is hosted. Markdown discounts are supported on all eBay marketplaces.
+     * @return MarketplaceIdEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceIdEnum {
         return $this->marketplaceId;
     }
 
@@ -194,10 +194,10 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the priority property value. This field is ignored in markdown discounts. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionPriorityEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the priority property value. This field is ignored in markdown discounts.
+     * @return PromotionPriorityEnum|null
     */
-    public function getPriority(): ?string {
+    public function getPriority(): ?PromotionPriorityEnum {
         return $this->priority;
     }
 
@@ -210,10 +210,10 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the promotionStatus property value. The current status of the discount. When creating a new discount, you must set this value to either <code>DRAFT</code> or <code>SCHEDULED</code>.  <br><br>Note that you must set this value to <code>SCHEDULED</code> when you update a <b>RUNNING</b> discount. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the promotionStatus property value. The current status of the discount. When creating a new discount, you must set this value to either <code>DRAFT</code> or <code>SCHEDULED</code>.  <br><br>Note that you must set this value to <code>SCHEDULED</code> when you update a <b>RUNNING</b> discount.
+     * @return PromotionStatusEnum|null
     */
-    public function getPromotionStatus(): ?string {
+    public function getPromotionStatus(): ?PromotionStatusEnum {
         return $this->promotionStatus;
     }
 
@@ -243,11 +243,11 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
         $writer->writeBooleanValue('blockPriceIncreaseInItemRevision', $this->getBlockPriceIncreaseInItemRevision());
         $writer->writeStringValue('description', $this->getDescription());
         $writer->writeStringValue('endDate', $this->getEndDate());
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeStringValue('name', $this->getName());
-        $writer->writeStringValue('priority', $this->getPriority());
+        $writer->writeEnumValue('priority', $this->getPriority());
         $writer->writeStringValue('promotionImageUrl', $this->getPromotionImageUrl());
-        $writer->writeStringValue('promotionStatus', $this->getPromotionStatus());
+        $writer->writeEnumValue('promotionStatus', $this->getPromotionStatus());
         $writer->writeCollectionOfObjectValues('selectedInventoryDiscounts', $this->getSelectedInventoryDiscounts());
         $writer->writeStringValue('startDate', $this->getStartDate());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -302,10 +302,10 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. The eBay marketplace ID of the site where the markdown discount is hosted. Markdown discounts are supported on all eBay marketplaces. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. The eBay marketplace ID of the site where the markdown discount is hosted. Markdown discounts are supported on all eBay marketplaces.
+     * @param MarketplaceIdEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceIdEnum $value): void {
         $this->marketplaceId = $value;
     }
 
@@ -318,10 +318,10 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the priority property value. This field is ignored in markdown discounts. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionPriorityEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the priority property.
+     * Sets the priority property value. This field is ignored in markdown discounts.
+     * @param PromotionPriorityEnum|null $value Value to set for the priority property.
     */
-    public function setPriority(?string $value): void {
+    public function setPriority(?PromotionPriorityEnum $value): void {
         $this->priority = $value;
     }
 
@@ -334,10 +334,10 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the promotionStatus property value. The current status of the discount. When creating a new discount, you must set this value to either <code>DRAFT</code> or <code>SCHEDULED</code>.  <br><br>Note that you must set this value to <code>SCHEDULED</code> when you update a <b>RUNNING</b> discount. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the promotionStatus property.
+     * Sets the promotionStatus property value. The current status of the discount. When creating a new discount, you must set this value to either <code>DRAFT</code> or <code>SCHEDULED</code>.  <br><br>Note that you must set this value to <code>SCHEDULED</code> when you update a <b>RUNNING</b> discount.
+     * @param PromotionStatusEnum|null $value Value to set for the promotionStatus property.
     */
-    public function setPromotionStatus(?string $value): void {
+    public function setPromotionStatus(?PromotionStatusEnum $value): void {
         $this->promotionStatus = $value;
     }
 

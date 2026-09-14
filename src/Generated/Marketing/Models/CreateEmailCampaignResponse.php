@@ -21,6 +21,9 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
+/**
+ * This type defines the response payload of the <b>createEmailCampaign</b> method.
+*/
 class CreateEmailCampaignResponse implements AdditionalDataHolder, Parsable 
 {
     /**
@@ -34,9 +37,9 @@ class CreateEmailCampaignResponse implements AdditionalDataHolder, Parsable
     private ?string $emailCampaignId = null;
     
     /**
-     * @var string|null $emailCampaignStatus The status of the email campaign.<br><br><code>ACTIVE</code> is returned for email campaigns that have been successfully created but not been sent.<br><br><code>SENT</code> is returned for email campaigns that have already been sent.<br><br><code>ERROR</code> is returned when an email has not been successfully created. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum'>eBay API documentation</a>
+     * @var EmailCampaignStatusEnum|null $emailCampaignStatus The status of the email campaign.<br><br><code>ACTIVE</code> is returned for email campaigns that have been successfully created but not been sent.<br><br><code>SENT</code> is returned for email campaigns that have already been sent.<br><br><code>ERROR</code> is returned when an email has not been successfully created.
     */
-    private ?string $emailCampaignStatus = null;
+    private ?EmailCampaignStatusEnum $emailCampaignStatus = null;
     
     /**
      * Instantiates a new CreateEmailCampaignResponse and sets the default values.
@@ -71,10 +74,10 @@ class CreateEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the emailCampaignStatus property value. The status of the email campaign.<br><br><code>ACTIVE</code> is returned for email campaigns that have been successfully created but not been sent.<br><br><code>SENT</code> is returned for email campaigns that have already been sent.<br><br><code>ERROR</code> is returned when an email has not been successfully created. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the emailCampaignStatus property value. The status of the email campaign.<br><br><code>ACTIVE</code> is returned for email campaigns that have been successfully created but not been sent.<br><br><code>SENT</code> is returned for email campaigns that have already been sent.<br><br><code>ERROR</code> is returned when an email has not been successfully created.
+     * @return EmailCampaignStatusEnum|null
     */
-    public function getEmailCampaignStatus(): ?string {
+    public function getEmailCampaignStatus(): ?EmailCampaignStatusEnum {
         return $this->emailCampaignStatus;
     }
 
@@ -86,7 +89,7 @@ class CreateEmailCampaignResponse implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'emailCampaignId' => fn(ParseNode $n) => $o->setEmailCampaignId($n->getStringValue()),
-            'emailCampaignStatus' => fn(ParseNode $n) => $o->setEmailCampaignStatus($n->getStringValue()),
+            'emailCampaignStatus' => fn(ParseNode $n) => $o->setEmailCampaignStatus($n->getEnumValue(EmailCampaignStatusEnum::class)),
         ];
     }
 
@@ -96,7 +99,7 @@ class CreateEmailCampaignResponse implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('emailCampaignId', $this->getEmailCampaignId());
-        $writer->writeStringValue('emailCampaignStatus', $this->getEmailCampaignStatus());
+        $writer->writeEnumValue('emailCampaignStatus', $this->getEmailCampaignStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -117,10 +120,10 @@ class CreateEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the emailCampaignStatus property value. The status of the email campaign.<br><br><code>ACTIVE</code> is returned for email campaigns that have been successfully created but not been sent.<br><br><code>SENT</code> is returned for email campaigns that have already been sent.<br><br><code>ERROR</code> is returned when an email has not been successfully created. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the emailCampaignStatus property.
+     * Sets the emailCampaignStatus property value. The status of the email campaign.<br><br><code>ACTIVE</code> is returned for email campaigns that have been successfully created but not been sent.<br><br><code>SENT</code> is returned for email campaigns that have already been sent.<br><br><code>ERROR</code> is returned when an email has not been successfully created.
+     * @param EmailCampaignStatusEnum|null $value Value to set for the emailCampaignStatus property.
     */
-    public function setEmailCampaignStatus(?string $value): void {
+    public function setEmailCampaignStatus(?EmailCampaignStatusEnum $value): void {
         $this->emailCampaignStatus = $value;
     }
 

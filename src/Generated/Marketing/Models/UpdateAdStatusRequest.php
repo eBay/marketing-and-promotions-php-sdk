@@ -32,14 +32,14 @@ class UpdateAdStatusRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $adId A unique eBay-assigned identifier for an ad that belongs to the specified campaign.<br><br> Use the <a href="/api-docs/sell/marketing/resources/ad/methods/getAds">getAds</a> method to retrieve ad IDs.
+     * @var string|null $adId A unique eBay-assigned identifier for an ad that belongs to the specified campaign.<br><br> Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getads">getAds</a> method to retrieve ad IDs.
     */
     private ?string $adId = null;
     
     /**
-     * @var string|null $adStatus An enumeration value representing the status you wish to update the specified ad to.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdStatusEnum'>eBay API documentation</a>
+     * @var AdStatusEnum|null $adStatus An enumeration value representing the status you wish to update the specified ad to.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul>
     */
-    private ?string $adStatus = null;
+    private ?AdStatusEnum $adStatus = null;
     
     /**
      * Instantiates a new UpdateAdStatusRequest and sets the default values.
@@ -66,7 +66,7 @@ class UpdateAdStatusRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adId property value. A unique eBay-assigned identifier for an ad that belongs to the specified campaign.<br><br> Use the <a href="/api-docs/sell/marketing/resources/ad/methods/getAds">getAds</a> method to retrieve ad IDs.
+     * Gets the adId property value. A unique eBay-assigned identifier for an ad that belongs to the specified campaign.<br><br> Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getads">getAds</a> method to retrieve ad IDs.
      * @return string|null
     */
     public function getAdId(): ?string {
@@ -74,10 +74,10 @@ class UpdateAdStatusRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adStatus property value. An enumeration value representing the status you wish to update the specified ad to.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the adStatus property value. An enumeration value representing the status you wish to update the specified ad to.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul>
+     * @return AdStatusEnum|null
     */
-    public function getAdStatus(): ?string {
+    public function getAdStatus(): ?AdStatusEnum {
         return $this->adStatus;
     }
 
@@ -89,7 +89,7 @@ class UpdateAdStatusRequest implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'adId' => fn(ParseNode $n) => $o->setAdId($n->getStringValue()),
-            'adStatus' => fn(ParseNode $n) => $o->setAdStatus($n->getStringValue()),
+            'adStatus' => fn(ParseNode $n) => $o->setAdStatus($n->getEnumValue(AdStatusEnum::class)),
         ];
     }
 
@@ -99,7 +99,7 @@ class UpdateAdStatusRequest implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('adId', $this->getAdId());
-        $writer->writeStringValue('adStatus', $this->getAdStatus());
+        $writer->writeEnumValue('adStatus', $this->getAdStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -112,7 +112,7 @@ class UpdateAdStatusRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adId property value. A unique eBay-assigned identifier for an ad that belongs to the specified campaign.<br><br> Use the <a href="/api-docs/sell/marketing/resources/ad/methods/getAds">getAds</a> method to retrieve ad IDs.
+     * Sets the adId property value. A unique eBay-assigned identifier for an ad that belongs to the specified campaign.<br><br> Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad-getads">getAds</a> method to retrieve ad IDs.
      * @param string|null $value Value to set for the adId property.
     */
     public function setAdId(?string $value): void {
@@ -120,10 +120,10 @@ class UpdateAdStatusRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adStatus property value. An enumeration value representing the status you wish to update the specified ad to.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the adStatus property.
+     * Sets the adStatus property value. An enumeration value representing the status you wish to update the specified ad to.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul>
+     * @param AdStatusEnum|null $value Value to set for the adStatus property.
     */
-    public function setAdStatus(?string $value): void {
+    public function setAdStatus(?AdStatusEnum $value): void {
         $this->adStatus = $value;
     }
 

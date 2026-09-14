@@ -21,6 +21,9 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
+/**
+ * The maximum amount for which the eBay suggested bid can be adjusted. This value represents the most a seller is willing to pay for each click on their ad. The adjusted bid will never exceed this amount.<br><br>This field is required for smart targeting campaigns.<br><br><span class="tablenote"><b>Note:</b> The maximum cost-per-click has a minimum value of 0.02 and a maximum value of 100.</span>
+*/
 class MaxCpc implements AdditionalDataHolder, Parsable 
 {
     /**
@@ -29,7 +32,7 @@ class MaxCpc implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $amount The allocated maximum CPC amount for a smart targeting campaign.<br><br>Both the <b>currency</b> and <b>amount</b> must be specified when allocating the Max CPC.
     */
     private ?Amount $amount = null;
     
@@ -58,7 +61,7 @@ class MaxCpc implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the amount property value. The allocated maximum CPC amount for a smart targeting campaign.<br><br>Both the <b>currency</b> and <b>amount</b> must be specified when allocating the Max CPC.
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -94,7 +97,7 @@ class MaxCpc implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the amount property value. The allocated maximum CPC amount for a smart targeting campaign.<br><br>Both the <b>currency</b> and <b>amount</b> must be specified when allocating the Max CPC.
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {

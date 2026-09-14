@@ -21,6 +21,9 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
+/**
+ * This type defines the response payload for the <b>updateEmailCampaign</b> method.
+*/
 class UpdateEmailCampaignResponse implements AdditionalDataHolder, Parsable 
 {
     /**
@@ -34,9 +37,9 @@ class UpdateEmailCampaignResponse implements AdditionalDataHolder, Parsable
     private ?string $emailCampaignId = null;
     
     /**
-     * @var string|null $emailCampaignStatus The email campaign status. See <a href="/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum">EmailCampaignStatusEnum</a> for a list of email campaign statuses and their descriptions. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum'>eBay API documentation</a>
+     * @var EmailCampaignStatusEnum|null $emailCampaignStatus The email campaign status. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.emailcampaignstatusenum">EmailCampaignStatusEnum</a> for a list of email campaign statuses and their descriptions.
     */
-    private ?string $emailCampaignStatus = null;
+    private ?EmailCampaignStatusEnum $emailCampaignStatus = null;
     
     /**
      * Instantiates a new UpdateEmailCampaignResponse and sets the default values.
@@ -71,10 +74,10 @@ class UpdateEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the emailCampaignStatus property value. The email campaign status. See <a href="/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum">EmailCampaignStatusEnum</a> for a list of email campaign statuses and their descriptions. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the emailCampaignStatus property value. The email campaign status. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.emailcampaignstatusenum">EmailCampaignStatusEnum</a> for a list of email campaign statuses and their descriptions.
+     * @return EmailCampaignStatusEnum|null
     */
-    public function getEmailCampaignStatus(): ?string {
+    public function getEmailCampaignStatus(): ?EmailCampaignStatusEnum {
         return $this->emailCampaignStatus;
     }
 
@@ -86,7 +89,7 @@ class UpdateEmailCampaignResponse implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'emailCampaignId' => fn(ParseNode $n) => $o->setEmailCampaignId($n->getStringValue()),
-            'emailCampaignStatus' => fn(ParseNode $n) => $o->setEmailCampaignStatus($n->getStringValue()),
+            'emailCampaignStatus' => fn(ParseNode $n) => $o->setEmailCampaignStatus($n->getEnumValue(EmailCampaignStatusEnum::class)),
         ];
     }
 
@@ -96,7 +99,7 @@ class UpdateEmailCampaignResponse implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('emailCampaignId', $this->getEmailCampaignId());
-        $writer->writeStringValue('emailCampaignStatus', $this->getEmailCampaignStatus());
+        $writer->writeEnumValue('emailCampaignStatus', $this->getEmailCampaignStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -117,10 +120,10 @@ class UpdateEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the emailCampaignStatus property value. The email campaign status. See <a href="/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum">EmailCampaignStatusEnum</a> for a list of email campaign statuses and their descriptions. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the emailCampaignStatus property.
+     * Sets the emailCampaignStatus property value. The email campaign status. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.emailcampaignstatusenum">EmailCampaignStatusEnum</a> for a list of email campaign statuses and their descriptions.
+     * @param EmailCampaignStatusEnum|null $value Value to set for the emailCampaignStatus property.
     */
-    public function setEmailCampaignStatus(?string $value): void {
+    public function setEmailCampaignStatus(?EmailCampaignStatusEnum $value): void {
         $this->emailCampaignStatus = $value;
     }
 

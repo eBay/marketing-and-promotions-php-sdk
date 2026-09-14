@@ -38,7 +38,7 @@ class ReportTask implements AdditionalDataHolder, Parsable
     private ?array $campaignIds = null;
     
     /**
-     * @var array<string>|null $channels The channel for the advertising campaign that will be included in the report task. This value indicates whether the data included in the report task is for an Onsite or Offsite advertising campaign.
+     * @var array<ChannelEnum>|null $channels The channel for the advertising campaign that will be included in the report task. This value indicates whether the data included in the report task is for an Onsite or Offsite advertising campaign.
     */
     private ?array $channels = null;
     
@@ -58,12 +58,12 @@ class ReportTask implements AdditionalDataHolder, Parsable
     private ?array $dimensions = null;
     
     /**
-     * @var array<string>|null $fundingModels The funding model for the campaign that shall be included in the report.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> The default funding model for Promoted Listings reports is <code>COST_PER_SALE</code>.</span><br /><br /><b>Valid Values:</b><ul><li><code>COST_PER_SALE</code></li><li><code>COST_PER_CLICK</code></li></ul>
+     * @var array<FundingModelEnum>|null $fundingModels The funding model for the campaign that shall be included in the report.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> The default funding model for Promoted Listings reports is <code>COST_PER_SALE</code>.</span><br /><br /><b>Valid Values:</b><ul><li><code>COST_PER_SALE</code></li><li><code>COST_PER_CLICK</code></li></ul>
     */
     private ?array $fundingModels = null;
     
     /**
-     * @var array<InventoryReference>|null $inventoryReferences If supplied in the request, this field returns a list of the seller's inventory reference IDs included in the report.  <p>Each item is referenced by a pair of <b>inventoryRefernceID</b> and <b>inventoryReferenceType</b> values, where an inventory reference ID can be either a seller-defined <b>SKU</b> value or an <b>inventoryItemGroupKey</b>. An <b>inventoryItemGroupKey</b> is seller-defined ID for an inventory item group (a multiple-variation listing), and is created and used by the <a href="/api-docs/sell/inventory/resources/methods">Inventory API</a>.</p>
+     * @var array<InventoryReference>|null $inventoryReferences If supplied in the request, this field returns a list of the seller's inventory reference IDs included in the report.  <p>Each item is referenced by a pair of <b>inventoryRefernceID</b> and <b>inventoryReferenceType</b> values, where an inventory reference ID can be either a seller-defined <b>SKU</b> value or an <b>inventoryItemGroupKey</b>. An <b>inventoryItemGroupKey</b> is seller-defined ID for an inventory item group (a multiple-variation listing), and is created and used by the <a href="/api-docs/sell/inventory/resources/methods" target="_blank">Inventory API</a>.</p>
     */
     private ?array $inventoryReferences = null;
     
@@ -73,9 +73,9 @@ class ReportTask implements AdditionalDataHolder, Parsable
     private ?array $listingIds = null;
     
     /**
-     * @var string|null $marketplaceId The ID of the eBay marketplace used by the report task. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
+     * @var MarketplaceIdEnum|null $marketplaceId The ID of the eBay marketplace used by the report task.
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceIdEnum $marketplaceId = null;
     
     /**
      * @var array<string>|null $metricKeys A list of metrics for the report task.
@@ -88,9 +88,9 @@ class ReportTask implements AdditionalDataHolder, Parsable
     private ?string $reportExpirationDate = null;
     
     /**
-     * @var string|null $reportFormat Indicates the format of the report. Currently, only <code>TSV_GZIP</code> is supported. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:ReportFormatEnum'>eBay API documentation</a>
+     * @var ReportFormatEnum|null $reportFormat Indicates the format of the report. Currently, only <code>TSV_GZIP</code> is supported.
     */
-    private ?string $reportFormat = null;
+    private ?ReportFormatEnum $reportFormat = null;
     
     /**
      * @var string|null $reportHref The URL of the generated report, which can be used to download the report once it has been generated.
@@ -128,9 +128,9 @@ class ReportTask implements AdditionalDataHolder, Parsable
     private ?string $reportTaskId = null;
     
     /**
-     * @var string|null $reportTaskStatus Indicates the current state of the report task. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:TaskStatusEnum'>eBay API documentation</a>
+     * @var TaskStatusEnum|null $reportTaskStatus Indicates the current state of the report task.
     */
-    private ?string $reportTaskStatus = null;
+    private ?TaskStatusEnum $reportTaskStatus = null;
     
     /**
      * @var string|null $reportTaskStatusMessage A status message with additional information about the report task.
@@ -138,9 +138,9 @@ class ReportTask implements AdditionalDataHolder, Parsable
     private ?string $reportTaskStatusMessage = null;
     
     /**
-     * @var string|null $reportType Indicates type of report associated with the report task.<br/><br/><span class="tablenote"><b>Note:</b> INVENTORY_PERFORMANCE_REPORT is not currently available; availability date is pending.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:ReportTypeEnum'>eBay API documentation</a>
+     * @var ReportTypeEnum|null $reportType Indicates type of report associated with the report task.<br/><br/><span class="tablenote"><b>Note:</b> <code>INVENTORY_PERFORMANCE_REPORT</code> is not currently available; availability date is pending.</span>
     */
-    private ?string $reportType = null;
+    private ?ReportTypeEnum $reportType = null;
     
     /**
      * Instantiates a new ReportTask and sets the default values.
@@ -176,7 +176,7 @@ class ReportTask implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the channels property value. The channel for the advertising campaign that will be included in the report task. This value indicates whether the data included in the report task is for an Onsite or Offsite advertising campaign.
-     * @return array<string>|null
+     * @return array<ChannelEnum>|null
     */
     public function getChannels(): ?array {
         return $this->channels;
@@ -221,25 +221,11 @@ class ReportTask implements AdditionalDataHolder, Parsable
                 /** @var array<string>|null $val */
                 $this->setCampaignIds($val);
             },
-            'channels' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setChannels($val);
-            },
+            'channels' => fn(ParseNode $n) => $o->setChannels($n->getCollectionOfEnumValues(ChannelEnum::class)),
             'dateFrom' => fn(ParseNode $n) => $o->setDateFrom($n->getStringValue()),
             'dateTo' => fn(ParseNode $n) => $o->setDateTo($n->getStringValue()),
             'dimensions' => fn(ParseNode $n) => $o->setDimensions($n->getCollectionOfObjectValues([Dimension::class, 'createFromDiscriminatorValue'])),
-            'fundingModels' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setFundingModels($val);
-            },
+            'fundingModels' => fn(ParseNode $n) => $o->setFundingModels($n->getCollectionOfEnumValues(FundingModelEnum::class)),
             'inventoryReferences' => fn(ParseNode $n) => $o->setInventoryReferences($n->getCollectionOfObjectValues([InventoryReference::class, 'createFromDiscriminatorValue'])),
             'listingIds' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
@@ -249,7 +235,7 @@ class ReportTask implements AdditionalDataHolder, Parsable
                 /** @var array<string>|null $val */
                 $this->setListingIds($val);
             },
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceIdEnum::class)),
             'metricKeys' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
                 if (is_array($val)) {
@@ -259,7 +245,7 @@ class ReportTask implements AdditionalDataHolder, Parsable
                 $this->setMetricKeys($val);
             },
             'reportExpirationDate' => fn(ParseNode $n) => $o->setReportExpirationDate($n->getStringValue()),
-            'reportFormat' => fn(ParseNode $n) => $o->setReportFormat($n->getStringValue()),
+            'reportFormat' => fn(ParseNode $n) => $o->setReportFormat($n->getEnumValue(ReportFormatEnum::class)),
             'reportHref' => fn(ParseNode $n) => $o->setReportHref($n->getStringValue()),
             'reportId' => fn(ParseNode $n) => $o->setReportId($n->getStringValue()),
             'reportName' => fn(ParseNode $n) => $o->setReportName($n->getStringValue()),
@@ -267,22 +253,22 @@ class ReportTask implements AdditionalDataHolder, Parsable
             'reportTaskCreationDate' => fn(ParseNode $n) => $o->setReportTaskCreationDate($n->getStringValue()),
             'reportTaskExpectedCompletionDate' => fn(ParseNode $n) => $o->setReportTaskExpectedCompletionDate($n->getStringValue()),
             'reportTaskId' => fn(ParseNode $n) => $o->setReportTaskId($n->getStringValue()),
-            'reportTaskStatus' => fn(ParseNode $n) => $o->setReportTaskStatus($n->getStringValue()),
+            'reportTaskStatus' => fn(ParseNode $n) => $o->setReportTaskStatus($n->getEnumValue(TaskStatusEnum::class)),
             'reportTaskStatusMessage' => fn(ParseNode $n) => $o->setReportTaskStatusMessage($n->getStringValue()),
-            'reportType' => fn(ParseNode $n) => $o->setReportType($n->getStringValue()),
+            'reportType' => fn(ParseNode $n) => $o->setReportType($n->getEnumValue(ReportTypeEnum::class)),
         ];
     }
 
     /**
      * Gets the fundingModels property value. The funding model for the campaign that shall be included in the report.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> The default funding model for Promoted Listings reports is <code>COST_PER_SALE</code>.</span><br /><br /><b>Valid Values:</b><ul><li><code>COST_PER_SALE</code></li><li><code>COST_PER_CLICK</code></li></ul>
-     * @return array<string>|null
+     * @return array<FundingModelEnum>|null
     */
     public function getFundingModels(): ?array {
         return $this->fundingModels;
     }
 
     /**
-     * Gets the inventoryReferences property value. If supplied in the request, this field returns a list of the seller's inventory reference IDs included in the report.  <p>Each item is referenced by a pair of <b>inventoryRefernceID</b> and <b>inventoryReferenceType</b> values, where an inventory reference ID can be either a seller-defined <b>SKU</b> value or an <b>inventoryItemGroupKey</b>. An <b>inventoryItemGroupKey</b> is seller-defined ID for an inventory item group (a multiple-variation listing), and is created and used by the <a href="/api-docs/sell/inventory/resources/methods">Inventory API</a>.</p>
+     * Gets the inventoryReferences property value. If supplied in the request, this field returns a list of the seller's inventory reference IDs included in the report.  <p>Each item is referenced by a pair of <b>inventoryRefernceID</b> and <b>inventoryReferenceType</b> values, where an inventory reference ID can be either a seller-defined <b>SKU</b> value or an <b>inventoryItemGroupKey</b>. An <b>inventoryItemGroupKey</b> is seller-defined ID for an inventory item group (a multiple-variation listing), and is created and used by the <a href="/api-docs/sell/inventory/resources/methods" target="_blank">Inventory API</a>.</p>
      * @return array<InventoryReference>|null
     */
     public function getInventoryReferences(): ?array {
@@ -298,10 +284,10 @@ class ReportTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the marketplaceId property value. The ID of the eBay marketplace used by the report task. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. The ID of the eBay marketplace used by the report task.
+     * @return MarketplaceIdEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceIdEnum {
         return $this->marketplaceId;
     }
 
@@ -322,10 +308,10 @@ class ReportTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the reportFormat property value. Indicates the format of the report. Currently, only <code>TSV_GZIP</code> is supported. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:ReportFormatEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the reportFormat property value. Indicates the format of the report. Currently, only <code>TSV_GZIP</code> is supported.
+     * @return ReportFormatEnum|null
     */
-    public function getReportFormat(): ?string {
+    public function getReportFormat(): ?ReportFormatEnum {
         return $this->reportFormat;
     }
 
@@ -386,10 +372,10 @@ class ReportTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the reportTaskStatus property value. Indicates the current state of the report task. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:TaskStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the reportTaskStatus property value. Indicates the current state of the report task.
+     * @return TaskStatusEnum|null
     */
-    public function getReportTaskStatus(): ?string {
+    public function getReportTaskStatus(): ?TaskStatusEnum {
         return $this->reportTaskStatus;
     }
 
@@ -402,10 +388,10 @@ class ReportTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the reportType property value. Indicates type of report associated with the report task.<br/><br/><span class="tablenote"><b>Note:</b> INVENTORY_PERFORMANCE_REPORT is not currently available; availability date is pending.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:ReportTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the reportType property value. Indicates type of report associated with the report task.<br/><br/><span class="tablenote"><b>Note:</b> <code>INVENTORY_PERFORMANCE_REPORT</code> is not currently available; availability date is pending.</span>
+     * @return ReportTypeEnum|null
     */
-    public function getReportType(): ?string {
+    public function getReportType(): ?ReportTypeEnum {
         return $this->reportType;
     }
 
@@ -415,17 +401,17 @@ class ReportTask implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfPrimitiveValues('campaignIds', $this->getCampaignIds());
-        $writer->writeCollectionOfPrimitiveValues('channels', $this->getChannels());
+        $writer->writeCollectionOfEnumValues('channels', $this->getChannels());
         $writer->writeStringValue('dateFrom', $this->getDateFrom());
         $writer->writeStringValue('dateTo', $this->getDateTo());
         $writer->writeCollectionOfObjectValues('dimensions', $this->getDimensions());
-        $writer->writeCollectionOfPrimitiveValues('fundingModels', $this->getFundingModels());
+        $writer->writeCollectionOfEnumValues('fundingModels', $this->getFundingModels());
         $writer->writeCollectionOfObjectValues('inventoryReferences', $this->getInventoryReferences());
         $writer->writeCollectionOfPrimitiveValues('listingIds', $this->getListingIds());
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeCollectionOfPrimitiveValues('metricKeys', $this->getMetricKeys());
         $writer->writeStringValue('reportExpirationDate', $this->getReportExpirationDate());
-        $writer->writeStringValue('reportFormat', $this->getReportFormat());
+        $writer->writeEnumValue('reportFormat', $this->getReportFormat());
         $writer->writeStringValue('reportHref', $this->getReportHref());
         $writer->writeStringValue('reportId', $this->getReportId());
         $writer->writeStringValue('reportName', $this->getReportName());
@@ -433,9 +419,9 @@ class ReportTask implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('reportTaskCreationDate', $this->getReportTaskCreationDate());
         $writer->writeStringValue('reportTaskExpectedCompletionDate', $this->getReportTaskExpectedCompletionDate());
         $writer->writeStringValue('reportTaskId', $this->getReportTaskId());
-        $writer->writeStringValue('reportTaskStatus', $this->getReportTaskStatus());
+        $writer->writeEnumValue('reportTaskStatus', $this->getReportTaskStatus());
         $writer->writeStringValue('reportTaskStatusMessage', $this->getReportTaskStatusMessage());
-        $writer->writeStringValue('reportType', $this->getReportType());
+        $writer->writeEnumValue('reportType', $this->getReportType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -457,7 +443,7 @@ class ReportTask implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the channels property value. The channel for the advertising campaign that will be included in the report task. This value indicates whether the data included in the report task is for an Onsite or Offsite advertising campaign.
-     * @param array<string>|null $value Value to set for the channels property.
+     * @param array<ChannelEnum>|null $value Value to set for the channels property.
     */
     public function setChannels(?array $value): void {
         $this->channels = $value;
@@ -489,14 +475,14 @@ class ReportTask implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the fundingModels property value. The funding model for the campaign that shall be included in the report.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> The default funding model for Promoted Listings reports is <code>COST_PER_SALE</code>.</span><br /><br /><b>Valid Values:</b><ul><li><code>COST_PER_SALE</code></li><li><code>COST_PER_CLICK</code></li></ul>
-     * @param array<string>|null $value Value to set for the fundingModels property.
+     * @param array<FundingModelEnum>|null $value Value to set for the fundingModels property.
     */
     public function setFundingModels(?array $value): void {
         $this->fundingModels = $value;
     }
 
     /**
-     * Sets the inventoryReferences property value. If supplied in the request, this field returns a list of the seller's inventory reference IDs included in the report.  <p>Each item is referenced by a pair of <b>inventoryRefernceID</b> and <b>inventoryReferenceType</b> values, where an inventory reference ID can be either a seller-defined <b>SKU</b> value or an <b>inventoryItemGroupKey</b>. An <b>inventoryItemGroupKey</b> is seller-defined ID for an inventory item group (a multiple-variation listing), and is created and used by the <a href="/api-docs/sell/inventory/resources/methods">Inventory API</a>.</p>
+     * Sets the inventoryReferences property value. If supplied in the request, this field returns a list of the seller's inventory reference IDs included in the report.  <p>Each item is referenced by a pair of <b>inventoryRefernceID</b> and <b>inventoryReferenceType</b> values, where an inventory reference ID can be either a seller-defined <b>SKU</b> value or an <b>inventoryItemGroupKey</b>. An <b>inventoryItemGroupKey</b> is seller-defined ID for an inventory item group (a multiple-variation listing), and is created and used by the <a href="/api-docs/sell/inventory/resources/methods" target="_blank">Inventory API</a>.</p>
      * @param array<InventoryReference>|null $value Value to set for the inventoryReferences property.
     */
     public function setInventoryReferences(?array $value): void {
@@ -512,10 +498,10 @@ class ReportTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. The ID of the eBay marketplace used by the report task. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. The ID of the eBay marketplace used by the report task.
+     * @param MarketplaceIdEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceIdEnum $value): void {
         $this->marketplaceId = $value;
     }
 
@@ -536,10 +522,10 @@ class ReportTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the reportFormat property value. Indicates the format of the report. Currently, only <code>TSV_GZIP</code> is supported. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:ReportFormatEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the reportFormat property.
+     * Sets the reportFormat property value. Indicates the format of the report. Currently, only <code>TSV_GZIP</code> is supported.
+     * @param ReportFormatEnum|null $value Value to set for the reportFormat property.
     */
-    public function setReportFormat(?string $value): void {
+    public function setReportFormat(?ReportFormatEnum $value): void {
         $this->reportFormat = $value;
     }
 
@@ -600,10 +586,10 @@ class ReportTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the reportTaskStatus property value. Indicates the current state of the report task. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:TaskStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the reportTaskStatus property.
+     * Sets the reportTaskStatus property value. Indicates the current state of the report task.
+     * @param TaskStatusEnum|null $value Value to set for the reportTaskStatus property.
     */
-    public function setReportTaskStatus(?string $value): void {
+    public function setReportTaskStatus(?TaskStatusEnum $value): void {
         $this->reportTaskStatus = $value;
     }
 
@@ -616,10 +602,10 @@ class ReportTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the reportType property value. Indicates type of report associated with the report task.<br/><br/><span class="tablenote"><b>Note:</b> INVENTORY_PERFORMANCE_REPORT is not currently available; availability date is pending.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:ReportTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the reportType property.
+     * Sets the reportType property value. Indicates type of report associated with the report task.<br/><br/><span class="tablenote"><b>Note:</b> <code>INVENTORY_PERFORMANCE_REPORT</code> is not currently available; availability date is pending.</span>
+     * @param ReportTypeEnum|null $value Value to set for the reportType property.
     */
-    public function setReportType(?string $value): void {
+    public function setReportType(?ReportTypeEnum $value): void {
         $this->reportType = $value;
     }
 

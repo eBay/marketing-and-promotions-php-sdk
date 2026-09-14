@@ -32,14 +32,14 @@ class UpdateNegativeKeywordIdRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $negativeKeywordId A unique eBay-assigned ID for a negative keyword. This keyword ID will be generated for each successfully created negative keyword.<br><br>Use the <a href="/api-docs/sell/marketing/resources/negative_keyword/methods/getNegativeKeywords" target="_blank">getNegativeKeywords</a> method to retrieve negative keyword IDs.
+     * @var string|null $negativeKeywordId A unique eBay-assigned ID for a negative keyword. This keyword ID will be generated for each successfully created negative keyword.<br><br>Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-negative_keyword-getnegativekeywords">getNegativeKeywords</a> method to retrieve negative keyword IDs.
     */
     private ?string $negativeKeywordId = null;
     
     /**
-     * @var string|null $negativeKeywordStatus A field that defines the status of the negative keyword.<br><br>See <a href="/api-docs/sell/marketing/types/pls:NegativeKeywordStatusEnum" target="_blank">NegativeKeywordStatusEnum</a> for supported values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordStatusEnum'>eBay API documentation</a>
+     * @var NegativeKeywordStatusEnum|null $negativeKeywordStatus A field that defines the status of the negative keyword.<br><br>See <a href="/develop/api/sell/marketing_api#sell-marketing_api-negative_keyword-getnegativekeyword.negativekeywordstatusenum">NegativeKeywordStatusEnum</a> for supported values.
     */
-    private ?string $negativeKeywordStatus = null;
+    private ?NegativeKeywordStatusEnum $negativeKeywordStatus = null;
     
     /**
      * Instantiates a new UpdateNegativeKeywordIdRequest and sets the default values.
@@ -73,12 +73,12 @@ class UpdateNegativeKeywordIdRequest implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'negativeKeywordId' => fn(ParseNode $n) => $o->setNegativeKeywordId($n->getStringValue()),
-            'negativeKeywordStatus' => fn(ParseNode $n) => $o->setNegativeKeywordStatus($n->getStringValue()),
+            'negativeKeywordStatus' => fn(ParseNode $n) => $o->setNegativeKeywordStatus($n->getEnumValue(NegativeKeywordStatusEnum::class)),
         ];
     }
 
     /**
-     * Gets the negativeKeywordId property value. A unique eBay-assigned ID for a negative keyword. This keyword ID will be generated for each successfully created negative keyword.<br><br>Use the <a href="/api-docs/sell/marketing/resources/negative_keyword/methods/getNegativeKeywords" target="_blank">getNegativeKeywords</a> method to retrieve negative keyword IDs.
+     * Gets the negativeKeywordId property value. A unique eBay-assigned ID for a negative keyword. This keyword ID will be generated for each successfully created negative keyword.<br><br>Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-negative_keyword-getnegativekeywords">getNegativeKeywords</a> method to retrieve negative keyword IDs.
      * @return string|null
     */
     public function getNegativeKeywordId(): ?string {
@@ -86,10 +86,10 @@ class UpdateNegativeKeywordIdRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the negativeKeywordStatus property value. A field that defines the status of the negative keyword.<br><br>See <a href="/api-docs/sell/marketing/types/pls:NegativeKeywordStatusEnum" target="_blank">NegativeKeywordStatusEnum</a> for supported values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the negativeKeywordStatus property value. A field that defines the status of the negative keyword.<br><br>See <a href="/develop/api/sell/marketing_api#sell-marketing_api-negative_keyword-getnegativekeyword.negativekeywordstatusenum">NegativeKeywordStatusEnum</a> for supported values.
+     * @return NegativeKeywordStatusEnum|null
     */
-    public function getNegativeKeywordStatus(): ?string {
+    public function getNegativeKeywordStatus(): ?NegativeKeywordStatusEnum {
         return $this->negativeKeywordStatus;
     }
 
@@ -99,7 +99,7 @@ class UpdateNegativeKeywordIdRequest implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('negativeKeywordId', $this->getNegativeKeywordId());
-        $writer->writeStringValue('negativeKeywordStatus', $this->getNegativeKeywordStatus());
+        $writer->writeEnumValue('negativeKeywordStatus', $this->getNegativeKeywordStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -112,7 +112,7 @@ class UpdateNegativeKeywordIdRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the negativeKeywordId property value. A unique eBay-assigned ID for a negative keyword. This keyword ID will be generated for each successfully created negative keyword.<br><br>Use the <a href="/api-docs/sell/marketing/resources/negative_keyword/methods/getNegativeKeywords" target="_blank">getNegativeKeywords</a> method to retrieve negative keyword IDs.
+     * Sets the negativeKeywordId property value. A unique eBay-assigned ID for a negative keyword. This keyword ID will be generated for each successfully created negative keyword.<br><br>Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-negative_keyword-getnegativekeywords">getNegativeKeywords</a> method to retrieve negative keyword IDs.
      * @param string|null $value Value to set for the negativeKeywordId property.
     */
     public function setNegativeKeywordId(?string $value): void {
@@ -120,10 +120,10 @@ class UpdateNegativeKeywordIdRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the negativeKeywordStatus property value. A field that defines the status of the negative keyword.<br><br>See <a href="/api-docs/sell/marketing/types/pls:NegativeKeywordStatusEnum" target="_blank">NegativeKeywordStatusEnum</a> for supported values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the negativeKeywordStatus property.
+     * Sets the negativeKeywordStatus property value. A field that defines the status of the negative keyword.<br><br>See <a href="/develop/api/sell/marketing_api#sell-marketing_api-negative_keyword-getnegativekeyword.negativekeywordstatusenum">NegativeKeywordStatusEnum</a> for supported values.
+     * @param NegativeKeywordStatusEnum|null $value Value to set for the negativeKeywordStatus property.
     */
-    public function setNegativeKeywordStatus(?string $value): void {
+    public function setNegativeKeywordStatus(?NegativeKeywordStatusEnum $value): void {
         $this->negativeKeywordStatus = $value;
     }
 

@@ -32,12 +32,12 @@ class CreateKeywordRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $adGroupId This <b>adGroupId</b> is created when an ad group is first created and associated with a campaign. This is the ad group that the corresponding keyword will be added to. This ad group must be a part of the campaign that is specified in the call URI. Use the <a href="/api-docs/sell/marketing/resources/adgroup/methods/getAdGroups">getAdGroups</a> method to retrieve the ad group IDs for a seller, and <a href="/api-docs/sell/marketing/resources/keywords/methods/getKeywords">getKeywords</a> to retrieve the keyword IDs for a seller's keywords.
+     * @var string|null $adGroupId This <b>adGroupId</b> is created when an ad group is first created and associated with a campaign. This is the ad group that the corresponding keyword will be added to. This ad group must be a part of the campaign that is specified in the call URI. Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group IDs for a seller, and <a href="/develop/api/sell/marketing_api#sell-marketing_api-keyword-getkeywords">getKeywords</a> to retrieve the keyword IDs for a seller's keywords.
     */
     private ?string $adGroupId = null;
     
     /**
-     * @var Amount|null $bid A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $bid This container is used to set the maximum bid for the keyword. Each time a listing is retrieved in search results using this keyword and clicked on, the seller will be charged, at most, this amount. Each click goes toward the daily budget set up for the CPC campaign. If the bid is not provided, then the default bid associated with the ad group is used.<br /><br /><span class="tablenote"><b>Note:</b> You can call the  <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-suggestbids">suggestBids</a> method to retrieve the suggested bids for keywords.</span>
     */
     private ?Amount $bid = null;
     
@@ -47,9 +47,9 @@ class CreateKeywordRequest implements AdditionalDataHolder, Parsable
     private ?string $keywordText = null;
     
     /**
-     * @var string|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
+     * @var MatchTypeEnum|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
     */
-    private ?string $matchType = null;
+    private ?MatchTypeEnum $matchType = null;
     
     /**
      * Instantiates a new CreateKeywordRequest and sets the default values.
@@ -76,7 +76,7 @@ class CreateKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adGroupId property value. This <b>adGroupId</b> is created when an ad group is first created and associated with a campaign. This is the ad group that the corresponding keyword will be added to. This ad group must be a part of the campaign that is specified in the call URI. Use the <a href="/api-docs/sell/marketing/resources/adgroup/methods/getAdGroups">getAdGroups</a> method to retrieve the ad group IDs for a seller, and <a href="/api-docs/sell/marketing/resources/keywords/methods/getKeywords">getKeywords</a> to retrieve the keyword IDs for a seller's keywords.
+     * Gets the adGroupId property value. This <b>adGroupId</b> is created when an ad group is first created and associated with a campaign. This is the ad group that the corresponding keyword will be added to. This ad group must be a part of the campaign that is specified in the call URI. Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group IDs for a seller, and <a href="/develop/api/sell/marketing_api#sell-marketing_api-keyword-getkeywords">getKeywords</a> to retrieve the keyword IDs for a seller's keywords.
      * @return string|null
     */
     public function getAdGroupId(): ?string {
@@ -84,7 +84,7 @@ class CreateKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the bid property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the bid property value. This container is used to set the maximum bid for the keyword. Each time a listing is retrieved in search results using this keyword and clicked on, the seller will be charged, at most, this amount. Each click goes toward the daily budget set up for the CPC campaign. If the bid is not provided, then the default bid associated with the ad group is used.<br /><br /><span class="tablenote"><b>Note:</b> You can call the  <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-suggestbids">suggestBids</a> method to retrieve the suggested bids for keywords.</span>
      * @return Amount|null
     */
     public function getBid(): ?Amount {
@@ -101,7 +101,7 @@ class CreateKeywordRequest implements AdditionalDataHolder, Parsable
             'adGroupId' => fn(ParseNode $n) => $o->setAdGroupId($n->getStringValue()),
             'bid' => fn(ParseNode $n) => $o->setBid($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'keywordText' => fn(ParseNode $n) => $o->setKeywordText($n->getStringValue()),
-            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getStringValue()),
+            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getEnumValue(MatchTypeEnum::class)),
         ];
     }
 
@@ -114,10 +114,10 @@ class CreateKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @return MatchTypeEnum|null
     */
-    public function getMatchType(): ?string {
+    public function getMatchType(): ?MatchTypeEnum {
         return $this->matchType;
     }
 
@@ -129,7 +129,7 @@ class CreateKeywordRequest implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('adGroupId', $this->getAdGroupId());
         $writer->writeObjectValue('bid', $this->getBid());
         $writer->writeStringValue('keywordText', $this->getKeywordText());
-        $writer->writeStringValue('matchType', $this->getMatchType());
+        $writer->writeEnumValue('matchType', $this->getMatchType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -142,7 +142,7 @@ class CreateKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adGroupId property value. This <b>adGroupId</b> is created when an ad group is first created and associated with a campaign. This is the ad group that the corresponding keyword will be added to. This ad group must be a part of the campaign that is specified in the call URI. Use the <a href="/api-docs/sell/marketing/resources/adgroup/methods/getAdGroups">getAdGroups</a> method to retrieve the ad group IDs for a seller, and <a href="/api-docs/sell/marketing/resources/keywords/methods/getKeywords">getKeywords</a> to retrieve the keyword IDs for a seller's keywords.
+     * Sets the adGroupId property value. This <b>adGroupId</b> is created when an ad group is first created and associated with a campaign. This is the ad group that the corresponding keyword will be added to. This ad group must be a part of the campaign that is specified in the call URI. Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group IDs for a seller, and <a href="/develop/api/sell/marketing_api#sell-marketing_api-keyword-getkeywords">getKeywords</a> to retrieve the keyword IDs for a seller's keywords.
      * @param string|null $value Value to set for the adGroupId property.
     */
     public function setAdGroupId(?string $value): void {
@@ -150,7 +150,7 @@ class CreateKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the bid property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the bid property value. This container is used to set the maximum bid for the keyword. Each time a listing is retrieved in search results using this keyword and clicked on, the seller will be charged, at most, this amount. Each click goes toward the daily budget set up for the CPC campaign. If the bid is not provided, then the default bid associated with the ad group is used.<br /><br /><span class="tablenote"><b>Note:</b> You can call the  <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-suggestbids">suggestBids</a> method to retrieve the suggested bids for keywords.</span>
      * @param Amount|null $value Value to set for the bid property.
     */
     public function setBid(?Amount $value): void {
@@ -166,10 +166,10 @@ class CreateKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the matchType property.
+     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @param MatchTypeEnum|null $value Value to set for the matchType property.
     */
-    public function setMatchType(?string $value): void {
+    public function setMatchType(?MatchTypeEnum $value): void {
         $this->matchType = $value;
     }
 

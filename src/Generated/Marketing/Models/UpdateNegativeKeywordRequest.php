@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that contains the fields for the <b>UpdateNegativeKeyword</b> request.
+ * A type that defines the fields for the request to update a negative keyword.
 */
 class UpdateNegativeKeywordRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,9 +32,9 @@ class UpdateNegativeKeywordRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $negativeKeywordStatus A field that defines the status of the negative keyword. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordStatusEnum'>eBay API documentation</a>
+     * @var NegativeKeywordStatusEnum|null $negativeKeywordStatus A field that defines the status of the negative keyword.
     */
-    private ?string $negativeKeywordStatus = null;
+    private ?NegativeKeywordStatusEnum $negativeKeywordStatus = null;
     
     /**
      * Instantiates a new UpdateNegativeKeywordRequest and sets the default values.
@@ -67,15 +67,15 @@ class UpdateNegativeKeywordRequest implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'negativeKeywordStatus' => fn(ParseNode $n) => $o->setNegativeKeywordStatus($n->getStringValue()),
+            'negativeKeywordStatus' => fn(ParseNode $n) => $o->setNegativeKeywordStatus($n->getEnumValue(NegativeKeywordStatusEnum::class)),
         ];
     }
 
     /**
-     * Gets the negativeKeywordStatus property value. A field that defines the status of the negative keyword. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the negativeKeywordStatus property value. A field that defines the status of the negative keyword.
+     * @return NegativeKeywordStatusEnum|null
     */
-    public function getNegativeKeywordStatus(): ?string {
+    public function getNegativeKeywordStatus(): ?NegativeKeywordStatusEnum {
         return $this->negativeKeywordStatus;
     }
 
@@ -84,7 +84,7 @@ class UpdateNegativeKeywordRequest implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('negativeKeywordStatus', $this->getNegativeKeywordStatus());
+        $writer->writeEnumValue('negativeKeywordStatus', $this->getNegativeKeywordStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -97,10 +97,10 @@ class UpdateNegativeKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the negativeKeywordStatus property value. A field that defines the status of the negative keyword. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the negativeKeywordStatus property.
+     * Sets the negativeKeywordStatus property value. A field that defines the status of the negative keyword.
+     * @param NegativeKeywordStatusEnum|null $value Value to set for the negativeKeywordStatus property.
     */
-    public function setNegativeKeywordStatus(?string $value): void {
+    public function setNegativeKeywordStatus(?NegativeKeywordStatusEnum $value): void {
         $this->negativeKeywordStatus = $value;
     }
 

@@ -42,19 +42,19 @@ class CreateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
     private ?array $ads = null;
     
     /**
-     * @var array<Error>|null $errors An array of errors or warnings associated with the create-ads request.
+     * @var array<ErrorDetailV3>|null $errors An array of errors or warnings associated with the create-ads request.
     */
     private ?array $errors = null;
     
     /**
-     * @var string|null $inventoryReferenceId An ID that identifies a single-item listing or multiple-variation listing that is managed with the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference">Inventory API</a>. <p>The <i>inventory reference ID</i> is a seller-defined value that can be either an <b>SKU</b> for a single-item listing or an <b>inventoryItemGroupKey</b> for a multiple-value listing.</p>
+     * @var string|null $inventoryReferenceId An ID that identifies a single-item listing or multiple-variation listing that is managed with the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference" target="_blank">Inventory API</a>. <p>The <i>inventory reference ID</i> is a seller-defined value that can be either an <b>SKU</b> for a single-item listing or an <b>inventoryItemGroupKey</b> for a multiple-value listing.</p>
     */
     private ?string $inventoryReferenceId = null;
     
     /**
-     * @var string|null $inventoryReferenceType Indicates the type of item the <b>inventoryReferenceId</b> references. The item can be either an <code>INVENTORY_ITEM</code> or an <code>INVENTORY_ITEM_GROUP</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
+     * @var InventoryReferenceTypeEnum|null $inventoryReferenceType Indicates the type of item the <b>inventoryReferenceId</b> references. The item can be either an <code>INVENTORY_ITEM</code> or an <code>INVENTORY_ITEM_GROUP</code>.
     */
-    private ?string $inventoryReferenceType = null;
+    private ?InventoryReferenceTypeEnum $inventoryReferenceType = null;
     
     /**
      * @var int|null $statusCode An HTTP status code that indicates the response-status of the request. Check this code to see if the ads were successfully created.
@@ -103,7 +103,7 @@ class CreateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
 
     /**
      * Gets the errors property value. An array of errors or warnings associated with the create-ads request.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -118,15 +118,15 @@ class CreateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
         return  [
             'adGroupId' => fn(ParseNode $n) => $o->setAdGroupId($n->getStringValue()),
             'ads' => fn(ParseNode $n) => $o->setAds($n->getCollectionOfObjectValues([AdReference::class, 'createFromDiscriminatorValue'])),
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
             'inventoryReferenceId' => fn(ParseNode $n) => $o->setInventoryReferenceId($n->getStringValue()),
-            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getStringValue()),
+            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getEnumValue(InventoryReferenceTypeEnum::class)),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
         ];
     }
 
     /**
-     * Gets the inventoryReferenceId property value. An ID that identifies a single-item listing or multiple-variation listing that is managed with the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference">Inventory API</a>. <p>The <i>inventory reference ID</i> is a seller-defined value that can be either an <b>SKU</b> for a single-item listing or an <b>inventoryItemGroupKey</b> for a multiple-value listing.</p>
+     * Gets the inventoryReferenceId property value. An ID that identifies a single-item listing or multiple-variation listing that is managed with the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference" target="_blank">Inventory API</a>. <p>The <i>inventory reference ID</i> is a seller-defined value that can be either an <b>SKU</b> for a single-item listing or an <b>inventoryItemGroupKey</b> for a multiple-value listing.</p>
      * @return string|null
     */
     public function getInventoryReferenceId(): ?string {
@@ -134,10 +134,10 @@ class CreateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
     }
 
     /**
-     * Gets the inventoryReferenceType property value. Indicates the type of item the <b>inventoryReferenceId</b> references. The item can be either an <code>INVENTORY_ITEM</code> or an <code>INVENTORY_ITEM_GROUP</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the inventoryReferenceType property value. Indicates the type of item the <b>inventoryReferenceId</b> references. The item can be either an <code>INVENTORY_ITEM</code> or an <code>INVENTORY_ITEM_GROUP</code>.
+     * @return InventoryReferenceTypeEnum|null
     */
-    public function getInventoryReferenceType(): ?string {
+    public function getInventoryReferenceType(): ?InventoryReferenceTypeEnum {
         return $this->inventoryReferenceType;
     }
 
@@ -158,7 +158,7 @@ class CreateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
         $writer->writeCollectionOfObjectValues('ads', $this->getAds());
         $writer->writeCollectionOfObjectValues('errors', $this->getErrors());
         $writer->writeStringValue('inventoryReferenceId', $this->getInventoryReferenceId());
-        $writer->writeStringValue('inventoryReferenceType', $this->getInventoryReferenceType());
+        $writer->writeEnumValue('inventoryReferenceType', $this->getInventoryReferenceType());
         $writer->writeIntegerValue('statusCode', $this->getStatusCode());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -189,14 +189,14 @@ class CreateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
 
     /**
      * Sets the errors property value. An array of errors or warnings associated with the create-ads request.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;
     }
 
     /**
-     * Sets the inventoryReferenceId property value. An ID that identifies a single-item listing or multiple-variation listing that is managed with the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference">Inventory API</a>. <p>The <i>inventory reference ID</i> is a seller-defined value that can be either an <b>SKU</b> for a single-item listing or an <b>inventoryItemGroupKey</b> for a multiple-value listing.</p>
+     * Sets the inventoryReferenceId property value. An ID that identifies a single-item listing or multiple-variation listing that is managed with the <a href="/api-docs/sell/inventory/resources/methods" title="Inventory API Reference" target="_blank">Inventory API</a>. <p>The <i>inventory reference ID</i> is a seller-defined value that can be either an <b>SKU</b> for a single-item listing or an <b>inventoryItemGroupKey</b> for a multiple-value listing.</p>
      * @param string|null $value Value to set for the inventoryReferenceId property.
     */
     public function setInventoryReferenceId(?string $value): void {
@@ -204,10 +204,10 @@ class CreateAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
     }
 
     /**
-     * Sets the inventoryReferenceType property value. Indicates the type of item the <b>inventoryReferenceId</b> references. The item can be either an <code>INVENTORY_ITEM</code> or an <code>INVENTORY_ITEM_GROUP</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the inventoryReferenceType property.
+     * Sets the inventoryReferenceType property value. Indicates the type of item the <b>inventoryReferenceId</b> references. The item can be either an <code>INVENTORY_ITEM</code> or an <code>INVENTORY_ITEM_GROUP</code>.
+     * @param InventoryReferenceTypeEnum|null $value Value to set for the inventoryReferenceType property.
     */
-    public function setInventoryReferenceType(?string $value): void {
+    public function setInventoryReferenceType(?InventoryReferenceTypeEnum $value): void {
         $this->inventoryReferenceType = $value;
     }
 

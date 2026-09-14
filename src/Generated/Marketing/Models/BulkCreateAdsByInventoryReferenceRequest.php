@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields used to create ads in bulk by inventory reference IDs.
+ * This request object defines the fields for the <b>BulkCreateAdsByInventoryReference</b> request.
 */
 class BulkCreateAdsByInventoryReferenceRequest implements AdditionalDataHolder, Parsable 
 {

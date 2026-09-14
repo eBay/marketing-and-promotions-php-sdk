@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that defines the data for a payment amount, such as the sale price.
+ * The suggested bid associated with the keyword. 
 */
 class ProposedBid implements AdditionalDataHolder, Parsable 
 {
@@ -32,9 +32,9 @@ class ProposedBid implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $currency The base currency applied to the <b>value</b> field to establish a monetary amount.  <br><br>The currency is represented as a 3-letter <a href="https://www.iso.org/iso-4217-currency-codes.html " title="https://www.iso.org " target="_blank">ISO 4217</a> currency code. For example, the code for the Canadian Dollar is <code>CAD</code>.  <br><br><b>Default:</b> The default currency of the eBay marketplace that hosts the listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:CurrencyCodeEnum'>eBay API documentation</a>
+     * @var CurrencyCodeEnum|null $currency The base currency applied to the <b>value</b> field to establish a monetary amount.  <br><br>The currency is represented as a 3-letter <a href="https://www.iso.org/iso-4217-currency-codes.html " title="https://www.iso.org " target="_blank">ISO 4217</a> currency code. For example, the code for the Canadian Dollar is <code>CAD</code>.  <br><br><b>Default:</b> The default currency of the eBay marketplace that hosts the listing.
     */
-    private ?string $currency = null;
+    private ?CurrencyCodeEnum $currency = null;
     
     /**
      * @var string|null $rangeEnd The end of the range specified for the bid.
@@ -76,10 +76,10 @@ class ProposedBid implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the currency property value. The base currency applied to the <b>value</b> field to establish a monetary amount.  <br><br>The currency is represented as a 3-letter <a href="https://www.iso.org/iso-4217-currency-codes.html " title="https://www.iso.org " target="_blank">ISO 4217</a> currency code. For example, the code for the Canadian Dollar is <code>CAD</code>.  <br><br><b>Default:</b> The default currency of the eBay marketplace that hosts the listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:CurrencyCodeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the currency property value. The base currency applied to the <b>value</b> field to establish a monetary amount.  <br><br>The currency is represented as a 3-letter <a href="https://www.iso.org/iso-4217-currency-codes.html " title="https://www.iso.org " target="_blank">ISO 4217</a> currency code. For example, the code for the Canadian Dollar is <code>CAD</code>.  <br><br><b>Default:</b> The default currency of the eBay marketplace that hosts the listing.
+     * @return CurrencyCodeEnum|null
     */
-    public function getCurrency(): ?string {
+    public function getCurrency(): ?CurrencyCodeEnum {
         return $this->currency;
     }
 
@@ -90,7 +90,7 @@ class ProposedBid implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'currency' => fn(ParseNode $n) => $o->setCurrency($n->getStringValue()),
+            'currency' => fn(ParseNode $n) => $o->setCurrency($n->getEnumValue(CurrencyCodeEnum::class)),
             'rangeEnd' => fn(ParseNode $n) => $o->setRangeEnd($n->getStringValue()),
             'rangeStart' => fn(ParseNode $n) => $o->setRangeStart($n->getStringValue()),
             'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
@@ -126,7 +126,7 @@ class ProposedBid implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('currency', $this->getCurrency());
+        $writer->writeEnumValue('currency', $this->getCurrency());
         $writer->writeStringValue('rangeEnd', $this->getRangeEnd());
         $writer->writeStringValue('rangeStart', $this->getRangeStart());
         $writer->writeStringValue('value', $this->getValue());
@@ -142,10 +142,10 @@ class ProposedBid implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the currency property value. The base currency applied to the <b>value</b> field to establish a monetary amount.  <br><br>The currency is represented as a 3-letter <a href="https://www.iso.org/iso-4217-currency-codes.html " title="https://www.iso.org " target="_blank">ISO 4217</a> currency code. For example, the code for the Canadian Dollar is <code>CAD</code>.  <br><br><b>Default:</b> The default currency of the eBay marketplace that hosts the listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:CurrencyCodeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the currency property.
+     * Sets the currency property value. The base currency applied to the <b>value</b> field to establish a monetary amount.  <br><br>The currency is represented as a 3-letter <a href="https://www.iso.org/iso-4217-currency-codes.html " title="https://www.iso.org " target="_blank">ISO 4217</a> currency code. For example, the code for the Canadian Dollar is <code>CAD</code>.  <br><br><b>Default:</b> The default currency of the eBay marketplace that hosts the listing.
+     * @param CurrencyCodeEnum|null $value Value to set for the currency property.
     */
-    public function setCurrency(?string $value): void {
+    public function setCurrency(?CurrencyCodeEnum $value): void {
         $this->currency = $value;
     }
 

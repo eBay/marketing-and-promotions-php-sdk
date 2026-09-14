@@ -32,9 +32,9 @@ class AdditionalInfo implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $infoType The type of additional information provided for the suggested keyword.<br /><br /><strong>Valid Value:</strong> <code>KEYWORD_INSIGHTS</code> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdditionalInfoEnum'>eBay API documentation</a>
+     * @var AdditionalInfoEnum|null $infoType The type of additional information provided for the suggested keyword.<br /><br /><strong>Valid Value:</strong> <code>KEYWORD_INSIGHTS</code>
     */
-    private ?string $infoType = null;
+    private ?AdditionalInfoEnum $infoType = null;
     
     /**
      * @var array<AdditionalInfoData>|null $metrics A list of additional data provided for the suggested keyword.
@@ -72,16 +72,16 @@ class AdditionalInfo implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'infoType' => fn(ParseNode $n) => $o->setInfoType($n->getStringValue()),
+            'infoType' => fn(ParseNode $n) => $o->setInfoType($n->getEnumValue(AdditionalInfoEnum::class)),
             'metrics' => fn(ParseNode $n) => $o->setMetrics($n->getCollectionOfObjectValues([AdditionalInfoData::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the infoType property value. The type of additional information provided for the suggested keyword.<br /><br /><strong>Valid Value:</strong> <code>KEYWORD_INSIGHTS</code> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdditionalInfoEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the infoType property value. The type of additional information provided for the suggested keyword.<br /><br /><strong>Valid Value:</strong> <code>KEYWORD_INSIGHTS</code>
+     * @return AdditionalInfoEnum|null
     */
-    public function getInfoType(): ?string {
+    public function getInfoType(): ?AdditionalInfoEnum {
         return $this->infoType;
     }
 
@@ -98,7 +98,7 @@ class AdditionalInfo implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('infoType', $this->getInfoType());
+        $writer->writeEnumValue('infoType', $this->getInfoType());
         $writer->writeCollectionOfObjectValues('metrics', $this->getMetrics());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class AdditionalInfo implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the infoType property value. The type of additional information provided for the suggested keyword.<br /><br /><strong>Valid Value:</strong> <code>KEYWORD_INSIGHTS</code> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdditionalInfoEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the infoType property.
+     * Sets the infoType property value. The type of additional information provided for the suggested keyword.<br /><br /><strong>Valid Value:</strong> <code>KEYWORD_INSIGHTS</code>
+     * @param AdditionalInfoEnum|null $value Value to set for the infoType property.
     */
-    public function setInfoType(?string $value): void {
+    public function setInfoType(?AdditionalInfoEnum $value): void {
         $this->infoType = $value;
     }
 

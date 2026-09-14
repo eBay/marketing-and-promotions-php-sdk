@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that defines the request fields used to update the ad rate strategy for a Promoted Listings ad campaign.
+ * This type defines the request fields for the ad rate strategy that shall be updated.
 */
 class UpdateAdrateStrategyRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,9 +32,9 @@ class UpdateAdrateStrategyRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $adRateStrategy This field is used to change the current ad rate strategy for a Cost Per Sale (CPS) campaign. It is not needed if the ad rate strategy is not being changed for the campaign.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for offsite campaigns.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdRateStrategyEnum'>eBay API documentation</a>
+     * @var AdRateStrategyEnum|null $adRateStrategy This field is used to change the current ad rate strategy for a Cost Per Sale (CPS) campaign. It is not needed if the ad rate strategy is not being changed for the campaign.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for offsite campaigns.</span>
     */
-    private ?string $adRateStrategy = null;
+    private ?AdRateStrategyEnum $adRateStrategy = null;
     
     /**
      * @var string|null $bidPercentage The user-defined <b>bid percentage</b> (also known as the <i>ad rate</i>) sets the level that eBay increases the visibility in search results for the associated listing. The higher the <b>bidPercentage</b> value, the more eBay promotes the listing.  <br><br>The value specified here is also used to calculate the Promoted Listings fee. This percentage value is multiplied by the final sales price to determine the fee. <br><br>The Promoted Listings fee is determined at the time the transaction completes and the seller is assessed the fee only when an item sells through a Promoted Listings ad campaign. <br><br>The <b>bidPercentage</b> is a single precision value that is guided by the following rules: <ul><li>These values are <b>valid</b>:<br>&nbsp;&nbsp;&nbsp;<code>4.1</code>, &nbsp;&nbsp;&nbsp;<code>5.0</code>, &nbsp;&nbsp;&nbsp;<code>5.5</code>, ...</li>  <li>These values are <b>not valid</b>:<br /> &nbsp;&nbsp;&nbsp;<code>0.01</code>, &nbsp;&nbsp;&nbsp;<code>10.75</code>, &nbsp;&nbsp;&nbsp;<code>99.99</code>,<br /> &nbsp;&nbsp;&nbsp;and so on.</li></ul>This is the default bid percentage for the campaigns using the Cost Per Sale (CPS) funding model, and this value will be overridden by any ads in the campaign that have their own set bid percentages.<br /><br />If a bid percentage is not provided for an ad, eBay uses the default bid percentage of the associated campaign.<br><br><span class="tablenote"><b>Note:</b> This field has a minimum value of <code>2.0</code> and a maximum value of <code>100.0</code>.</span>
@@ -71,10 +71,10 @@ class UpdateAdrateStrategyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adRateStrategy property value. This field is used to change the current ad rate strategy for a Cost Per Sale (CPS) campaign. It is not needed if the ad rate strategy is not being changed for the campaign.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for offsite campaigns.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdRateStrategyEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the adRateStrategy property value. This field is used to change the current ad rate strategy for a Cost Per Sale (CPS) campaign. It is not needed if the ad rate strategy is not being changed for the campaign.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for offsite campaigns.</span>
+     * @return AdRateStrategyEnum|null
     */
-    public function getAdRateStrategy(): ?string {
+    public function getAdRateStrategy(): ?AdRateStrategyEnum {
         return $this->adRateStrategy;
     }
 
@@ -101,7 +101,7 @@ class UpdateAdrateStrategyRequest implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'adRateStrategy' => fn(ParseNode $n) => $o->setAdRateStrategy($n->getStringValue()),
+            'adRateStrategy' => fn(ParseNode $n) => $o->setAdRateStrategy($n->getEnumValue(AdRateStrategyEnum::class)),
             'bidPercentage' => fn(ParseNode $n) => $o->setBidPercentage($n->getStringValue()),
             'dynamicAdRatePreferences' => fn(ParseNode $n) => $o->setDynamicAdRatePreferences($n->getCollectionOfObjectValues([DynamicAdRatePreference::class, 'createFromDiscriminatorValue'])),
         ];
@@ -112,7 +112,7 @@ class UpdateAdrateStrategyRequest implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('adRateStrategy', $this->getAdRateStrategy());
+        $writer->writeEnumValue('adRateStrategy', $this->getAdRateStrategy());
         $writer->writeStringValue('bidPercentage', $this->getBidPercentage());
         $writer->writeCollectionOfObjectValues('dynamicAdRatePreferences', $this->getDynamicAdRatePreferences());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -127,10 +127,10 @@ class UpdateAdrateStrategyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adRateStrategy property value. This field is used to change the current ad rate strategy for a Cost Per Sale (CPS) campaign. It is not needed if the ad rate strategy is not being changed for the campaign.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for offsite campaigns.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdRateStrategyEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the adRateStrategy property.
+     * Sets the adRateStrategy property value. This field is used to change the current ad rate strategy for a Cost Per Sale (CPS) campaign. It is not needed if the ad rate strategy is not being changed for the campaign.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for offsite campaigns.</span>
+     * @param AdRateStrategyEnum|null $value Value to set for the adRateStrategy property.
     */
-    public function setAdRateStrategy(?string $value): void {
+    public function setAdRateStrategy(?AdRateStrategyEnum $value): void {
         $this->adRateStrategy = $value;
     }
 

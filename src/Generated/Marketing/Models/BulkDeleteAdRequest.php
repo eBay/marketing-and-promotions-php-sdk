@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields that the call uses to remove ads in bulk.
+ * This request object defines the fields for the <b>bulkDeleteAdsByListingId</b> request.
 */
 class BulkDeleteAdRequest implements AdditionalDataHolder, Parsable 
 {

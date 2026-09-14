@@ -32,9 +32,9 @@ class MetricMetadata implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $dataType The data type of the returned metric value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:DataTypeEnum'>eBay API documentation</a>
+     * @var DataTypeEnum|null $dataType The data type of the returned metric value.
     */
-    private ?string $dataType = null;
+    private ?DataTypeEnum $dataType = null;
     
     /**
      * @var string|null $metricKey The name of the metric.
@@ -66,10 +66,10 @@ class MetricMetadata implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the dataType property value. The data type of the returned metric value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:DataTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the dataType property value. The data type of the returned metric value.
+     * @return DataTypeEnum|null
     */
-    public function getDataType(): ?string {
+    public function getDataType(): ?DataTypeEnum {
         return $this->dataType;
     }
 
@@ -80,7 +80,7 @@ class MetricMetadata implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'dataType' => fn(ParseNode $n) => $o->setDataType($n->getStringValue()),
+            'dataType' => fn(ParseNode $n) => $o->setDataType($n->getEnumValue(DataTypeEnum::class)),
             'metricKey' => fn(ParseNode $n) => $o->setMetricKey($n->getStringValue()),
         ];
     }
@@ -98,7 +98,7 @@ class MetricMetadata implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('dataType', $this->getDataType());
+        $writer->writeEnumValue('dataType', $this->getDataType());
         $writer->writeStringValue('metricKey', $this->getMetricKey());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class MetricMetadata implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the dataType property value. The data type of the returned metric value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:DataTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the dataType property.
+     * Sets the dataType property value. The data type of the returned metric value.
+     * @param DataTypeEnum|null $value Value to set for the dataType property.
     */
-    public function setDataType(?string $value): void {
+    public function setDataType(?DataTypeEnum $value): void {
         $this->dataType = $value;
     }
 

@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The suggested bid rate for the item.
+ * This type defines the suggested bid rate for the keyword.
 */
 class SuggestedBids implements AdditionalDataHolder, Parsable 
 {
@@ -37,12 +37,12 @@ class SuggestedBids implements AdditionalDataHolder, Parsable
     private ?string $keywordText = null;
     
     /**
-     * @var string|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
+     * @var MatchTypeEnum|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
     */
-    private ?string $matchType = null;
+    private ?MatchTypeEnum $matchType = null;
     
     /**
-     * @var ProposedBid|null $proposedBid A type that defines the data for a payment amount, such as the sale price.
+     * @var ProposedBid|null $proposedBid The suggested bid associated with the keyword. 
     */
     private ?ProposedBid $proposedBid = null;
     
@@ -78,7 +78,7 @@ class SuggestedBids implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'keywordText' => fn(ParseNode $n) => $o->setKeywordText($n->getStringValue()),
-            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getStringValue()),
+            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getEnumValue(MatchTypeEnum::class)),
             'proposedBid' => fn(ParseNode $n) => $o->setProposedBid($n->getObjectValue([ProposedBid::class, 'createFromDiscriminatorValue'])),
         ];
     }
@@ -92,15 +92,15 @@ class SuggestedBids implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @return MatchTypeEnum|null
     */
-    public function getMatchType(): ?string {
+    public function getMatchType(): ?MatchTypeEnum {
         return $this->matchType;
     }
 
     /**
-     * Gets the proposedBid property value. A type that defines the data for a payment amount, such as the sale price.
+     * Gets the proposedBid property value. The suggested bid associated with the keyword. 
      * @return ProposedBid|null
     */
     public function getProposedBid(): ?ProposedBid {
@@ -113,7 +113,7 @@ class SuggestedBids implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('keywordText', $this->getKeywordText());
-        $writer->writeStringValue('matchType', $this->getMatchType());
+        $writer->writeEnumValue('matchType', $this->getMatchType());
         $writer->writeObjectValue('proposedBid', $this->getProposedBid());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -135,15 +135,15 @@ class SuggestedBids implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the matchType property.
+     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @param MatchTypeEnum|null $value Value to set for the matchType property.
     */
-    public function setMatchType(?string $value): void {
+    public function setMatchType(?MatchTypeEnum $value): void {
         $this->matchType = $value;
     }
 
     /**
-     * Sets the proposedBid property value. A type that defines the data for a payment amount, such as the sale price.
+     * Sets the proposedBid property value. The suggested bid associated with the keyword. 
      * @param ProposedBid|null $value Value to set for the proposedBid property.
     */
     public function setProposedBid(?ProposedBid $value): void {

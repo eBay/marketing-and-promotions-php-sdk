@@ -16,6 +16,7 @@
 
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Promotion_report;
 
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\PromotionsReportPagedCollection;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,11 @@ class Promotion_reportRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Promotion_reportRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [PromotionsReportPagedCollection::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [PromotionsReportPagedCollection::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

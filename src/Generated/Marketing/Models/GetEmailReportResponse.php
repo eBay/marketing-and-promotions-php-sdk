@@ -21,6 +21,9 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
+/**
+ * This type defines the response payload for the <b>getEmailReport</b> method.
+*/
 class GetEmailReportResponse implements AdditionalDataHolder, Parsable 
 {
     /**
@@ -39,7 +42,7 @@ class GetEmailReportResponse implements AdditionalDataHolder, Parsable
     private ?int $openCount = null;
     
     /**
-     * @var Amount|null $totalSales A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $totalSales A seller's total sale amount for the time range specified by the query.
     */
     private ?Amount $totalSales = null;
     
@@ -97,7 +100,7 @@ class GetEmailReportResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the totalSales property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the totalSales property value. A seller's total sale amount for the time range specified by the query.
      * @return Amount|null
     */
     public function getTotalSales(): ?Amount {
@@ -140,7 +143,7 @@ class GetEmailReportResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the totalSales property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the totalSales property value. A seller's total sale amount for the time range specified by the query.
      * @param Amount|null $value Value to set for the totalSales property.
     */
     public function setTotalSales(?Amount $value): void {

@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This container defines the criteria for when the discounts trigger, such as the minimum quantity the buyer must purchase before the discount kicks in. The discount is applied each time the criteria defined by this container is met.  <p><b>Note:</b> When configuring the rules that govern when the discounts are applied, populate just one of the following fields in the <b>discountSpecification</b> container:</p>  <ul><li><b>minAmount</b></li> <li><b>minQuantity</b></li> <li><b>forEachQuantity</b></li> <li><b>forEachAmount</b></li></ul> <p class="tablenote"><b>Tip:</b> Refer to <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html">Configuring threshold discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> to create different types of discounts.</p>
+ * This container defines the criteria for when the discounts trigger, such as the minimum quantity that the buyer must purchase before the discount kicks in. The discount is applied each time the criteria defined by this container is met.  <p>When configuring the rules that govern when the discounts are applied, populate just one of the following fields in the <b>discountSpecification</b> container:</p>  <ul><li><b>minAmount</b></li> <li><b>minQuantity</b></li> <li><b>forEachQuantity</b></li> <li><b>forEachAmount</b></li></ul>  <p class="tablenote"><b>Important:</b> When configuring <i>volume pricing discounts</i>, only <b>minQuantity</b> is applicable as a <b>discountSpecification</b>. Also, the configuration for <b>minQuantity</b> in a volume pricing configuration is specific. In the first <b>discountSpecification</b> container, set <b>minQuantity</b> to <code>1</code>, and in the second, set <b>minQuantity</b> to <code>2</code>. If you include a third <b>discountRules</b> pair, <b>minQuantity</b> must be set to <code>3</code>, and in a fourth, it must be set to <code>4</code>. Also, you must set a <b>ruleOrder</b> value in each <b>discountRules</b> container. In the first container, <b>discountRules</b> must be set to <code>1</code>, and in each subsequent container, the value be be incremented by 1. For more, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html" target="_blank">Configuring volume pricing discounts</a>.</p> <p class="tablenote"><b>Tip:</b> see <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html" target="_blank">Configuring threshold discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> to create different types of discounts.</p>
 */
 class DiscountSpecification implements AdditionalDataHolder, Parsable 
 {
@@ -32,27 +32,27 @@ class DiscountSpecification implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $forEachAmount A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $forEachAmount The monetary amount that must be spent on discounted items before the discount is applied.  <br><br><b>Valid values</b> for the associated <code>forEachAmount</code> <b>value</b> field: <br><code>5</code>, <code>10</code>, <code>15</code>, <code>20</code>, <code>25</code>, <code>30</code>, <code>35</code>, <code>40</code>, <code>45</code>, <code>49</code>, <br> &nbsp; <code>50</code>, <code>55</code>, <code>59</code>, <code>60</code>, <code>65</code>, <code>69</code>, <code>70</code>, <code>75</code>, <code>79</code>, <code>80</code>, <br> &nbsp; <code>85</code>, <code>89</code>, <code>90</code>, <code>95</code>, <code>99</code>, <code>100</code>, <code>110</code>, <code>120</code>, <code>125</code>, <br> &nbsp; <code>149</code>, <code>150</code>, <code>175</code>, <code>199</code>, <code>200</code>, <code>249</code>, <code>250</code>, <code>299</code>, <br> &nbsp; <code>300</code>, <code>350</code>, <code>399</code>, <code>400</code>, <code>450</code>, <code>499</code>, <code>500</code>
     */
     private ?Amount $forEachAmount = null;
     
     /**
-     * @var int|null $forEachQuantity The number of items that must be purchased in order to qualify for the discount.  <br><br><b>Valid values:</b> <br><code> &nbsp; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, <br> &nbsp; 12, 13, 14, 15, 16, 17, 18, 19 <br> &nbsp; 20, 25, 50, 75, 100</code>
+     * @var int|null $forEachQuantity The number of items that must be purchased in order to qualify for the discount.  <br><br><b>Valid values:</b> <br>&nbsp; <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <br> &nbsp; <code>12</code>, <code>13</code>, <code>14</code>, <code>15</code>, <code>16</code>, <code>17</code>, <code>18</code>, <code>19</code> <br> &nbsp; <code>20</code>, <code>25</code>, <code>50</code>, <code>75</code>, <code>1001</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <br> &nbsp; <code>12</code>, <code>13</code>, <code>14</code>, <code>15</code>, <code>16</code>, <code>17</code>, <code>18</code>, <code>19</code> <br> &nbsp; <code>20</code>, <code>25</code>, <code>50</code>, <code>75</code>, <code>100</code>
     */
     private ?int $forEachQuantity = null;
     
     /**
-     * @var Amount|null $minAmount A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $minAmount Known as the "threshold amount", the minimum dollar amount that needs to be spent on discounted items in order to qualify for the discount.  <br><br><b>Valid values</b> for the associated <code>minAmount</code> <b>value</b> field: <br> &nbsp; <code>5</code>, <code>10</code>, <code>15</code>, <code>20</code>, <code>25</code>, <code>30</code>, <code>35</code>, <code>40</code>, <code>45</code>, <code>49</code>, <br> &nbsp; <code>50</code>, <code>55</code>, <code>59</code>, <code>60</code>, <code>65</code>, <code>69</code>, <code>70</code>, <code>75</code>, <code>79</code>, <code>80</code>, <br> &nbsp; <code>85</code>, <code>89</code>, <code>90</code>, <code>95</code>, <code>99</code>, <code>100</code>, <code>110</code>, <code>120</code>, <br> &nbsp; <code>125</code>, <code>149</code>, <code>150</code>, <code>175</code>, <code>199</code>, <code>200</code>, <code>249</code>, <code>250</code>, <code>299</code>, <br> &nbsp; <code>300</code>, <code>350</code>, <code>399</code>, <code>400</code>, <code>450</code>, <code>499</code>, <code>500</code>
     */
     private ?Amount $minAmount = null;
     
     /**
-     * @var int|null $minQuantity The minimum quantity of discounted items that needs to be bought in order to qualify for the discount.  <br><br><b>Valid values:</b> <br><code> &nbsp; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, <br> &nbsp; 12, 13, 14, 15, 16, 17, 18, 19 <br> &nbsp; 20, 25, 50, 75, 100</code>
+     * @var int|null $minQuantity The minimum quantity of discounted items that needs to be bought in order to qualify for the discount.  <br><br><b>Valid values:</b> <br> &nbsp; <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <br> &nbsp; <code>12</code>, <code>13</code>, <code>14</code>, <code>15</code>, <code>16</code>, <code>17</code>, <code>18</code>, <code>19</code> <br> &nbsp; <code>20</code>, <code>25</code>, <code>50</code>, <code>75</code>, <code>100</code>
     */
     private ?int $minQuantity = null;
     
     /**
-     * @var int|null $numberOfDiscountedItems Use this field to configure "Buy One Get One" (or <b>BOGO</b>) discounts.  <br><br>You must couple this field with <b>forEachQuantity</b> and an <b>amountOffItem</b> or <b>percentOffItem</b> field to configure your BOGO discount. This field is not valid with order-based discounts. <br><br>The value of this field represents the number of items to be discounted when other discount criteria is met. For example, when the buyer adds the number of items identified by the <b>forEachQuantity</b> value to their cart, they are then eligible to receive the stated discount from an additional number of like items (the number of which is identified by this field) when they add those items to their cart. To receive the discount, the buyer must purchase the number of items indicated by  <b>forEachQuantity</b> <i>plus</i> the number indicated by this field.  <br><br><b>Valid values:</b> <br><code> &nbsp; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</code>
+     * @var int|null $numberOfDiscountedItems Use this field to configure "Buy One Get One" (or <b>BOGO</b>) discounts.  <br><br>You must couple this field with <b>forEachQuantity</b> and an <b>amountOffItem</b> or <b>percentOffItem</b> field to configure your BOGO discount. This field is not valid with order-based discounts. <br><br>The value of this field represents the number of items to be discounted when other discount criteria is met. For example, when the buyer adds the number of items identified by the <b>forEachQuantity</b> value to their cart, they are then eligible to receive the stated discount from an additional number of like items (the number of which is identified by this field) when they add those items to their cart. To receive the discount, the buyer must purchase the number of items indicated by  <b>forEachQuantity</b> <i>plus</i> the number indicated by this field.  <br><br><b>Valid values:</b> <br> &nbsp; <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>
     */
     private ?int $numberOfDiscountedItems = null;
     
@@ -96,7 +96,7 @@ class DiscountSpecification implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the forEachAmount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the forEachAmount property value. The monetary amount that must be spent on discounted items before the discount is applied.  <br><br><b>Valid values</b> for the associated <code>forEachAmount</code> <b>value</b> field: <br><code>5</code>, <code>10</code>, <code>15</code>, <code>20</code>, <code>25</code>, <code>30</code>, <code>35</code>, <code>40</code>, <code>45</code>, <code>49</code>, <br> &nbsp; <code>50</code>, <code>55</code>, <code>59</code>, <code>60</code>, <code>65</code>, <code>69</code>, <code>70</code>, <code>75</code>, <code>79</code>, <code>80</code>, <br> &nbsp; <code>85</code>, <code>89</code>, <code>90</code>, <code>95</code>, <code>99</code>, <code>100</code>, <code>110</code>, <code>120</code>, <code>125</code>, <br> &nbsp; <code>149</code>, <code>150</code>, <code>175</code>, <code>199</code>, <code>200</code>, <code>249</code>, <code>250</code>, <code>299</code>, <br> &nbsp; <code>300</code>, <code>350</code>, <code>399</code>, <code>400</code>, <code>450</code>, <code>499</code>, <code>500</code>
      * @return Amount|null
     */
     public function getForEachAmount(): ?Amount {
@@ -104,7 +104,7 @@ class DiscountSpecification implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the forEachQuantity property value. The number of items that must be purchased in order to qualify for the discount.  <br><br><b>Valid values:</b> <br><code> &nbsp; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, <br> &nbsp; 12, 13, 14, 15, 16, 17, 18, 19 <br> &nbsp; 20, 25, 50, 75, 100</code>
+     * Gets the forEachQuantity property value. The number of items that must be purchased in order to qualify for the discount.  <br><br><b>Valid values:</b> <br>&nbsp; <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <br> &nbsp; <code>12</code>, <code>13</code>, <code>14</code>, <code>15</code>, <code>16</code>, <code>17</code>, <code>18</code>, <code>19</code> <br> &nbsp; <code>20</code>, <code>25</code>, <code>50</code>, <code>75</code>, <code>1001</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <br> &nbsp; <code>12</code>, <code>13</code>, <code>14</code>, <code>15</code>, <code>16</code>, <code>17</code>, <code>18</code>, <code>19</code> <br> &nbsp; <code>20</code>, <code>25</code>, <code>50</code>, <code>75</code>, <code>100</code>
      * @return int|null
     */
     public function getForEachQuantity(): ?int {
@@ -112,7 +112,7 @@ class DiscountSpecification implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the minAmount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the minAmount property value. Known as the "threshold amount", the minimum dollar amount that needs to be spent on discounted items in order to qualify for the discount.  <br><br><b>Valid values</b> for the associated <code>minAmount</code> <b>value</b> field: <br> &nbsp; <code>5</code>, <code>10</code>, <code>15</code>, <code>20</code>, <code>25</code>, <code>30</code>, <code>35</code>, <code>40</code>, <code>45</code>, <code>49</code>, <br> &nbsp; <code>50</code>, <code>55</code>, <code>59</code>, <code>60</code>, <code>65</code>, <code>69</code>, <code>70</code>, <code>75</code>, <code>79</code>, <code>80</code>, <br> &nbsp; <code>85</code>, <code>89</code>, <code>90</code>, <code>95</code>, <code>99</code>, <code>100</code>, <code>110</code>, <code>120</code>, <br> &nbsp; <code>125</code>, <code>149</code>, <code>150</code>, <code>175</code>, <code>199</code>, <code>200</code>, <code>249</code>, <code>250</code>, <code>299</code>, <br> &nbsp; <code>300</code>, <code>350</code>, <code>399</code>, <code>400</code>, <code>450</code>, <code>499</code>, <code>500</code>
      * @return Amount|null
     */
     public function getMinAmount(): ?Amount {
@@ -120,7 +120,7 @@ class DiscountSpecification implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the minQuantity property value. The minimum quantity of discounted items that needs to be bought in order to qualify for the discount.  <br><br><b>Valid values:</b> <br><code> &nbsp; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, <br> &nbsp; 12, 13, 14, 15, 16, 17, 18, 19 <br> &nbsp; 20, 25, 50, 75, 100</code>
+     * Gets the minQuantity property value. The minimum quantity of discounted items that needs to be bought in order to qualify for the discount.  <br><br><b>Valid values:</b> <br> &nbsp; <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <br> &nbsp; <code>12</code>, <code>13</code>, <code>14</code>, <code>15</code>, <code>16</code>, <code>17</code>, <code>18</code>, <code>19</code> <br> &nbsp; <code>20</code>, <code>25</code>, <code>50</code>, <code>75</code>, <code>100</code>
      * @return int|null
     */
     public function getMinQuantity(): ?int {
@@ -128,7 +128,7 @@ class DiscountSpecification implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the numberOfDiscountedItems property value. Use this field to configure "Buy One Get One" (or <b>BOGO</b>) discounts.  <br><br>You must couple this field with <b>forEachQuantity</b> and an <b>amountOffItem</b> or <b>percentOffItem</b> field to configure your BOGO discount. This field is not valid with order-based discounts. <br><br>The value of this field represents the number of items to be discounted when other discount criteria is met. For example, when the buyer adds the number of items identified by the <b>forEachQuantity</b> value to their cart, they are then eligible to receive the stated discount from an additional number of like items (the number of which is identified by this field) when they add those items to their cart. To receive the discount, the buyer must purchase the number of items indicated by  <b>forEachQuantity</b> <i>plus</i> the number indicated by this field.  <br><br><b>Valid values:</b> <br><code> &nbsp; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</code>
+     * Gets the numberOfDiscountedItems property value. Use this field to configure "Buy One Get One" (or <b>BOGO</b>) discounts.  <br><br>You must couple this field with <b>forEachQuantity</b> and an <b>amountOffItem</b> or <b>percentOffItem</b> field to configure your BOGO discount. This field is not valid with order-based discounts. <br><br>The value of this field represents the number of items to be discounted when other discount criteria is met. For example, when the buyer adds the number of items identified by the <b>forEachQuantity</b> value to their cart, they are then eligible to receive the stated discount from an additional number of like items (the number of which is identified by this field) when they add those items to their cart. To receive the discount, the buyer must purchase the number of items indicated by  <b>forEachQuantity</b> <i>plus</i> the number indicated by this field.  <br><br><b>Valid values:</b> <br> &nbsp; <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>
      * @return int|null
     */
     public function getNumberOfDiscountedItems(): ?int {
@@ -157,7 +157,7 @@ class DiscountSpecification implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the forEachAmount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the forEachAmount property value. The monetary amount that must be spent on discounted items before the discount is applied.  <br><br><b>Valid values</b> for the associated <code>forEachAmount</code> <b>value</b> field: <br><code>5</code>, <code>10</code>, <code>15</code>, <code>20</code>, <code>25</code>, <code>30</code>, <code>35</code>, <code>40</code>, <code>45</code>, <code>49</code>, <br> &nbsp; <code>50</code>, <code>55</code>, <code>59</code>, <code>60</code>, <code>65</code>, <code>69</code>, <code>70</code>, <code>75</code>, <code>79</code>, <code>80</code>, <br> &nbsp; <code>85</code>, <code>89</code>, <code>90</code>, <code>95</code>, <code>99</code>, <code>100</code>, <code>110</code>, <code>120</code>, <code>125</code>, <br> &nbsp; <code>149</code>, <code>150</code>, <code>175</code>, <code>199</code>, <code>200</code>, <code>249</code>, <code>250</code>, <code>299</code>, <br> &nbsp; <code>300</code>, <code>350</code>, <code>399</code>, <code>400</code>, <code>450</code>, <code>499</code>, <code>500</code>
      * @param Amount|null $value Value to set for the forEachAmount property.
     */
     public function setForEachAmount(?Amount $value): void {
@@ -165,7 +165,7 @@ class DiscountSpecification implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the forEachQuantity property value. The number of items that must be purchased in order to qualify for the discount.  <br><br><b>Valid values:</b> <br><code> &nbsp; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, <br> &nbsp; 12, 13, 14, 15, 16, 17, 18, 19 <br> &nbsp; 20, 25, 50, 75, 100</code>
+     * Sets the forEachQuantity property value. The number of items that must be purchased in order to qualify for the discount.  <br><br><b>Valid values:</b> <br>&nbsp; <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <br> &nbsp; <code>12</code>, <code>13</code>, <code>14</code>, <code>15</code>, <code>16</code>, <code>17</code>, <code>18</code>, <code>19</code> <br> &nbsp; <code>20</code>, <code>25</code>, <code>50</code>, <code>75</code>, <code>1001</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <br> &nbsp; <code>12</code>, <code>13</code>, <code>14</code>, <code>15</code>, <code>16</code>, <code>17</code>, <code>18</code>, <code>19</code> <br> &nbsp; <code>20</code>, <code>25</code>, <code>50</code>, <code>75</code>, <code>100</code>
      * @param int|null $value Value to set for the forEachQuantity property.
     */
     public function setForEachQuantity(?int $value): void {
@@ -173,7 +173,7 @@ class DiscountSpecification implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the minAmount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the minAmount property value. Known as the "threshold amount", the minimum dollar amount that needs to be spent on discounted items in order to qualify for the discount.  <br><br><b>Valid values</b> for the associated <code>minAmount</code> <b>value</b> field: <br> &nbsp; <code>5</code>, <code>10</code>, <code>15</code>, <code>20</code>, <code>25</code>, <code>30</code>, <code>35</code>, <code>40</code>, <code>45</code>, <code>49</code>, <br> &nbsp; <code>50</code>, <code>55</code>, <code>59</code>, <code>60</code>, <code>65</code>, <code>69</code>, <code>70</code>, <code>75</code>, <code>79</code>, <code>80</code>, <br> &nbsp; <code>85</code>, <code>89</code>, <code>90</code>, <code>95</code>, <code>99</code>, <code>100</code>, <code>110</code>, <code>120</code>, <br> &nbsp; <code>125</code>, <code>149</code>, <code>150</code>, <code>175</code>, <code>199</code>, <code>200</code>, <code>249</code>, <code>250</code>, <code>299</code>, <br> &nbsp; <code>300</code>, <code>350</code>, <code>399</code>, <code>400</code>, <code>450</code>, <code>499</code>, <code>500</code>
      * @param Amount|null $value Value to set for the minAmount property.
     */
     public function setMinAmount(?Amount $value): void {
@@ -181,7 +181,7 @@ class DiscountSpecification implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the minQuantity property value. The minimum quantity of discounted items that needs to be bought in order to qualify for the discount.  <br><br><b>Valid values:</b> <br><code> &nbsp; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, <br> &nbsp; 12, 13, 14, 15, 16, 17, 18, 19 <br> &nbsp; 20, 25, 50, 75, 100</code>
+     * Sets the minQuantity property value. The minimum quantity of discounted items that needs to be bought in order to qualify for the discount.  <br><br><b>Valid values:</b> <br> &nbsp; <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <br> &nbsp; <code>12</code>, <code>13</code>, <code>14</code>, <code>15</code>, <code>16</code>, <code>17</code>, <code>18</code>, <code>19</code> <br> &nbsp; <code>20</code>, <code>25</code>, <code>50</code>, <code>75</code>, <code>100</code>
      * @param int|null $value Value to set for the minQuantity property.
     */
     public function setMinQuantity(?int $value): void {
@@ -189,7 +189,7 @@ class DiscountSpecification implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the numberOfDiscountedItems property value. Use this field to configure "Buy One Get One" (or <b>BOGO</b>) discounts.  <br><br>You must couple this field with <b>forEachQuantity</b> and an <b>amountOffItem</b> or <b>percentOffItem</b> field to configure your BOGO discount. This field is not valid with order-based discounts. <br><br>The value of this field represents the number of items to be discounted when other discount criteria is met. For example, when the buyer adds the number of items identified by the <b>forEachQuantity</b> value to their cart, they are then eligible to receive the stated discount from an additional number of like items (the number of which is identified by this field) when they add those items to their cart. To receive the discount, the buyer must purchase the number of items indicated by  <b>forEachQuantity</b> <i>plus</i> the number indicated by this field.  <br><br><b>Valid values:</b> <br><code> &nbsp; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</code>
+     * Sets the numberOfDiscountedItems property value. Use this field to configure "Buy One Get One" (or <b>BOGO</b>) discounts.  <br><br>You must couple this field with <b>forEachQuantity</b> and an <b>amountOffItem</b> or <b>percentOffItem</b> field to configure your BOGO discount. This field is not valid with order-based discounts. <br><br>The value of this field represents the number of items to be discounted when other discount criteria is met. For example, when the buyer adds the number of items identified by the <b>forEachQuantity</b> value to their cart, they are then eligible to receive the stated discount from an additional number of like items (the number of which is identified by this field) when they add those items to their cart. To receive the discount, the buyer must purchase the number of items indicated by  <b>forEachQuantity</b> <i>plus</i> the number indicated by this field.  <br><br><b>Valid values:</b> <br> &nbsp; <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>
      * @param int|null $value Value to set for the numberOfDiscountedItems property.
     */
     public function setNumberOfDiscountedItems(?int $value): void {

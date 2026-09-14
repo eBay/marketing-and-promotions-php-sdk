@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that defines the fields used by the <b>Keyword</b> method.
+ * A type that defines the fields used by the <b>keyword</b> requests.
 */
 class KeywordRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,14 +32,14 @@ class KeywordRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $keywordText The text of the keyword. Keywords are not case sensitive and compound words can be used without additional encoding (for example, tennis ball).<br><br>You can use the <a href="/api-docs/sell/marketing/resources/keyword/methods/getKeywords">getKeywords</a> method to retrieve keyword values currently associated with the specified ad group.<br /><br /><b>Maximum number of characters: </b>100 <br /><br /><b>Maximum number of words: </b>10 
+     * @var string|null $keywordText The text of the keyword. Keywords are not case sensitive and compound words can be used without additional encoding (for example, tennis ball).<br><br>You can use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-keyword-getkeywords">getKeywords</a> method to retrieve keyword values currently associated with the specified ad group.<br /><br /><b>Maximum number of characters: </b>100 <br /><br /><b>Maximum number of words: </b>10 
     */
     private ?string $keywordText = null;
     
     /**
-     * @var string|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
+     * @var MatchTypeEnum|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
     */
-    private ?string $matchType = null;
+    private ?MatchTypeEnum $matchType = null;
     
     /**
      * Instantiates a new KeywordRequest and sets the default values.
@@ -73,12 +73,12 @@ class KeywordRequest implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'keywordText' => fn(ParseNode $n) => $o->setKeywordText($n->getStringValue()),
-            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getStringValue()),
+            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getEnumValue(MatchTypeEnum::class)),
         ];
     }
 
     /**
-     * Gets the keywordText property value. The text of the keyword. Keywords are not case sensitive and compound words can be used without additional encoding (for example, tennis ball).<br><br>You can use the <a href="/api-docs/sell/marketing/resources/keyword/methods/getKeywords">getKeywords</a> method to retrieve keyword values currently associated with the specified ad group.<br /><br /><b>Maximum number of characters: </b>100 <br /><br /><b>Maximum number of words: </b>10 
+     * Gets the keywordText property value. The text of the keyword. Keywords are not case sensitive and compound words can be used without additional encoding (for example, tennis ball).<br><br>You can use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-keyword-getkeywords">getKeywords</a> method to retrieve keyword values currently associated with the specified ad group.<br /><br /><b>Maximum number of characters: </b>100 <br /><br /><b>Maximum number of words: </b>10 
      * @return string|null
     */
     public function getKeywordText(): ?string {
@@ -86,10 +86,10 @@ class KeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @return MatchTypeEnum|null
     */
-    public function getMatchType(): ?string {
+    public function getMatchType(): ?MatchTypeEnum {
         return $this->matchType;
     }
 
@@ -99,7 +99,7 @@ class KeywordRequest implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('keywordText', $this->getKeywordText());
-        $writer->writeStringValue('matchType', $this->getMatchType());
+        $writer->writeEnumValue('matchType', $this->getMatchType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -112,7 +112,7 @@ class KeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the keywordText property value. The text of the keyword. Keywords are not case sensitive and compound words can be used without additional encoding (for example, tennis ball).<br><br>You can use the <a href="/api-docs/sell/marketing/resources/keyword/methods/getKeywords">getKeywords</a> method to retrieve keyword values currently associated with the specified ad group.<br /><br /><b>Maximum number of characters: </b>100 <br /><br /><b>Maximum number of words: </b>10 
+     * Sets the keywordText property value. The text of the keyword. Keywords are not case sensitive and compound words can be used without additional encoding (for example, tennis ball).<br><br>You can use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-keyword-getkeywords">getKeywords</a> method to retrieve keyword values currently associated with the specified ad group.<br /><br /><b>Maximum number of characters: </b>100 <br /><br /><b>Maximum number of words: </b>10 
      * @param string|null $value Value to set for the keywordText property.
     */
     public function setKeywordText(?string $value): void {
@@ -120,10 +120,10 @@ class KeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the matchType property.
+     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @param MatchTypeEnum|null $value Value to set for the matchType property.
     */
-    public function setMatchType(?string $value): void {
+    public function setMatchType(?MatchTypeEnum $value): void {
         $this->matchType = $value;
     }
 

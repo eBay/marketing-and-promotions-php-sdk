@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields in an Discounts Manager Summary report. Reports are formatted in JSON. For more details, see <a href="/api-docs/sell/static/marketing/pm-summary-reports.html">Reading item discount Summary reports</a>.
+ * This type defines the fields in an Discounts Manager Summary report. Reports are formatted in JSON. For more details, see <a href="/api-docs/sell/static/marketing/pm-summary-reports.html" target="_blank">Reading item discount Summary reports</a>.
 */
 class SummaryReportResponse implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class SummaryReportResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $baseSale A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $baseSale The total revenue from all the purchased items that were part of a discount but <i>did not trigger</i> a discount during the discount period.
     */
     private ?Amount $baseSale = null;
     
@@ -47,12 +47,12 @@ class SummaryReportResponse implements AdditionalDataHolder, Parsable
     private ?string $percentageSalesLift = null;
     
     /**
-     * @var Amount|null $promotionSale A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $promotionSale The total revenue from all the purchased items that were part of a discount and their purchase <i>did trigger</i> a discount during the discount period.
     */
     private ?Amount $promotionSale = null;
     
     /**
-     * @var Amount|null $totalSale A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $totalSale Total dollar sales amount of all the seller's listings, current to the date the report was generated.
     */
     private ?Amount $totalSale = null;
     
@@ -81,7 +81,7 @@ class SummaryReportResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the baseSale property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the baseSale property value. The total revenue from all the purchased items that were part of a discount but <i>did not trigger</i> a discount during the discount period.
      * @return Amount|null
     */
     public function getBaseSale(): ?Amount {
@@ -120,7 +120,7 @@ class SummaryReportResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the promotionSale property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the promotionSale property value. The total revenue from all the purchased items that were part of a discount and their purchase <i>did trigger</i> a discount during the discount period.
      * @return Amount|null
     */
     public function getPromotionSale(): ?Amount {
@@ -128,7 +128,7 @@ class SummaryReportResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the totalSale property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the totalSale property value. Total dollar sales amount of all the seller's listings, current to the date the report was generated.
      * @return Amount|null
     */
     public function getTotalSale(): ?Amount {
@@ -157,7 +157,7 @@ class SummaryReportResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the baseSale property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the baseSale property value. The total revenue from all the purchased items that were part of a discount but <i>did not trigger</i> a discount during the discount period.
      * @param Amount|null $value Value to set for the baseSale property.
     */
     public function setBaseSale(?Amount $value): void {
@@ -181,7 +181,7 @@ class SummaryReportResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the promotionSale property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the promotionSale property value. The total revenue from all the purchased items that were part of a discount and their purchase <i>did trigger</i> a discount during the discount period.
      * @param Amount|null $value Value to set for the promotionSale property.
     */
     public function setPromotionSale(?Amount $value): void {
@@ -189,7 +189,7 @@ class SummaryReportResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the totalSale property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the totalSale property value. Total dollar sales amount of all the seller's listings, current to the date the report was generated.
      * @param Amount|null $value Value to set for the totalSale property.
     */
     public function setTotalSale(?Amount $value): void {

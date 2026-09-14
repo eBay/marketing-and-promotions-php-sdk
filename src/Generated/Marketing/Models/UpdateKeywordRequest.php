@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that contains the fields for the <b>UpdateKeyword</b> request.
+ * A type that defines the fields for the request to update a keyword.
 */
 class UpdateKeywordRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,14 +32,14 @@ class UpdateKeywordRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $bid A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $bid This container is used to set or change the bid for the keyword. Each time a listing is retrieved in search results using this keyword and clicked on, the seller will be charged this amount. Each click goes toward the daily budget set up for the CPC campaign. If the bid is not provided, then the default bid associated with the ad group is used.
     */
     private ?Amount $bid = null;
     
     /**
-     * @var string|null $keywordStatus Include this field if you wish to change the status of the keyword. The status value specified here must be different than the keyword's current status. To confirm the current status of a keyword, you can use the <a href="/api-docs/sell/marketing/resources/keyword/methods/getKeyword">getKeyword</a> method.</p><p>If the status of the ad is currently <code>ACTIVE</code>, you can change status to <code>PAUSED</code> or <code>ARCHIVED</code>. If ad group is currently in <code>PAUSED</code> status, you can change the status back to <code>ACTIVE</code>. Ads that are currently in <code>ARCHIVED</code> status cannot be made <code>ACTIVE</code> again. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:KeywordStatusEnum'>eBay API documentation</a>
+     * @var KeywordStatusEnum|null $keywordStatus Include this field if you wish to change the status of the keyword. The status value specified here must be different than the keyword's current status. To confirm the current status of a keyword, you can use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-keyword-getkeyword">getKeyword</a> method.</p><p>If the status of the ad is currently <code>ACTIVE</code>, you can change status to <code>PAUSED</code> or <code>ARCHIVED</code>. If ad group is currently in <code>PAUSED</code> status, you can change the status back to <code>ACTIVE</code>. Ads that are currently in <code>ARCHIVED</code> status cannot be made <code>ACTIVE</code> again.
     */
-    private ?string $keywordStatus = null;
+    private ?KeywordStatusEnum $keywordStatus = null;
     
     /**
      * Instantiates a new UpdateKeywordRequest and sets the default values.
@@ -66,7 +66,7 @@ class UpdateKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the bid property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the bid property value. This container is used to set or change the bid for the keyword. Each time a listing is retrieved in search results using this keyword and clicked on, the seller will be charged this amount. Each click goes toward the daily budget set up for the CPC campaign. If the bid is not provided, then the default bid associated with the ad group is used.
      * @return Amount|null
     */
     public function getBid(): ?Amount {
@@ -81,15 +81,15 @@ class UpdateKeywordRequest implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'bid' => fn(ParseNode $n) => $o->setBid($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'keywordStatus' => fn(ParseNode $n) => $o->setKeywordStatus($n->getStringValue()),
+            'keywordStatus' => fn(ParseNode $n) => $o->setKeywordStatus($n->getEnumValue(KeywordStatusEnum::class)),
         ];
     }
 
     /**
-     * Gets the keywordStatus property value. Include this field if you wish to change the status of the keyword. The status value specified here must be different than the keyword's current status. To confirm the current status of a keyword, you can use the <a href="/api-docs/sell/marketing/resources/keyword/methods/getKeyword">getKeyword</a> method.</p><p>If the status of the ad is currently <code>ACTIVE</code>, you can change status to <code>PAUSED</code> or <code>ARCHIVED</code>. If ad group is currently in <code>PAUSED</code> status, you can change the status back to <code>ACTIVE</code>. Ads that are currently in <code>ARCHIVED</code> status cannot be made <code>ACTIVE</code> again. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:KeywordStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the keywordStatus property value. Include this field if you wish to change the status of the keyword. The status value specified here must be different than the keyword's current status. To confirm the current status of a keyword, you can use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-keyword-getkeyword">getKeyword</a> method.</p><p>If the status of the ad is currently <code>ACTIVE</code>, you can change status to <code>PAUSED</code> or <code>ARCHIVED</code>. If ad group is currently in <code>PAUSED</code> status, you can change the status back to <code>ACTIVE</code>. Ads that are currently in <code>ARCHIVED</code> status cannot be made <code>ACTIVE</code> again.
+     * @return KeywordStatusEnum|null
     */
-    public function getKeywordStatus(): ?string {
+    public function getKeywordStatus(): ?KeywordStatusEnum {
         return $this->keywordStatus;
     }
 
@@ -99,7 +99,7 @@ class UpdateKeywordRequest implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('bid', $this->getBid());
-        $writer->writeStringValue('keywordStatus', $this->getKeywordStatus());
+        $writer->writeEnumValue('keywordStatus', $this->getKeywordStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -112,7 +112,7 @@ class UpdateKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the bid property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the bid property value. This container is used to set or change the bid for the keyword. Each time a listing is retrieved in search results using this keyword and clicked on, the seller will be charged this amount. Each click goes toward the daily budget set up for the CPC campaign. If the bid is not provided, then the default bid associated with the ad group is used.
      * @param Amount|null $value Value to set for the bid property.
     */
     public function setBid(?Amount $value): void {
@@ -120,10 +120,10 @@ class UpdateKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the keywordStatus property value. Include this field if you wish to change the status of the keyword. The status value specified here must be different than the keyword's current status. To confirm the current status of a keyword, you can use the <a href="/api-docs/sell/marketing/resources/keyword/methods/getKeyword">getKeyword</a> method.</p><p>If the status of the ad is currently <code>ACTIVE</code>, you can change status to <code>PAUSED</code> or <code>ARCHIVED</code>. If ad group is currently in <code>PAUSED</code> status, you can change the status back to <code>ACTIVE</code>. Ads that are currently in <code>ARCHIVED</code> status cannot be made <code>ACTIVE</code> again. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:KeywordStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the keywordStatus property.
+     * Sets the keywordStatus property value. Include this field if you wish to change the status of the keyword. The status value specified here must be different than the keyword's current status. To confirm the current status of a keyword, you can use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-keyword-getkeyword">getKeyword</a> method.</p><p>If the status of the ad is currently <code>ACTIVE</code>, you can change status to <code>PAUSED</code> or <code>ARCHIVED</code>. If ad group is currently in <code>PAUSED</code> status, you can change the status back to <code>ACTIVE</code>. Ads that are currently in <code>ARCHIVED</code> status cannot be made <code>ACTIVE</code> again.
+     * @param KeywordStatusEnum|null $value Value to set for the keywordStatus property.
     */
-    public function setKeywordStatus(?string $value): void {
+    public function setKeywordStatus(?KeywordStatusEnum $value): void {
         $this->keywordStatus = $value;
     }
 

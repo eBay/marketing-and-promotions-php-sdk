@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields needed for a clone-campaign request.
+ * This type defines the fields for a clone campaign request.
 */
 class CloneCampaignRequest implements AdditionalDataHolder, Parsable 
 {
@@ -37,12 +37,12 @@ class CloneCampaignRequest implements AdditionalDataHolder, Parsable
     private ?string $campaignName = null;
     
     /**
-     * @var string|null $endDate The date and time the campaign ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). If this field is omitted, the campaign will have no defined end date, and will not end until the seller makes a decision to end the campaign with an <a href="/api-docs/sell/marketing/resources/campaign/methods/endCampaign">endCampaign</a> call, or if they update the campaign at a later time with an end date.
+     * @var string|null $endDate The date and time the campaign ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). If this field is omitted, the campaign will have no defined end date, and will not end until the seller makes a decision to end the campaign with an <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-endcampaign">endCampaign</a> call, or if they update the campaign at a later time with an end date.
     */
     private ?string $endDate = null;
     
     /**
-     * @var FundingStrategy|null $fundingStrategy This type defines how the Promoted Listings fee is calculated for a Promoted Listings ad campaign.
+     * @var FundingStrategy|null $fundingStrategy This container includes parameters that define an ad campaign funding strategy. The set of seller-configurable parameters depends on the selected <b>fundingModel</b> value.
     */
     private ?FundingStrategy $fundingStrategy = null;
     
@@ -84,7 +84,7 @@ class CloneCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the endDate property value. The date and time the campaign ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). If this field is omitted, the campaign will have no defined end date, and will not end until the seller makes a decision to end the campaign with an <a href="/api-docs/sell/marketing/resources/campaign/methods/endCampaign">endCampaign</a> call, or if they update the campaign at a later time with an end date.
+     * Gets the endDate property value. The date and time the campaign ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). If this field is omitted, the campaign will have no defined end date, and will not end until the seller makes a decision to end the campaign with an <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-endcampaign">endCampaign</a> call, or if they update the campaign at a later time with an end date.
      * @return string|null
     */
     public function getEndDate(): ?string {
@@ -106,7 +106,7 @@ class CloneCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the fundingStrategy property value. This type defines how the Promoted Listings fee is calculated for a Promoted Listings ad campaign.
+     * Gets the fundingStrategy property value. This container includes parameters that define an ad campaign funding strategy. The set of seller-configurable parameters depends on the selected <b>fundingModel</b> value.
      * @return FundingStrategy|null
     */
     public function getFundingStrategy(): ?FundingStrategy {
@@ -150,7 +150,7 @@ class CloneCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the endDate property value. The date and time the campaign ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). If this field is omitted, the campaign will have no defined end date, and will not end until the seller makes a decision to end the campaign with an <a href="/api-docs/sell/marketing/resources/campaign/methods/endCampaign">endCampaign</a> call, or if they update the campaign at a later time with an end date.
+     * Sets the endDate property value. The date and time the campaign ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). If this field is omitted, the campaign will have no defined end date, and will not end until the seller makes a decision to end the campaign with an <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-endcampaign">endCampaign</a> call, or if they update the campaign at a later time with an end date.
      * @param string|null $value Value to set for the endDate property.
     */
     public function setEndDate(?string $value): void {
@@ -158,7 +158,7 @@ class CloneCampaignRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the fundingStrategy property value. This type defines how the Promoted Listings fee is calculated for a Promoted Listings ad campaign.
+     * Sets the fundingStrategy property value. This container includes parameters that define an ad campaign funding strategy. The set of seller-configurable parameters depends on the selected <b>fundingModel</b> value.
      * @param FundingStrategy|null $value Value to set for the fundingStrategy property.
     */
     public function setFundingStrategy(?FundingStrategy $value): void {

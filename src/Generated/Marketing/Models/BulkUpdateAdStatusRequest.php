@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that defines the fields for the <b>BulkUpdateAdStatus</b> request.
+ * The bulk request to update the ads.
 */
 class BulkUpdateAdStatusRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class BulkUpdateAdStatusRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<UpdateAdStatusRequest>|null $requests An array of listing IDs and bid percentages.
+     * @var array<UpdateAdStatusRequest>|null $requests An array of listing IDs and <b>adStatus</b> pairs.
     */
     private ?array $requests = null;
     
@@ -72,7 +72,7 @@ class BulkUpdateAdStatusRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the requests property value. An array of listing IDs and bid percentages.
+     * Gets the requests property value. An array of listing IDs and <b>adStatus</b> pairs.
      * @return array<UpdateAdStatusRequest>|null
     */
     public function getRequests(): ?array {
@@ -97,7 +97,7 @@ class BulkUpdateAdStatusRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the requests property value. An array of listing IDs and bid percentages.
+     * Sets the requests property value. An array of listing IDs and <b>adStatus</b> pairs.
      * @param array<UpdateAdStatusRequest>|null $value Value to set for the requests property.
     */
     public function setRequests(?array $value): void {

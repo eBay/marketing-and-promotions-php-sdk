@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The price range.
+ * This container is used if the seller wants to apply the email campaign to listings based on a price range.<br><br>The <b>priceRange</b> container consists of the <b>currency</b>, <b>gte</b>, and <b>lte</b> fields.<br><br> "gte" stands for "greater than or equal to" and "lte" stands for "less than or equal to". Either <b>gte</b>, <b>lte</b>, or both must be used.<br><br><b>currency</b> is a required field if including a price range. One of the three-digit currency codes from <b>CurrencyCodeEnum</b> must be specified.<br><br><span class="tablenote"><b>Note: </b>Use this object when the <b>itemSelectMode</b> is set to <code>AUTO</code>.</span>
 */
 class PriceRange implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class PriceRange implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $currency Specifies the currency of the listings in an email campaign using one of the three-digit codes of the <a href="/api-docs/sell/marketing/types/ba:CurrencyCodeEnum" target="_blank">CurrencyCodeEnum</a> type.
+     * @var string|null $currency Specifies the currency of the listings in an email campaign using one of the three-digit codes of the <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailreport.currencycodeenum">CurrencyCodeEnum</a> type.
     */
     private ?string $currency = null;
     
@@ -71,7 +71,7 @@ class PriceRange implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the currency property value. Specifies the currency of the listings in an email campaign using one of the three-digit codes of the <a href="/api-docs/sell/marketing/types/ba:CurrencyCodeEnum" target="_blank">CurrencyCodeEnum</a> type.
+     * Gets the currency property value. Specifies the currency of the listings in an email campaign using one of the three-digit codes of the <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailreport.currencycodeenum">CurrencyCodeEnum</a> type.
      * @return string|null
     */
     public function getCurrency(): ?string {
@@ -127,7 +127,7 @@ class PriceRange implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the currency property value. Specifies the currency of the listings in an email campaign using one of the three-digit codes of the <a href="/api-docs/sell/marketing/types/ba:CurrencyCodeEnum" target="_blank">CurrencyCodeEnum</a> type.
+     * Sets the currency property value. Specifies the currency of the listings in an email campaign using one of the three-digit codes of the <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailreport.currencycodeenum">CurrencyCodeEnum</a> type.
      * @param string|null $value Value to set for the currency property.
     */
     public function setCurrency(?string $value): void {

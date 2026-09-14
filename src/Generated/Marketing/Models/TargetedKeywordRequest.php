@@ -23,7 +23,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * A type that provides details for the targeted keywords.
+ * The required data to retrieve suggested keywords.
 */
 class TargetedKeywordRequest implements AdditionalDataHolder, Parsable 
 {
@@ -33,12 +33,12 @@ class TargetedKeywordRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<string>|null $additionalInfo A field used to indicate whether additional information and insight data shall be provided for suggested keywords.<br><br>Use this array to retrieve keyword insights, including active seller count and search volume.<br /><br /><strong>Valid Value:</strong> <code>KEYWORD_INSIGHTS</code>
+     * @var array<AdditionalInfoEnum>|null $additionalInfo A field used to indicate whether additional information and insight data shall be provided for suggested keywords.<br><br>Use this array to retrieve keyword insights, including active seller count and search volume.<br /><br /><strong>Valid Value:</strong> <code>KEYWORD_INSIGHTS</code>
     */
     private ?array $additionalInfo = null;
     
     /**
-     * @var array<string>|null $exclusions A field used to indicate that the keywords already selected by sellers for the specified listing IDs should be filtered out of the response, and only new and unique keyword recommendations shall be returned.<br /><br /><strong>Valid Value:</strong> <code>ADOPTED_KEYWORDS</code>
+     * @var array<ExclusionsEnum>|null $exclusions A field used to indicate that the keywords already selected by sellers for the specified listing IDs should be filtered out of the response, and only new and unique keyword recommendations shall be returned.<br /><br /><strong>Valid Value:</strong> <code>ADOPTED_KEYWORDS</code>
     */
     private ?array $exclusions = null;
     
@@ -48,9 +48,9 @@ class TargetedKeywordRequest implements AdditionalDataHolder, Parsable
     private ?array $listingIds = null;
     
     /**
-     * @var string|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
+     * @var MatchTypeEnum|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
     */
-    private ?string $matchType = null;
+    private ?MatchTypeEnum $matchType = null;
     
     /**
      * Instantiates a new TargetedKeywordRequest and sets the default values.
@@ -78,7 +78,7 @@ class TargetedKeywordRequest implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the additionalInfo property value. A field used to indicate whether additional information and insight data shall be provided for suggested keywords.<br><br>Use this array to retrieve keyword insights, including active seller count and search volume.<br /><br /><strong>Valid Value:</strong> <code>KEYWORD_INSIGHTS</code>
-     * @return array<string>|null
+     * @return array<AdditionalInfoEnum>|null
     */
     public function getAdditionalInfo(): ?array {
         return $this->additionalInfo;
@@ -86,7 +86,7 @@ class TargetedKeywordRequest implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the exclusions property value. A field used to indicate that the keywords already selected by sellers for the specified listing IDs should be filtered out of the response, and only new and unique keyword recommendations shall be returned.<br /><br /><strong>Valid Value:</strong> <code>ADOPTED_KEYWORDS</code>
-     * @return array<string>|null
+     * @return array<ExclusionsEnum>|null
     */
     public function getExclusions(): ?array {
         return $this->exclusions;
@@ -99,22 +99,8 @@ class TargetedKeywordRequest implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'additionalInfo' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setAdditionalInfo($val);
-            },
-            'exclusions' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setExclusions($val);
-            },
+            'additionalInfo' => fn(ParseNode $n) => $o->setAdditionalInfo($n->getCollectionOfEnumValues(AdditionalInfoEnum::class)),
+            'exclusions' => fn(ParseNode $n) => $o->setExclusions($n->getCollectionOfEnumValues(ExclusionsEnum::class)),
             'listingIds' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
                 if (is_array($val)) {
@@ -123,7 +109,7 @@ class TargetedKeywordRequest implements AdditionalDataHolder, Parsable
                 /** @var array<string>|null $val */
                 $this->setListingIds($val);
             },
-            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getStringValue()),
+            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getEnumValue(MatchTypeEnum::class)),
         ];
     }
 
@@ -136,10 +122,10 @@ class TargetedKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @return MatchTypeEnum|null
     */
-    public function getMatchType(): ?string {
+    public function getMatchType(): ?MatchTypeEnum {
         return $this->matchType;
     }
 
@@ -148,10 +134,10 @@ class TargetedKeywordRequest implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeCollectionOfPrimitiveValues('additionalInfo', $this->getAdditionalInfo());
-        $writer->writeCollectionOfPrimitiveValues('exclusions', $this->getExclusions());
+        $writer->writeCollectionOfEnumValues('additionalInfo', $this->getAdditionalInfo());
+        $writer->writeCollectionOfEnumValues('exclusions', $this->getExclusions());
         $writer->writeCollectionOfPrimitiveValues('listingIds', $this->getListingIds());
-        $writer->writeStringValue('matchType', $this->getMatchType());
+        $writer->writeEnumValue('matchType', $this->getMatchType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -165,7 +151,7 @@ class TargetedKeywordRequest implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the additionalInfo property value. A field used to indicate whether additional information and insight data shall be provided for suggested keywords.<br><br>Use this array to retrieve keyword insights, including active seller count and search volume.<br /><br /><strong>Valid Value:</strong> <code>KEYWORD_INSIGHTS</code>
-     * @param array<string>|null $value Value to set for the additionalInfo property.
+     * @param array<AdditionalInfoEnum>|null $value Value to set for the additionalInfo property.
     */
     public function setAdditionalInfo(?array $value): void {
         $this->additionalInfo = $value;
@@ -173,7 +159,7 @@ class TargetedKeywordRequest implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the exclusions property value. A field used to indicate that the keywords already selected by sellers for the specified listing IDs should be filtered out of the response, and only new and unique keyword recommendations shall be returned.<br /><br /><strong>Valid Value:</strong> <code>ADOPTED_KEYWORDS</code>
-     * @param array<string>|null $value Value to set for the exclusions property.
+     * @param array<ExclusionsEnum>|null $value Value to set for the exclusions property.
     */
     public function setExclusions(?array $value): void {
         $this->exclusions = $value;
@@ -188,10 +174,10 @@ class TargetedKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the matchType property.
+     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @param MatchTypeEnum|null $value Value to set for the matchType property.
     */
-    public function setMatchType(?string $value): void {
+    public function setMatchType(?MatchTypeEnum $value): void {
         $this->matchType = $value;
     }
 

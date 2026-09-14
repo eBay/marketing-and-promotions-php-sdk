@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields for specifying the criterion (selection rule) settings of an ad campaign. If you populate the campaignCriterion object in your <b>createCampaign</b> request, ads for the campaign are created by rule for the listings that meet the criteria you specify, and these ads are associated with the newly created campaign.
+ * The selection rules (criterion) used to select the listings for a campaign. If you populate the <b>campaignCriterion</b> object in your <b>createCampaign</b> request, ads for the campaign are created by rule for the listings that meet the criteria you specify, and these ads are associated with the campaign.<span class="tablenote"><b>Note:</b> This container is only returned for rules-based campaigns using the Cost Per Sale (CPS) funding model.</span>
 */
 class CampaignCriterion implements AdditionalDataHolder, Parsable 
 {
@@ -37,12 +37,12 @@ class CampaignCriterion implements AdditionalDataHolder, Parsable
     private ?bool $autoSelectFutureInventory = null;
     
     /**
-     * @var string|null $criterionType This enum defines the criterion (selection rule) types. Currently, the only criterion type supported is <code>INVENTORY_PARTITION</code>, and you must specify this value if you manage your items with the Inventory API and you want to include items based on their inventory reference IDs.  <br><br>Do not include this field if you manage your listings with Trading API/legacy model. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:CriterionTypeEnum'>eBay API documentation</a>
+     * @var CriterionTypeEnum|null $criterionType This enum defines the criterion (selection rule) types. Currently, the only criterion type supported is <code>INVENTORY_PARTITION</code>, and you must specify this value if you manage your items with the Inventory API and you want to include items based on their inventory reference IDs.  <br><br>Do not include this field if you manage your listings with Trading API/legacy model.
     */
-    private ?string $criterionType = null;
+    private ?CriterionTypeEnum $criterionType = null;
     
     /**
-     * @var array<SelectionRule>|null $selectionRules This container shows all of the rules/inclusion filters used to add listings to the campaign. For information on using the contained fields, see <a href= "/api-docs/sell/static/marketing/using-the-selectionrules-container.html#Campaign ">Promoted Listing campaigns</a>.
+     * @var array<SelectionRule>|null $selectionRules This container shows all of the rules/inclusion filters used to add listings to the campaign. For information on using the contained fields, see <a href= "/api-docs/sell/static/marketing/using-the-selectionrules-container.html#Campaign " target="_blank">Promoted Listing campaigns</a>.
     */
     private ?array $selectionRules = null;
     
@@ -79,10 +79,10 @@ class CampaignCriterion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the criterionType property value. This enum defines the criterion (selection rule) types. Currently, the only criterion type supported is <code>INVENTORY_PARTITION</code>, and you must specify this value if you manage your items with the Inventory API and you want to include items based on their inventory reference IDs.  <br><br>Do not include this field if you manage your listings with Trading API/legacy model. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:CriterionTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the criterionType property value. This enum defines the criterion (selection rule) types. Currently, the only criterion type supported is <code>INVENTORY_PARTITION</code>, and you must specify this value if you manage your items with the Inventory API and you want to include items based on their inventory reference IDs.  <br><br>Do not include this field if you manage your listings with Trading API/legacy model.
+     * @return CriterionTypeEnum|null
     */
-    public function getCriterionType(): ?string {
+    public function getCriterionType(): ?CriterionTypeEnum {
         return $this->criterionType;
     }
 
@@ -94,13 +94,13 @@ class CampaignCriterion implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'autoSelectFutureInventory' => fn(ParseNode $n) => $o->setAutoSelectFutureInventory($n->getBooleanValue()),
-            'criterionType' => fn(ParseNode $n) => $o->setCriterionType($n->getStringValue()),
+            'criterionType' => fn(ParseNode $n) => $o->setCriterionType($n->getEnumValue(CriterionTypeEnum::class)),
             'selectionRules' => fn(ParseNode $n) => $o->setSelectionRules($n->getCollectionOfObjectValues([SelectionRule::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the selectionRules property value. This container shows all of the rules/inclusion filters used to add listings to the campaign. For information on using the contained fields, see <a href= "/api-docs/sell/static/marketing/using-the-selectionrules-container.html#Campaign ">Promoted Listing campaigns</a>.
+     * Gets the selectionRules property value. This container shows all of the rules/inclusion filters used to add listings to the campaign. For information on using the contained fields, see <a href= "/api-docs/sell/static/marketing/using-the-selectionrules-container.html#Campaign " target="_blank">Promoted Listing campaigns</a>.
      * @return array<SelectionRule>|null
     */
     public function getSelectionRules(): ?array {
@@ -113,7 +113,7 @@ class CampaignCriterion implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeBooleanValue('autoSelectFutureInventory', $this->getAutoSelectFutureInventory());
-        $writer->writeStringValue('criterionType', $this->getCriterionType());
+        $writer->writeEnumValue('criterionType', $this->getCriterionType());
         $writer->writeCollectionOfObjectValues('selectionRules', $this->getSelectionRules());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -135,15 +135,15 @@ class CampaignCriterion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the criterionType property value. This enum defines the criterion (selection rule) types. Currently, the only criterion type supported is <code>INVENTORY_PARTITION</code>, and you must specify this value if you manage your items with the Inventory API and you want to include items based on their inventory reference IDs.  <br><br>Do not include this field if you manage your listings with Trading API/legacy model. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:CriterionTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the criterionType property.
+     * Sets the criterionType property value. This enum defines the criterion (selection rule) types. Currently, the only criterion type supported is <code>INVENTORY_PARTITION</code>, and you must specify this value if you manage your items with the Inventory API and you want to include items based on their inventory reference IDs.  <br><br>Do not include this field if you manage your listings with Trading API/legacy model.
+     * @param CriterionTypeEnum|null $value Value to set for the criterionType property.
     */
-    public function setCriterionType(?string $value): void {
+    public function setCriterionType(?CriterionTypeEnum $value): void {
         $this->criterionType = $value;
     }
 
     /**
-     * Sets the selectionRules property value. This container shows all of the rules/inclusion filters used to add listings to the campaign. For information on using the contained fields, see <a href= "/api-docs/sell/static/marketing/using-the-selectionrules-container.html#Campaign ">Promoted Listing campaigns</a>.
+     * Sets the selectionRules property value. This container shows all of the rules/inclusion filters used to add listings to the campaign. For information on using the contained fields, see <a href= "/api-docs/sell/static/marketing/using-the-selectionrules-container.html#Campaign " target="_blank">Promoted Listing campaigns</a>.
      * @param array<SelectionRule>|null $value Value to set for the selectionRules property.
     */
     public function setSelectionRules(?array $value): void {

@@ -32,7 +32,7 @@ class NegativeKeyword implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $adGroupId An ad group ID that is generated when an ad group is first created and associated with a campaign.<br /><br /><span class="tablenote"><b>Note:</b> You can call the <a href="/api-docs/sell/marketing/resources/adgroup/methods/getAdGroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.</span>
+     * @var string|null $adGroupId An ad group ID that is generated when an ad group is first created and associated with a campaign.<br /><br /><span class="tablenote"><b>Note:</b> You can call the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.</span>
     */
     private ?string $adGroupId = null;
     
@@ -47,14 +47,14 @@ class NegativeKeyword implements AdditionalDataHolder, Parsable
     private ?string $negativeKeywordId = null;
     
     /**
-     * @var string|null $negativeKeywordMatchType A field that defines the match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordMatchTypeEnum'>eBay API documentation</a>
+     * @var NegativeKeywordMatchTypeEnum|null $negativeKeywordMatchType A field that defines the match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
     */
-    private ?string $negativeKeywordMatchType = null;
+    private ?NegativeKeywordMatchTypeEnum $negativeKeywordMatchType = null;
     
     /**
-     * @var string|null $negativeKeywordStatus A field that defines the status of the negative keyword. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordStatusEnum'>eBay API documentation</a>
+     * @var NegativeKeywordStatusEnum|null $negativeKeywordStatus A field that defines the status of the negative keyword.
     */
-    private ?string $negativeKeywordStatus = null;
+    private ?NegativeKeywordStatusEnum $negativeKeywordStatus = null;
     
     /**
      * @var string|null $negativeKeywordText The text for the negative keyword.
@@ -86,7 +86,7 @@ class NegativeKeyword implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adGroupId property value. An ad group ID that is generated when an ad group is first created and associated with a campaign.<br /><br /><span class="tablenote"><b>Note:</b> You can call the <a href="/api-docs/sell/marketing/resources/adgroup/methods/getAdGroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.</span>
+     * Gets the adGroupId property value. An ad group ID that is generated when an ad group is first created and associated with a campaign.<br /><br /><span class="tablenote"><b>Note:</b> You can call the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.</span>
      * @return string|null
     */
     public function getAdGroupId(): ?string {
@@ -111,8 +111,8 @@ class NegativeKeyword implements AdditionalDataHolder, Parsable
             'adGroupId' => fn(ParseNode $n) => $o->setAdGroupId($n->getStringValue()),
             'campaignId' => fn(ParseNode $n) => $o->setCampaignId($n->getStringValue()),
             'negativeKeywordId' => fn(ParseNode $n) => $o->setNegativeKeywordId($n->getStringValue()),
-            'negativeKeywordMatchType' => fn(ParseNode $n) => $o->setNegativeKeywordMatchType($n->getStringValue()),
-            'negativeKeywordStatus' => fn(ParseNode $n) => $o->setNegativeKeywordStatus($n->getStringValue()),
+            'negativeKeywordMatchType' => fn(ParseNode $n) => $o->setNegativeKeywordMatchType($n->getEnumValue(NegativeKeywordMatchTypeEnum::class)),
+            'negativeKeywordStatus' => fn(ParseNode $n) => $o->setNegativeKeywordStatus($n->getEnumValue(NegativeKeywordStatusEnum::class)),
             'negativeKeywordText' => fn(ParseNode $n) => $o->setNegativeKeywordText($n->getStringValue()),
         ];
     }
@@ -126,18 +126,18 @@ class NegativeKeyword implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the negativeKeywordMatchType property value. A field that defines the match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordMatchTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the negativeKeywordMatchType property value. A field that defines the match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @return NegativeKeywordMatchTypeEnum|null
     */
-    public function getNegativeKeywordMatchType(): ?string {
+    public function getNegativeKeywordMatchType(): ?NegativeKeywordMatchTypeEnum {
         return $this->negativeKeywordMatchType;
     }
 
     /**
-     * Gets the negativeKeywordStatus property value. A field that defines the status of the negative keyword. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the negativeKeywordStatus property value. A field that defines the status of the negative keyword.
+     * @return NegativeKeywordStatusEnum|null
     */
-    public function getNegativeKeywordStatus(): ?string {
+    public function getNegativeKeywordStatus(): ?NegativeKeywordStatusEnum {
         return $this->negativeKeywordStatus;
     }
 
@@ -157,8 +157,8 @@ class NegativeKeyword implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('adGroupId', $this->getAdGroupId());
         $writer->writeStringValue('campaignId', $this->getCampaignId());
         $writer->writeStringValue('negativeKeywordId', $this->getNegativeKeywordId());
-        $writer->writeStringValue('negativeKeywordMatchType', $this->getNegativeKeywordMatchType());
-        $writer->writeStringValue('negativeKeywordStatus', $this->getNegativeKeywordStatus());
+        $writer->writeEnumValue('negativeKeywordMatchType', $this->getNegativeKeywordMatchType());
+        $writer->writeEnumValue('negativeKeywordStatus', $this->getNegativeKeywordStatus());
         $writer->writeStringValue('negativeKeywordText', $this->getNegativeKeywordText());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -172,7 +172,7 @@ class NegativeKeyword implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adGroupId property value. An ad group ID that is generated when an ad group is first created and associated with a campaign.<br /><br /><span class="tablenote"><b>Note:</b> You can call the <a href="/api-docs/sell/marketing/resources/adgroup/methods/getAdGroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.</span>
+     * Sets the adGroupId property value. An ad group ID that is generated when an ad group is first created and associated with a campaign.<br /><br /><span class="tablenote"><b>Note:</b> You can call the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.</span>
      * @param string|null $value Value to set for the adGroupId property.
     */
     public function setAdGroupId(?string $value): void {
@@ -196,18 +196,18 @@ class NegativeKeyword implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the negativeKeywordMatchType property value. A field that defines the match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordMatchTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the negativeKeywordMatchType property.
+     * Sets the negativeKeywordMatchType property value. A field that defines the match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @param NegativeKeywordMatchTypeEnum|null $value Value to set for the negativeKeywordMatchType property.
     */
-    public function setNegativeKeywordMatchType(?string $value): void {
+    public function setNegativeKeywordMatchType(?NegativeKeywordMatchTypeEnum $value): void {
         $this->negativeKeywordMatchType = $value;
     }
 
     /**
-     * Sets the negativeKeywordStatus property value. A field that defines the status of the negative keyword. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the negativeKeywordStatus property.
+     * Sets the negativeKeywordStatus property value. A field that defines the status of the negative keyword.
+     * @param NegativeKeywordStatusEnum|null $value Value to set for the negativeKeywordStatus property.
     */
-    public function setNegativeKeywordStatus(?string $value): void {
+    public function setNegativeKeywordStatus(?NegativeKeywordStatusEnum $value): void {
         $this->negativeKeywordStatus = $value;
     }
 

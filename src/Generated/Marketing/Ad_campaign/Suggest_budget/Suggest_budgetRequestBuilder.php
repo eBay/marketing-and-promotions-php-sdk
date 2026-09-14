@@ -16,6 +16,7 @@
 
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Suggest_budget;
 
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\SuggestBudgetResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -44,18 +45,24 @@ class Suggest_budgetRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * <span class="tablenote"><b>Note:</b> This method is only supported for Promoted Offsite campaigns. Sellers can use the <a href="/api-docs/sell/account/resources/advertising_eligibility/methods/getAdvertisingEligibility" target="_blank ">getAdvertisingEligibility</a> method of the <a href="//api-docs/sell/account/overview.html" target="_blank ">Account API v1</a> to determine if they are eligible for offsite campaigns.</span><br>This method allows sellers to retrieve the suggested budget for an offsite campaign.
+     * <span class="tablenote"><b>Note:</b> This method is only supported for Promoted Offsite campaigns. Sellers can use the <a href="/api-docs/sell/account/resources/advertising_eligibility/methods/getAdvertisingEligibility" target="_blank ">getAdvertisingEligibility</a> method of the <a href="/api-docs/sell/account/overview.html" target="_blank ">Account API v1</a> to determine if they are eligible for offsite campaigns.</span><br>This method allows sellers to retrieve the suggested budget for an offsite campaign.
      * @param Suggest_budgetRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<SuggestBudgetResponse|null>
      * @throws Exception
     */
     public function get(?Suggest_budgetRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SuggestBudgetResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SuggestBudgetResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * <span class="tablenote"><b>Note:</b> This method is only supported for Promoted Offsite campaigns. Sellers can use the <a href="/api-docs/sell/account/resources/advertising_eligibility/methods/getAdvertisingEligibility" target="_blank ">getAdvertisingEligibility</a> method of the <a href="//api-docs/sell/account/overview.html" target="_blank ">Account API v1</a> to determine if they are eligible for offsite campaigns.</span><br>This method allows sellers to retrieve the suggested budget for an offsite campaign.
+     * <span class="tablenote"><b>Note:</b> This method is only supported for Promoted Offsite campaigns. Sellers can use the <a href="/api-docs/sell/account/resources/advertising_eligibility/methods/getAdvertisingEligibility" target="_blank ">getAdvertisingEligibility</a> method of the <a href="/api-docs/sell/account/overview.html" target="_blank ">Account API v1</a> to determine if they are eligible for offsite campaigns.</span><br>This method allows sellers to retrieve the suggested budget for an offsite campaign.
      * @param Suggest_budgetRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
