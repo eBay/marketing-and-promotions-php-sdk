@@ -16,6 +16,7 @@
 
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Ad_group\Item\Suggest_bids;
 
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\TargetedBidRequest;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\TargetedBidsPagedCollection;
 use Exception;
@@ -45,20 +46,26 @@ class Suggest_bidsRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * <span class="tablenote"><b>Note:</b> This method is only available for select partners who have been approved for the eBay priority strategy program. For information about how to request access to this program, refer to <a href="/api-docs/sell/static/marketing/pl-verify-eligibility.html#access-requests " target="_blank "> Priority Strategy Access Requests</a> in the Promoted Listings Playbook. To determine if a seller qualifies for priority strategy, use the <a href="/api-docs/sell/account/resources/advertising_eligibility/methods/getAdvertisingEligibility " target="_blank ">getAdvertisingEligibility</a> method in Account API.</span><br />This method allows sellers to retrieve the suggested bids for input keywords and match type.
-     * @param TargetedBidRequest $body A type that defines the targeted bid.
+     * This method allows sellers to retrieve the suggested bids for input keywords and match type.
+     * @param TargetedBidRequest $body The data requested to retrieve the suggested bids.
      * @param Suggest_bidsRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<TargetedBidsPagedCollection|null>
      * @throws Exception
     */
     public function post(TargetedBidRequest $body, ?Suggest_bidsRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [TargetedBidsPagedCollection::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [TargetedBidsPagedCollection::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * <span class="tablenote"><b>Note:</b> This method is only available for select partners who have been approved for the eBay priority strategy program. For information about how to request access to this program, refer to <a href="/api-docs/sell/static/marketing/pl-verify-eligibility.html#access-requests " target="_blank "> Priority Strategy Access Requests</a> in the Promoted Listings Playbook. To determine if a seller qualifies for priority strategy, use the <a href="/api-docs/sell/account/resources/advertising_eligibility/methods/getAdvertisingEligibility " target="_blank ">getAdvertisingEligibility</a> method in Account API.</span><br />This method allows sellers to retrieve the suggested bids for input keywords and match type.
-     * @param TargetedBidRequest $body A type that defines the targeted bid.
+     * This method allows sellers to retrieve the suggested bids for input keywords and match type.
+     * @param TargetedBidRequest $body The data requested to retrieve the suggested bids.
      * @param Suggest_bidsRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

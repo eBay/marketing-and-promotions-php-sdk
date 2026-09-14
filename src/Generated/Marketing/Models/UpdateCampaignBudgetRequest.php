@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that contains the fields for the <b>UpdateCampaignBudget</b> request.
+ * This type defines the request fields for the budget details that shall be updated.
 */
 class UpdateCampaignBudgetRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class UpdateCampaignBudgetRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var BudgetRequest|null $daily A container for the budget details of a Promoted Listings campaign that uses the Cost Per Click (CPC) funding model.<br /><br /><span class="tablenote"><b>Note:</b> This container will only be returned for campaigns using the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
+     * @var BudgetRequest|null $daily The daily budget limit for the Cost Per Click (CPC) Promoted Listings campaign. This will be a dollar value. All clicks using the keywords defined for the campaign will go towards expending the daily budget. Once the daily budget is exceeded for the campaign, all Promoted Listings under the campaign will be turned off until the next day.<br /><br /><b>Valid Values</b>:<ul><li><code>50.00</code></li><li><code>100.00</code></li></ul>
     */
     private ?BudgetRequest $daily = null;
     
@@ -61,7 +61,7 @@ class UpdateCampaignBudgetRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the daily property value. A container for the budget details of a Promoted Listings campaign that uses the Cost Per Click (CPC) funding model.<br /><br /><span class="tablenote"><b>Note:</b> This container will only be returned for campaigns using the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
+     * Gets the daily property value. The daily budget limit for the Cost Per Click (CPC) Promoted Listings campaign. This will be a dollar value. All clicks using the keywords defined for the campaign will go towards expending the daily budget. Once the daily budget is exceeded for the campaign, all Promoted Listings under the campaign will be turned off until the next day.<br /><br /><b>Valid Values</b>:<ul><li><code>50.00</code></li><li><code>100.00</code></li></ul>
      * @return BudgetRequest|null
     */
     public function getDaily(): ?BudgetRequest {
@@ -97,7 +97,7 @@ class UpdateCampaignBudgetRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the daily property value. A container for the budget details of a Promoted Listings campaign that uses the Cost Per Click (CPC) funding model.<br /><br /><span class="tablenote"><b>Note:</b> This container will only be returned for campaigns using the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
+     * Sets the daily property value. The daily budget limit for the Cost Per Click (CPC) Promoted Listings campaign. This will be a dollar value. All clicks using the keywords defined for the campaign will go towards expending the daily budget. Once the daily budget is exceeded for the campaign, all Promoted Listings under the campaign will be turned off until the next day.<br /><br /><b>Valid Values</b>:<ul><li><code>50.00</code></li><li><code>100.00</code></li></ul>
      * @param BudgetRequest|null $value Value to set for the daily property.
     */
     public function setDaily(?BudgetRequest $value): void {

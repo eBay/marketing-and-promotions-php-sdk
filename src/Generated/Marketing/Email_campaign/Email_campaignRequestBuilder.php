@@ -21,6 +21,7 @@ use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Item\WithEmai
 use EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Report\ReportRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\CreateEmailCampaignRequest;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\CreateEmailCampaignResponse;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\GetEmailCampaignsResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -50,7 +51,7 @@ class Email_campaignRequestBuilder extends BaseRequestBuilder
     
     /**
      * Gets an item from the EBay/MarketingAndPromotions/Generated/Marketing.email_campaign.item collection
-     * @param string $email_campaign_id This path parameter specifies the unique eBay-assigned identifier of the email campaign being retrieved.<br><br>Use the <a href="/api-docs/sell/marketing/resources/campaign/methods/getEmailCampaigns">getEmailCampaigns</a> method to retrieve a list of email campaign IDs for a seller.
+     * @param string $email_campaign_id This path parameter specifies the unique eBay-assigned identifier of the email campaign being retrieved.<br><br>Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns">getEmailCampaigns</a> method to retrieve a list of email campaign IDs for a seller.
      * @return WithEmail_campaign_ItemRequestBuilder
     */
     public function byEmail_campaign_id(string $email_campaign_id): WithEmail_campaign_ItemRequestBuilder {
@@ -74,30 +75,40 @@ class Email_campaignRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method retrieves a list of email campaigns from a seller's eBay store.<br><br>Users can filter the results by <a href="/api-docs/sell/marketing/types/api:CampaignTypeEnum">email campaign type</a>, <a href="/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum">email campaign status</a>, and <a href="/api-docs/sell/marketing/types/ba:MarketplaceIdEnum">marketplace ID</a> using the <code>q</code> query parameter.
+     * This method retrieves a list of email campaigns from a seller's eBay store.<br><br>Users can filter the results by <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.campaigntypeenum">email campaign type</a>, <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.emailcampaignstatusenum">email campaign status</a>, and <a href="/develop/api/sell/request_headers#marketplace-id-values" target="_blank">marketplace ID</a> using the <code>q</code> query parameter.
      * @param Email_campaignRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<GetEmailCampaignsResponse|null>
      * @throws Exception
     */
     public function get(?Email_campaignRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetEmailCampaignsResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetEmailCampaignsResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
      * This method creates a new email campaign. An eBay store owner can create six different types of email campaigns: Welcome, New products & collections, Coupon, Sale event + markdown, Order discount, and Volume pricing.<br><br>A successful <b>createEmailCampaign</b> request returns the <b>emailCampaignId</b> assigned to the new email campaign.<br><br>The fields <b>emailCampaignType</b>, <b>audienceCodes</b>, <b>itemSelectMode</b>, <b>subject</b>, and <b>personalizedMessage</b> are required for all email campaign types. <br><br>Specific email campaign types have required values for additional fields. For more information on the email campaign types, see the <a href="/api-docs/sell/static/marketing/store-email-campaigns.html#email-campain-types" target="_blank">Store Email Campaigns</a> section of the Selling Integration Guide. 
-     * @param CreateEmailCampaignRequest $body create email campaign request payload
+     * @param CreateEmailCampaignRequest $body Create a new email campaign request.
      * @param Email_campaignRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<CreateEmailCampaignResponse|null>
      * @throws Exception
     */
     public function post(CreateEmailCampaignRequest $body, ?Email_campaignRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [CreateEmailCampaignResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [CreateEmailCampaignResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method retrieves a list of email campaigns from a seller's eBay store.<br><br>Users can filter the results by <a href="/api-docs/sell/marketing/types/api:CampaignTypeEnum">email campaign type</a>, <a href="/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum">email campaign status</a>, and <a href="/api-docs/sell/marketing/types/ba:MarketplaceIdEnum">marketplace ID</a> using the <code>q</code> query parameter.
+     * This method retrieves a list of email campaigns from a seller's eBay store.<br><br>Users can filter the results by <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.campaigntypeenum">email campaign type</a>, <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.emailcampaignstatusenum">email campaign status</a>, and <a href="/develop/api/sell/request_headers#marketplace-id-values" target="_blank">marketplace ID</a> using the <code>q</code> query parameter.
      * @param Email_campaignRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -119,7 +130,7 @@ class Email_campaignRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method creates a new email campaign. An eBay store owner can create six different types of email campaigns: Welcome, New products & collections, Coupon, Sale event + markdown, Order discount, and Volume pricing.<br><br>A successful <b>createEmailCampaign</b> request returns the <b>emailCampaignId</b> assigned to the new email campaign.<br><br>The fields <b>emailCampaignType</b>, <b>audienceCodes</b>, <b>itemSelectMode</b>, <b>subject</b>, and <b>personalizedMessage</b> are required for all email campaign types. <br><br>Specific email campaign types have required values for additional fields. For more information on the email campaign types, see the <a href="/api-docs/sell/static/marketing/store-email-campaigns.html#email-campain-types" target="_blank">Store Email Campaigns</a> section of the Selling Integration Guide. 
-     * @param CreateEmailCampaignRequest $body create email campaign request payload
+     * @param CreateEmailCampaignRequest $body Create a new email campaign request.
      * @param Email_campaignRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

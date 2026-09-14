@@ -32,9 +32,9 @@ class ReportMetadata implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $channel This field indicates whether a COST_PER_CLICK report type is related to an ON_SITE or OFF_SITE Promoted Listings campaign. This field is not returned for COST_PER_SALE report types since COST_PER_SALE campaigns are only available ON_SITE. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:ChannelEnum'>eBay API documentation</a>
+     * @var ChannelEnum|null $channel This field indicates whether a <code>COST_PER_CLICK</code> report type is related to an <code>ON_SITE</code> or <code>OFF_SITE</code> Promoted Listings campaign. This field is not returned for <code>COST_PER_SALE</code> report types since <code>COST_PER_SALE</code> campaigns are only available <code>ON_SITE</code>.
     */
-    private ?string $channel = null;
+    private ?ChannelEnum $channel = null;
     
     /**
      * @var array<DimensionMetadata>|null $dimensionMetadata A list containing the metadata for the dimension used in the report.
@@ -57,9 +57,9 @@ class ReportMetadata implements AdditionalDataHolder, Parsable
     private ?array $metricMetadata = null;
     
     /**
-     * @var string|null $reportType The <b>report_type</b>, as specified in the request to create the report task.<br/><br/><span class="tablenote"><b>Note:</b> INVENTORY_PERFORMANCE_REPORT is not currently available; availability date is pending.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:ReportTypeEnum'>eBay API documentation</a>
+     * @var ReportTypeEnum|null $reportType The <b>report_type</b>, as specified in the request to create the report task.<br/><br/><span class="tablenote"><b>Note:</b> INVENTORY_PERFORMANCE_REPORT is not currently available; availability date is pending.</span>
     */
-    private ?string $reportType = null;
+    private ?ReportTypeEnum $reportType = null;
     
     /**
      * Instantiates a new ReportMetadata and sets the default values.
@@ -86,10 +86,10 @@ class ReportMetadata implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the channel property value. This field indicates whether a COST_PER_CLICK report type is related to an ON_SITE or OFF_SITE Promoted Listings campaign. This field is not returned for COST_PER_SALE report types since COST_PER_SALE campaigns are only available ON_SITE. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:ChannelEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the channel property value. This field indicates whether a <code>COST_PER_CLICK</code> report type is related to an <code>ON_SITE</code> or <code>OFF_SITE</code> Promoted Listings campaign. This field is not returned for <code>COST_PER_SALE</code> report types since <code>COST_PER_SALE</code> campaigns are only available <code>ON_SITE</code>.
+     * @return ChannelEnum|null
     */
-    public function getChannel(): ?string {
+    public function getChannel(): ?ChannelEnum {
         return $this->channel;
     }
 
@@ -108,12 +108,12 @@ class ReportMetadata implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'channel' => fn(ParseNode $n) => $o->setChannel($n->getStringValue()),
+            'channel' => fn(ParseNode $n) => $o->setChannel($n->getEnumValue(ChannelEnum::class)),
             'dimensionMetadata' => fn(ParseNode $n) => $o->setDimensionMetadata($n->getCollectionOfObjectValues([DimensionMetadata::class, 'createFromDiscriminatorValue'])),
             'maxNumberOfDimensionsToRequest' => fn(ParseNode $n) => $o->setMaxNumberOfDimensionsToRequest($n->getIntegerValue()),
             'maxNumberOfMetricsToRequest' => fn(ParseNode $n) => $o->setMaxNumberOfMetricsToRequest($n->getIntegerValue()),
             'metricMetadata' => fn(ParseNode $n) => $o->setMetricMetadata($n->getCollectionOfObjectValues([MetricMetadata::class, 'createFromDiscriminatorValue'])),
-            'reportType' => fn(ParseNode $n) => $o->setReportType($n->getStringValue()),
+            'reportType' => fn(ParseNode $n) => $o->setReportType($n->getEnumValue(ReportTypeEnum::class)),
         ];
     }
 
@@ -142,10 +142,10 @@ class ReportMetadata implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the reportType property value. The <b>report_type</b>, as specified in the request to create the report task.<br/><br/><span class="tablenote"><b>Note:</b> INVENTORY_PERFORMANCE_REPORT is not currently available; availability date is pending.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:ReportTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the reportType property value. The <b>report_type</b>, as specified in the request to create the report task.<br/><br/><span class="tablenote"><b>Note:</b> INVENTORY_PERFORMANCE_REPORT is not currently available; availability date is pending.</span>
+     * @return ReportTypeEnum|null
     */
-    public function getReportType(): ?string {
+    public function getReportType(): ?ReportTypeEnum {
         return $this->reportType;
     }
 
@@ -154,12 +154,12 @@ class ReportMetadata implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('channel', $this->getChannel());
+        $writer->writeEnumValue('channel', $this->getChannel());
         $writer->writeCollectionOfObjectValues('dimensionMetadata', $this->getDimensionMetadata());
         $writer->writeIntegerValue('maxNumberOfDimensionsToRequest', $this->getMaxNumberOfDimensionsToRequest());
         $writer->writeIntegerValue('maxNumberOfMetricsToRequest', $this->getMaxNumberOfMetricsToRequest());
         $writer->writeCollectionOfObjectValues('metricMetadata', $this->getMetricMetadata());
-        $writer->writeStringValue('reportType', $this->getReportType());
+        $writer->writeEnumValue('reportType', $this->getReportType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -172,10 +172,10 @@ class ReportMetadata implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the channel property value. This field indicates whether a COST_PER_CLICK report type is related to an ON_SITE or OFF_SITE Promoted Listings campaign. This field is not returned for COST_PER_SALE report types since COST_PER_SALE campaigns are only available ON_SITE. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:ChannelEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the channel property.
+     * Sets the channel property value. This field indicates whether a <code>COST_PER_CLICK</code> report type is related to an <code>ON_SITE</code> or <code>OFF_SITE</code> Promoted Listings campaign. This field is not returned for <code>COST_PER_SALE</code> report types since <code>COST_PER_SALE</code> campaigns are only available <code>ON_SITE</code>.
+     * @param ChannelEnum|null $value Value to set for the channel property.
     */
-    public function setChannel(?string $value): void {
+    public function setChannel(?ChannelEnum $value): void {
         $this->channel = $value;
     }
 
@@ -212,10 +212,10 @@ class ReportMetadata implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the reportType property value. The <b>report_type</b>, as specified in the request to create the report task.<br/><br/><span class="tablenote"><b>Note:</b> INVENTORY_PERFORMANCE_REPORT is not currently available; availability date is pending.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:ReportTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the reportType property.
+     * Sets the reportType property value. The <b>report_type</b>, as specified in the request to create the report task.<br/><br/><span class="tablenote"><b>Note:</b> INVENTORY_PERFORMANCE_REPORT is not currently available; availability date is pending.</span>
+     * @param ReportTypeEnum|null $value Value to set for the reportType property.
     */
-    public function setReportType(?string $value): void {
+    public function setReportType(?ReportTypeEnum $value): void {
         $this->reportType = $value;
     }
 

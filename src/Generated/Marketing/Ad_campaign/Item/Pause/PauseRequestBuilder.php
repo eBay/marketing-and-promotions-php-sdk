@@ -16,6 +16,7 @@
 
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Pause;
 
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -43,18 +44,24 @@ class PauseRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method pauses an active (RUNNING) campaign.  <p>You can restart the campaign by calling <a href="/api-docs/sell/marketing/resources/campaign/methods/resumeCampaign">resumeCampaign</a>, as long as the campaign's end date is in the future.<br><br><span class="tablenote"><b>Note:</b>The listings associated with a paused campaign cannot be added into another campaign.</span><br><br>Call <a href="/api-docs/sell/marketing/resources/campaign/methods/getCampaigns">getCampaigns</a> to retrieve the <b>campaign_id</b> and the campaign status (<code>RUNNING</code>, <code>PAUSED</code>, <code>ENDED</code>, and so on) for all the seller's campaigns.
+     * This method pauses an active (RUNNING) campaign.  <p>You can restart the campaign by calling <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-resumecampaign">resumeCampaign</a>, as long as the campaign's end date is in the future.<br><br><span class="tablenote"><b>Note:</b>The listings associated with a paused campaign cannot be added into another campaign.</span><br>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> to retrieve the <b>campaign_id</b> and the campaign status (<code>RUNNING</code>, <code>PAUSED</code>, <code>ENDED</code>, and so on) for all the seller's campaigns.
      * @param PauseRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(?PauseRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
-     * This method pauses an active (RUNNING) campaign.  <p>You can restart the campaign by calling <a href="/api-docs/sell/marketing/resources/campaign/methods/resumeCampaign">resumeCampaign</a>, as long as the campaign's end date is in the future.<br><br><span class="tablenote"><b>Note:</b>The listings associated with a paused campaign cannot be added into another campaign.</span><br><br>Call <a href="/api-docs/sell/marketing/resources/campaign/methods/getCampaigns">getCampaigns</a> to retrieve the <b>campaign_id</b> and the campaign status (<code>RUNNING</code>, <code>PAUSED</code>, <code>ENDED</code>, and so on) for all the seller's campaigns.
+     * This method pauses an active (RUNNING) campaign.  <p>You can restart the campaign by calling <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-resumecampaign">resumeCampaign</a>, as long as the campaign's end date is in the future.<br><br><span class="tablenote"><b>Note:</b>The listings associated with a paused campaign cannot be added into another campaign.</span><br>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> to retrieve the <b>campaign_id</b> and the campaign status (<code>RUNNING</code>, <code>PAUSED</code>, <code>ENDED</code>, and so on) for all the seller's campaigns.
      * @param PauseRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -67,6 +74,7 @@ class PauseRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         return $requestInfo;
     }
 

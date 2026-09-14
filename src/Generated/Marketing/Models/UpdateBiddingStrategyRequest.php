@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the fields used in the <b>updatedBiddingStrategy</b> request.
+ * This type specifies the new value for the bidding strategy.
 */
 class UpdateBiddingStrategyRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,9 +32,9 @@ class UpdateBiddingStrategyRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $biddingStrategy The new bidding strategy for the specified Cost Per Click (CPC) campaign. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:BiddingStrategyEnum'>eBay API documentation</a>
+     * @var BiddingStrategyEnum|null $biddingStrategy The new bidding strategy for the specified Cost Per Click (CPC) campaign.
     */
-    private ?string $biddingStrategy = null;
+    private ?BiddingStrategyEnum $biddingStrategy = null;
     
     /**
      * @var array<BidPreference>|null $bidPreferences This container indicates the bidding preferences of the campaign, such as the maximum CPC amount.<br><br><span class="tablenote"><b>Note:</b> This container is only applicable for smart targeting campaigns.</span><br>This container is required if the user wants to create a Smart Targeting campaign.
@@ -66,10 +66,10 @@ class UpdateBiddingStrategyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the biddingStrategy property value. The new bidding strategy for the specified Cost Per Click (CPC) campaign. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:BiddingStrategyEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the biddingStrategy property value. The new bidding strategy for the specified Cost Per Click (CPC) campaign.
+     * @return BiddingStrategyEnum|null
     */
-    public function getBiddingStrategy(): ?string {
+    public function getBiddingStrategy(): ?BiddingStrategyEnum {
         return $this->biddingStrategy;
     }
 
@@ -88,7 +88,7 @@ class UpdateBiddingStrategyRequest implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'biddingStrategy' => fn(ParseNode $n) => $o->setBiddingStrategy($n->getStringValue()),
+            'biddingStrategy' => fn(ParseNode $n) => $o->setBiddingStrategy($n->getEnumValue(BiddingStrategyEnum::class)),
             'bidPreferences' => fn(ParseNode $n) => $o->setBidPreferences($n->getCollectionOfObjectValues([BidPreference::class, 'createFromDiscriminatorValue'])),
         ];
     }
@@ -98,7 +98,7 @@ class UpdateBiddingStrategyRequest implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('biddingStrategy', $this->getBiddingStrategy());
+        $writer->writeEnumValue('biddingStrategy', $this->getBiddingStrategy());
         $writer->writeCollectionOfObjectValues('bidPreferences', $this->getBidPreferences());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class UpdateBiddingStrategyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the biddingStrategy property value. The new bidding strategy for the specified Cost Per Click (CPC) campaign. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:BiddingStrategyEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the biddingStrategy property.
+     * Sets the biddingStrategy property value. The new bidding strategy for the specified Cost Per Click (CPC) campaign.
+     * @param BiddingStrategyEnum|null $value Value to set for the biddingStrategy property.
     */
-    public function setBiddingStrategy(?string $value): void {
+    public function setBiddingStrategy(?BiddingStrategyEnum $value): void {
         $this->biddingStrategy = $value;
     }
 

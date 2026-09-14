@@ -27,7 +27,7 @@ class Ad_reportRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/MarketingAndPromotions/Generated/Marketing.ad_report.item collection
-     * @param string $report_id This path parameter specifies the unique ID of the Promoted Listings report being retrieved.<br><br>Use the <a href="/api-docs/sell/marketing/resources/ad_report_task/methods/getReportTasks">getReportTasks</a> method to retrieve report IDs.
+     * @param string $report_id This path parameter specifies the unique ID of the Promoted Listings report being retrieved.<br><br>Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_report_task-getreporttasks">getReportTasks</a> method to retrieve report IDs.
      * @return WithReport_ItemRequestBuilder
     */
     public function byReport_id(string $report_id): WithReport_ItemRequestBuilder {

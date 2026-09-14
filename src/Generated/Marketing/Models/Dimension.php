@@ -23,7 +23,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * This type defines the annotation and dimension key used by the report. For information on how to set these values, see <a href="/api-docs/sell/static/marketing/pl-reports.html">Promoted Listings reporting</a>.
+ * This type defines the annotation and dimension key used by the report. For information on how to set these values, see <a href="/api-docs/sell/static/marketing/pl-reports.html" target="_blank">Promoted Listings reporting</a>.
 */
 class Dimension implements AdditionalDataHolder, Parsable 
 {

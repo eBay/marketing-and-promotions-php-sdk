@@ -37,7 +37,7 @@ class AdUpdateStatusByListingIdResponse implements AdditionalDataHolder, Parsabl
     private ?string $adGroupId = null;
     
     /**
-     * @var array<Error>|null $errors A list of errors associated with the specified listing ID.
+     * @var array<ErrorDetailV3>|null $errors A list of errors associated with the specified listing ID.
     */
     private ?array $errors = null;
     
@@ -90,7 +90,7 @@ class AdUpdateStatusByListingIdResponse implements AdditionalDataHolder, Parsabl
 
     /**
      * Gets the errors property value. A list of errors associated with the specified listing ID.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -104,7 +104,7 @@ class AdUpdateStatusByListingIdResponse implements AdditionalDataHolder, Parsabl
         $o = $this;
         return  [
             'adGroupId' => fn(ParseNode $n) => $o->setAdGroupId($n->getStringValue()),
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
             'href' => fn(ParseNode $n) => $o->setHref($n->getStringValue()),
             'listingId' => fn(ParseNode $n) => $o->setListingId($n->getStringValue()),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
@@ -166,7 +166,7 @@ class AdUpdateStatusByListingIdResponse implements AdditionalDataHolder, Parsabl
 
     /**
      * Sets the errors property value. A list of errors associated with the specified listing ID.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;

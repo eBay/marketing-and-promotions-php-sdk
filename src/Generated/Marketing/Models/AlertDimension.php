@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that contains the dimension fields.
+ * The dimension information of the alert including keys and values.
 */
 class AlertDimension implements AdditionalDataHolder, Parsable 
 {
@@ -32,12 +32,12 @@ class AlertDimension implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $key The key field of the applied dimension. For example, the marketplace Id. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:DimensionKeyEnum'>eBay API documentation</a>
+     * @var DimensionKeyEnum|null $key The key field of the applied dimension. For example, the marketplace Id.
     */
-    private ?string $key = null;
+    private ?DimensionKeyEnum $key = null;
     
     /**
-     * @var string|null $value The value field of the applied dimension. For example, if the key is a <code>MARKETPLACE_ID</code>, the value would be from <a href='/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>MarketplaceIdEnum</a>.
+     * @var string|null $value The value field of the applied dimension. For example, if the key is a <code>MARKETPLACE_ID</code>, the value would be from <a href='/develop/api/sell/request_headers#marketplace-id-values' target="_blank">Marketplace ID values</a>.
     */
     private ?string $value = null;
     
@@ -72,21 +72,21 @@ class AlertDimension implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'key' => fn(ParseNode $n) => $o->setKey($n->getStringValue()),
+            'key' => fn(ParseNode $n) => $o->setKey($n->getEnumValue(DimensionKeyEnum::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the key property value. The key field of the applied dimension. For example, the marketplace Id. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:DimensionKeyEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the key property value. The key field of the applied dimension. For example, the marketplace Id.
+     * @return DimensionKeyEnum|null
     */
-    public function getKey(): ?string {
+    public function getKey(): ?DimensionKeyEnum {
         return $this->key;
     }
 
     /**
-     * Gets the value property value. The value field of the applied dimension. For example, if the key is a <code>MARKETPLACE_ID</code>, the value would be from <a href='/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>MarketplaceIdEnum</a>.
+     * Gets the value property value. The value field of the applied dimension. For example, if the key is a <code>MARKETPLACE_ID</code>, the value would be from <a href='/develop/api/sell/request_headers#marketplace-id-values' target="_blank">Marketplace ID values</a>.
      * @return string|null
     */
     public function getValue(): ?string {
@@ -98,7 +98,7 @@ class AlertDimension implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('key', $this->getKey());
+        $writer->writeEnumValue('key', $this->getKey());
         $writer->writeStringValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,15 +112,15 @@ class AlertDimension implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the key property value. The key field of the applied dimension. For example, the marketplace Id. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:DimensionKeyEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the key property.
+     * Sets the key property value. The key field of the applied dimension. For example, the marketplace Id.
+     * @param DimensionKeyEnum|null $value Value to set for the key property.
     */
-    public function setKey(?string $value): void {
+    public function setKey(?DimensionKeyEnum $value): void {
         $this->key = $value;
     }
 
     /**
-     * Sets the value property value. The value field of the applied dimension. For example, if the key is a <code>MARKETPLACE_ID</code>, the value would be from <a href='/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>MarketplaceIdEnum</a>.
+     * Sets the value property value. The value field of the applied dimension. For example, if the key is a <code>MARKETPLACE_ID</code>, the value would be from <a href='/develop/api/sell/request_headers#marketplace-id-values' target="_blank">Marketplace ID values</a>.
      * @param string|null $value Value to set for the value property.
     */
     public function setValue(?string $value): void {

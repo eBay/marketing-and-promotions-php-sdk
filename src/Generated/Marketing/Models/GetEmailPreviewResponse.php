@@ -21,6 +21,9 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
+/**
+ * This type defines the response payload for the <b>getEmailPreview</b> method.
+*/
 class GetEmailPreviewResponse implements AdditionalDataHolder, Parsable 
 {
     /**

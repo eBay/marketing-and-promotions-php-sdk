@@ -17,6 +17,7 @@
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_metadata;
 
 use EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_metadata\Item\WithReport_typeItemRequestBuilder;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\ReportMetadatas;
 use Exception;
 use Http\Promise\Promise;
@@ -32,7 +33,7 @@ class Ad_report_metadataRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/MarketingAndPromotions/Generated/Marketing.ad_report_metadata.item collection
-     * @param string $report_type This path parameter specifies the name of the report type whose metadata you want to retrieve.<br /><br />For details about available report types and their descriptions, refer to the <a href="/api-docs/sell/marketing/types/plr:ReportTypeEnum" target="_blank">ReportTypeEnum</a>.
+     * @param string $report_type This path parameter specifies the name of the report type whose metadata you want to retrieve.<br /><br />For details about available report types and their descriptions, refer to the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_report_task-getreporttasks.reporttypeenum">ReportTypeEnum</a>.
      * @return WithReport_typeItemRequestBuilder
     */
     public function byReport_type(string $report_type): WithReport_typeItemRequestBuilder {
@@ -63,7 +64,11 @@ class Ad_report_metadataRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Ad_report_metadataRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [ReportMetadatas::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [ReportMetadatas::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

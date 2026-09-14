@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A container for the details of an existing ad group.<br /><br />An ad group can be added to a campaign that uses the Cost Per Click (CPC) funding model. A campaign may have multiple ad groups. All listings that are promoted in the campaign are included in the ad group.<br /><br /><span class="tablenote"><b>Note:</b> This type only applies to the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
+ * This type defines the details of an existing ad group.<br /><br />An ad group can be added to a campaign that uses the Cost Per Click (CPC) funding model. A campaign may have multiple ad groups. All listings that are promoted in the campaign are included in the ad group.<br /><br /><span class="tablenote"><b>Note:</b> This type only applies to the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
 */
 class AdGroup implements AdditionalDataHolder, Parsable 
 {
@@ -37,12 +37,12 @@ class AdGroup implements AdditionalDataHolder, Parsable
     private ?string $adGroupId = null;
     
     /**
-     * @var string|null $adGroupStatus An enumeration value representing the current status of the ad group.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdGroupStatusEnum'>eBay API documentation</a>
+     * @var AdGroupStatusEnum|null $adGroupStatus An enumeration value representing the current status of the ad group.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul>
     */
-    private ?string $adGroupStatus = null;
+    private ?AdGroupStatusEnum $adGroupStatus = null;
     
     /**
-     * @var Amount|null $defaultBid A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $defaultBid A bid amount that applies to all of the keywords in an ad group that do not have individual bids. For all keywords without individual bids, the default bid is the amount that the seller will pay per click for the listings in the ad group in the promoted listings campaign.<br><br><b>Valid Values</b>: 0.5, 0.75
     */
     private ?Amount $defaultBid = null;
     
@@ -84,15 +84,15 @@ class AdGroup implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adGroupStatus property value. An enumeration value representing the current status of the ad group.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdGroupStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the adGroupStatus property value. An enumeration value representing the current status of the ad group.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul>
+     * @return AdGroupStatusEnum|null
     */
-    public function getAdGroupStatus(): ?string {
+    public function getAdGroupStatus(): ?AdGroupStatusEnum {
         return $this->adGroupStatus;
     }
 
     /**
-     * Gets the defaultBid property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the defaultBid property value. A bid amount that applies to all of the keywords in an ad group that do not have individual bids. For all keywords without individual bids, the default bid is the amount that the seller will pay per click for the listings in the ad group in the promoted listings campaign.<br><br><b>Valid Values</b>: 0.5, 0.75
      * @return Amount|null
     */
     public function getDefaultBid(): ?Amount {
@@ -107,7 +107,7 @@ class AdGroup implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'adGroupId' => fn(ParseNode $n) => $o->setAdGroupId($n->getStringValue()),
-            'adGroupStatus' => fn(ParseNode $n) => $o->setAdGroupStatus($n->getStringValue()),
+            'adGroupStatus' => fn(ParseNode $n) => $o->setAdGroupStatus($n->getEnumValue(AdGroupStatusEnum::class)),
             'defaultBid' => fn(ParseNode $n) => $o->setDefaultBid($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
         ];
@@ -127,7 +127,7 @@ class AdGroup implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('adGroupId', $this->getAdGroupId());
-        $writer->writeStringValue('adGroupStatus', $this->getAdGroupStatus());
+        $writer->writeEnumValue('adGroupStatus', $this->getAdGroupStatus());
         $writer->writeObjectValue('defaultBid', $this->getDefaultBid());
         $writer->writeStringValue('name', $this->getName());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -150,15 +150,15 @@ class AdGroup implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adGroupStatus property value. An enumeration value representing the current status of the ad group.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdGroupStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the adGroupStatus property.
+     * Sets the adGroupStatus property value. An enumeration value representing the current status of the ad group.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul>
+     * @param AdGroupStatusEnum|null $value Value to set for the adGroupStatus property.
     */
-    public function setAdGroupStatus(?string $value): void {
+    public function setAdGroupStatus(?AdGroupStatusEnum $value): void {
         $this->adGroupStatus = $value;
     }
 
     /**
-     * Sets the defaultBid property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the defaultBid property value. A bid amount that applies to all of the keywords in an ad group that do not have individual bids. For all keywords without individual bids, the default bid is the amount that the seller will pay per click for the listings in the ad group in the promoted listings campaign.<br><br><b>Valid Values</b>: 0.5, 0.75
      * @param Amount|null $value Value to set for the defaultBid property.
     */
     public function setDefaultBid(?Amount $value): void {

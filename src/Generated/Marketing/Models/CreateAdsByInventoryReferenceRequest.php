@@ -32,7 +32,7 @@ class CreateAdsByInventoryReferenceRequest implements AdditionalDataHolder, Pars
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $adGroupId <span class="tablenote"><b>Note:</b> This field is not currently in use. Ad groups are only applicable to priority strategy ad campaigns that use the Cost Per Click (CPC) funding model. See <a href="/api-docs/sell/static/marketing/pl-overview.html#funding-model">Funding Models</a> in the <i>Promoted Listings Playbook</i> for more information.</span>
+     * @var string|null $adGroupId <span class="tablenote"><b>Note:</b> This field is not currently in use. Ad groups are only applicable to priority strategy ad campaigns that use the Cost Per Click (CPC) funding model. See <a href="/api-docs/sell/static/marketing/pl-overview.html#funding-model" target="_blank">Funding Models</a> in the <i>Promoted Listings Playbook</i> for more information.</span>
     */
     private ?string $adGroupId = null;
     
@@ -47,9 +47,9 @@ class CreateAdsByInventoryReferenceRequest implements AdditionalDataHolder, Pars
     private ?string $inventoryReferenceId = null;
     
     /**
-     * @var string|null $inventoryReferenceType This enumerated value indicates the type of item the <b>inventoryReferenceId</b> references.<br><br>The item can be either an <code>INVENTORY_ITEM</code> or an <code>INVENTORY_ITEM_GROUP</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
+     * @var InventoryReferenceTypeEnum|null $inventoryReferenceType This enumerated value indicates the type of item the <b>inventoryReferenceId</b> references.<br><br>The item can be either an <code>INVENTORY_ITEM</code> or an <code>INVENTORY_ITEM_GROUP</code>.
     */
-    private ?string $inventoryReferenceType = null;
+    private ?InventoryReferenceTypeEnum $inventoryReferenceType = null;
     
     /**
      * Instantiates a new CreateAdsByInventoryReferenceRequest and sets the default values.
@@ -76,7 +76,7 @@ class CreateAdsByInventoryReferenceRequest implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Gets the adGroupId property value. <span class="tablenote"><b>Note:</b> This field is not currently in use. Ad groups are only applicable to priority strategy ad campaigns that use the Cost Per Click (CPC) funding model. See <a href="/api-docs/sell/static/marketing/pl-overview.html#funding-model">Funding Models</a> in the <i>Promoted Listings Playbook</i> for more information.</span>
+     * Gets the adGroupId property value. <span class="tablenote"><b>Note:</b> This field is not currently in use. Ad groups are only applicable to priority strategy ad campaigns that use the Cost Per Click (CPC) funding model. See <a href="/api-docs/sell/static/marketing/pl-overview.html#funding-model" target="_blank">Funding Models</a> in the <i>Promoted Listings Playbook</i> for more information.</span>
      * @return string|null
     */
     public function getAdGroupId(): ?string {
@@ -101,7 +101,7 @@ class CreateAdsByInventoryReferenceRequest implements AdditionalDataHolder, Pars
             'adGroupId' => fn(ParseNode $n) => $o->setAdGroupId($n->getStringValue()),
             'bidPercentage' => fn(ParseNode $n) => $o->setBidPercentage($n->getStringValue()),
             'inventoryReferenceId' => fn(ParseNode $n) => $o->setInventoryReferenceId($n->getStringValue()),
-            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getStringValue()),
+            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getEnumValue(InventoryReferenceTypeEnum::class)),
         ];
     }
 
@@ -114,10 +114,10 @@ class CreateAdsByInventoryReferenceRequest implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Gets the inventoryReferenceType property value. This enumerated value indicates the type of item the <b>inventoryReferenceId</b> references.<br><br>The item can be either an <code>INVENTORY_ITEM</code> or an <code>INVENTORY_ITEM_GROUP</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the inventoryReferenceType property value. This enumerated value indicates the type of item the <b>inventoryReferenceId</b> references.<br><br>The item can be either an <code>INVENTORY_ITEM</code> or an <code>INVENTORY_ITEM_GROUP</code>.
+     * @return InventoryReferenceTypeEnum|null
     */
-    public function getInventoryReferenceType(): ?string {
+    public function getInventoryReferenceType(): ?InventoryReferenceTypeEnum {
         return $this->inventoryReferenceType;
     }
 
@@ -129,7 +129,7 @@ class CreateAdsByInventoryReferenceRequest implements AdditionalDataHolder, Pars
         $writer->writeStringValue('adGroupId', $this->getAdGroupId());
         $writer->writeStringValue('bidPercentage', $this->getBidPercentage());
         $writer->writeStringValue('inventoryReferenceId', $this->getInventoryReferenceId());
-        $writer->writeStringValue('inventoryReferenceType', $this->getInventoryReferenceType());
+        $writer->writeEnumValue('inventoryReferenceType', $this->getInventoryReferenceType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -142,7 +142,7 @@ class CreateAdsByInventoryReferenceRequest implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Sets the adGroupId property value. <span class="tablenote"><b>Note:</b> This field is not currently in use. Ad groups are only applicable to priority strategy ad campaigns that use the Cost Per Click (CPC) funding model. See <a href="/api-docs/sell/static/marketing/pl-overview.html#funding-model">Funding Models</a> in the <i>Promoted Listings Playbook</i> for more information.</span>
+     * Sets the adGroupId property value. <span class="tablenote"><b>Note:</b> This field is not currently in use. Ad groups are only applicable to priority strategy ad campaigns that use the Cost Per Click (CPC) funding model. See <a href="/api-docs/sell/static/marketing/pl-overview.html#funding-model" target="_blank">Funding Models</a> in the <i>Promoted Listings Playbook</i> for more information.</span>
      * @param string|null $value Value to set for the adGroupId property.
     */
     public function setAdGroupId(?string $value): void {
@@ -166,10 +166,10 @@ class CreateAdsByInventoryReferenceRequest implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Sets the inventoryReferenceType property value. This enumerated value indicates the type of item the <b>inventoryReferenceId</b> references.<br><br>The item can be either an <code>INVENTORY_ITEM</code> or an <code>INVENTORY_ITEM_GROUP</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the inventoryReferenceType property.
+     * Sets the inventoryReferenceType property value. This enumerated value indicates the type of item the <b>inventoryReferenceId</b> references.<br><br>The item can be either an <code>INVENTORY_ITEM</code> or an <code>INVENTORY_ITEM_GROUP</code>.
+     * @param InventoryReferenceTypeEnum|null $value Value to set for the inventoryReferenceType property.
     */
-    public function setInventoryReferenceType(?string $value): void {
+    public function setInventoryReferenceType(?InventoryReferenceTypeEnum $value): void {
         $this->inventoryReferenceType = $value;
     }
 

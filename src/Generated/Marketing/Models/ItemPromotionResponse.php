@@ -37,12 +37,12 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     private ?bool $applyDiscountToSingleItemOnly = null;
     
     /**
-     * @var Amount|null $budget A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $budget This sets the budget for the <code>CODED_COUPON</code> discount type. Supported values range from 100-1000000. Supported currency codes include USD, GBP, EUR, and AUD. <p class="tablenote"><b>Note:</b> The budget value for an active or paused discount can not be decreased.</p> <p class="tablenote"><b>Note:</b> The Currency Code for 'budget' must be the same as the Currency Code for 'maxDiscountAmount'.</p>
     */
     private ?Amount $budget = null;
     
     /**
-     * @var CouponConfiguration|null $couponConfiguration This container defines a coded coupon discount. It is required if the discount type is CODED_COUPON.
+     * @var CouponConfiguration|null $couponConfiguration The configuration of a coded coupon discount.
     */
     private ?CouponConfiguration $couponConfiguration = null;
     
@@ -62,14 +62,14 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     private ?string $endDate = null;
     
     /**
-     * @var InventoryCriterion|null $inventoryCriterion This type defines either the selections rules or the list of listing IDs for the discount. The "listing IDs" are are either the seller's item IDs or the eBay listing IDs.
+     * @var InventoryCriterion|null $inventoryCriterion Returns either an array of listing IDs or the selection rules used to specify the items being discounted. Listing IDs can be either eBay listing IDs or an array of seller's inventory reference IDs (know as SKUs or custom labels). See the <b>selectionRules</b> container for the rule criteria you can use to select inventory.
     */
     private ?InventoryCriterion $inventoryCriterion = null;
     
     /**
-     * @var string|null $marketplaceId The eBay marketplace ID of the site where the threshold discount is hosted. Threshold discounts are currently supported on a limited number of eBay marketplaces.  <p><b>Valid values:</b></p>  <ul class="compact"><li><code>EBAY_AU</code> = Australia</li> <li><code>EBAY_DE</code> = Germany</li> <li><code>EBAY_ES</code> = Spain</li> <li><code>EBAY_FR</code> = France</li> <li><code>EBAY_GB</code> = Great Britain</li> <li><code>EBAY_IT</code> = Italy</li> <li><code>EBAY_US</code> = United States</li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
+     * @var MarketplaceIdEnum|null $marketplaceId The eBay marketplace ID of the site where the threshold discount is hosted. Threshold discounts are currently supported on a limited number of eBay marketplaces.  <p><b>Valid values:</b></p>  <ul class="compact"><li><code>EBAY_AU</code> = Australia</li> <li><code>EBAY_DE</code> = Germany</li> <li><code>EBAY_ES</code> = Spain</li> <li><code>EBAY_FR</code> = France</li> <li><code>EBAY_GB</code> = Great Britain</li> <li><code>EBAY_IT</code> = Italy</li> <li><code>EBAY_US</code> = United States</li></ul>
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceIdEnum $marketplaceId = null;
     
     /**
      * @var string|null $name The seller-defined name or "title" of the discount that the seller can use to identify a discount. This label is not displayed in end-user flows.  <br><br><b>Maximum length:</b> 90
@@ -77,9 +77,9 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var string|null $priority Applicable for only <b>ORDER_DISCOUNT</b> discounts, this field indicates the precedence of the discount, which eBay uses to determine the position of a discount on the seller's <b>All Offers</b> page. If an item is associated with multiple discounts, the discount with the higher priority takes precedence. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionPriorityEnum'>eBay API documentation</a>
+     * @var PromotionPriorityEnum|null $priority Applicable for only <b>ORDER_DISCOUNT</b> discounts, this field indicates the precedence of the discount, which eBay uses to determine the position of a discount on the seller's <b>All Offers</b> page. If an item is associated with multiple discounts, the discount with the higher priority takes precedence.
     */
-    private ?string $priority = null;
+    private ?PromotionPriorityEnum $priority = null;
     
     /**
      * @var string|null $promotionId A unique eBay-assigned ID for the discount that's generated when the discount is created.
@@ -92,14 +92,14 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     private ?string $promotionImageUrl = null;
     
     /**
-     * @var string|null $promotionStatus The current status of the discount. When creating a new discount, this value must be set to either <code>DRAFT</code> or <code>SCHEDULED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>
+     * @var PromotionStatusEnum|null $promotionStatus The current status of the discount. When creating a new discount, this value must be set to either <code>DRAFT</code> or <code>SCHEDULED</code>.
     */
-    private ?string $promotionStatus = null;
+    private ?PromotionStatusEnum $promotionStatus = null;
     
     /**
-     * @var string|null $promotionType Indicates the type of the discount, either <code>CODED_COUPON</code>, <code>MARKDOWN_SALE</code>, <code>ORDER_DISCOUNT</code>, or <code>VOLUME_DISCOUNT</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionTypeEnum'>eBay API documentation</a>
+     * @var PromotionTypeEnum|null $promotionType Indicates the type of the discount, either <code>CODED_COUPON</code>, <code>MARKDOWN_SALE</code>, <code>ORDER_DISCOUNT</code>, or <code>VOLUME_DISCOUNT</code>.
     */
-    private ?string $promotionType = null;
+    private ?PromotionTypeEnum $promotionType = null;
     
     /**
      * @var string|null $startDate The date and time the discount starts in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). For display purposes, convert this time into the local time of the seller.
@@ -139,7 +139,7 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the budget property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the budget property value. This sets the budget for the <code>CODED_COUPON</code> discount type. Supported values range from 100-1000000. Supported currency codes include USD, GBP, EUR, and AUD. <p class="tablenote"><b>Note:</b> The budget value for an active or paused discount can not be decreased.</p> <p class="tablenote"><b>Note:</b> The Currency Code for 'budget' must be the same as the Currency Code for 'maxDiscountAmount'.</p>
      * @return Amount|null
     */
     public function getBudget(): ?Amount {
@@ -147,7 +147,7 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the couponConfiguration property value. This container defines a coded coupon discount. It is required if the discount type is CODED_COUPON.
+     * Gets the couponConfiguration property value. The configuration of a coded coupon discount.
      * @return CouponConfiguration|null
     */
     public function getCouponConfiguration(): ?CouponConfiguration {
@@ -192,19 +192,19 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
             'discountRules' => fn(ParseNode $n) => $o->setDiscountRules($n->getCollectionOfObjectValues([DiscountRule::class, 'createFromDiscriminatorValue'])),
             'endDate' => fn(ParseNode $n) => $o->setEndDate($n->getStringValue()),
             'inventoryCriterion' => fn(ParseNode $n) => $o->setInventoryCriterion($n->getObjectValue([InventoryCriterion::class, 'createFromDiscriminatorValue'])),
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceIdEnum::class)),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
-            'priority' => fn(ParseNode $n) => $o->setPriority($n->getStringValue()),
+            'priority' => fn(ParseNode $n) => $o->setPriority($n->getEnumValue(PromotionPriorityEnum::class)),
             'promotionId' => fn(ParseNode $n) => $o->setPromotionId($n->getStringValue()),
             'promotionImageUrl' => fn(ParseNode $n) => $o->setPromotionImageUrl($n->getStringValue()),
-            'promotionStatus' => fn(ParseNode $n) => $o->setPromotionStatus($n->getStringValue()),
-            'promotionType' => fn(ParseNode $n) => $o->setPromotionType($n->getStringValue()),
+            'promotionStatus' => fn(ParseNode $n) => $o->setPromotionStatus($n->getEnumValue(PromotionStatusEnum::class)),
+            'promotionType' => fn(ParseNode $n) => $o->setPromotionType($n->getEnumValue(PromotionTypeEnum::class)),
             'startDate' => fn(ParseNode $n) => $o->setStartDate($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the inventoryCriterion property value. This type defines either the selections rules or the list of listing IDs for the discount. The "listing IDs" are are either the seller's item IDs or the eBay listing IDs.
+     * Gets the inventoryCriterion property value. Returns either an array of listing IDs or the selection rules used to specify the items being discounted. Listing IDs can be either eBay listing IDs or an array of seller's inventory reference IDs (know as SKUs or custom labels). See the <b>selectionRules</b> container for the rule criteria you can use to select inventory.
      * @return InventoryCriterion|null
     */
     public function getInventoryCriterion(): ?InventoryCriterion {
@@ -212,10 +212,10 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the marketplaceId property value. The eBay marketplace ID of the site where the threshold discount is hosted. Threshold discounts are currently supported on a limited number of eBay marketplaces.  <p><b>Valid values:</b></p>  <ul class="compact"><li><code>EBAY_AU</code> = Australia</li> <li><code>EBAY_DE</code> = Germany</li> <li><code>EBAY_ES</code> = Spain</li> <li><code>EBAY_FR</code> = France</li> <li><code>EBAY_GB</code> = Great Britain</li> <li><code>EBAY_IT</code> = Italy</li> <li><code>EBAY_US</code> = United States</li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. The eBay marketplace ID of the site where the threshold discount is hosted. Threshold discounts are currently supported on a limited number of eBay marketplaces.  <p><b>Valid values:</b></p>  <ul class="compact"><li><code>EBAY_AU</code> = Australia</li> <li><code>EBAY_DE</code> = Germany</li> <li><code>EBAY_ES</code> = Spain</li> <li><code>EBAY_FR</code> = France</li> <li><code>EBAY_GB</code> = Great Britain</li> <li><code>EBAY_IT</code> = Italy</li> <li><code>EBAY_US</code> = United States</li></ul>
+     * @return MarketplaceIdEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceIdEnum {
         return $this->marketplaceId;
     }
 
@@ -228,10 +228,10 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the priority property value. Applicable for only <b>ORDER_DISCOUNT</b> discounts, this field indicates the precedence of the discount, which eBay uses to determine the position of a discount on the seller's <b>All Offers</b> page. If an item is associated with multiple discounts, the discount with the higher priority takes precedence. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionPriorityEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the priority property value. Applicable for only <b>ORDER_DISCOUNT</b> discounts, this field indicates the precedence of the discount, which eBay uses to determine the position of a discount on the seller's <b>All Offers</b> page. If an item is associated with multiple discounts, the discount with the higher priority takes precedence.
+     * @return PromotionPriorityEnum|null
     */
-    public function getPriority(): ?string {
+    public function getPriority(): ?PromotionPriorityEnum {
         return $this->priority;
     }
 
@@ -252,18 +252,18 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the promotionStatus property value. The current status of the discount. When creating a new discount, this value must be set to either <code>DRAFT</code> or <code>SCHEDULED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the promotionStatus property value. The current status of the discount. When creating a new discount, this value must be set to either <code>DRAFT</code> or <code>SCHEDULED</code>.
+     * @return PromotionStatusEnum|null
     */
-    public function getPromotionStatus(): ?string {
+    public function getPromotionStatus(): ?PromotionStatusEnum {
         return $this->promotionStatus;
     }
 
     /**
-     * Gets the promotionType property value. Indicates the type of the discount, either <code>CODED_COUPON</code>, <code>MARKDOWN_SALE</code>, <code>ORDER_DISCOUNT</code>, or <code>VOLUME_DISCOUNT</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the promotionType property value. Indicates the type of the discount, either <code>CODED_COUPON</code>, <code>MARKDOWN_SALE</code>, <code>ORDER_DISCOUNT</code>, or <code>VOLUME_DISCOUNT</code>.
+     * @return PromotionTypeEnum|null
     */
-    public function getPromotionType(): ?string {
+    public function getPromotionType(): ?PromotionTypeEnum {
         return $this->promotionType;
     }
 
@@ -287,13 +287,13 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
         $writer->writeCollectionOfObjectValues('discountRules', $this->getDiscountRules());
         $writer->writeStringValue('endDate', $this->getEndDate());
         $writer->writeObjectValue('inventoryCriterion', $this->getInventoryCriterion());
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeStringValue('name', $this->getName());
-        $writer->writeStringValue('priority', $this->getPriority());
+        $writer->writeEnumValue('priority', $this->getPriority());
         $writer->writeStringValue('promotionId', $this->getPromotionId());
         $writer->writeStringValue('promotionImageUrl', $this->getPromotionImageUrl());
-        $writer->writeStringValue('promotionStatus', $this->getPromotionStatus());
-        $writer->writeStringValue('promotionType', $this->getPromotionType());
+        $writer->writeEnumValue('promotionStatus', $this->getPromotionStatus());
+        $writer->writeEnumValue('promotionType', $this->getPromotionType());
         $writer->writeStringValue('startDate', $this->getStartDate());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -315,7 +315,7 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the budget property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the budget property value. This sets the budget for the <code>CODED_COUPON</code> discount type. Supported values range from 100-1000000. Supported currency codes include USD, GBP, EUR, and AUD. <p class="tablenote"><b>Note:</b> The budget value for an active or paused discount can not be decreased.</p> <p class="tablenote"><b>Note:</b> The Currency Code for 'budget' must be the same as the Currency Code for 'maxDiscountAmount'.</p>
      * @param Amount|null $value Value to set for the budget property.
     */
     public function setBudget(?Amount $value): void {
@@ -323,7 +323,7 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the couponConfiguration property value. This container defines a coded coupon discount. It is required if the discount type is CODED_COUPON.
+     * Sets the couponConfiguration property value. The configuration of a coded coupon discount.
      * @param CouponConfiguration|null $value Value to set for the couponConfiguration property.
     */
     public function setCouponConfiguration(?CouponConfiguration $value): void {
@@ -355,7 +355,7 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the inventoryCriterion property value. This type defines either the selections rules or the list of listing IDs for the discount. The "listing IDs" are are either the seller's item IDs or the eBay listing IDs.
+     * Sets the inventoryCriterion property value. Returns either an array of listing IDs or the selection rules used to specify the items being discounted. Listing IDs can be either eBay listing IDs or an array of seller's inventory reference IDs (know as SKUs or custom labels). See the <b>selectionRules</b> container for the rule criteria you can use to select inventory.
      * @param InventoryCriterion|null $value Value to set for the inventoryCriterion property.
     */
     public function setInventoryCriterion(?InventoryCriterion $value): void {
@@ -363,10 +363,10 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. The eBay marketplace ID of the site where the threshold discount is hosted. Threshold discounts are currently supported on a limited number of eBay marketplaces.  <p><b>Valid values:</b></p>  <ul class="compact"><li><code>EBAY_AU</code> = Australia</li> <li><code>EBAY_DE</code> = Germany</li> <li><code>EBAY_ES</code> = Spain</li> <li><code>EBAY_FR</code> = France</li> <li><code>EBAY_GB</code> = Great Britain</li> <li><code>EBAY_IT</code> = Italy</li> <li><code>EBAY_US</code> = United States</li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. The eBay marketplace ID of the site where the threshold discount is hosted. Threshold discounts are currently supported on a limited number of eBay marketplaces.  <p><b>Valid values:</b></p>  <ul class="compact"><li><code>EBAY_AU</code> = Australia</li> <li><code>EBAY_DE</code> = Germany</li> <li><code>EBAY_ES</code> = Spain</li> <li><code>EBAY_FR</code> = France</li> <li><code>EBAY_GB</code> = Great Britain</li> <li><code>EBAY_IT</code> = Italy</li> <li><code>EBAY_US</code> = United States</li></ul>
+     * @param MarketplaceIdEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceIdEnum $value): void {
         $this->marketplaceId = $value;
     }
 
@@ -379,10 +379,10 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the priority property value. Applicable for only <b>ORDER_DISCOUNT</b> discounts, this field indicates the precedence of the discount, which eBay uses to determine the position of a discount on the seller's <b>All Offers</b> page. If an item is associated with multiple discounts, the discount with the higher priority takes precedence. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionPriorityEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the priority property.
+     * Sets the priority property value. Applicable for only <b>ORDER_DISCOUNT</b> discounts, this field indicates the precedence of the discount, which eBay uses to determine the position of a discount on the seller's <b>All Offers</b> page. If an item is associated with multiple discounts, the discount with the higher priority takes precedence.
+     * @param PromotionPriorityEnum|null $value Value to set for the priority property.
     */
-    public function setPriority(?string $value): void {
+    public function setPriority(?PromotionPriorityEnum $value): void {
         $this->priority = $value;
     }
 
@@ -403,18 +403,18 @@ class ItemPromotionResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the promotionStatus property value. The current status of the discount. When creating a new discount, this value must be set to either <code>DRAFT</code> or <code>SCHEDULED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the promotionStatus property.
+     * Sets the promotionStatus property value. The current status of the discount. When creating a new discount, this value must be set to either <code>DRAFT</code> or <code>SCHEDULED</code>.
+     * @param PromotionStatusEnum|null $value Value to set for the promotionStatus property.
     */
-    public function setPromotionStatus(?string $value): void {
+    public function setPromotionStatus(?PromotionStatusEnum $value): void {
         $this->promotionStatus = $value;
     }
 
     /**
-     * Sets the promotionType property value. Indicates the type of the discount, either <code>CODED_COUPON</code>, <code>MARKDOWN_SALE</code>, <code>ORDER_DISCOUNT</code>, or <code>VOLUME_DISCOUNT</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the promotionType property.
+     * Sets the promotionType property value. Indicates the type of the discount, either <code>CODED_COUPON</code>, <code>MARKDOWN_SALE</code>, <code>ORDER_DISCOUNT</code>, or <code>VOLUME_DISCOUNT</code>.
+     * @param PromotionTypeEnum|null $value Value to set for the promotionType property.
     */
-    public function setPromotionType(?string $value): void {
+    public function setPromotionType(?PromotionTypeEnum $value): void {
         $this->promotionType = $value;
     }
 

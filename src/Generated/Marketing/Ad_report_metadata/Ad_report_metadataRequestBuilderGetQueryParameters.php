@@ -22,20 +22,20 @@ namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_metadata;
 class Ad_report_metadataRequestBuilderGetQueryParameters 
 {
     /**
-     * @var string|null $channel This query parameter is used only if the user wants to see COST_PER_CLICK report metadata for a specific channel. Refer to the <a href="/api-docs/sell/marketing/types/pls:ChannelEnum">ChannelEnum</a> type for supported values.<br><br><span class="tablenote"><b>Note:</b> The channel parameter is only applicable for COST_PER_CLICK funding model.</span>
+     * @var string|null $channel This query parameter is used only if the user wants to see <code>COST_PER_CLICK</code> report metadata for a specific channel. Refer to the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_report_task-getreporttasks.channelenum">ChannelEnum</a> type for supported values.<br><br><span class="tablenote"><b>Note:</b> The channel parameter is only applicable for <code>COST_PER_CLICK</code> funding model.</span>
     */
     public ?string $channel = null;
     
     /**
      * @QueryParameter("funding_model")
-     * @var string|null $fundingModel This query parameter is used only if the user wants to see report metadata for a specific funding model. Refer to the <a href="/api-docs/sell/marketing/types/pls:FundingModelEnum">FundingModelEnum</a> type for supported values.
+     * @var string|null $fundingModel This query parameter is used only if the user wants to see report metadata for a specific funding model. Refer to the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_report_task-getreporttasks.fundingmodelenum">FundingModelEnum</a> type for supported values.
     */
     public ?string $fundingModel = null;
     
     /**
      * Instantiates a new Ad_report_metadataRequestBuilderGetQueryParameters and sets the default values.
-     * @param string|null $channel This query parameter is used only if the user wants to see COST_PER_CLICK report metadata for a specific channel. Refer to the <a href="/api-docs/sell/marketing/types/pls:ChannelEnum">ChannelEnum</a> type for supported values.<br><br><span class="tablenote"><b>Note:</b> The channel parameter is only applicable for COST_PER_CLICK funding model.</span>
-     * @param string|null $funding_model This query parameter is used only if the user wants to see report metadata for a specific funding model. Refer to the <a href="/api-docs/sell/marketing/types/pls:FundingModelEnum">FundingModelEnum</a> type for supported values.
+     * @param string|null $channel This query parameter is used only if the user wants to see <code>COST_PER_CLICK</code> report metadata for a specific channel. Refer to the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_report_task-getreporttasks.channelenum">ChannelEnum</a> type for supported values.<br><br><span class="tablenote"><b>Note:</b> The channel parameter is only applicable for <code>COST_PER_CLICK</code> funding model.</span>
+     * @param string|null $funding_model This query parameter is used only if the user wants to see report metadata for a specific funding model. Refer to the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_report_task-getreporttasks.fundingmodelenum">FundingModelEnum</a> type for supported values.
     */
     public function __construct(?string $channel = null, ?string $funding_model = null) {
         $this->channel = $channel;

@@ -22,6 +22,9 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
+/**
+ * This type defines the response payload for the <b>getEmailCampaign</b> method.
+*/
 class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable 
 {
     /**
@@ -40,9 +43,9 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     private ?string $categoryId = null;
     
     /**
-     * @var string|null $categoryType The enumeration value returned here indicates if the <b>categoryId</b> value is the identifier of an eBay category or an eBay store category.<br><br>This field is returned if a seller has applied the email campaign to a specific category. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:CategoryTypeEnum'>eBay API documentation</a>
+     * @var CategoryTypeEnum|null $categoryType The enumeration value returned here indicates if the <b>categoryId</b> value is the identifier of an eBay category or an eBay store category.<br><br>This field is returned if a seller has applied the email campaign to a specific category.
     */
-    private ?string $categoryType = null;
+    private ?CategoryTypeEnum $categoryType = null;
     
     /**
      * @var string|null $creationDate The date and time that the email campaign was created, given in UTC format.
@@ -55,14 +58,14 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     private ?string $emailCampaignId = null;
     
     /**
-     * @var string|null $emailCampaignStatus The email campaign status. See <a href="/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum">EmailCampaignStatusEnum</a> for a list of valid statuses. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum'>eBay API documentation</a>
+     * @var EmailCampaignStatusEnum|null $emailCampaignStatus The email campaign status. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.emailcampaignstatusenum">EmailCampaignStatusEnum</a> for a list of valid statuses.
     */
-    private ?string $emailCampaignStatus = null;
+    private ?EmailCampaignStatusEnum $emailCampaignStatus = null;
     
     /**
-     * @var string|null $emailCampaignType The email campaign type. See <a href="/api-docs/sell/marketing/types/api:CampaignTypeEnum">CampaignTypeEnum</a> for valid email campaign types. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:CampaignTypeEnum'>eBay API documentation</a>
+     * @var CampaignTypeEnum|null $emailCampaignType The email campaign type. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.campaigntypeenum">CampaignTypeEnum</a> for valid email campaign types.
     */
-    private ?string $emailCampaignType = null;
+    private ?CampaignTypeEnum $emailCampaignType = null;
     
     /**
      * @var array<string>|null $itemIds The listing IDs of the items that were manually added to the email campaign.<br><br>Only listings added manually by the seller are returned. Returns a null array if no listings were added.
@@ -70,12 +73,12 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     private ?array $itemIds = null;
     
     /**
-     * @var string|null $itemSelectMode The mode used to select the items listed in the email campaign. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ItemSelectModeEnum'>eBay API documentation</a>
+     * @var ItemSelectModeEnum|null $itemSelectMode The mode used to select the items listed in the email campaign.
     */
-    private ?string $itemSelectMode = null;
+    private ?ItemSelectModeEnum $itemSelectMode = null;
     
     /**
-     * @var string|null $marketplaceId The eBay marketplace where the email campaign is active. See <a href="/api-docs/sell/marketing/types/ba:MarketplaceIdEnum">MarketplaceIdEnum</a> for a list of marketplace IDs.
+     * @var string|null $marketplaceId The eBay marketplace where the email campaign is active. See <b>MarketplaceIdEnum</b> for a list of marketplace IDs.
     */
     private ?string $marketplaceId = null;
     
@@ -90,7 +93,7 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     private ?string $personalizedMessage = null;
     
     /**
-     * @var PriceRange|null $priceRange The price range.
+     * @var PriceRange|null $priceRange The price range and currency set within the email campaign. This container will only return if a price range was set.
     */
     private ?PriceRange $priceRange = null;
     
@@ -100,9 +103,9 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     private ?string $promotionId = null;
     
     /**
-     * @var string|null $promotionSelectMode Indicates whether the listings that the discount was applied to were selected manually or automatically.<br><br>This field will only return if a discount was applied. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:PromotionSelectModeEnum'>eBay API documentation</a>
+     * @var PromotionSelectModeEnum|null $promotionSelectMode Indicates whether the listings that the discount was applied to were selected manually or automatically.<br><br>This field will only return if a discount was applied.
     */
-    private ?string $promotionSelectMode = null;
+    private ?PromotionSelectModeEnum $promotionSelectMode = null;
     
     /**
      * @var string|null $scheduleDate The date and time that the email campaign newsletter is scheduled to send, given in UTC format. This field is only returned if the seller set the start of the email campaign to a date in the future.
@@ -110,9 +113,9 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     private ?string $scheduleDate = null;
     
     /**
-     * @var string|null $scheduleDateType The schedule type of the email campaign. See <a href="/api-docs/sell/marketing/types/api:ScheduleDateTypeEnum">ScheduleDateTypeEnum</a>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ScheduleDateTypeEnum'>eBay API documentation</a>
+     * @var ScheduleDateTypeEnum|null $scheduleDateType The schedule type of the email campaign. See <b>ScheduleDateTypeEnum</b>.
     */
-    private ?string $scheduleDateType = null;
+    private ?ScheduleDateTypeEnum $scheduleDateType = null;
     
     /**
      * @var string|null $sentDate The date and time that the email campaign was sent, given in UTC format.
@@ -120,9 +123,9 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     private ?string $sentDate = null;
     
     /**
-     * @var string|null $sort The sort rule is used to display the items in the email campaign. If no sort rule was selected, the default will be <code>NEWLY_LISTED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ItemSortEnum'>eBay API documentation</a>
+     * @var ItemSortEnum|null $sort The sort rule is used to display the items in the email campaign. If no sort rule was selected, the default will be <code>NEWLY_LISTED</code>.
     */
-    private ?string $sort = null;
+    private ?ItemSortEnum $sort = null;
     
     /**
      * @var string|null $subject The email campaign subject.
@@ -170,10 +173,10 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the categoryType property value. The enumeration value returned here indicates if the <b>categoryId</b> value is the identifier of an eBay category or an eBay store category.<br><br>This field is returned if a seller has applied the email campaign to a specific category. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:CategoryTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the categoryType property value. The enumeration value returned here indicates if the <b>categoryId</b> value is the identifier of an eBay category or an eBay store category.<br><br>This field is returned if a seller has applied the email campaign to a specific category.
+     * @return CategoryTypeEnum|null
     */
-    public function getCategoryType(): ?string {
+    public function getCategoryType(): ?CategoryTypeEnum {
         return $this->categoryType;
     }
 
@@ -194,18 +197,18 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the emailCampaignStatus property value. The email campaign status. See <a href="/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum">EmailCampaignStatusEnum</a> for a list of valid statuses. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the emailCampaignStatus property value. The email campaign status. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.emailcampaignstatusenum">EmailCampaignStatusEnum</a> for a list of valid statuses.
+     * @return EmailCampaignStatusEnum|null
     */
-    public function getEmailCampaignStatus(): ?string {
+    public function getEmailCampaignStatus(): ?EmailCampaignStatusEnum {
         return $this->emailCampaignStatus;
     }
 
     /**
-     * Gets the emailCampaignType property value. The email campaign type. See <a href="/api-docs/sell/marketing/types/api:CampaignTypeEnum">CampaignTypeEnum</a> for valid email campaign types. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:CampaignTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the emailCampaignType property value. The email campaign type. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.campaigntypeenum">CampaignTypeEnum</a> for valid email campaign types.
+     * @return CampaignTypeEnum|null
     */
-    public function getEmailCampaignType(): ?string {
+    public function getEmailCampaignType(): ?CampaignTypeEnum {
         return $this->emailCampaignType;
     }
 
@@ -218,11 +221,11 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
         return  [
             'audiences' => fn(ParseNode $n) => $o->setAudiences($n->getCollectionOfObjectValues([CampaignAudience::class, 'createFromDiscriminatorValue'])),
             'categoryId' => fn(ParseNode $n) => $o->setCategoryId($n->getStringValue()),
-            'categoryType' => fn(ParseNode $n) => $o->setCategoryType($n->getStringValue()),
+            'categoryType' => fn(ParseNode $n) => $o->setCategoryType($n->getEnumValue(CategoryTypeEnum::class)),
             'creationDate' => fn(ParseNode $n) => $o->setCreationDate($n->getStringValue()),
             'emailCampaignId' => fn(ParseNode $n) => $o->setEmailCampaignId($n->getStringValue()),
-            'emailCampaignStatus' => fn(ParseNode $n) => $o->setEmailCampaignStatus($n->getStringValue()),
-            'emailCampaignType' => fn(ParseNode $n) => $o->setEmailCampaignType($n->getStringValue()),
+            'emailCampaignStatus' => fn(ParseNode $n) => $o->setEmailCampaignStatus($n->getEnumValue(EmailCampaignStatusEnum::class)),
+            'emailCampaignType' => fn(ParseNode $n) => $o->setEmailCampaignType($n->getEnumValue(CampaignTypeEnum::class)),
             'itemIds' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
                 if (is_array($val)) {
@@ -231,17 +234,17 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
                 /** @var array<string>|null $val */
                 $this->setItemIds($val);
             },
-            'itemSelectMode' => fn(ParseNode $n) => $o->setItemSelectMode($n->getStringValue()),
+            'itemSelectMode' => fn(ParseNode $n) => $o->setItemSelectMode($n->getEnumValue(ItemSelectModeEnum::class)),
             'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
             'modificationDate' => fn(ParseNode $n) => $o->setModificationDate($n->getStringValue()),
             'personalizedMessage' => fn(ParseNode $n) => $o->setPersonalizedMessage($n->getStringValue()),
             'priceRange' => fn(ParseNode $n) => $o->setPriceRange($n->getObjectValue([PriceRange::class, 'createFromDiscriminatorValue'])),
             'promotionId' => fn(ParseNode $n) => $o->setPromotionId($n->getStringValue()),
-            'promotionSelectMode' => fn(ParseNode $n) => $o->setPromotionSelectMode($n->getStringValue()),
+            'promotionSelectMode' => fn(ParseNode $n) => $o->setPromotionSelectMode($n->getEnumValue(PromotionSelectModeEnum::class)),
             'scheduleDate' => fn(ParseNode $n) => $o->setScheduleDate($n->getStringValue()),
-            'scheduleDateType' => fn(ParseNode $n) => $o->setScheduleDateType($n->getStringValue()),
+            'scheduleDateType' => fn(ParseNode $n) => $o->setScheduleDateType($n->getEnumValue(ScheduleDateTypeEnum::class)),
             'sentDate' => fn(ParseNode $n) => $o->setSentDate($n->getStringValue()),
-            'sort' => fn(ParseNode $n) => $o->setSort($n->getStringValue()),
+            'sort' => fn(ParseNode $n) => $o->setSort($n->getEnumValue(ItemSortEnum::class)),
             'subject' => fn(ParseNode $n) => $o->setSubject($n->getStringValue()),
         ];
     }
@@ -255,15 +258,15 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the itemSelectMode property value. The mode used to select the items listed in the email campaign. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ItemSelectModeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the itemSelectMode property value. The mode used to select the items listed in the email campaign.
+     * @return ItemSelectModeEnum|null
     */
-    public function getItemSelectMode(): ?string {
+    public function getItemSelectMode(): ?ItemSelectModeEnum {
         return $this->itemSelectMode;
     }
 
     /**
-     * Gets the marketplaceId property value. The eBay marketplace where the email campaign is active. See <a href="/api-docs/sell/marketing/types/ba:MarketplaceIdEnum">MarketplaceIdEnum</a> for a list of marketplace IDs.
+     * Gets the marketplaceId property value. The eBay marketplace where the email campaign is active. See <b>MarketplaceIdEnum</b> for a list of marketplace IDs.
      * @return string|null
     */
     public function getMarketplaceId(): ?string {
@@ -287,7 +290,7 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the priceRange property value. The price range.
+     * Gets the priceRange property value. The price range and currency set within the email campaign. This container will only return if a price range was set.
      * @return PriceRange|null
     */
     public function getPriceRange(): ?PriceRange {
@@ -303,10 +306,10 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the promotionSelectMode property value. Indicates whether the listings that the discount was applied to were selected manually or automatically.<br><br>This field will only return if a discount was applied. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:PromotionSelectModeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the promotionSelectMode property value. Indicates whether the listings that the discount was applied to were selected manually or automatically.<br><br>This field will only return if a discount was applied.
+     * @return PromotionSelectModeEnum|null
     */
-    public function getPromotionSelectMode(): ?string {
+    public function getPromotionSelectMode(): ?PromotionSelectModeEnum {
         return $this->promotionSelectMode;
     }
 
@@ -319,10 +322,10 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the scheduleDateType property value. The schedule type of the email campaign. See <a href="/api-docs/sell/marketing/types/api:ScheduleDateTypeEnum">ScheduleDateTypeEnum</a>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ScheduleDateTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the scheduleDateType property value. The schedule type of the email campaign. See <b>ScheduleDateTypeEnum</b>.
+     * @return ScheduleDateTypeEnum|null
     */
-    public function getScheduleDateType(): ?string {
+    public function getScheduleDateType(): ?ScheduleDateTypeEnum {
         return $this->scheduleDateType;
     }
 
@@ -335,10 +338,10 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sort property value. The sort rule is used to display the items in the email campaign. If no sort rule was selected, the default will be <code>NEWLY_LISTED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ItemSortEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the sort property value. The sort rule is used to display the items in the email campaign. If no sort rule was selected, the default will be <code>NEWLY_LISTED</code>.
+     * @return ItemSortEnum|null
     */
-    public function getSort(): ?string {
+    public function getSort(): ?ItemSortEnum {
         return $this->sort;
     }
 
@@ -357,23 +360,23 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfObjectValues('audiences', $this->getAudiences());
         $writer->writeStringValue('categoryId', $this->getCategoryId());
-        $writer->writeStringValue('categoryType', $this->getCategoryType());
+        $writer->writeEnumValue('categoryType', $this->getCategoryType());
         $writer->writeStringValue('creationDate', $this->getCreationDate());
         $writer->writeStringValue('emailCampaignId', $this->getEmailCampaignId());
-        $writer->writeStringValue('emailCampaignStatus', $this->getEmailCampaignStatus());
-        $writer->writeStringValue('emailCampaignType', $this->getEmailCampaignType());
+        $writer->writeEnumValue('emailCampaignStatus', $this->getEmailCampaignStatus());
+        $writer->writeEnumValue('emailCampaignType', $this->getEmailCampaignType());
         $writer->writeCollectionOfPrimitiveValues('itemIds', $this->getItemIds());
-        $writer->writeStringValue('itemSelectMode', $this->getItemSelectMode());
+        $writer->writeEnumValue('itemSelectMode', $this->getItemSelectMode());
         $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeStringValue('modificationDate', $this->getModificationDate());
         $writer->writeStringValue('personalizedMessage', $this->getPersonalizedMessage());
         $writer->writeObjectValue('priceRange', $this->getPriceRange());
         $writer->writeStringValue('promotionId', $this->getPromotionId());
-        $writer->writeStringValue('promotionSelectMode', $this->getPromotionSelectMode());
+        $writer->writeEnumValue('promotionSelectMode', $this->getPromotionSelectMode());
         $writer->writeStringValue('scheduleDate', $this->getScheduleDate());
-        $writer->writeStringValue('scheduleDateType', $this->getScheduleDateType());
+        $writer->writeEnumValue('scheduleDateType', $this->getScheduleDateType());
         $writer->writeStringValue('sentDate', $this->getSentDate());
-        $writer->writeStringValue('sort', $this->getSort());
+        $writer->writeEnumValue('sort', $this->getSort());
         $writer->writeStringValue('subject', $this->getSubject());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -403,10 +406,10 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the categoryType property value. The enumeration value returned here indicates if the <b>categoryId</b> value is the identifier of an eBay category or an eBay store category.<br><br>This field is returned if a seller has applied the email campaign to a specific category. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:CategoryTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the categoryType property.
+     * Sets the categoryType property value. The enumeration value returned here indicates if the <b>categoryId</b> value is the identifier of an eBay category or an eBay store category.<br><br>This field is returned if a seller has applied the email campaign to a specific category.
+     * @param CategoryTypeEnum|null $value Value to set for the categoryType property.
     */
-    public function setCategoryType(?string $value): void {
+    public function setCategoryType(?CategoryTypeEnum $value): void {
         $this->categoryType = $value;
     }
 
@@ -427,18 +430,18 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the emailCampaignStatus property value. The email campaign status. See <a href="/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum">EmailCampaignStatusEnum</a> for a list of valid statuses. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the emailCampaignStatus property.
+     * Sets the emailCampaignStatus property value. The email campaign status. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.emailcampaignstatusenum">EmailCampaignStatusEnum</a> for a list of valid statuses.
+     * @param EmailCampaignStatusEnum|null $value Value to set for the emailCampaignStatus property.
     */
-    public function setEmailCampaignStatus(?string $value): void {
+    public function setEmailCampaignStatus(?EmailCampaignStatusEnum $value): void {
         $this->emailCampaignStatus = $value;
     }
 
     /**
-     * Sets the emailCampaignType property value. The email campaign type. See <a href="/api-docs/sell/marketing/types/api:CampaignTypeEnum">CampaignTypeEnum</a> for valid email campaign types. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:CampaignTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the emailCampaignType property.
+     * Sets the emailCampaignType property value. The email campaign type. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.campaigntypeenum">CampaignTypeEnum</a> for valid email campaign types.
+     * @param CampaignTypeEnum|null $value Value to set for the emailCampaignType property.
     */
-    public function setEmailCampaignType(?string $value): void {
+    public function setEmailCampaignType(?CampaignTypeEnum $value): void {
         $this->emailCampaignType = $value;
     }
 
@@ -451,15 +454,15 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the itemSelectMode property value. The mode used to select the items listed in the email campaign. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ItemSelectModeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the itemSelectMode property.
+     * Sets the itemSelectMode property value. The mode used to select the items listed in the email campaign.
+     * @param ItemSelectModeEnum|null $value Value to set for the itemSelectMode property.
     */
-    public function setItemSelectMode(?string $value): void {
+    public function setItemSelectMode(?ItemSelectModeEnum $value): void {
         $this->itemSelectMode = $value;
     }
 
     /**
-     * Sets the marketplaceId property value. The eBay marketplace where the email campaign is active. See <a href="/api-docs/sell/marketing/types/ba:MarketplaceIdEnum">MarketplaceIdEnum</a> for a list of marketplace IDs.
+     * Sets the marketplaceId property value. The eBay marketplace where the email campaign is active. See <b>MarketplaceIdEnum</b> for a list of marketplace IDs.
      * @param string|null $value Value to set for the marketplaceId property.
     */
     public function setMarketplaceId(?string $value): void {
@@ -483,7 +486,7 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the priceRange property value. The price range.
+     * Sets the priceRange property value. The price range and currency set within the email campaign. This container will only return if a price range was set.
      * @param PriceRange|null $value Value to set for the priceRange property.
     */
     public function setPriceRange(?PriceRange $value): void {
@@ -499,10 +502,10 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the promotionSelectMode property value. Indicates whether the listings that the discount was applied to were selected manually or automatically.<br><br>This field will only return if a discount was applied. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:PromotionSelectModeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the promotionSelectMode property.
+     * Sets the promotionSelectMode property value. Indicates whether the listings that the discount was applied to were selected manually or automatically.<br><br>This field will only return if a discount was applied.
+     * @param PromotionSelectModeEnum|null $value Value to set for the promotionSelectMode property.
     */
-    public function setPromotionSelectMode(?string $value): void {
+    public function setPromotionSelectMode(?PromotionSelectModeEnum $value): void {
         $this->promotionSelectMode = $value;
     }
 
@@ -515,10 +518,10 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the scheduleDateType property value. The schedule type of the email campaign. See <a href="/api-docs/sell/marketing/types/api:ScheduleDateTypeEnum">ScheduleDateTypeEnum</a>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ScheduleDateTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the scheduleDateType property.
+     * Sets the scheduleDateType property value. The schedule type of the email campaign. See <b>ScheduleDateTypeEnum</b>.
+     * @param ScheduleDateTypeEnum|null $value Value to set for the scheduleDateType property.
     */
-    public function setScheduleDateType(?string $value): void {
+    public function setScheduleDateType(?ScheduleDateTypeEnum $value): void {
         $this->scheduleDateType = $value;
     }
 
@@ -531,10 +534,10 @@ class GetEmailCampaignResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sort property value. The sort rule is used to display the items in the email campaign. If no sort rule was selected, the default will be <code>NEWLY_LISTED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ItemSortEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the sort property.
+     * Sets the sort property value. The sort rule is used to display the items in the email campaign. If no sort rule was selected, the default will be <code>NEWLY_LISTED</code>.
+     * @param ItemSortEnum|null $value Value to set for the sort property.
     */
-    public function setSort(?string $value): void {
+    public function setSort(?ItemSortEnum $value): void {
         $this->sort = $value;
     }
 

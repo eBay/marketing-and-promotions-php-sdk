@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that contains the aspect fields.
+ * The aspect information of the alert including keys and values.
 */
 class Aspect implements AdditionalDataHolder, Parsable 
 {
@@ -32,9 +32,9 @@ class Aspect implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $key The type of the aspect. For example, <code>MINIMUM_REQUIRED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AspectKeyEnum'>eBay API documentation</a>
+     * @var AspectKeyEnum|null $key The type of the aspect. For example, <code>MINIMUM_REQUIRED</code>.
     */
-    private ?string $key = null;
+    private ?AspectKeyEnum $key = null;
     
     /**
      * @var string|null $value The value of the aspect. For example, if the aspect is a percentage, a value of '2.0' would equal 2%.
@@ -72,16 +72,16 @@ class Aspect implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'key' => fn(ParseNode $n) => $o->setKey($n->getStringValue()),
+            'key' => fn(ParseNode $n) => $o->setKey($n->getEnumValue(AspectKeyEnum::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the key property value. The type of the aspect. For example, <code>MINIMUM_REQUIRED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AspectKeyEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the key property value. The type of the aspect. For example, <code>MINIMUM_REQUIRED</code>.
+     * @return AspectKeyEnum|null
     */
-    public function getKey(): ?string {
+    public function getKey(): ?AspectKeyEnum {
         return $this->key;
     }
 
@@ -98,7 +98,7 @@ class Aspect implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('key', $this->getKey());
+        $writer->writeEnumValue('key', $this->getKey());
         $writer->writeStringValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class Aspect implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the key property value. The type of the aspect. For example, <code>MINIMUM_REQUIRED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AspectKeyEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the key property.
+     * Sets the key property value. The type of the aspect. For example, <code>MINIMUM_REQUIRED</code>.
+     * @param AspectKeyEnum|null $value Value to set for the key property.
     */
-    public function setKey(?string $value): void {
+    public function setKey(?AspectKeyEnum $value): void {
         $this->key = $value;
     }
 

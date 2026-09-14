@@ -32,9 +32,9 @@ class DimensionMetadata implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $dataType The data type of the dimension value used to create the report. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:DataTypeEnum'>eBay API documentation</a>
+     * @var DataTypeEnum|null $dataType The data type of the dimension value used to create the report.
     */
-    private ?string $dataType = null;
+    private ?DataTypeEnum $dataType = null;
     
     /**
      * @var string|null $dimensionKey The name of the dimension used to create the report.
@@ -71,10 +71,10 @@ class DimensionMetadata implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the dataType property value. The data type of the dimension value used to create the report. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:DataTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the dataType property value. The data type of the dimension value used to create the report.
+     * @return DataTypeEnum|null
     */
-    public function getDataType(): ?string {
+    public function getDataType(): ?DataTypeEnum {
         return $this->dataType;
     }
 
@@ -101,7 +101,7 @@ class DimensionMetadata implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'dataType' => fn(ParseNode $n) => $o->setDataType($n->getStringValue()),
+            'dataType' => fn(ParseNode $n) => $o->setDataType($n->getEnumValue(DataTypeEnum::class)),
             'dimensionKey' => fn(ParseNode $n) => $o->setDimensionKey($n->getStringValue()),
             'dimensionKeyAnnotations' => fn(ParseNode $n) => $o->setDimensionKeyAnnotations($n->getCollectionOfObjectValues([DimensionKeyAnnotation::class, 'createFromDiscriminatorValue'])),
         ];
@@ -112,7 +112,7 @@ class DimensionMetadata implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('dataType', $this->getDataType());
+        $writer->writeEnumValue('dataType', $this->getDataType());
         $writer->writeStringValue('dimensionKey', $this->getDimensionKey());
         $writer->writeCollectionOfObjectValues('dimensionKeyAnnotations', $this->getDimensionKeyAnnotations());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -127,10 +127,10 @@ class DimensionMetadata implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the dataType property value. The data type of the dimension value used to create the report. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:DataTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the dataType property.
+     * Sets the dataType property value. The data type of the dimension value used to create the report.
+     * @param DataTypeEnum|null $value Value to set for the dataType property.
     */
-    public function setDataType(?string $value): void {
+    public function setDataType(?DataTypeEnum $value): void {
         $this->dataType = $value;
     }
 

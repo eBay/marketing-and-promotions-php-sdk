@@ -32,9 +32,9 @@ class AdditionalInfoData implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $metricKey The metric used to provide additional information for the suggested keyword.<br /><br /><strong>Valid Values:</strong> <ul><li><code>ACTIVE_SELLER_COUNT</code></li><li><code>SEARCH_VOLUME</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MetricEnum'>eBay API documentation</a>
+     * @var MetricEnum|null $metricKey The metric used to provide additional information for the suggested keyword.<br /><br /><strong>Valid Values:</strong> <ul><li><code>ACTIVE_SELLER_COUNT</code></li><li><code>SEARCH_VOLUME</code></li></ul>
     */
-    private ?string $metricKey = null;
+    private ?MetricEnum $metricKey = null;
     
     /**
      * @var string|null $value The data provided for the specified metric.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> All metric data is compiled for the marketplace associated with the specified campaign ID.</span>
@@ -72,16 +72,16 @@ class AdditionalInfoData implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'metricKey' => fn(ParseNode $n) => $o->setMetricKey($n->getStringValue()),
+            'metricKey' => fn(ParseNode $n) => $o->setMetricKey($n->getEnumValue(MetricEnum::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the metricKey property value. The metric used to provide additional information for the suggested keyword.<br /><br /><strong>Valid Values:</strong> <ul><li><code>ACTIVE_SELLER_COUNT</code></li><li><code>SEARCH_VOLUME</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MetricEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the metricKey property value. The metric used to provide additional information for the suggested keyword.<br /><br /><strong>Valid Values:</strong> <ul><li><code>ACTIVE_SELLER_COUNT</code></li><li><code>SEARCH_VOLUME</code></li></ul>
+     * @return MetricEnum|null
     */
-    public function getMetricKey(): ?string {
+    public function getMetricKey(): ?MetricEnum {
         return $this->metricKey;
     }
 
@@ -98,7 +98,7 @@ class AdditionalInfoData implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('metricKey', $this->getMetricKey());
+        $writer->writeEnumValue('metricKey', $this->getMetricKey());
         $writer->writeStringValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class AdditionalInfoData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the metricKey property value. The metric used to provide additional information for the suggested keyword.<br /><br /><strong>Valid Values:</strong> <ul><li><code>ACTIVE_SELLER_COUNT</code></li><li><code>SEARCH_VOLUME</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MetricEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the metricKey property.
+     * Sets the metricKey property value. The metric used to provide additional information for the suggested keyword.<br /><br /><strong>Valid Values:</strong> <ul><li><code>ACTIVE_SELLER_COUNT</code></li><li><code>SEARCH_VOLUME</code></li></ul>
+     * @param MetricEnum|null $value Value to set for the metricKey property.
     */
-    public function setMetricKey(?string $value): void {
+    public function setMetricKey(?MetricEnum $value): void {
         $this->metricKey = $value;
     }
 

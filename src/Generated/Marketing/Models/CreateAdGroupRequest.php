@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that defines the fields for the <b>CreateAdGroup</b> request.
+ * This type defines the fields for the <b>createAdGroup</b> request.
 */
 class CreateAdGroupRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class CreateAdGroupRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $defaultBid A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $defaultBid A bid amount that applies to all of the keywords in an ad group that do not have individual bids.
     */
     private ?Amount $defaultBid = null;
     
@@ -66,7 +66,7 @@ class CreateAdGroupRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the defaultBid property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the defaultBid property value. A bid amount that applies to all of the keywords in an ad group that do not have individual bids.
      * @return Amount|null
     */
     public function getDefaultBid(): ?Amount {
@@ -112,7 +112,7 @@ class CreateAdGroupRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the defaultBid property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the defaultBid property value. A bid amount that applies to all of the keywords in an ad group that do not have individual bids.
      * @param Amount|null $value Value to set for the defaultBid property.
     */
     public function setDefaultBid(?Amount $value): void {

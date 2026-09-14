@@ -42,7 +42,7 @@ class Get_campaign_by_nameRequestBuilderGetRequestConfiguration extends BaseRequ
 
     /**
      * Instantiates a new Get_campaign_by_nameRequestBuilderGetQueryParameters.
-     * @param string|null $campaign_name This query parameter specifies name of the campaign being retrieved.<br><br> Use the <a href="/api-docs/sell/marketing/resources/campaign/methods/getCampaigns" target="_blank">getCampaigns</a> method to retrieve a list of a seller's campaign names.
+     * @param string|null $campaign_name This query parameter specifies name of the campaign being retrieved.<br><br> Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> method to retrieve a list of a seller's campaign names.
      * @return Get_campaign_by_nameRequestBuilderGetQueryParameters
     */
     public static function createQueryParameters(?string $campaign_name = null): Get_campaign_by_nameRequestBuilderGetQueryParameters {

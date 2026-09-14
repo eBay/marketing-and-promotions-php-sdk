@@ -37,9 +37,9 @@ class DimensionKeyAnnotation implements AdditionalDataHolder, Parsable
     private ?string $annotationKey = null;
     
     /**
-     * @var string|null $dataType The data type of the annotation key value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:DataTypeEnum'>eBay API documentation</a>
+     * @var DataTypeEnum|null $dataType The data type of the annotation key value.
     */
-    private ?string $dataType = null;
+    private ?DataTypeEnum $dataType = null;
     
     /**
      * Instantiates a new DimensionKeyAnnotation and sets the default values.
@@ -74,10 +74,10 @@ class DimensionKeyAnnotation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the dataType property value. The data type of the annotation key value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:DataTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the dataType property value. The data type of the annotation key value.
+     * @return DataTypeEnum|null
     */
-    public function getDataType(): ?string {
+    public function getDataType(): ?DataTypeEnum {
         return $this->dataType;
     }
 
@@ -89,7 +89,7 @@ class DimensionKeyAnnotation implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'annotationKey' => fn(ParseNode $n) => $o->setAnnotationKey($n->getStringValue()),
-            'dataType' => fn(ParseNode $n) => $o->setDataType($n->getStringValue()),
+            'dataType' => fn(ParseNode $n) => $o->setDataType($n->getEnumValue(DataTypeEnum::class)),
         ];
     }
 
@@ -99,7 +99,7 @@ class DimensionKeyAnnotation implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('annotationKey', $this->getAnnotationKey());
-        $writer->writeStringValue('dataType', $this->getDataType());
+        $writer->writeEnumValue('dataType', $this->getDataType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class DimensionKeyAnnotation implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the dataType property value. The data type of the annotation key value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/plr:DataTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the dataType property.
+     * Sets the dataType property value. The data type of the annotation key value.
+     * @param DataTypeEnum|null $value Value to set for the dataType property.
     */
-    public function setDataType(?string $value): void {
+    public function setDataType(?DataTypeEnum $value): void {
         $this->dataType = $value;
     }
 

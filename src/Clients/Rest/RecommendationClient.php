@@ -23,7 +23,6 @@ use EBay\MarketingAndPromotions\Configuration\MarketingAndPromotionsConfiguratio
 use EBay\MarketingAndPromotions\Configuration\RequestOptions;
 use EBay\MarketingAndPromotions\Generated\Recommendation\RecommendationApiClient;
 use EBay\MarketingAndPromotions\Generated\Recommendation\Models\FindListingRecommendationRequest;
-use EBay\MarketingAndPromotions\Generated\Recommendation\Models\PagedListingRecommendationCollection;
 use EBay\MarketingAndPromotions\Generated\Recommendation\Find\FindRequestBuilderPostRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
@@ -35,6 +34,44 @@ final class RecommendationClient
         private readonly GuzzleClient $guzzle,
         private readonly MarketingAndPromotionsConfiguration $config,
     ) {}
+
+    /** @return array<string, string> */
+    private function mergedHeaders(?RequestOptions $requestOptions): array
+    {
+        return array_merge(
+            $this->config->defaultRequestOptions->headers,
+            $requestOptions !== null ? $requestOptions->headers : []
+        );
+    }
+
+    public function findListingRecommendations(
+        FindListingRecommendationRequest $body,
+        ?string $filter = null,
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $xEBAYCMARKETPLACEID = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        if ($xEBAYCMARKETPLACEID !== null) {
+            $headers["X-EBAY-C-MARKETPLACE-ID"] = $xEBAYCMARKETPLACEID;
+        }
+        $this->call($accessToken, fn($api) =>
+            $api->find()->post(
+                $body,
+                new FindRequestBuilderPostRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: FindRequestBuilderPostRequestConfiguration::createQueryParameters(
+                        filter: $filter,
+                        limit: $limit,
+                        offset: $offset,
+                    ),
+                )
+            )->wait()
+        );
+    }
 
     private function call(?string $accessToken, callable $op): mixed
     {
@@ -51,35 +88,5 @@ final class RecommendationClient
         $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
         $adapter->setBaseUrl($this->config->recommendationBaseUrl);
         return new RecommendationApiClient($adapter);
-    }
-
-    /** @return array<string,string> */
-    private function mergedHeaders(?RequestOptions $requestOptions): array
-    {
-        return array_merge(
-            $this->config->defaultRequestOptions->headers,
-            $requestOptions !== null ? $requestOptions->headers : []
-        );
-    }
-
-    public function findListingRecommendations(
-        FindListingRecommendationRequest $body,
-        ?string $filter = null,
-        ?string $limit = null,
-        ?string $offset = null,
-        ?string $accessToken = null,
-        ?RequestOptions $requestOptions = null
-    ): ?PagedListingRecommendationCollection {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->find()->post($body, new FindRequestBuilderPostRequestConfiguration(
-                headers: $headers,
-                queryParameters: FindRequestBuilderPostRequestConfiguration::createQueryParameters(
-                    filter: $filter,
-                    limit: $limit,
-                    offset: $offset,
-                )
-            ))->wait()
-        );
     }
 }

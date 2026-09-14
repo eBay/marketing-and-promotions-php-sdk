@@ -16,6 +16,7 @@
 
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Report;
 
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\GetEmailReportResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,12 @@ class ReportRequestBuilder extends BaseRequestBuilder
     */
     public function get(?ReportRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetEmailReportResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetEmailReportResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

@@ -32,7 +32,7 @@ class BidPreference implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var MaxCpc|null $maxCpc The maxCpc property
+     * @var MaxCpc|null $maxCpc The maximum amount for which the eBay suggested bid can be adjusted. This value represents the most a seller is willing to pay for each click on their ad. The adjusted bid will never exceed this amount.<br><br>This field is required for smart targeting campaigns.<br><br><span class="tablenote"><b>Note:</b> The maximum cost-per-click has a minimum value of 0.02 and a maximum value of 100.</span>
     */
     private ?MaxCpc $maxCpc = null;
     
@@ -72,7 +72,7 @@ class BidPreference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the maxCpc property value. The maxCpc property
+     * Gets the maxCpc property value. The maximum amount for which the eBay suggested bid can be adjusted. This value represents the most a seller is willing to pay for each click on their ad. The adjusted bid will never exceed this amount.<br><br>This field is required for smart targeting campaigns.<br><br><span class="tablenote"><b>Note:</b> The maximum cost-per-click has a minimum value of 0.02 and a maximum value of 100.</span>
      * @return MaxCpc|null
     */
     public function getMaxCpc(): ?MaxCpc {
@@ -97,7 +97,7 @@ class BidPreference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the maxCpc property value. The maxCpc property
+     * Sets the maxCpc property value. The maximum amount for which the eBay suggested bid can be adjusted. This value represents the most a seller is willing to pay for each click on their ad. The adjusted bid will never exceed this amount.<br><br>This field is required for smart targeting campaigns.<br><br><span class="tablenote"><b>Note:</b> The maximum cost-per-click has a minimum value of 0.02 and a maximum value of 100.</span>
      * @param MaxCpc|null $value Value to set for the maxCpc property.
     */
     public function setMaxCpc(?MaxCpc $value): void {

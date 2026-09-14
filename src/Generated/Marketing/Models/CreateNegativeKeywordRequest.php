@@ -32,19 +32,19 @@ class CreateNegativeKeywordRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $adGroupId This adGroupId is created when an ad group is first created and associated with a campaign. This is the ad group to which the corresponding negative keyword will be added.<br /><br />Use the  <a href="/api-docs/sell/marketing/resources/adgroup/methods/getAdGroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.</span><br /><br /><i>Required if</i> the negative keyword is being created at the ad group level.
+     * @var string|null $adGroupId This adGroupId is created when an ad group is first created and associated with a campaign. This is the ad group to which the corresponding negative keyword will be added.<br /><br />Use the  <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.</span><br /><br /><i>Required if</i> the negative keyword is being created at the ad group level.
     */
     private ?string $adGroupId = null;
     
     /**
-     * @var string|null $campaignId This path parameter specifies the unique eBay-assigned identifier of the ad campaign associated with the set of negative keywords being created. <br><br> Use the <a href="/api-docs/sell/marketing/resources/campaign/methods/getCampaigns" target="_blank">getCampaigns</a> method to retrieve campaign IDs.<br /><br /><i>Required if</i> the negative keyword is being created at the ad group level.
+     * @var string|null $campaignId This path parameter specifies the unique eBay-assigned identifier of the ad campaign associated with the set of negative keywords being created. <br><br> Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> method to retrieve campaign IDs.<br /><br /><i>Required if</i> the negative keyword is being created at the ad group level.
     */
     private ?string $campaignId = null;
     
     /**
-     * @var string|null $negativeKeywordMatchType A field that defines the match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordMatchTypeEnum'>eBay API documentation</a>
+     * @var NegativeKeywordMatchTypeEnum|null $negativeKeywordMatchType A field that defines the match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
     */
-    private ?string $negativeKeywordMatchType = null;
+    private ?NegativeKeywordMatchTypeEnum $negativeKeywordMatchType = null;
     
     /**
      * @var string|null $negativeKeywordText The negative keyword text.
@@ -76,7 +76,7 @@ class CreateNegativeKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adGroupId property value. This adGroupId is created when an ad group is first created and associated with a campaign. This is the ad group to which the corresponding negative keyword will be added.<br /><br />Use the  <a href="/api-docs/sell/marketing/resources/adgroup/methods/getAdGroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.</span><br /><br /><i>Required if</i> the negative keyword is being created at the ad group level.
+     * Gets the adGroupId property value. This adGroupId is created when an ad group is first created and associated with a campaign. This is the ad group to which the corresponding negative keyword will be added.<br /><br />Use the  <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.</span><br /><br /><i>Required if</i> the negative keyword is being created at the ad group level.
      * @return string|null
     */
     public function getAdGroupId(): ?string {
@@ -84,7 +84,7 @@ class CreateNegativeKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the campaignId property value. This path parameter specifies the unique eBay-assigned identifier of the ad campaign associated with the set of negative keywords being created. <br><br> Use the <a href="/api-docs/sell/marketing/resources/campaign/methods/getCampaigns" target="_blank">getCampaigns</a> method to retrieve campaign IDs.<br /><br /><i>Required if</i> the negative keyword is being created at the ad group level.
+     * Gets the campaignId property value. This path parameter specifies the unique eBay-assigned identifier of the ad campaign associated with the set of negative keywords being created. <br><br> Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> method to retrieve campaign IDs.<br /><br /><i>Required if</i> the negative keyword is being created at the ad group level.
      * @return string|null
     */
     public function getCampaignId(): ?string {
@@ -100,16 +100,16 @@ class CreateNegativeKeywordRequest implements AdditionalDataHolder, Parsable
         return  [
             'adGroupId' => fn(ParseNode $n) => $o->setAdGroupId($n->getStringValue()),
             'campaignId' => fn(ParseNode $n) => $o->setCampaignId($n->getStringValue()),
-            'negativeKeywordMatchType' => fn(ParseNode $n) => $o->setNegativeKeywordMatchType($n->getStringValue()),
+            'negativeKeywordMatchType' => fn(ParseNode $n) => $o->setNegativeKeywordMatchType($n->getEnumValue(NegativeKeywordMatchTypeEnum::class)),
             'negativeKeywordText' => fn(ParseNode $n) => $o->setNegativeKeywordText($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the negativeKeywordMatchType property value. A field that defines the match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordMatchTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the negativeKeywordMatchType property value. A field that defines the match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @return NegativeKeywordMatchTypeEnum|null
     */
-    public function getNegativeKeywordMatchType(): ?string {
+    public function getNegativeKeywordMatchType(): ?NegativeKeywordMatchTypeEnum {
         return $this->negativeKeywordMatchType;
     }
 
@@ -128,7 +128,7 @@ class CreateNegativeKeywordRequest implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('adGroupId', $this->getAdGroupId());
         $writer->writeStringValue('campaignId', $this->getCampaignId());
-        $writer->writeStringValue('negativeKeywordMatchType', $this->getNegativeKeywordMatchType());
+        $writer->writeEnumValue('negativeKeywordMatchType', $this->getNegativeKeywordMatchType());
         $writer->writeStringValue('negativeKeywordText', $this->getNegativeKeywordText());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -142,7 +142,7 @@ class CreateNegativeKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adGroupId property value. This adGroupId is created when an ad group is first created and associated with a campaign. This is the ad group to which the corresponding negative keyword will be added.<br /><br />Use the  <a href="/api-docs/sell/marketing/resources/adgroup/methods/getAdGroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.</span><br /><br /><i>Required if</i> the negative keyword is being created at the ad group level.
+     * Sets the adGroupId property value. This adGroupId is created when an ad group is first created and associated with a campaign. This is the ad group to which the corresponding negative keyword will be added.<br /><br />Use the  <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.</span><br /><br /><i>Required if</i> the negative keyword is being created at the ad group level.
      * @param string|null $value Value to set for the adGroupId property.
     */
     public function setAdGroupId(?string $value): void {
@@ -150,7 +150,7 @@ class CreateNegativeKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the campaignId property value. This path parameter specifies the unique eBay-assigned identifier of the ad campaign associated with the set of negative keywords being created. <br><br> Use the <a href="/api-docs/sell/marketing/resources/campaign/methods/getCampaigns" target="_blank">getCampaigns</a> method to retrieve campaign IDs.<br /><br /><i>Required if</i> the negative keyword is being created at the ad group level.
+     * Sets the campaignId property value. This path parameter specifies the unique eBay-assigned identifier of the ad campaign associated with the set of negative keywords being created. <br><br> Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-campaign-getcampaigns">getCampaigns</a> method to retrieve campaign IDs.<br /><br /><i>Required if</i> the negative keyword is being created at the ad group level.
      * @param string|null $value Value to set for the campaignId property.
     */
     public function setCampaignId(?string $value): void {
@@ -158,10 +158,10 @@ class CreateNegativeKeywordRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the negativeKeywordMatchType property value. A field that defines the match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordMatchTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the negativeKeywordMatchType property.
+     * Sets the negativeKeywordMatchType property value. A field that defines the match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @param NegativeKeywordMatchTypeEnum|null $value Value to set for the negativeKeywordMatchType property.
     */
-    public function setNegativeKeywordMatchType(?string $value): void {
+    public function setNegativeKeywordMatchType(?NegativeKeywordMatchTypeEnum $value): void {
         $this->negativeKeywordMatchType = $value;
     }
 

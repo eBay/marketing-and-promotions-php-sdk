@@ -42,7 +42,7 @@ class AudienceRequestBuilderGetRequestConfiguration extends BaseRequestConfigura
 
     /**
      * Instantiates a new AudienceRequestBuilderGetQueryParameters.
-     * @param string|null $emailCampaignType The email campaign type to search against.<br><br>See <a href="/api-docs/sell/marketing/types/api:CampaignTypeEnum" target="_blank">CampaignTypeEnum</a> for the full list of available email campaign types and associated enum values.
+     * @param string|null $emailCampaignType The email campaign type to search against.<br><br>See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.campaigntypeenum">CampaignTypeEnum</a> for the full list of available email campaign types and associated enum values.
      * @param string|null $limit The maximum number of audience groups returned per page in the results set.<br><br><b>Min value</b>: 1<br><br><b>Max value</b>: 200<br><br><b>Default value</b>: 100
      * @param string|null $offset The number of results to skip in a pagination query. This value cannot be less than 0.<br><br><b>Default value</b>: 0
      * @return AudienceRequestBuilderGetQueryParameters

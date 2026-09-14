@@ -32,7 +32,7 @@ class ListingDetail implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $currentPrice A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $currentPrice The container that returns the current price of the listing.
     */
     private ?Amount $currentPrice = null;
     
@@ -57,12 +57,12 @@ class ListingDetail implements AdditionalDataHolder, Parsable
     private ?string $listingCategoryId = null;
     
     /**
-     * @var string|null $listingCondition An eBay-assigned value that indicates condition of the associated item. For more information, see <a href="/api-docs/sell/static/metadata/condition-id-values.html">Item condition ID and name values</a>.
+     * @var string|null $listingCondition An eBay-assigned value that indicates condition of the associated item. For more information, see <a href="/api-docs/sell/static/metadata/condition-id-values.html" target="_blank">Item condition ID and name values</a>.
     */
     private ?string $listingCondition = null;
     
     /**
-     * @var string|null $listingConditionId The ID of the condition associated with the item. For more information, see <a href="/api-docs/sell/static/metadata/condition-id-values.html">Item condition ID and name values</a>.<br /><br /><span class="tablenote"><b>Note: </b> This value is not currently returned in the response.</span>
+     * @var string|null $listingConditionId The ID of the condition associated with the item. For more information, see <a href="/api-docs/sell/static/metadata/condition-id-values.html" target="_blank">Item condition ID and name values</a>.<br /><br /><span class="tablenote"><b>Note: </b> This value is not currently returned in the response.</span>
     */
     private ?string $listingConditionId = null;
     
@@ -116,7 +116,7 @@ class ListingDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the currentPrice property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the currentPrice property value. The container that returns the current price of the listing.
      * @return Amount|null
     */
     public function getCurrentPrice(): ?Amount {
@@ -178,7 +178,7 @@ class ListingDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the listingCondition property value. An eBay-assigned value that indicates condition of the associated item. For more information, see <a href="/api-docs/sell/static/metadata/condition-id-values.html">Item condition ID and name values</a>.
+     * Gets the listingCondition property value. An eBay-assigned value that indicates condition of the associated item. For more information, see <a href="/api-docs/sell/static/metadata/condition-id-values.html" target="_blank">Item condition ID and name values</a>.
      * @return string|null
     */
     public function getListingCondition(): ?string {
@@ -186,7 +186,7 @@ class ListingDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the listingConditionId property value. The ID of the condition associated with the item. For more information, see <a href="/api-docs/sell/static/metadata/condition-id-values.html">Item condition ID and name values</a>.<br /><br /><span class="tablenote"><b>Note: </b> This value is not currently returned in the response.</span>
+     * Gets the listingConditionId property value. The ID of the condition associated with the item. For more information, see <a href="/api-docs/sell/static/metadata/condition-id-values.html" target="_blank">Item condition ID and name values</a>.<br /><br /><span class="tablenote"><b>Note: </b> This value is not currently returned in the response.</span>
      * @return string|null
     */
     public function getListingConditionId(): ?string {
@@ -262,7 +262,7 @@ class ListingDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the currentPrice property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the currentPrice property value. The container that returns the current price of the listing.
      * @param Amount|null $value Value to set for the currentPrice property.
     */
     public function setCurrentPrice(?Amount $value): void {
@@ -302,7 +302,7 @@ class ListingDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingCondition property value. An eBay-assigned value that indicates condition of the associated item. For more information, see <a href="/api-docs/sell/static/metadata/condition-id-values.html">Item condition ID and name values</a>.
+     * Sets the listingCondition property value. An eBay-assigned value that indicates condition of the associated item. For more information, see <a href="/api-docs/sell/static/metadata/condition-id-values.html" target="_blank">Item condition ID and name values</a>.
      * @param string|null $value Value to set for the listingCondition property.
     */
     public function setListingCondition(?string $value): void {
@@ -310,7 +310,7 @@ class ListingDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the listingConditionId property value. The ID of the condition associated with the item. For more information, see <a href="/api-docs/sell/static/metadata/condition-id-values.html">Item condition ID and name values</a>.<br /><br /><span class="tablenote"><b>Note: </b> This value is not currently returned in the response.</span>
+     * Sets the listingConditionId property value. The ID of the condition associated with the item. For more information, see <a href="/api-docs/sell/static/metadata/condition-id-values.html" target="_blank">Item condition ID and name values</a>.<br /><br /><span class="tablenote"><b>Note: </b> This value is not currently returned in the response.</span>
      * @param string|null $value Value to set for the listingConditionId property.
     */
     public function setListingConditionId(?string $value): void {

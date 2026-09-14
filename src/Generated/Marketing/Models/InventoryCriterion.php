@@ -23,7 +23,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * This type defines either the selections rules or the list of listing IDs for the discount. The "listing IDs" are are either the seller's item IDs or the eBay listing IDs.
+ * A container that defines either the listing IDs or the selection rules that specify the items to include in the discount. Listing IDs can be either eBay listing IDs or a list of the seller's inventory reference IDs (know as SKUs or custom labels). See the <b>selectionRules</b> container for the rule criteria you can use to select inventory.  <p class="tablenote"><b>Note:</b> All listings in Discounts Manager discounts must support an electronic payment method.</p>
 */
 class InventoryCriterion implements AdditionalDataHolder, Parsable 
 {
@@ -33,9 +33,9 @@ class InventoryCriterion implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $inventoryCriterionType Indicates how the items to be discounted are selected. You can include inventory by ID, using rules, or globally include all your inventory.  For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:InventoryCriterionEnum'>eBay API documentation</a>
+     * @var InventoryCriterionEnum|null $inventoryCriterionType Indicates how the items to be discounted are selected. You can include inventory by ID, using rules, or globally include all your inventory. 
     */
-    private ?string $inventoryCriterionType = null;
+    private ?InventoryCriterionEnum $inventoryCriterionType = null;
     
     /**
      * @var array<InventoryItem>|null $inventoryItems An array of containers for the seller's inventory reference IDs (also known as an "SKU" or "custom label") to be added to the discount.<br><p class="tablenote"><b>Note:</b> The request can have either <b>inventoryItems</b> or <b>listingIds</b>, but not both.</p><br><b>Maximum:</b> 2000 parent items <br><br><b>Maximum SKU or custom label length:</b> 50 characters <br><br><i>Required if</i> <b>InventoryCriterionType</b> is set to <code>INVENTORY_BY_VALUE</code>, you must specify either <b>inventoryItems</b> or <b>listingIds</b>.
@@ -48,7 +48,7 @@ class InventoryCriterion implements AdditionalDataHolder, Parsable
     private ?array $listingIds = null;
     
     /**
-     * @var RuleCriteria|null $ruleCriteria This type defines the fields for a set of inventory selection rules.  <br><br><b>Required:</b> When <b>inventoryCriterionType</b> is set to <code>INVENTORY_BY_RULE</code> or <code>INVENTORY_ANY</code>.
+     * @var RuleCriteria|null $ruleCriteria This container defines a set of inventory selection rules for a discount.  <br><br>When defining rule criteria, you must limit item exclusions to 100 IDs when you choose from live inventory.  <br><br>Required if  <b>InventoryCriterionEnum</b> is set to <code>INVENTORY_BY_RULE</code> or <code>INVENTORY_ANY</code>.
     */
     private ?RuleCriteria $ruleCriteria = null;
     
@@ -83,7 +83,7 @@ class InventoryCriterion implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'inventoryCriterionType' => fn(ParseNode $n) => $o->setInventoryCriterionType($n->getStringValue()),
+            'inventoryCriterionType' => fn(ParseNode $n) => $o->setInventoryCriterionType($n->getEnumValue(InventoryCriterionEnum::class)),
             'inventoryItems' => fn(ParseNode $n) => $o->setInventoryItems($n->getCollectionOfObjectValues([InventoryItem::class, 'createFromDiscriminatorValue'])),
             'listingIds' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
@@ -98,10 +98,10 @@ class InventoryCriterion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the inventoryCriterionType property value. Indicates how the items to be discounted are selected. You can include inventory by ID, using rules, or globally include all your inventory.  For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:InventoryCriterionEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the inventoryCriterionType property value. Indicates how the items to be discounted are selected. You can include inventory by ID, using rules, or globally include all your inventory. 
+     * @return InventoryCriterionEnum|null
     */
-    public function getInventoryCriterionType(): ?string {
+    public function getInventoryCriterionType(): ?InventoryCriterionEnum {
         return $this->inventoryCriterionType;
     }
 
@@ -122,7 +122,7 @@ class InventoryCriterion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the ruleCriteria property value. This type defines the fields for a set of inventory selection rules.  <br><br><b>Required:</b> When <b>inventoryCriterionType</b> is set to <code>INVENTORY_BY_RULE</code> or <code>INVENTORY_ANY</code>.
+     * Gets the ruleCriteria property value. This container defines a set of inventory selection rules for a discount.  <br><br>When defining rule criteria, you must limit item exclusions to 100 IDs when you choose from live inventory.  <br><br>Required if  <b>InventoryCriterionEnum</b> is set to <code>INVENTORY_BY_RULE</code> or <code>INVENTORY_ANY</code>.
      * @return RuleCriteria|null
     */
     public function getRuleCriteria(): ?RuleCriteria {
@@ -134,7 +134,7 @@ class InventoryCriterion implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('inventoryCriterionType', $this->getInventoryCriterionType());
+        $writer->writeEnumValue('inventoryCriterionType', $this->getInventoryCriterionType());
         $writer->writeCollectionOfObjectValues('inventoryItems', $this->getInventoryItems());
         $writer->writeCollectionOfPrimitiveValues('listingIds', $this->getListingIds());
         $writer->writeObjectValue('ruleCriteria', $this->getRuleCriteria());
@@ -150,10 +150,10 @@ class InventoryCriterion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the inventoryCriterionType property value. Indicates how the items to be discounted are selected. You can include inventory by ID, using rules, or globally include all your inventory.  For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:InventoryCriterionEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the inventoryCriterionType property.
+     * Sets the inventoryCriterionType property value. Indicates how the items to be discounted are selected. You can include inventory by ID, using rules, or globally include all your inventory. 
+     * @param InventoryCriterionEnum|null $value Value to set for the inventoryCriterionType property.
     */
-    public function setInventoryCriterionType(?string $value): void {
+    public function setInventoryCriterionType(?InventoryCriterionEnum $value): void {
         $this->inventoryCriterionType = $value;
     }
 
@@ -174,7 +174,7 @@ class InventoryCriterion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the ruleCriteria property value. This type defines the fields for a set of inventory selection rules.  <br><br><b>Required:</b> When <b>inventoryCriterionType</b> is set to <code>INVENTORY_BY_RULE</code> or <code>INVENTORY_ANY</code>.
+     * Sets the ruleCriteria property value. This container defines a set of inventory selection rules for a discount.  <br><br>When defining rule criteria, you must limit item exclusions to 100 IDs when you choose from live inventory.  <br><br>Required if  <b>InventoryCriterionEnum</b> is set to <code>INVENTORY_BY_RULE</code> or <code>INVENTORY_ANY</code>.
      * @param RuleCriteria|null $value Value to set for the ruleCriteria property.
     */
     public function setRuleCriteria(?RuleCriteria $value): void {

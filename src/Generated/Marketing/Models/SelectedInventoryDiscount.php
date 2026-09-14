@@ -32,7 +32,7 @@ class SelectedInventoryDiscount implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var DiscountBenefit|null $discountBenefit This container defines the discount as either a monetary amount or a percentage of the sales price.  <p class="tablenote"><b>Important!:</b> You must populate one and only one of the fields in this container: <ul><li><b>amountOffItem</b></li> <li><b>amountOffOrder</b></li> <li><b>percentageOffItem</b></li> <li><b>percentageOffOrder</b></li></ul></p>  <p class="tablenote"><b>Tip:</b> Refer to <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html">Configuring discounts for threshold discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> values to create different types of discounts.</p>
+     * @var DiscountBenefit|null $discountBenefit This container defines the discount as either a monetary amount or a percentage applied to the sales price.
     */
     private ?DiscountBenefit $discountBenefit = null;
     
@@ -42,12 +42,12 @@ class SelectedInventoryDiscount implements AdditionalDataHolder, Parsable
     private ?string $discountId = null;
     
     /**
-     * @var InventoryCriterion|null $inventoryCriterion This type defines either the selections rules or the list of listing IDs for the discount. The "listing IDs" are are either the seller's item IDs or the eBay listing IDs.
+     * @var InventoryCriterion|null $inventoryCriterion A container that defines either the listing IDs or the selection rules that specify the items to include in the discount. Listing IDs can be either eBay listing IDs or a list of the seller's inventory reference IDs (know as SKUs or custom labels). See the <b>selectionRules</b> container for the rule criteria you can use to select inventory.  <p class="tablenote"><b>Note:</b> All listings in Discounts Manager discounts must support an electronic payment method.</p>
     */
     private ?InventoryCriterion $inventoryCriterion = null;
     
     /**
-     * @var int|null $ruleOrder For markdown discounts, this field is reserved for future use. <!--This field specifies the precedence of this set of inventory criteria, which is taken into account if an item is selected for multiple discounts by different sets of criteria. The criteria with the highest priority (lowest ruleOrder value) takes precedence over criteria with a lower precedence.-->
+     * @var int|null $ruleOrder For markdown discounts, this field is reserved for future use. <!--This field specifies the precedence of this set of inventory criteria, which is taken into account if an item is selected for multiple discounts by different sets of criteria. The criteria with the highest priority (lowest <b>ruleOrder</b> value) takes precedence over criteria with a lower precedence.-->
     */
     private ?int $ruleOrder = null;
     
@@ -76,7 +76,7 @@ class SelectedInventoryDiscount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the discountBenefit property value. This container defines the discount as either a monetary amount or a percentage of the sales price.  <p class="tablenote"><b>Important!:</b> You must populate one and only one of the fields in this container: <ul><li><b>amountOffItem</b></li> <li><b>amountOffOrder</b></li> <li><b>percentageOffItem</b></li> <li><b>percentageOffOrder</b></li></ul></p>  <p class="tablenote"><b>Tip:</b> Refer to <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html">Configuring discounts for threshold discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> values to create different types of discounts.</p>
+     * Gets the discountBenefit property value. This container defines the discount as either a monetary amount or a percentage applied to the sales price.
      * @return DiscountBenefit|null
     */
     public function getDiscountBenefit(): ?DiscountBenefit {
@@ -106,7 +106,7 @@ class SelectedInventoryDiscount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the inventoryCriterion property value. This type defines either the selections rules or the list of listing IDs for the discount. The "listing IDs" are are either the seller's item IDs or the eBay listing IDs.
+     * Gets the inventoryCriterion property value. A container that defines either the listing IDs or the selection rules that specify the items to include in the discount. Listing IDs can be either eBay listing IDs or a list of the seller's inventory reference IDs (know as SKUs or custom labels). See the <b>selectionRules</b> container for the rule criteria you can use to select inventory.  <p class="tablenote"><b>Note:</b> All listings in Discounts Manager discounts must support an electronic payment method.</p>
      * @return InventoryCriterion|null
     */
     public function getInventoryCriterion(): ?InventoryCriterion {
@@ -114,7 +114,7 @@ class SelectedInventoryDiscount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the ruleOrder property value. For markdown discounts, this field is reserved for future use. <!--This field specifies the precedence of this set of inventory criteria, which is taken into account if an item is selected for multiple discounts by different sets of criteria. The criteria with the highest priority (lowest ruleOrder value) takes precedence over criteria with a lower precedence.-->
+     * Gets the ruleOrder property value. For markdown discounts, this field is reserved for future use. <!--This field specifies the precedence of this set of inventory criteria, which is taken into account if an item is selected for multiple discounts by different sets of criteria. The criteria with the highest priority (lowest <b>ruleOrder</b> value) takes precedence over criteria with a lower precedence.-->
      * @return int|null
     */
     public function getRuleOrder(): ?int {
@@ -142,7 +142,7 @@ class SelectedInventoryDiscount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the discountBenefit property value. This container defines the discount as either a monetary amount or a percentage of the sales price.  <p class="tablenote"><b>Important!:</b> You must populate one and only one of the fields in this container: <ul><li><b>amountOffItem</b></li> <li><b>amountOffOrder</b></li> <li><b>percentageOffItem</b></li> <li><b>percentageOffOrder</b></li></ul></p>  <p class="tablenote"><b>Tip:</b> Refer to <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html">Configuring discounts for threshold discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> values to create different types of discounts.</p>
+     * Sets the discountBenefit property value. This container defines the discount as either a monetary amount or a percentage applied to the sales price.
      * @param DiscountBenefit|null $value Value to set for the discountBenefit property.
     */
     public function setDiscountBenefit(?DiscountBenefit $value): void {
@@ -158,7 +158,7 @@ class SelectedInventoryDiscount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the inventoryCriterion property value. This type defines either the selections rules or the list of listing IDs for the discount. The "listing IDs" are are either the seller's item IDs or the eBay listing IDs.
+     * Sets the inventoryCriterion property value. A container that defines either the listing IDs or the selection rules that specify the items to include in the discount. Listing IDs can be either eBay listing IDs or a list of the seller's inventory reference IDs (know as SKUs or custom labels). See the <b>selectionRules</b> container for the rule criteria you can use to select inventory.  <p class="tablenote"><b>Note:</b> All listings in Discounts Manager discounts must support an electronic payment method.</p>
      * @param InventoryCriterion|null $value Value to set for the inventoryCriterion property.
     */
     public function setInventoryCriterion(?InventoryCriterion $value): void {
@@ -166,7 +166,7 @@ class SelectedInventoryDiscount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the ruleOrder property value. For markdown discounts, this field is reserved for future use. <!--This field specifies the precedence of this set of inventory criteria, which is taken into account if an item is selected for multiple discounts by different sets of criteria. The criteria with the highest priority (lowest ruleOrder value) takes precedence over criteria with a lower precedence.-->
+     * Sets the ruleOrder property value. For markdown discounts, this field is reserved for future use. <!--This field specifies the precedence of this set of inventory criteria, which is taken into account if an item is selected for multiple discounts by different sets of criteria. The criteria with the highest priority (lowest <b>ruleOrder</b> value) takes precedence over criteria with a lower precedence.-->
      * @param int|null $value Value to set for the ruleOrder property.
     */
     public function setRuleOrder(?int $value): void {

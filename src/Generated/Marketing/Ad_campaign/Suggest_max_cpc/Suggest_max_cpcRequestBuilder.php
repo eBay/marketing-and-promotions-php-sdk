@@ -16,6 +16,7 @@
 
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Suggest_max_cpc;
 
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\SuggestMaxCpcRequest;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\SuggestMaxCpcResponse;
 use Exception;
@@ -46,19 +47,25 @@ class Suggest_max_cpcRequestBuilder extends BaseRequestBuilder
 
     /**
      * <span class="tablenote"><b>Note:</b> This method is only supported for smart targeting priority strategy campaigns. Sellers can use the <a href="/api-docs/sell/account/resources/advertising_eligibility/methods/getAdvertisingEligibility " target="_blank ">getAdvertisingEligibility</a> method of the Account API v1 to determine if they are eligible for a priority strategy campaign.</span><br />This method allows sellers to retrieve the suggested maximum cost-per-click value for a smart targeting campaign. This value is required when creating a smart targeting campaign and indicates the maximum amount for which the eBay suggested bid can be adjusted.
-     * @param SuggestMaxCpcRequest $body This type defines the fields used in the <b>suggestMaxCpc</b> request. To retrieve the suggested <b>maxCpc</b> value for a smart targeting campaign, a seller must specify the listings associated with the campaign, as well as the marketplace on which the campaign is hosted.
+     * @param SuggestMaxCpcRequest $body This type defines the fields used in the <b>suggestMaxCpc</b> request.
      * @param Suggest_max_cpcRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<SuggestMaxCpcResponse|null>
      * @throws Exception
     */
     public function post(SuggestMaxCpcRequest $body, ?Suggest_max_cpcRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SuggestMaxCpcResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SuggestMaxCpcResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
      * <span class="tablenote"><b>Note:</b> This method is only supported for smart targeting priority strategy campaigns. Sellers can use the <a href="/api-docs/sell/account/resources/advertising_eligibility/methods/getAdvertisingEligibility " target="_blank ">getAdvertisingEligibility</a> method of the Account API v1 to determine if they are eligible for a priority strategy campaign.</span><br />This method allows sellers to retrieve the suggested maximum cost-per-click value for a smart targeting campaign. This value is required when creating a smart targeting campaign and indicates the maximum amount for which the eBay suggested bid can be adjusted.
-     * @param SuggestMaxCpcRequest $body This type defines the fields used in the <b>suggestMaxCpc</b> request. To retrieve the suggested <b>maxCpc</b> value for a smart targeting campaign, a seller must specify the listings associated with the campaign, as well as the marketplace on which the campaign is hosted.
+     * @param SuggestMaxCpcRequest $body This type defines the fields used in the <b>suggestMaxCpc</b> request.
      * @param Suggest_max_cpcRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

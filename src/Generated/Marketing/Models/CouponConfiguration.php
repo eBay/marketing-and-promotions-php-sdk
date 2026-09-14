@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This container defines a coded coupon discount. It is required if the discount type is CODED_COUPON.
+ * The configuration of a coded coupon discount.
 */
 class CouponConfiguration implements AdditionalDataHolder, Parsable 
 {
@@ -37,9 +37,9 @@ class CouponConfiguration implements AdditionalDataHolder, Parsable
     private ?string $couponCode = null;
     
     /**
-     * @var string|null $couponType This indicates the type of Coded Coupon discount, and is required when the discount type is <b>CODED_COUPON</b>.<br><br>Supported types:<ul><li><b>PRIVATE_SINGLE_SELLER_COUPON:</b> Anyone can use and share the coupon code, but it isn't posted on eBay.</li><li><b>PUBLIC_SINGLE_SELLER_COUPON:</b> Anyone can find the coupon code on eBay and use it.</li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:CouponTypeEnum'>eBay API documentation</a>
+     * @var CouponTypeEnum|null $couponType This indicates the type of Coded Coupon discount, and is required when the discount type is <b>CODED_COUPON</b>.<br><br>Supported types:<ul><li><b>PRIVATE_SINGLE_SELLER_COUPON:</b> Anyone can use and share the coupon code, but it isn't posted on eBay.</li><li><b>PUBLIC_SINGLE_SELLER_COUPON:</b> Anyone can find the coupon code on eBay and use it.</li></ul>
     */
-    private ?string $couponType = null;
+    private ?CouponTypeEnum $couponType = null;
     
     /**
      * @var int|null $maxCouponRedemptionPerUser This sets the limit on the number of times a buyer can use this coupon. The range of values is 1-10. If no value is provided, a buyer can use the coupon an unlimited number of times.
@@ -79,10 +79,10 @@ class CouponConfiguration implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the couponType property value. This indicates the type of Coded Coupon discount, and is required when the discount type is <b>CODED_COUPON</b>.<br><br>Supported types:<ul><li><b>PRIVATE_SINGLE_SELLER_COUPON:</b> Anyone can use and share the coupon code, but it isn't posted on eBay.</li><li><b>PUBLIC_SINGLE_SELLER_COUPON:</b> Anyone can find the coupon code on eBay and use it.</li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:CouponTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the couponType property value. This indicates the type of Coded Coupon discount, and is required when the discount type is <b>CODED_COUPON</b>.<br><br>Supported types:<ul><li><b>PRIVATE_SINGLE_SELLER_COUPON:</b> Anyone can use and share the coupon code, but it isn't posted on eBay.</li><li><b>PUBLIC_SINGLE_SELLER_COUPON:</b> Anyone can find the coupon code on eBay and use it.</li></ul>
+     * @return CouponTypeEnum|null
     */
-    public function getCouponType(): ?string {
+    public function getCouponType(): ?CouponTypeEnum {
         return $this->couponType;
     }
 
@@ -94,7 +94,7 @@ class CouponConfiguration implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'couponCode' => fn(ParseNode $n) => $o->setCouponCode($n->getStringValue()),
-            'couponType' => fn(ParseNode $n) => $o->setCouponType($n->getStringValue()),
+            'couponType' => fn(ParseNode $n) => $o->setCouponType($n->getEnumValue(CouponTypeEnum::class)),
             'maxCouponRedemptionPerUser' => fn(ParseNode $n) => $o->setMaxCouponRedemptionPerUser($n->getIntegerValue()),
         ];
     }
@@ -113,7 +113,7 @@ class CouponConfiguration implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('couponCode', $this->getCouponCode());
-        $writer->writeStringValue('couponType', $this->getCouponType());
+        $writer->writeEnumValue('couponType', $this->getCouponType());
         $writer->writeIntegerValue('maxCouponRedemptionPerUser', $this->getMaxCouponRedemptionPerUser());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -135,10 +135,10 @@ class CouponConfiguration implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the couponType property value. This indicates the type of Coded Coupon discount, and is required when the discount type is <b>CODED_COUPON</b>.<br><br>Supported types:<ul><li><b>PRIVATE_SINGLE_SELLER_COUPON:</b> Anyone can use and share the coupon code, but it isn't posted on eBay.</li><li><b>PUBLIC_SINGLE_SELLER_COUPON:</b> Anyone can find the coupon code on eBay and use it.</li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:CouponTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the couponType property.
+     * Sets the couponType property value. This indicates the type of Coded Coupon discount, and is required when the discount type is <b>CODED_COUPON</b>.<br><br>Supported types:<ul><li><b>PRIVATE_SINGLE_SELLER_COUPON:</b> Anyone can use and share the coupon code, but it isn't posted on eBay.</li><li><b>PUBLIC_SINGLE_SELLER_COUPON:</b> Anyone can find the coupon code on eBay and use it.</li></ul>
+     * @param CouponTypeEnum|null $value Value to set for the couponType property.
     */
-    public function setCouponType(?string $value): void {
+    public function setCouponType(?CouponTypeEnum $value): void {
         $this->couponType = $value;
     }
 

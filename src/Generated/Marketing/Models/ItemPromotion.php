@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * <span class="tablenote"><b>Note:</b> As of July 8th 2024, <i>promotions</i> are now being referred to as <i>discounts</i> on Seller Hub and eBay help pages. Sell Marketing API documentation has been updated to reflect this product name change, but note that no API interface changes have been made.</span><br>This type defines the fields that describe a threshold discount and includes the discount, the items being discounted, and the rules that specify when the discount is applied.
+ * This type defines the fields that describe an item discount.
 */
 class ItemPromotion implements AdditionalDataHolder, Parsable 
 {
@@ -32,17 +32,17 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var bool|null $applyDiscountToSingleItemOnly This flag is relevant in only when <b>promotionType</b> is set to <code>VOLUME_DISCOUNT</code>. For details on volume pricing discounts, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html">Configuring volume pricing discounts</a>.  <br><br>If set to <code>true</code>, the discount is applied only when the buyer purchases multiple quantities of a single item that is being discounted. Otherwise, the discount applies to multiple quantities of any the items being discounted. Different variations of a multi-variation item are considered to be the same item. Note that this flag is not relevant if the <b>inventoryCriterion</b> container identifies a single listing ID for the discount.
+     * @var bool|null $applyDiscountToSingleItemOnly This flag is relevant in only when <b>promotionType</b> is set to <code>VOLUME_DISCOUNT</code>. For details on volume pricing discounts, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html" target="_blank">Configuring volume pricing discounts</a>.  <br><br>If set to <code>true</code>, the discount is applied only when the buyer purchases multiple quantities of a single item that is being discounted. Otherwise, the discount applies to multiple quantities of any the items being discounted. Different variations of a multi-variation item are considered to be the same item. Note that this flag is not relevant if the <b>inventoryCriterion</b> container identifies a single listing ID for the discount.
     */
     private ?bool $applyDiscountToSingleItemOnly = null;
     
     /**
-     * @var Amount|null $budget A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $budget This sets the budget for the <code>CODED_COUPON</code> discount type. Supported values range from 100-1000000. Supported currency codes include USD, GBP, EUR, and AUD. <p class="tablenote"><b>Note:</b> The budget value for an active or paused discount can not be decreased.</p> <p class="tablenote"><b>Note:</b> The Currency Code for 'budget' must be the same as the Currency Code for 'maxDiscountAmount'.</p>
     */
     private ?Amount $budget = null;
     
     /**
-     * @var CouponConfiguration|null $couponConfiguration This container defines a coded coupon discount. It is required if the discount type is CODED_COUPON.
+     * @var CouponConfiguration|null $couponConfiguration The configuration of a coded coupon discount.
     */
     private ?CouponConfiguration $couponConfiguration = null;
     
@@ -52,7 +52,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     private ?string $description = null;
     
     /**
-     * @var array<DiscountRule>|null $discountRules This container defines a discount using the following two required fields: <ul><li><b>discountBenefit</b> &ndash; Defines a discount as either a monetary amount or a percentage that is subtracted from the sales price of an item, a set of items, or an order.</li>  <li><b>discountSpecification</b> &ndash; Defines a set of rules that determine when the discount is applied.</li></ul> <p class="tablenote"><b>Note:</b> For volume pricing, you must specify at least two and not more than four <b>discountBenefit</b>/<b>discountSpecification</b> pairs. In addition, you must define each set of rules with a <b>ruleOrder</b> value that corresponds with the order of volume discounts you present.</p>  <p><b>Tip:</b> Refer to <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html">Specifying item discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> to create different types of discounts.</p>
+     * @var array<DiscountRule>|null $discountRules This container defines a discount using the following two required fields: <ul><li><b>discountBenefit</b> &ndash; Defines a discount as either a monetary amount or a percentage that is subtracted from the sales price of an item, a set of items, or an order.</li>  <li><b>discountSpecification</b> &ndash; Defines a set of rules that determine when the discount is applied.</li></ul> <p class="tablenote"><b>Note:</b> For volume pricing, you must specify at least two and not more than four <b>discountBenefit</b>/<b>discountSpecification</b> pairs. In addition, you must define each set of rules with a <b>ruleOrder</b> value that corresponds with the order of volume discounts you present.</p>  <p><b>Tip:</b> Refer to <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html" target="_blank">Specifying item discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> to create different types of discounts.</p>
     */
     private ?array $discountRules = null;
     
@@ -62,14 +62,14 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     private ?string $endDate = null;
     
     /**
-     * @var InventoryCriterion|null $inventoryCriterion This type defines either the selections rules or the list of listing IDs for the discount. The "listing IDs" are are either the seller's item IDs or the eBay listing IDs.
+     * @var InventoryCriterion|null $inventoryCriterion A container that defines either the listing IDs or the selection rules that specify the items to be discounted. Listing IDs can be either eBay listing IDs or a list of the seller's inventory reference IDs (know as SKUs or custom labels). See the <b>selectionRules</b> container for the rule criteria you can use to select inventory.  <p class="tablenote"><b>Note:</b> All listings in Discounts Manager discounts must support an electronic payment method.</p>
     */
     private ?InventoryCriterion $inventoryCriterion = null;
     
     /**
-     * @var string|null $marketplaceId The eBay marketplace ID of the site where the threshold discount is hosted. Threshold discounts are currently supported on a limited number of eBay marketplaces.  <p><b>Valid values:</b></p>  <ul><li><code>EBAY_AU</code> = Australia</li> <li><code>EBAY_DE</code> = Germany</li> <li><code>EBAY_ES</code> = Spain</li> <li><code>EBAY_FR</code> = France</li> <li><code>EBAY_GB</code> = Great Britain</li> <li><code>EBAY_IT</code> = Italy</li> <li><code>EBAY_US</code> = United States</li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
+     * @var MarketplaceIdEnum|null $marketplaceId The eBay marketplace ID of the site where the threshold discount is hosted. Threshold discounts are currently supported on a limited number of eBay marketplaces.  <p><b>Valid values:</b></p>  <ul><li><code>EBAY_AU</code> = Australia</li> <li><code>EBAY_DE</code> = Germany</li> <li><code>EBAY_ES</code> = Spain</li> <li><code>EBAY_FR</code> = France</li> <li><code>EBAY_GB</code> = Great Britain</li> <li><code>EBAY_IT</code> = Italy</li> <li><code>EBAY_US</code> = United States</li></ul>
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceIdEnum $marketplaceId = null;
     
     /**
      * @var string|null $name The seller-defined name or "title" of the discount that the seller can use to identify a discounts. This label is not displayed in end-user flows.  <br><br><b>Maximum length:</b> 90
@@ -77,9 +77,9 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var string|null $priority Applicable for only <b>ORDER_DISCOUNT</b> discounts, this field indicates the precedence of the discounts, which is used to determine the position of a discount on the seller's <b>All Offers</b> page. If an item is associated with multiple discounts, the discount with the higher priority takes precedence. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionPriorityEnum'>eBay API documentation</a>
+     * @var PromotionPriorityEnum|null $priority Applicable for only <b>ORDER_DISCOUNT</b> discounts, this field indicates the precedence of the discounts, which is used to determine the position of a discount on the seller's <b>All Offers</b> page. If an item is associated with multiple discounts, the discount with the higher priority takes precedence.
     */
-    private ?string $priority = null;
+    private ?PromotionPriorityEnum $priority = null;
     
     /**
      * @var string|null $promotionImageUrl Required for CODED_COUPON, MARKDOWN_SALE, and ORDER_DISCOUNT discounts, and not valid for VOLUME_DISCOUNT discounts.  <br><br>Populate this field with a URL that points to an image to be used with the discount. This image is displayed on the seller's <b>All Offers</b> page. The URL must point to either JPEG or PNG image and it must be a minimum of 500x500 pixels in dimension and cannot exceed 12Mb in size.
@@ -87,14 +87,14 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     private ?string $promotionImageUrl = null;
     
     /**
-     * @var string|null $promotionStatus The current status of the discount. When creating a new discount, this value must be set to either <code>DRAFT</code> or <code>SCHEDULED</code>.  <br><br>Note that you must set this value to <code>SCHEDULED</code> when you update a <b>RUNNING</b> discount. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>
+     * @var PromotionStatusEnum|null $promotionStatus The current status of the discount. When creating a new discount, this value must be set to either <code>DRAFT</code> or <code>SCHEDULED</code>.  <br><br>Note that you must set this value to <code>SCHEDULED</code> when you update a <b>RUNNING</b> discount.
     */
-    private ?string $promotionStatus = null;
+    private ?PromotionStatusEnum $promotionStatus = null;
     
     /**
-     * @var string|null $promotionType Use this field to specify the type of the discount you are creating. <p>The supported types are:</p> <ul><li><code>CODED_COUPON</code> &ndash; A coupon code discount set with <b>createItemPromotion</b>.</li> <li><code>MARKDOWN_SALE</code> &ndash; A markdown discount set with <b>createItemPriceMarkdownPromotion</b>.</li> <li><code>ORDER_DISCOUNT</code> &ndash; A threshold discount set with <b>createItemPromotion</b>.</li> <li><code>VOLUME_DISCOUNT</code> &ndash; A volume pricing discount set with <b>createItemPromotion</b>.</li></ul> <p>See the <a href="/api-docs/sell/static/marketing/promotions-manager.html" target="_blank">Discounts Manager</a> documentation for details.</p> <p><i>Required if </i> you are creating a volume pricing discount (<code>VOLUME_DISCOUNT</code>).</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionTypeEnum'>eBay API documentation</a>
+     * @var PromotionTypeEnum|null $promotionType Use this field to specify the type of the discount you are creating. <p>The supported types are:</p> <ul><li><code>CODED_COUPON</code> &ndash; A coupon code discount set with <b>createItemPromotion</b>.</li> <li><code>MARKDOWN_SALE</code> &ndash; A markdown discount set with <b>createItemPriceMarkdownPromotion</b>.</li> <li><code>ORDER_DISCOUNT</code> &ndash; A threshold discount set with <b>createItemPromotion</b>.</li> <li><code>VOLUME_DISCOUNT</code> &ndash; A volume pricing discount set with <b>createItemPromotion</b>.</li></ul> <p>See the <a href="/api-docs/sell/static/marketing/promotions-manager.html" target="_blank">Discounts Manager</a> documentation for details.</p> <p><i>Required if </i> you are creating a volume pricing discount (<code>VOLUME_DISCOUNT</code>).</p>
     */
-    private ?string $promotionType = null;
+    private ?PromotionTypeEnum $promotionType = null;
     
     /**
      * @var string|null $startDate The date and time the discount starts in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). For display purposes, convert this time into the local time of the seller.
@@ -126,7 +126,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the applyDiscountToSingleItemOnly property value. This flag is relevant in only when <b>promotionType</b> is set to <code>VOLUME_DISCOUNT</code>. For details on volume pricing discounts, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html">Configuring volume pricing discounts</a>.  <br><br>If set to <code>true</code>, the discount is applied only when the buyer purchases multiple quantities of a single item that is being discounted. Otherwise, the discount applies to multiple quantities of any the items being discounted. Different variations of a multi-variation item are considered to be the same item. Note that this flag is not relevant if the <b>inventoryCriterion</b> container identifies a single listing ID for the discount.
+     * Gets the applyDiscountToSingleItemOnly property value. This flag is relevant in only when <b>promotionType</b> is set to <code>VOLUME_DISCOUNT</code>. For details on volume pricing discounts, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html" target="_blank">Configuring volume pricing discounts</a>.  <br><br>If set to <code>true</code>, the discount is applied only when the buyer purchases multiple quantities of a single item that is being discounted. Otherwise, the discount applies to multiple quantities of any the items being discounted. Different variations of a multi-variation item are considered to be the same item. Note that this flag is not relevant if the <b>inventoryCriterion</b> container identifies a single listing ID for the discount.
      * @return bool|null
     */
     public function getApplyDiscountToSingleItemOnly(): ?bool {
@@ -134,7 +134,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the budget property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the budget property value. This sets the budget for the <code>CODED_COUPON</code> discount type. Supported values range from 100-1000000. Supported currency codes include USD, GBP, EUR, and AUD. <p class="tablenote"><b>Note:</b> The budget value for an active or paused discount can not be decreased.</p> <p class="tablenote"><b>Note:</b> The Currency Code for 'budget' must be the same as the Currency Code for 'maxDiscountAmount'.</p>
      * @return Amount|null
     */
     public function getBudget(): ?Amount {
@@ -142,7 +142,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the couponConfiguration property value. This container defines a coded coupon discount. It is required if the discount type is CODED_COUPON.
+     * Gets the couponConfiguration property value. The configuration of a coded coupon discount.
      * @return CouponConfiguration|null
     */
     public function getCouponConfiguration(): ?CouponConfiguration {
@@ -158,7 +158,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the discountRules property value. This container defines a discount using the following two required fields: <ul><li><b>discountBenefit</b> &ndash; Defines a discount as either a monetary amount or a percentage that is subtracted from the sales price of an item, a set of items, or an order.</li>  <li><b>discountSpecification</b> &ndash; Defines a set of rules that determine when the discount is applied.</li></ul> <p class="tablenote"><b>Note:</b> For volume pricing, you must specify at least two and not more than four <b>discountBenefit</b>/<b>discountSpecification</b> pairs. In addition, you must define each set of rules with a <b>ruleOrder</b> value that corresponds with the order of volume discounts you present.</p>  <p><b>Tip:</b> Refer to <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html">Specifying item discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> to create different types of discounts.</p>
+     * Gets the discountRules property value. This container defines a discount using the following two required fields: <ul><li><b>discountBenefit</b> &ndash; Defines a discount as either a monetary amount or a percentage that is subtracted from the sales price of an item, a set of items, or an order.</li>  <li><b>discountSpecification</b> &ndash; Defines a set of rules that determine when the discount is applied.</li></ul> <p class="tablenote"><b>Note:</b> For volume pricing, you must specify at least two and not more than four <b>discountBenefit</b>/<b>discountSpecification</b> pairs. In addition, you must define each set of rules with a <b>ruleOrder</b> value that corresponds with the order of volume discounts you present.</p>  <p><b>Tip:</b> Refer to <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html" target="_blank">Specifying item discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> to create different types of discounts.</p>
      * @return array<DiscountRule>|null
     */
     public function getDiscountRules(): ?array {
@@ -187,18 +187,18 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
             'discountRules' => fn(ParseNode $n) => $o->setDiscountRules($n->getCollectionOfObjectValues([DiscountRule::class, 'createFromDiscriminatorValue'])),
             'endDate' => fn(ParseNode $n) => $o->setEndDate($n->getStringValue()),
             'inventoryCriterion' => fn(ParseNode $n) => $o->setInventoryCriterion($n->getObjectValue([InventoryCriterion::class, 'createFromDiscriminatorValue'])),
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceIdEnum::class)),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
-            'priority' => fn(ParseNode $n) => $o->setPriority($n->getStringValue()),
+            'priority' => fn(ParseNode $n) => $o->setPriority($n->getEnumValue(PromotionPriorityEnum::class)),
             'promotionImageUrl' => fn(ParseNode $n) => $o->setPromotionImageUrl($n->getStringValue()),
-            'promotionStatus' => fn(ParseNode $n) => $o->setPromotionStatus($n->getStringValue()),
-            'promotionType' => fn(ParseNode $n) => $o->setPromotionType($n->getStringValue()),
+            'promotionStatus' => fn(ParseNode $n) => $o->setPromotionStatus($n->getEnumValue(PromotionStatusEnum::class)),
+            'promotionType' => fn(ParseNode $n) => $o->setPromotionType($n->getEnumValue(PromotionTypeEnum::class)),
             'startDate' => fn(ParseNode $n) => $o->setStartDate($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the inventoryCriterion property value. This type defines either the selections rules or the list of listing IDs for the discount. The "listing IDs" are are either the seller's item IDs or the eBay listing IDs.
+     * Gets the inventoryCriterion property value. A container that defines either the listing IDs or the selection rules that specify the items to be discounted. Listing IDs can be either eBay listing IDs or a list of the seller's inventory reference IDs (know as SKUs or custom labels). See the <b>selectionRules</b> container for the rule criteria you can use to select inventory.  <p class="tablenote"><b>Note:</b> All listings in Discounts Manager discounts must support an electronic payment method.</p>
      * @return InventoryCriterion|null
     */
     public function getInventoryCriterion(): ?InventoryCriterion {
@@ -206,10 +206,10 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the marketplaceId property value. The eBay marketplace ID of the site where the threshold discount is hosted. Threshold discounts are currently supported on a limited number of eBay marketplaces.  <p><b>Valid values:</b></p>  <ul><li><code>EBAY_AU</code> = Australia</li> <li><code>EBAY_DE</code> = Germany</li> <li><code>EBAY_ES</code> = Spain</li> <li><code>EBAY_FR</code> = France</li> <li><code>EBAY_GB</code> = Great Britain</li> <li><code>EBAY_IT</code> = Italy</li> <li><code>EBAY_US</code> = United States</li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. The eBay marketplace ID of the site where the threshold discount is hosted. Threshold discounts are currently supported on a limited number of eBay marketplaces.  <p><b>Valid values:</b></p>  <ul><li><code>EBAY_AU</code> = Australia</li> <li><code>EBAY_DE</code> = Germany</li> <li><code>EBAY_ES</code> = Spain</li> <li><code>EBAY_FR</code> = France</li> <li><code>EBAY_GB</code> = Great Britain</li> <li><code>EBAY_IT</code> = Italy</li> <li><code>EBAY_US</code> = United States</li></ul>
+     * @return MarketplaceIdEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceIdEnum {
         return $this->marketplaceId;
     }
 
@@ -222,10 +222,10 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the priority property value. Applicable for only <b>ORDER_DISCOUNT</b> discounts, this field indicates the precedence of the discounts, which is used to determine the position of a discount on the seller's <b>All Offers</b> page. If an item is associated with multiple discounts, the discount with the higher priority takes precedence. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionPriorityEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the priority property value. Applicable for only <b>ORDER_DISCOUNT</b> discounts, this field indicates the precedence of the discounts, which is used to determine the position of a discount on the seller's <b>All Offers</b> page. If an item is associated with multiple discounts, the discount with the higher priority takes precedence.
+     * @return PromotionPriorityEnum|null
     */
-    public function getPriority(): ?string {
+    public function getPriority(): ?PromotionPriorityEnum {
         return $this->priority;
     }
 
@@ -238,18 +238,18 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the promotionStatus property value. The current status of the discount. When creating a new discount, this value must be set to either <code>DRAFT</code> or <code>SCHEDULED</code>.  <br><br>Note that you must set this value to <code>SCHEDULED</code> when you update a <b>RUNNING</b> discount. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the promotionStatus property value. The current status of the discount. When creating a new discount, this value must be set to either <code>DRAFT</code> or <code>SCHEDULED</code>.  <br><br>Note that you must set this value to <code>SCHEDULED</code> when you update a <b>RUNNING</b> discount.
+     * @return PromotionStatusEnum|null
     */
-    public function getPromotionStatus(): ?string {
+    public function getPromotionStatus(): ?PromotionStatusEnum {
         return $this->promotionStatus;
     }
 
     /**
-     * Gets the promotionType property value. Use this field to specify the type of the discount you are creating. <p>The supported types are:</p> <ul><li><code>CODED_COUPON</code> &ndash; A coupon code discount set with <b>createItemPromotion</b>.</li> <li><code>MARKDOWN_SALE</code> &ndash; A markdown discount set with <b>createItemPriceMarkdownPromotion</b>.</li> <li><code>ORDER_DISCOUNT</code> &ndash; A threshold discount set with <b>createItemPromotion</b>.</li> <li><code>VOLUME_DISCOUNT</code> &ndash; A volume pricing discount set with <b>createItemPromotion</b>.</li></ul> <p>See the <a href="/api-docs/sell/static/marketing/promotions-manager.html" target="_blank">Discounts Manager</a> documentation for details.</p> <p><i>Required if </i> you are creating a volume pricing discount (<code>VOLUME_DISCOUNT</code>).</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the promotionType property value. Use this field to specify the type of the discount you are creating. <p>The supported types are:</p> <ul><li><code>CODED_COUPON</code> &ndash; A coupon code discount set with <b>createItemPromotion</b>.</li> <li><code>MARKDOWN_SALE</code> &ndash; A markdown discount set with <b>createItemPriceMarkdownPromotion</b>.</li> <li><code>ORDER_DISCOUNT</code> &ndash; A threshold discount set with <b>createItemPromotion</b>.</li> <li><code>VOLUME_DISCOUNT</code> &ndash; A volume pricing discount set with <b>createItemPromotion</b>.</li></ul> <p>See the <a href="/api-docs/sell/static/marketing/promotions-manager.html" target="_blank">Discounts Manager</a> documentation for details.</p> <p><i>Required if </i> you are creating a volume pricing discount (<code>VOLUME_DISCOUNT</code>).</p>
+     * @return PromotionTypeEnum|null
     */
-    public function getPromotionType(): ?string {
+    public function getPromotionType(): ?PromotionTypeEnum {
         return $this->promotionType;
     }
 
@@ -273,12 +273,12 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
         $writer->writeCollectionOfObjectValues('discountRules', $this->getDiscountRules());
         $writer->writeStringValue('endDate', $this->getEndDate());
         $writer->writeObjectValue('inventoryCriterion', $this->getInventoryCriterion());
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeStringValue('name', $this->getName());
-        $writer->writeStringValue('priority', $this->getPriority());
+        $writer->writeEnumValue('priority', $this->getPriority());
         $writer->writeStringValue('promotionImageUrl', $this->getPromotionImageUrl());
-        $writer->writeStringValue('promotionStatus', $this->getPromotionStatus());
-        $writer->writeStringValue('promotionType', $this->getPromotionType());
+        $writer->writeEnumValue('promotionStatus', $this->getPromotionStatus());
+        $writer->writeEnumValue('promotionType', $this->getPromotionType());
         $writer->writeStringValue('startDate', $this->getStartDate());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -292,7 +292,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the applyDiscountToSingleItemOnly property value. This flag is relevant in only when <b>promotionType</b> is set to <code>VOLUME_DISCOUNT</code>. For details on volume pricing discounts, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html">Configuring volume pricing discounts</a>.  <br><br>If set to <code>true</code>, the discount is applied only when the buyer purchases multiple quantities of a single item that is being discounted. Otherwise, the discount applies to multiple quantities of any the items being discounted. Different variations of a multi-variation item are considered to be the same item. Note that this flag is not relevant if the <b>inventoryCriterion</b> container identifies a single listing ID for the discount.
+     * Sets the applyDiscountToSingleItemOnly property value. This flag is relevant in only when <b>promotionType</b> is set to <code>VOLUME_DISCOUNT</code>. For details on volume pricing discounts, see <a href="/api-docs/sell/static/marketing/pm-volume-discounts.html" target="_blank">Configuring volume pricing discounts</a>.  <br><br>If set to <code>true</code>, the discount is applied only when the buyer purchases multiple quantities of a single item that is being discounted. Otherwise, the discount applies to multiple quantities of any the items being discounted. Different variations of a multi-variation item are considered to be the same item. Note that this flag is not relevant if the <b>inventoryCriterion</b> container identifies a single listing ID for the discount.
      * @param bool|null $value Value to set for the applyDiscountToSingleItemOnly property.
     */
     public function setApplyDiscountToSingleItemOnly(?bool $value): void {
@@ -300,7 +300,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the budget property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the budget property value. This sets the budget for the <code>CODED_COUPON</code> discount type. Supported values range from 100-1000000. Supported currency codes include USD, GBP, EUR, and AUD. <p class="tablenote"><b>Note:</b> The budget value for an active or paused discount can not be decreased.</p> <p class="tablenote"><b>Note:</b> The Currency Code for 'budget' must be the same as the Currency Code for 'maxDiscountAmount'.</p>
      * @param Amount|null $value Value to set for the budget property.
     */
     public function setBudget(?Amount $value): void {
@@ -308,7 +308,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the couponConfiguration property value. This container defines a coded coupon discount. It is required if the discount type is CODED_COUPON.
+     * Sets the couponConfiguration property value. The configuration of a coded coupon discount.
      * @param CouponConfiguration|null $value Value to set for the couponConfiguration property.
     */
     public function setCouponConfiguration(?CouponConfiguration $value): void {
@@ -324,7 +324,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the discountRules property value. This container defines a discount using the following two required fields: <ul><li><b>discountBenefit</b> &ndash; Defines a discount as either a monetary amount or a percentage that is subtracted from the sales price of an item, a set of items, or an order.</li>  <li><b>discountSpecification</b> &ndash; Defines a set of rules that determine when the discount is applied.</li></ul> <p class="tablenote"><b>Note:</b> For volume pricing, you must specify at least two and not more than four <b>discountBenefit</b>/<b>discountSpecification</b> pairs. In addition, you must define each set of rules with a <b>ruleOrder</b> value that corresponds with the order of volume discounts you present.</p>  <p><b>Tip:</b> Refer to <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html">Specifying item discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> to create different types of discounts.</p>
+     * Sets the discountRules property value. This container defines a discount using the following two required fields: <ul><li><b>discountBenefit</b> &ndash; Defines a discount as either a monetary amount or a percentage that is subtracted from the sales price of an item, a set of items, or an order.</li>  <li><b>discountSpecification</b> &ndash; Defines a set of rules that determine when the discount is applied.</li></ul> <p class="tablenote"><b>Note:</b> For volume pricing, you must specify at least two and not more than four <b>discountBenefit</b>/<b>discountSpecification</b> pairs. In addition, you must define each set of rules with a <b>ruleOrder</b> value that corresponds with the order of volume discounts you present.</p>  <p><b>Tip:</b> Refer to <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html" target="_blank">Specifying item discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> to create different types of discounts.</p>
      * @param array<DiscountRule>|null $value Value to set for the discountRules property.
     */
     public function setDiscountRules(?array $value): void {
@@ -340,7 +340,7 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the inventoryCriterion property value. This type defines either the selections rules or the list of listing IDs for the discount. The "listing IDs" are are either the seller's item IDs or the eBay listing IDs.
+     * Sets the inventoryCriterion property value. A container that defines either the listing IDs or the selection rules that specify the items to be discounted. Listing IDs can be either eBay listing IDs or a list of the seller's inventory reference IDs (know as SKUs or custom labels). See the <b>selectionRules</b> container for the rule criteria you can use to select inventory.  <p class="tablenote"><b>Note:</b> All listings in Discounts Manager discounts must support an electronic payment method.</p>
      * @param InventoryCriterion|null $value Value to set for the inventoryCriterion property.
     */
     public function setInventoryCriterion(?InventoryCriterion $value): void {
@@ -348,10 +348,10 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. The eBay marketplace ID of the site where the threshold discount is hosted. Threshold discounts are currently supported on a limited number of eBay marketplaces.  <p><b>Valid values:</b></p>  <ul><li><code>EBAY_AU</code> = Australia</li> <li><code>EBAY_DE</code> = Germany</li> <li><code>EBAY_ES</code> = Spain</li> <li><code>EBAY_FR</code> = France</li> <li><code>EBAY_GB</code> = Great Britain</li> <li><code>EBAY_IT</code> = Italy</li> <li><code>EBAY_US</code> = United States</li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. The eBay marketplace ID of the site where the threshold discount is hosted. Threshold discounts are currently supported on a limited number of eBay marketplaces.  <p><b>Valid values:</b></p>  <ul><li><code>EBAY_AU</code> = Australia</li> <li><code>EBAY_DE</code> = Germany</li> <li><code>EBAY_ES</code> = Spain</li> <li><code>EBAY_FR</code> = France</li> <li><code>EBAY_GB</code> = Great Britain</li> <li><code>EBAY_IT</code> = Italy</li> <li><code>EBAY_US</code> = United States</li></ul>
+     * @param MarketplaceIdEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceIdEnum $value): void {
         $this->marketplaceId = $value;
     }
 
@@ -364,10 +364,10 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the priority property value. Applicable for only <b>ORDER_DISCOUNT</b> discounts, this field indicates the precedence of the discounts, which is used to determine the position of a discount on the seller's <b>All Offers</b> page. If an item is associated with multiple discounts, the discount with the higher priority takes precedence. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionPriorityEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the priority property.
+     * Sets the priority property value. Applicable for only <b>ORDER_DISCOUNT</b> discounts, this field indicates the precedence of the discounts, which is used to determine the position of a discount on the seller's <b>All Offers</b> page. If an item is associated with multiple discounts, the discount with the higher priority takes precedence.
+     * @param PromotionPriorityEnum|null $value Value to set for the priority property.
     */
-    public function setPriority(?string $value): void {
+    public function setPriority(?PromotionPriorityEnum $value): void {
         $this->priority = $value;
     }
 
@@ -380,18 +380,18 @@ class ItemPromotion implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the promotionStatus property value. The current status of the discount. When creating a new discount, this value must be set to either <code>DRAFT</code> or <code>SCHEDULED</code>.  <br><br>Note that you must set this value to <code>SCHEDULED</code> when you update a <b>RUNNING</b> discount. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the promotionStatus property.
+     * Sets the promotionStatus property value. The current status of the discount. When creating a new discount, this value must be set to either <code>DRAFT</code> or <code>SCHEDULED</code>.  <br><br>Note that you must set this value to <code>SCHEDULED</code> when you update a <b>RUNNING</b> discount.
+     * @param PromotionStatusEnum|null $value Value to set for the promotionStatus property.
     */
-    public function setPromotionStatus(?string $value): void {
+    public function setPromotionStatus(?PromotionStatusEnum $value): void {
         $this->promotionStatus = $value;
     }
 
     /**
-     * Sets the promotionType property value. Use this field to specify the type of the discount you are creating. <p>The supported types are:</p> <ul><li><code>CODED_COUPON</code> &ndash; A coupon code discount set with <b>createItemPromotion</b>.</li> <li><code>MARKDOWN_SALE</code> &ndash; A markdown discount set with <b>createItemPriceMarkdownPromotion</b>.</li> <li><code>ORDER_DISCOUNT</code> &ndash; A threshold discount set with <b>createItemPromotion</b>.</li> <li><code>VOLUME_DISCOUNT</code> &ndash; A volume pricing discount set with <b>createItemPromotion</b>.</li></ul> <p>See the <a href="/api-docs/sell/static/marketing/promotions-manager.html" target="_blank">Discounts Manager</a> documentation for details.</p> <p><i>Required if </i> you are creating a volume pricing discount (<code>VOLUME_DISCOUNT</code>).</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the promotionType property.
+     * Sets the promotionType property value. Use this field to specify the type of the discount you are creating. <p>The supported types are:</p> <ul><li><code>CODED_COUPON</code> &ndash; A coupon code discount set with <b>createItemPromotion</b>.</li> <li><code>MARKDOWN_SALE</code> &ndash; A markdown discount set with <b>createItemPriceMarkdownPromotion</b>.</li> <li><code>ORDER_DISCOUNT</code> &ndash; A threshold discount set with <b>createItemPromotion</b>.</li> <li><code>VOLUME_DISCOUNT</code> &ndash; A volume pricing discount set with <b>createItemPromotion</b>.</li></ul> <p>See the <a href="/api-docs/sell/static/marketing/promotions-manager.html" target="_blank">Discounts Manager</a> documentation for details.</p> <p><i>Required if </i> you are creating a volume pricing discount (<code>VOLUME_DISCOUNT</code>).</p>
+     * @param PromotionTypeEnum|null $value Value to set for the promotionType property.
     */
-    public function setPromotionType(?string $value): void {
+    public function setPromotionType(?PromotionTypeEnum $value): void {
         $this->promotionType = $value;
     }
 

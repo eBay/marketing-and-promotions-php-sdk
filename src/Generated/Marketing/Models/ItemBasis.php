@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A container for details regarding the basis for an item.
+ * This type defines the details regarding the basis for an item.
 */
 class ItemBasis implements AdditionalDataHolder, Parsable 
 {
@@ -37,9 +37,9 @@ class ItemBasis implements AdditionalDataHolder, Parsable
     private ?int $estimatedValue = null;
     
     /**
-     * @var string|null $metric The basis of the statistics. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:TargetingMetricsEnum'>eBay API documentation</a>
+     * @var TargetingMetricsEnum|null $metric The basis of the statistics.
     */
-    private ?string $metric = null;
+    private ?TargetingMetricsEnum $metric = null;
     
     /**
      * Instantiates a new ItemBasis and sets the default values.
@@ -81,15 +81,15 @@ class ItemBasis implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'estimatedValue' => fn(ParseNode $n) => $o->setEstimatedValue($n->getIntegerValue()),
-            'metric' => fn(ParseNode $n) => $o->setMetric($n->getStringValue()),
+            'metric' => fn(ParseNode $n) => $o->setMetric($n->getEnumValue(TargetingMetricsEnum::class)),
         ];
     }
 
     /**
-     * Gets the metric property value. The basis of the statistics. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:TargetingMetricsEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the metric property value. The basis of the statistics.
+     * @return TargetingMetricsEnum|null
     */
-    public function getMetric(): ?string {
+    public function getMetric(): ?TargetingMetricsEnum {
         return $this->metric;
     }
 
@@ -99,7 +99,7 @@ class ItemBasis implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeIntegerValue('estimatedValue', $this->getEstimatedValue());
-        $writer->writeStringValue('metric', $this->getMetric());
+        $writer->writeEnumValue('metric', $this->getMetric());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class ItemBasis implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the metric property value. The basis of the statistics. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:TargetingMetricsEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the metric property.
+     * Sets the metric property value. The basis of the statistics.
+     * @param TargetingMetricsEnum|null $value Value to set for the metric property.
     */
-    public function setMetric(?string $value): void {
+    public function setMetric(?TargetingMetricsEnum $value): void {
         $this->metric = $value;
     }
 

@@ -32,7 +32,7 @@ class CreateAdRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $adGroupId A unique eBay-assigned identifier for an ad group in a campaign that uses the Cost Per Click (CPC) funding model.<br><br>Use the <a href="/api-docs/sell/marketing/resources/adgroup/methods/getAdGroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.<br><br><span class="tablenote"><b>Note:</b> This field is required for manual targeting campaigns using the Cost Per Click (CPC) funding model.</span>
+     * @var string|null $adGroupId A unique eBay-assigned identifier for an ad group in a campaign that uses the Cost Per Click (CPC) funding model.<br><br>Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.<br><br><span class="tablenote"><b>Note:</b> This field is required for manual targeting campaigns using the Cost Per Click (CPC) funding model.</span>
     */
     private ?string $adGroupId = null;
     
@@ -71,7 +71,7 @@ class CreateAdRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adGroupId property value. A unique eBay-assigned identifier for an ad group in a campaign that uses the Cost Per Click (CPC) funding model.<br><br>Use the <a href="/api-docs/sell/marketing/resources/adgroup/methods/getAdGroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.<br><br><span class="tablenote"><b>Note:</b> This field is required for manual targeting campaigns using the Cost Per Click (CPC) funding model.</span>
+     * Gets the adGroupId property value. A unique eBay-assigned identifier for an ad group in a campaign that uses the Cost Per Click (CPC) funding model.<br><br>Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.<br><br><span class="tablenote"><b>Note:</b> This field is required for manual targeting campaigns using the Cost Per Click (CPC) funding model.</span>
      * @return string|null
     */
     public function getAdGroupId(): ?string {
@@ -127,7 +127,7 @@ class CreateAdRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adGroupId property value. A unique eBay-assigned identifier for an ad group in a campaign that uses the Cost Per Click (CPC) funding model.<br><br>Use the <a href="/api-docs/sell/marketing/resources/adgroup/methods/getAdGroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.<br><br><span class="tablenote"><b>Note:</b> This field is required for manual targeting campaigns using the Cost Per Click (CPC) funding model.</span>
+     * Sets the adGroupId property value. A unique eBay-assigned identifier for an ad group in a campaign that uses the Cost Per Click (CPC) funding model.<br><br>Use the <a href="/develop/api/sell/marketing_api#sell-marketing_api-ad_group-getadgroups">getAdGroups</a> method to retrieve the ad group IDs for a seller.<br><br><span class="tablenote"><b>Note:</b> This field is required for manual targeting campaigns using the Cost Per Click (CPC) funding model.</span>
      * @param string|null $value Value to set for the adGroupId property.
     */
     public function setAdGroupId(?string $value): void {

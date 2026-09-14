@@ -23,7 +23,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * This type defines the fields for a set of inventory selection rules.  <br><br><b>Required:</b> When <b>inventoryCriterionType</b> is set to <code>INVENTORY_BY_RULE</code> or <code>INVENTORY_ANY</code>.
+ * This container defines a set of inventory selection rules for a discount.  <br><br>When defining rule criteria, you must limit item exclusions to 100 IDs when you choose from live inventory.  <br><br>Required if  <b>InventoryCriterionEnum</b> is set to <code>INVENTORY_BY_RULE</code> or <code>INVENTORY_ANY</code>.
 */
 class RuleCriteria implements AdditionalDataHolder, Parsable 
 {

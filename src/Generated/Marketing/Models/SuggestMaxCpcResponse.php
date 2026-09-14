@@ -32,14 +32,14 @@ class SuggestMaxCpcResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $amount The suggested <b>maxCpc</b> amount for the smart targeting campaign.
     */
     private ?Amount $amount = null;
     
     /**
-     * @var string|null $marketplaceId The unique identifier of the marketplace where the listings are hosted. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
+     * @var MarketplaceIdEnum|null $marketplaceId The unique identifier of the marketplace where the listings are hosted.
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceIdEnum $marketplaceId = null;
     
     /**
      * Instantiates a new SuggestMaxCpcResponse and sets the default values.
@@ -66,7 +66,7 @@ class SuggestMaxCpcResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the amount property value. The suggested <b>maxCpc</b> amount for the smart targeting campaign.
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -81,15 +81,15 @@ class SuggestMaxCpcResponse implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'amount' => fn(ParseNode $n) => $o->setAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceIdEnum::class)),
         ];
     }
 
     /**
-     * Gets the marketplaceId property value. The unique identifier of the marketplace where the listings are hosted. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. The unique identifier of the marketplace where the listings are hosted.
+     * @return MarketplaceIdEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceIdEnum {
         return $this->marketplaceId;
     }
 
@@ -99,7 +99,7 @@ class SuggestMaxCpcResponse implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('amount', $this->getAmount());
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -112,7 +112,7 @@ class SuggestMaxCpcResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the amount property value. The suggested <b>maxCpc</b> amount for the smart targeting campaign.
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {
@@ -120,10 +120,10 @@ class SuggestMaxCpcResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. The unique identifier of the marketplace where the listings are hosted. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. The unique identifier of the marketplace where the listings are hosted.
+     * @param MarketplaceIdEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceIdEnum $value): void {
         $this->marketplaceId = $value;
     }
 

@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines how the Promoted Listings fee is calculated for a Promoted Listings ad campaign.
+ * This container includes parameters that define an ad campaign funding strategy. The set of seller-configurable parameters depends on the selected <b>fundingModel</b> value.<br/><br/>Currently, the supported funding models are <code>COST_PER_SALE</code> (CPS) and <code>COST_PER_CLICK</code> (CPC). For onsite ads, the CPC model supports two bidding strategies: <code>FIXED</code> and <code>DYNAMIC</code>.
 */
 class FundingStrategy implements AdditionalDataHolder, Parsable 
 {
@@ -32,14 +32,14 @@ class FundingStrategy implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $adRateStrategy This field is used to set the ad rate strategy for a Cost Per Sale (CPS) campaign.<br><br>The default value for this field is <code>FIXED</code>. If this field is omitted, the default value will be used.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for Cost Per Click (CPC) or offsite campaigns.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdRateStrategyEnum'>eBay API documentation</a>
+     * @var AdRateStrategyEnum|null $adRateStrategy This field is used to set the ad rate strategy for a Cost Per Sale (CPS) campaign.<br><br>The default value for this field is <code>FIXED</code>. If this field is omitted, the default value will be used.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for Cost Per Click (CPC) or offsite campaigns.</span>
     */
-    private ?string $adRateStrategy = null;
+    private ?AdRateStrategyEnum $adRateStrategy = null;
     
     /**
-     * @var string|null $biddingStrategy Indicates the bidding strategy for an onsite Cost Per Click (CPC) campaign that uses manual targeting.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for smart targeting campaigns.</span><br>Valid values are:<ul><li><code>FIXED</code><br><br>When using a fixed bidding strategy, sellers manually assign and adjust keyword bids for the CPC campaign.</li><li><code>DYNAMIC</code><br><br>When using a dynamic bidding strategy, eBay manages the campaign's keyword bids and automatically updates them daily to the suggested bid.<br><br><span class="tablenote"><b>Note:</b> For a CPC campaign using dynamic bidding, sellers can continue to manually add keywords for the campaign, but they are no longer able to manually adjust their associated bid values. In order to manually adjust bid values, sellers must use the <code>FIXED</code> bidding strategy.</span></li></ul><br><b>Default value:</b> FIXED For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:BiddingStrategyEnum'>eBay API documentation</a>
+     * @var BiddingStrategyEnum|null $biddingStrategy Indicates the bidding strategy for an onsite Cost Per Click (CPC) campaign that uses manual targeting.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for smart targeting campaigns.</span><br>Valid values are:<ul><li><code>FIXED</code><br><br>When using a fixed bidding strategy, sellers manually assign and adjust keyword bids for the CPC campaign.</li><li><code>DYNAMIC</code><br><br>When using a dynamic bidding strategy, eBay manages the campaign's keyword bids and automatically updates them daily to the suggested bid.<br><br><span class="tablenote"><b>Note:</b> For a CPC campaign using dynamic bidding, sellers can continue to manually add keywords for the campaign, but they are no longer able to manually adjust their associated bid values. In order to manually adjust bid values, sellers must use the <code>FIXED</code> bidding strategy.</span></li></ul><br><b>Default value:</b> FIXED
     */
-    private ?string $biddingStrategy = null;
+    private ?BiddingStrategyEnum $biddingStrategy = null;
     
     /**
      * @var string|null $bidPercentage The user-defined <b>bid percentage</b> (also known as the <i>ad rate</i>) sets the level that eBay increases the visibility in search results for the associated listing. The higher the <b>bidPercentage</b> value, the more eBay promotes the listing.  <br><br>The value specified here is also used to calculate the Promoted Listings fee. This percentage value is multiplied by the final sales price to determine the fee. <br><br>The Promoted Listings fee is determined at the time the transaction completes and the seller is assessed the fee only when an item sells through a Promoted Listings ad campaign. <br><br>The <b>bidPercentage</b> is a single precision value that is guided by the following rules: <ul><li>These values are <b>valid</b>:<br>&nbsp;&nbsp;&nbsp;<code>4.1</code>, &nbsp;&nbsp;&nbsp;<code>5.0</code>, &nbsp;&nbsp;&nbsp;<code>5.5</code>, ...</li>  <li>These values are <b>not valid</b>:<br /> &nbsp;&nbsp;&nbsp;<code>0.01</code>, &nbsp;&nbsp;&nbsp;<code>10.75</code>, &nbsp;&nbsp;&nbsp;<code>99.99</code>,<br /> &nbsp;&nbsp;&nbsp;and so on.</li></ul>This is the default bid percentage for the campaigns using the Cost Per Sale (CPS) funding model, and this value will be overridden by any ads in the campaign that have their own set bid percentages.<br /><br />If a bid percentage is not provided for an ad, eBay uses the default bid percentage of the associated campaign.<br /><br /><span class="tablenote"><b>Note:</b>This field is only relevant for campaigns that use the CPS funding model and a fixed ad rate. It is not used for campaigns that use the Cost Per Click (CPC) funding model and should not be provided when the selected adRateStrategy for the campaign is dynamic.</span><br><br><span class="tablenote"><b>Note:</b> This field has a minimum value of <code>2.0</code> and a maximum value of <code>100.0</code>.</span>
@@ -57,9 +57,9 @@ class FundingStrategy implements AdditionalDataHolder, Parsable
     private ?array $dynamicAdRatePreferences = null;
     
     /**
-     * @var string|null $fundingModel Indicates the model that eBay uses to calculate the Promoted Listings fee. <p>For a description of the funding model types, refer to <b>FundingModelTypeEnum</b>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:FundingModelEnum'>eBay API documentation</a>
+     * @var FundingModelEnum|null $fundingModel Indicates the model that eBay uses to calculate the Promoted Listings fee. <p>For a description of the funding model types, refer to <b>FundingModelTypeEnum</b>.
     */
-    private ?string $fundingModel = null;
+    private ?FundingModelEnum $fundingModel = null;
     
     /**
      * Instantiates a new FundingStrategy and sets the default values.
@@ -86,18 +86,18 @@ class FundingStrategy implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adRateStrategy property value. This field is used to set the ad rate strategy for a Cost Per Sale (CPS) campaign.<br><br>The default value for this field is <code>FIXED</code>. If this field is omitted, the default value will be used.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for Cost Per Click (CPC) or offsite campaigns.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdRateStrategyEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the adRateStrategy property value. This field is used to set the ad rate strategy for a Cost Per Sale (CPS) campaign.<br><br>The default value for this field is <code>FIXED</code>. If this field is omitted, the default value will be used.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for Cost Per Click (CPC) or offsite campaigns.</span>
+     * @return AdRateStrategyEnum|null
     */
-    public function getAdRateStrategy(): ?string {
+    public function getAdRateStrategy(): ?AdRateStrategyEnum {
         return $this->adRateStrategy;
     }
 
     /**
-     * Gets the biddingStrategy property value. Indicates the bidding strategy for an onsite Cost Per Click (CPC) campaign that uses manual targeting.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for smart targeting campaigns.</span><br>Valid values are:<ul><li><code>FIXED</code><br><br>When using a fixed bidding strategy, sellers manually assign and adjust keyword bids for the CPC campaign.</li><li><code>DYNAMIC</code><br><br>When using a dynamic bidding strategy, eBay manages the campaign's keyword bids and automatically updates them daily to the suggested bid.<br><br><span class="tablenote"><b>Note:</b> For a CPC campaign using dynamic bidding, sellers can continue to manually add keywords for the campaign, but they are no longer able to manually adjust their associated bid values. In order to manually adjust bid values, sellers must use the <code>FIXED</code> bidding strategy.</span></li></ul><br><b>Default value:</b> FIXED For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:BiddingStrategyEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the biddingStrategy property value. Indicates the bidding strategy for an onsite Cost Per Click (CPC) campaign that uses manual targeting.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for smart targeting campaigns.</span><br>Valid values are:<ul><li><code>FIXED</code><br><br>When using a fixed bidding strategy, sellers manually assign and adjust keyword bids for the CPC campaign.</li><li><code>DYNAMIC</code><br><br>When using a dynamic bidding strategy, eBay manages the campaign's keyword bids and automatically updates them daily to the suggested bid.<br><br><span class="tablenote"><b>Note:</b> For a CPC campaign using dynamic bidding, sellers can continue to manually add keywords for the campaign, but they are no longer able to manually adjust their associated bid values. In order to manually adjust bid values, sellers must use the <code>FIXED</code> bidding strategy.</span></li></ul><br><b>Default value:</b> FIXED
+     * @return BiddingStrategyEnum|null
     */
-    public function getBiddingStrategy(): ?string {
+    public function getBiddingStrategy(): ?BiddingStrategyEnum {
         return $this->biddingStrategy;
     }
 
@@ -132,20 +132,20 @@ class FundingStrategy implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'adRateStrategy' => fn(ParseNode $n) => $o->setAdRateStrategy($n->getStringValue()),
-            'biddingStrategy' => fn(ParseNode $n) => $o->setBiddingStrategy($n->getStringValue()),
+            'adRateStrategy' => fn(ParseNode $n) => $o->setAdRateStrategy($n->getEnumValue(AdRateStrategyEnum::class)),
+            'biddingStrategy' => fn(ParseNode $n) => $o->setBiddingStrategy($n->getEnumValue(BiddingStrategyEnum::class)),
             'bidPercentage' => fn(ParseNode $n) => $o->setBidPercentage($n->getStringValue()),
             'bidPreferences' => fn(ParseNode $n) => $o->setBidPreferences($n->getCollectionOfObjectValues([BidPreference::class, 'createFromDiscriminatorValue'])),
             'dynamicAdRatePreferences' => fn(ParseNode $n) => $o->setDynamicAdRatePreferences($n->getCollectionOfObjectValues([DynamicAdRatePreference::class, 'createFromDiscriminatorValue'])),
-            'fundingModel' => fn(ParseNode $n) => $o->setFundingModel($n->getStringValue()),
+            'fundingModel' => fn(ParseNode $n) => $o->setFundingModel($n->getEnumValue(FundingModelEnum::class)),
         ];
     }
 
     /**
-     * Gets the fundingModel property value. Indicates the model that eBay uses to calculate the Promoted Listings fee. <p>For a description of the funding model types, refer to <b>FundingModelTypeEnum</b>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:FundingModelEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the fundingModel property value. Indicates the model that eBay uses to calculate the Promoted Listings fee. <p>For a description of the funding model types, refer to <b>FundingModelTypeEnum</b>.
+     * @return FundingModelEnum|null
     */
-    public function getFundingModel(): ?string {
+    public function getFundingModel(): ?FundingModelEnum {
         return $this->fundingModel;
     }
 
@@ -154,12 +154,12 @@ class FundingStrategy implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('adRateStrategy', $this->getAdRateStrategy());
-        $writer->writeStringValue('biddingStrategy', $this->getBiddingStrategy());
+        $writer->writeEnumValue('adRateStrategy', $this->getAdRateStrategy());
+        $writer->writeEnumValue('biddingStrategy', $this->getBiddingStrategy());
         $writer->writeStringValue('bidPercentage', $this->getBidPercentage());
         $writer->writeCollectionOfObjectValues('bidPreferences', $this->getBidPreferences());
         $writer->writeCollectionOfObjectValues('dynamicAdRatePreferences', $this->getDynamicAdRatePreferences());
-        $writer->writeStringValue('fundingModel', $this->getFundingModel());
+        $writer->writeEnumValue('fundingModel', $this->getFundingModel());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -172,18 +172,18 @@ class FundingStrategy implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adRateStrategy property value. This field is used to set the ad rate strategy for a Cost Per Sale (CPS) campaign.<br><br>The default value for this field is <code>FIXED</code>. If this field is omitted, the default value will be used.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for Cost Per Click (CPC) or offsite campaigns.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AdRateStrategyEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the adRateStrategy property.
+     * Sets the adRateStrategy property value. This field is used to set the ad rate strategy for a Cost Per Sale (CPS) campaign.<br><br>The default value for this field is <code>FIXED</code>. If this field is omitted, the default value will be used.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for Cost Per Click (CPC) or offsite campaigns.</span>
+     * @param AdRateStrategyEnum|null $value Value to set for the adRateStrategy property.
     */
-    public function setAdRateStrategy(?string $value): void {
+    public function setAdRateStrategy(?AdRateStrategyEnum $value): void {
         $this->adRateStrategy = $value;
     }
 
     /**
-     * Sets the biddingStrategy property value. Indicates the bidding strategy for an onsite Cost Per Click (CPC) campaign that uses manual targeting.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for smart targeting campaigns.</span><br>Valid values are:<ul><li><code>FIXED</code><br><br>When using a fixed bidding strategy, sellers manually assign and adjust keyword bids for the CPC campaign.</li><li><code>DYNAMIC</code><br><br>When using a dynamic bidding strategy, eBay manages the campaign's keyword bids and automatically updates them daily to the suggested bid.<br><br><span class="tablenote"><b>Note:</b> For a CPC campaign using dynamic bidding, sellers can continue to manually add keywords for the campaign, but they are no longer able to manually adjust their associated bid values. In order to manually adjust bid values, sellers must use the <code>FIXED</code> bidding strategy.</span></li></ul><br><b>Default value:</b> FIXED For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:BiddingStrategyEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the biddingStrategy property.
+     * Sets the biddingStrategy property value. Indicates the bidding strategy for an onsite Cost Per Click (CPC) campaign that uses manual targeting.<br><br><span class="tablenote"><b>Note:</b> This field is not applicable for smart targeting campaigns.</span><br>Valid values are:<ul><li><code>FIXED</code><br><br>When using a fixed bidding strategy, sellers manually assign and adjust keyword bids for the CPC campaign.</li><li><code>DYNAMIC</code><br><br>When using a dynamic bidding strategy, eBay manages the campaign's keyword bids and automatically updates them daily to the suggested bid.<br><br><span class="tablenote"><b>Note:</b> For a CPC campaign using dynamic bidding, sellers can continue to manually add keywords for the campaign, but they are no longer able to manually adjust their associated bid values. In order to manually adjust bid values, sellers must use the <code>FIXED</code> bidding strategy.</span></li></ul><br><b>Default value:</b> FIXED
+     * @param BiddingStrategyEnum|null $value Value to set for the biddingStrategy property.
     */
-    public function setBiddingStrategy(?string $value): void {
+    public function setBiddingStrategy(?BiddingStrategyEnum $value): void {
         $this->biddingStrategy = $value;
     }
 
@@ -212,10 +212,10 @@ class FundingStrategy implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the fundingModel property value. Indicates the model that eBay uses to calculate the Promoted Listings fee. <p>For a description of the funding model types, refer to <b>FundingModelTypeEnum</b>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:FundingModelEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the fundingModel property.
+     * Sets the fundingModel property value. Indicates the model that eBay uses to calculate the Promoted Listings fee. <p>For a description of the funding model types, refer to <b>FundingModelTypeEnum</b>.
+     * @param FundingModelEnum|null $value Value to set for the fundingModel property.
     */
-    public function setFundingModel(?string $value): void {
+    public function setFundingModel(?FundingModelEnum $value): void {
         $this->fundingModel = $value;
     }
 

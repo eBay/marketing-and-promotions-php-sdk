@@ -16,6 +16,7 @@
 
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Item\Email_preview;
 
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\GetEmailPreviewResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -44,18 +45,23 @@ class Email_previewRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method returns a preview of the email sent by the email campaign indicated by the <b>email_campaign_id</b> path parameter.<br><br>Call <a href="/api-docs/sell/marketing/resources/campaign/methods/getEmailCampaigns">getEmailCampaigns</a> to obtain a list of email campaigns. Use the <b>emailCampaignId</b> value of the desired email campaign as the <b>email_campaign_id</b> path parameter value.<br><br>If this call is executed successfully, the response returns a <b>content</b> field that contains the raw HTML code of the email campaign that can then be rendered anywhere.<br><br><span class="tablenote"><b>Note:</b> The eBay listings in the email are sorted according to the email campaign sort criteria. The individual listings can change over time, as well.<br><br>The result of the email preview call can be treated as a snapshot of the email campaign taken at the date and time of the <b>renderDate</b> value found in the results of the call.</span>
+     * This method returns a preview of the email sent by the email campaign indicated by the <b>email_campaign_id</b> path parameter.<br><br>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns">getEmailCampaigns</a> to obtain a list of email campaigns. Use the <b>emailCampaignId</b> value of the desired email campaign as the <b>email_campaign_id</b> path parameter value.<br><br>If this call is executed successfully, the response returns a <b>content</b> field that contains the raw HTML code of the email campaign that can then be rendered anywhere.<br><br><span class="tablenote"><b>Note:</b> The eBay listings in the email are sorted according to the email campaign sort criteria. The individual listings can change over time, as well.<br><br>The result of the email preview call can be treated as a snapshot of the email campaign taken at the date and time of the <b>renderDate</b> value found in the results of the call.</span>
      * @param Email_previewRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<GetEmailPreviewResponse|null>
      * @throws Exception
     */
     public function get(?Email_previewRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetEmailPreviewResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetEmailPreviewResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method returns a preview of the email sent by the email campaign indicated by the <b>email_campaign_id</b> path parameter.<br><br>Call <a href="/api-docs/sell/marketing/resources/campaign/methods/getEmailCampaigns">getEmailCampaigns</a> to obtain a list of email campaigns. Use the <b>emailCampaignId</b> value of the desired email campaign as the <b>email_campaign_id</b> path parameter value.<br><br>If this call is executed successfully, the response returns a <b>content</b> field that contains the raw HTML code of the email campaign that can then be rendered anywhere.<br><br><span class="tablenote"><b>Note:</b> The eBay listings in the email are sorted according to the email campaign sort criteria. The individual listings can change over time, as well.<br><br>The result of the email preview call can be treated as a snapshot of the email campaign taken at the date and time of the <b>renderDate</b> value found in the results of the call.</span>
+     * This method returns a preview of the email sent by the email campaign indicated by the <b>email_campaign_id</b> path parameter.<br><br>Call <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns">getEmailCampaigns</a> to obtain a list of email campaigns. Use the <b>emailCampaignId</b> value of the desired email campaign as the <b>email_campaign_id</b> path parameter value.<br><br>If this call is executed successfully, the response returns a <b>content</b> field that contains the raw HTML code of the email campaign that can then be rendered anywhere.<br><br><span class="tablenote"><b>Note:</b> The eBay listings in the email are sorted according to the email campaign sort criteria. The individual listings can change over time, as well.<br><br>The result of the email preview call can be treated as a snapshot of the email campaign taken at the date and time of the <b>renderDate</b> value found in the results of the call.</span>
      * @param Email_previewRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

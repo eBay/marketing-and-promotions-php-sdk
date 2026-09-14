@@ -42,7 +42,7 @@ class Promotion_summary_reportRequestBuilderGetRequestConfiguration extends Base
 
     /**
      * Instantiates a new Promotion_summary_reportRequestBuilderGetQueryParameters.
-     * @param string|null $marketplace_id This parameter specifies the eBay marketplace ID of the site for which you want a discount summary report.<br><br>See <a href="/api-docs/sell/marketing/types/ba:MarketplaceIdEnum">MarketplaceIdEnum</a> for supported Marketplace ID values.
+     * @param string|null $marketplace_id This parameter specifies the eBay marketplace ID of the site for which you want a discount summary report.<br><br>See <a href="/develop/api/sell/request_headers#marketplace-id-values" target="_blank">Marketplace ID values</a> for supported Marketplace ID values.
      * @return Promotion_summary_reportRequestBuilderGetQueryParameters
     */
     public static function createQueryParameters(?string $marketplace_id = null): Promotion_summary_reportRequestBuilderGetQueryParameters {

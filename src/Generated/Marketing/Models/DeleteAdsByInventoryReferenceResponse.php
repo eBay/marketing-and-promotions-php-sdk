@@ -38,7 +38,7 @@ class DeleteAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
     private ?array $adIds = null;
     
     /**
-     * @var array<Error>|null $errors The container for the errors associated with the request.
+     * @var array<ErrorDetailV3>|null $errors The container for the errors associated with the request.
     */
     private ?array $errors = null;
     
@@ -48,9 +48,9 @@ class DeleteAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
     private ?string $inventoryReferenceId = null;
     
     /**
-     * @var string|null $inventoryReferenceType The enumeration value returned here indicates if the ad was for a single-variation listing or a multiple-variation listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
+     * @var InventoryReferenceTypeEnum|null $inventoryReferenceType The enumeration value returned here indicates if the ad was for a single-variation listing or a multiple-variation listing.
     */
-    private ?string $inventoryReferenceType = null;
+    private ?InventoryReferenceTypeEnum $inventoryReferenceType = null;
     
     /**
      * @var int|null $statusCode An HTTP status code indicating if the corresponding ad was successfully deleted or not. <code>200 Successful</code> should be returned for successfully deleted ads. <span class="tablenote"><b>Note:</b>A status code is returned for each ad that the seller deletes, or attempts to delete.</span>
@@ -91,7 +91,7 @@ class DeleteAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
 
     /**
      * Gets the errors property value. The container for the errors associated with the request.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -112,9 +112,9 @@ class DeleteAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
                 /** @var array<string>|null $val */
                 $this->setAdIds($val);
             },
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
             'inventoryReferenceId' => fn(ParseNode $n) => $o->setInventoryReferenceId($n->getStringValue()),
-            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getStringValue()),
+            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getEnumValue(InventoryReferenceTypeEnum::class)),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
         ];
     }
@@ -128,10 +128,10 @@ class DeleteAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
     }
 
     /**
-     * Gets the inventoryReferenceType property value. The enumeration value returned here indicates if the ad was for a single-variation listing or a multiple-variation listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the inventoryReferenceType property value. The enumeration value returned here indicates if the ad was for a single-variation listing or a multiple-variation listing.
+     * @return InventoryReferenceTypeEnum|null
     */
-    public function getInventoryReferenceType(): ?string {
+    public function getInventoryReferenceType(): ?InventoryReferenceTypeEnum {
         return $this->inventoryReferenceType;
     }
 
@@ -151,7 +151,7 @@ class DeleteAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
         $writer->writeCollectionOfPrimitiveValues('adIds', $this->getAdIds());
         $writer->writeCollectionOfObjectValues('errors', $this->getErrors());
         $writer->writeStringValue('inventoryReferenceId', $this->getInventoryReferenceId());
-        $writer->writeStringValue('inventoryReferenceType', $this->getInventoryReferenceType());
+        $writer->writeEnumValue('inventoryReferenceType', $this->getInventoryReferenceType());
         $writer->writeIntegerValue('statusCode', $this->getStatusCode());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -174,7 +174,7 @@ class DeleteAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
 
     /**
      * Sets the errors property value. The container for the errors associated with the request.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;
@@ -189,10 +189,10 @@ class DeleteAdsByInventoryReferenceResponse implements AdditionalDataHolder, Par
     }
 
     /**
-     * Sets the inventoryReferenceType property value. The enumeration value returned here indicates if the ad was for a single-variation listing or a multiple-variation listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:InventoryReferenceTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the inventoryReferenceType property.
+     * Sets the inventoryReferenceType property value. The enumeration value returned here indicates if the ad was for a single-variation listing or a multiple-variation listing.
+     * @param InventoryReferenceTypeEnum|null $value Value to set for the inventoryReferenceType property.
     */
-    public function setInventoryReferenceType(?string $value): void {
+    public function setInventoryReferenceType(?InventoryReferenceTypeEnum $value): void {
         $this->inventoryReferenceType = $value;
     }
 

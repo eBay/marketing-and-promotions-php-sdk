@@ -23,7 +23,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * This type defines the fields used in the <b>suggestMaxCpc</b> request. To retrieve the suggested <b>maxCpc</b> value for a smart targeting campaign, a seller must specify the listings associated with the campaign, as well as the marketplace on which the campaign is hosted.
+ * This type defines the fields used in the <b>suggestMaxCpc</b> request.
 */
 class SuggestMaxCpcRequest implements AdditionalDataHolder, Parsable 
 {
@@ -38,9 +38,9 @@ class SuggestMaxCpcRequest implements AdditionalDataHolder, Parsable
     private ?array $listingIds = null;
     
     /**
-     * @var string|null $marketplaceId The unique identifier of the marketplace where the listings are hosted. See <a href="/api-docs/sell/marketing/types/api:MarketplaceIdEnum" target="_blank ">MarketplaceIdEnum</a> for supported values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
+     * @var MarketplaceIdEnum|null $marketplaceId The unique identifier of the marketplace where the listings are hosted. See <a href="/develop/api/sell/request_headers#marketplace-id-values" target="_blank">Marketplace ID values</a> for supported values.
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceIdEnum $marketplaceId = null;
     
     /**
      * Instantiates a new SuggestMaxCpcRequest and sets the default values.
@@ -81,7 +81,7 @@ class SuggestMaxCpcRequest implements AdditionalDataHolder, Parsable
                 /** @var array<string>|null $val */
                 $this->setListingIds($val);
             },
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceIdEnum::class)),
         ];
     }
 
@@ -94,10 +94,10 @@ class SuggestMaxCpcRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the marketplaceId property value. The unique identifier of the marketplace where the listings are hosted. See <a href="/api-docs/sell/marketing/types/api:MarketplaceIdEnum" target="_blank ">MarketplaceIdEnum</a> for supported values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. The unique identifier of the marketplace where the listings are hosted. See <a href="/develop/api/sell/request_headers#marketplace-id-values" target="_blank">Marketplace ID values</a> for supported values.
+     * @return MarketplaceIdEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceIdEnum {
         return $this->marketplaceId;
     }
 
@@ -107,7 +107,7 @@ class SuggestMaxCpcRequest implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfPrimitiveValues('listingIds', $this->getListingIds());
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -128,10 +128,10 @@ class SuggestMaxCpcRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. The unique identifier of the marketplace where the listings are hosted. See <a href="/api-docs/sell/marketing/types/api:MarketplaceIdEnum" target="_blank ">MarketplaceIdEnum</a> for supported values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. The unique identifier of the marketplace where the listings are hosted. See <a href="/develop/api/sell/request_headers#marketplace-id-values" target="_blank">Marketplace ID values</a> for supported values.
+     * @param MarketplaceIdEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceIdEnum $value): void {
         $this->marketplaceId = $value;
     }
 

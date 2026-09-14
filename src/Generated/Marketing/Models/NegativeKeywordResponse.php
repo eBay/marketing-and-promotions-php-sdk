@@ -42,7 +42,7 @@ class NegativeKeywordResponse implements AdditionalDataHolder, Parsable
     private ?string $campaignId = null;
     
     /**
-     * @var array<Error>|null $errors This container will be returned if there is an issue creating the corresponding negative keyword.
+     * @var array<ErrorDetailV3>|null $errors This container will be returned if there is an issue creating the corresponding negative keyword.
     */
     private ?array $errors = null;
     
@@ -57,9 +57,9 @@ class NegativeKeywordResponse implements AdditionalDataHolder, Parsable
     private ?string $negativeKeywordId = null;
     
     /**
-     * @var string|null $negativeKeywordMatchType The match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordMatchTypeEnum'>eBay API documentation</a>
+     * @var NegativeKeywordMatchTypeEnum|null $negativeKeywordMatchType The match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
     */
-    private ?string $negativeKeywordMatchType = null;
+    private ?NegativeKeywordMatchTypeEnum $negativeKeywordMatchType = null;
     
     /**
      * @var string|null $negativeKeywordText The text for the negative keyword.
@@ -113,7 +113,7 @@ class NegativeKeywordResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the errors property value. This container will be returned if there is an issue creating the corresponding negative keyword.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getErrors(): ?array {
         return $this->errors;
@@ -128,10 +128,10 @@ class NegativeKeywordResponse implements AdditionalDataHolder, Parsable
         return  [
             'adGroupId' => fn(ParseNode $n) => $o->setAdGroupId($n->getStringValue()),
             'campaignId' => fn(ParseNode $n) => $o->setCampaignId($n->getStringValue()),
-            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'errors' => fn(ParseNode $n) => $o->setErrors($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
             'href' => fn(ParseNode $n) => $o->setHref($n->getStringValue()),
             'negativeKeywordId' => fn(ParseNode $n) => $o->setNegativeKeywordId($n->getStringValue()),
-            'negativeKeywordMatchType' => fn(ParseNode $n) => $o->setNegativeKeywordMatchType($n->getStringValue()),
+            'negativeKeywordMatchType' => fn(ParseNode $n) => $o->setNegativeKeywordMatchType($n->getEnumValue(NegativeKeywordMatchTypeEnum::class)),
             'negativeKeywordText' => fn(ParseNode $n) => $o->setNegativeKeywordText($n->getStringValue()),
             'statusCode' => fn(ParseNode $n) => $o->setStatusCode($n->getIntegerValue()),
         ];
@@ -154,10 +154,10 @@ class NegativeKeywordResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the negativeKeywordMatchType property value. The match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordMatchTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the negativeKeywordMatchType property value. The match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @return NegativeKeywordMatchTypeEnum|null
     */
-    public function getNegativeKeywordMatchType(): ?string {
+    public function getNegativeKeywordMatchType(): ?NegativeKeywordMatchTypeEnum {
         return $this->negativeKeywordMatchType;
     }
 
@@ -187,7 +187,7 @@ class NegativeKeywordResponse implements AdditionalDataHolder, Parsable
         $writer->writeCollectionOfObjectValues('errors', $this->getErrors());
         $writer->writeStringValue('href', $this->getHref());
         $writer->writeStringValue('negativeKeywordId', $this->getNegativeKeywordId());
-        $writer->writeStringValue('negativeKeywordMatchType', $this->getNegativeKeywordMatchType());
+        $writer->writeEnumValue('negativeKeywordMatchType', $this->getNegativeKeywordMatchType());
         $writer->writeStringValue('negativeKeywordText', $this->getNegativeKeywordText());
         $writer->writeIntegerValue('statusCode', $this->getStatusCode());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -219,7 +219,7 @@ class NegativeKeywordResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the errors property value. This container will be returned if there is an issue creating the corresponding negative keyword.
-     * @param array<Error>|null $value Value to set for the errors property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the errors property.
     */
     public function setErrors(?array $value): void {
         $this->errors = $value;
@@ -242,10 +242,10 @@ class NegativeKeywordResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the negativeKeywordMatchType property value. The match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:NegativeKeywordMatchTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the negativeKeywordMatchType property.
+     * Sets the negativeKeywordMatchType property value. The match type for the negative keyword.<br /><br /><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Broad matching of negative keywords is not currently supported.</span><br /><b>Valid Values:</b><ul><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @param NegativeKeywordMatchTypeEnum|null $value Value to set for the negativeKeywordMatchType property.
     */
-    public function setNegativeKeywordMatchType(?string $value): void {
+    public function setNegativeKeywordMatchType(?NegativeKeywordMatchTypeEnum $value): void {
         $this->negativeKeywordMatchType = $value;
     }
 

@@ -20,7 +20,6 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
  * This type indicates the suggested daily keyword budget for an offsite campaign.
@@ -33,7 +32,7 @@ class BudgetRecommendationResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var CampaignBudget|null $budget A type that defines the budget details for a Cost Per Click (CPC) Promoted Listings campaign.
+     * @var CampaignBudget|null $budget The allocated daily budget for the Cost Per Click (CPC) Promoted Listings campaign.
     */
     private ?CampaignBudget $budget = null;
     
@@ -43,7 +42,7 @@ class BudgetRecommendationResponse implements AdditionalDataHolder, Parsable
     private ?string $campaignId = null;
     
     /**
-     * @var array<string>|null $channels The channel for the campaign. This value indicates whether the campaign is an Onsite or Offsite advertising campaign.<br><br><b>Valid Values:</b><ul><li><code>ON_SITE</code></li><li><code>OFF_SITE</code></li></ul>
+     * @var array<ChannelEnum>|null $channels The channel for the campaign. This value indicates whether the campaign is an Onsite or Offsite advertising campaign.<br><br><b>Valid Values:</b><ul><li><code>ON_SITE</code></li><li><code>OFF_SITE</code></li></ul>
     */
     private ?array $channels = null;
     
@@ -72,7 +71,7 @@ class BudgetRecommendationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the budget property value. A type that defines the budget details for a Cost Per Click (CPC) Promoted Listings campaign.
+     * Gets the budget property value. The allocated daily budget for the Cost Per Click (CPC) Promoted Listings campaign.
      * @return CampaignBudget|null
     */
     public function getBudget(): ?CampaignBudget {
@@ -89,7 +88,7 @@ class BudgetRecommendationResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the channels property value. The channel for the campaign. This value indicates whether the campaign is an Onsite or Offsite advertising campaign.<br><br><b>Valid Values:</b><ul><li><code>ON_SITE</code></li><li><code>OFF_SITE</code></li></ul>
-     * @return array<string>|null
+     * @return array<ChannelEnum>|null
     */
     public function getChannels(): ?array {
         return $this->channels;
@@ -104,14 +103,7 @@ class BudgetRecommendationResponse implements AdditionalDataHolder, Parsable
         return  [
             'budget' => fn(ParseNode $n) => $o->setBudget($n->getObjectValue([CampaignBudget::class, 'createFromDiscriminatorValue'])),
             'campaignId' => fn(ParseNode $n) => $o->setCampaignId($n->getStringValue()),
-            'channels' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setChannels($val);
-            },
+            'channels' => fn(ParseNode $n) => $o->setChannels($n->getCollectionOfEnumValues(ChannelEnum::class)),
         ];
     }
 
@@ -122,7 +114,7 @@ class BudgetRecommendationResponse implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('budget', $this->getBudget());
         $writer->writeStringValue('campaignId', $this->getCampaignId());
-        $writer->writeCollectionOfPrimitiveValues('channels', $this->getChannels());
+        $writer->writeCollectionOfEnumValues('channels', $this->getChannels());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -135,7 +127,7 @@ class BudgetRecommendationResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the budget property value. A type that defines the budget details for a Cost Per Click (CPC) Promoted Listings campaign.
+     * Sets the budget property value. The allocated daily budget for the Cost Per Click (CPC) Promoted Listings campaign.
      * @param CampaignBudget|null $value Value to set for the budget property.
     */
     public function setBudget(?CampaignBudget $value): void {
@@ -152,7 +144,7 @@ class BudgetRecommendationResponse implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the channels property value. The channel for the campaign. This value indicates whether the campaign is an Onsite or Offsite advertising campaign.<br><br><b>Valid Values:</b><ul><li><code>ON_SITE</code></li><li><code>OFF_SITE</code></li></ul>
-     * @param array<string>|null $value Value to set for the channels property.
+     * @param array<ChannelEnum>|null $value Value to set for the channels property.
     */
     public function setChannels(?array $value): void {
         $this->channels = $value;

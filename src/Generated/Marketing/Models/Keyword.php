@@ -37,7 +37,7 @@ class Keyword implements AdditionalDataHolder, Parsable
     private ?string $adGroupId = null;
     
     /**
-     * @var Amount|null $bid A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $bid The bid associated with the keyword. This container will not be returned if the keyword does not have a defined bid value.
     */
     private ?Amount $bid = null;
     
@@ -47,9 +47,9 @@ class Keyword implements AdditionalDataHolder, Parsable
     private ?string $keywordId = null;
     
     /**
-     * @var string|null $keywordStatus The status of the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:KeywordStatusEnum'>eBay API documentation</a>
+     * @var KeywordStatusEnum|null $keywordStatus The status of the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul>
     */
-    private ?string $keywordStatus = null;
+    private ?KeywordStatusEnum $keywordStatus = null;
     
     /**
      * @var string|null $keywordText The text of the keyword.
@@ -57,9 +57,9 @@ class Keyword implements AdditionalDataHolder, Parsable
     private ?string $keywordText = null;
     
     /**
-     * @var string|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
+     * @var MatchTypeEnum|null $matchType A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
     */
-    private ?string $matchType = null;
+    private ?MatchTypeEnum $matchType = null;
     
     /**
      * Instantiates a new Keyword and sets the default values.
@@ -94,7 +94,7 @@ class Keyword implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the bid property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the bid property value. The bid associated with the keyword. This container will not be returned if the keyword does not have a defined bid value.
      * @return Amount|null
     */
     public function getBid(): ?Amount {
@@ -111,9 +111,9 @@ class Keyword implements AdditionalDataHolder, Parsable
             'adGroupId' => fn(ParseNode $n) => $o->setAdGroupId($n->getStringValue()),
             'bid' => fn(ParseNode $n) => $o->setBid($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'keywordId' => fn(ParseNode $n) => $o->setKeywordId($n->getStringValue()),
-            'keywordStatus' => fn(ParseNode $n) => $o->setKeywordStatus($n->getStringValue()),
+            'keywordStatus' => fn(ParseNode $n) => $o->setKeywordStatus($n->getEnumValue(KeywordStatusEnum::class)),
             'keywordText' => fn(ParseNode $n) => $o->setKeywordText($n->getStringValue()),
-            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getStringValue()),
+            'matchType' => fn(ParseNode $n) => $o->setMatchType($n->getEnumValue(MatchTypeEnum::class)),
         ];
     }
 
@@ -126,10 +126,10 @@ class Keyword implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the keywordStatus property value. The status of the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:KeywordStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the keywordStatus property value. The status of the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul>
+     * @return KeywordStatusEnum|null
     */
-    public function getKeywordStatus(): ?string {
+    public function getKeywordStatus(): ?KeywordStatusEnum {
         return $this->keywordStatus;
     }
 
@@ -142,10 +142,10 @@ class Keyword implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @return MatchTypeEnum|null
     */
-    public function getMatchType(): ?string {
+    public function getMatchType(): ?MatchTypeEnum {
         return $this->matchType;
     }
 
@@ -157,9 +157,9 @@ class Keyword implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('adGroupId', $this->getAdGroupId());
         $writer->writeObjectValue('bid', $this->getBid());
         $writer->writeStringValue('keywordId', $this->getKeywordId());
-        $writer->writeStringValue('keywordStatus', $this->getKeywordStatus());
+        $writer->writeEnumValue('keywordStatus', $this->getKeywordStatus());
         $writer->writeStringValue('keywordText', $this->getKeywordText());
-        $writer->writeStringValue('matchType', $this->getMatchType());
+        $writer->writeEnumValue('matchType', $this->getMatchType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -180,7 +180,7 @@ class Keyword implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the bid property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the bid property value. The bid associated with the keyword. This container will not be returned if the keyword does not have a defined bid value.
      * @param Amount|null $value Value to set for the bid property.
     */
     public function setBid(?Amount $value): void {
@@ -196,10 +196,10 @@ class Keyword implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the keywordStatus property value. The status of the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:KeywordStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the keywordStatus property.
+     * Sets the keywordStatus property value. The status of the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>ACTIVE</code></li><li><code>PAUSED</code></li><li><code>ARCHIVED</code></li></ul>
+     * @param KeywordStatusEnum|null $value Value to set for the keywordStatus property.
     */
-    public function setKeywordStatus(?string $value): void {
+    public function setKeywordStatus(?KeywordStatusEnum $value): void {
         $this->keywordStatus = $value;
     }
 
@@ -212,10 +212,10 @@ class Keyword implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:MatchTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the matchType property.
+     * Sets the matchType property value. A field that defines the match type for the keyword.<br /><br /><b>Valid Values:</b><ul><li><code>BROAD</code></li><li><code>EXACT</code></li><li><code>PHRASE</code></li></ul>
+     * @param MatchTypeEnum|null $value Value to set for the matchType property.
     */
-    public function setMatchType(?string $value): void {
+    public function setMatchType(?MatchTypeEnum $value): void {
         $this->matchType = $value;
     }
 

@@ -32,9 +32,9 @@ class Alert implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $alertType The type of alert message. For example, an invalid bid percentage. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AlertTypeEnum'>eBay API documentation</a>
+     * @var AlertTypeEnum|null $alertType The type of alert message. For example, an invalid bid percentage.
     */
-    private ?string $alertType = null;
+    private ?AlertTypeEnum $alertType = null;
     
     /**
      * @var array<AlertDetails>|null $details A description of the alert including dimensions and aspects.
@@ -66,10 +66,10 @@ class Alert implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the alertType property value. The type of alert message. For example, an invalid bid percentage. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AlertTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the alertType property value. The type of alert message. For example, an invalid bid percentage.
+     * @return AlertTypeEnum|null
     */
-    public function getAlertType(): ?string {
+    public function getAlertType(): ?AlertTypeEnum {
         return $this->alertType;
     }
 
@@ -88,7 +88,7 @@ class Alert implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'alertType' => fn(ParseNode $n) => $o->setAlertType($n->getStringValue()),
+            'alertType' => fn(ParseNode $n) => $o->setAlertType($n->getEnumValue(AlertTypeEnum::class)),
             'details' => fn(ParseNode $n) => $o->setDetails($n->getCollectionOfObjectValues([AlertDetails::class, 'createFromDiscriminatorValue'])),
         ];
     }
@@ -98,7 +98,7 @@ class Alert implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('alertType', $this->getAlertType());
+        $writer->writeEnumValue('alertType', $this->getAlertType());
         $writer->writeCollectionOfObjectValues('details', $this->getDetails());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class Alert implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the alertType property value. The type of alert message. For example, an invalid bid percentage. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:AlertTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the alertType property.
+     * Sets the alertType property value. The type of alert message. For example, an invalid bid percentage.
+     * @param AlertTypeEnum|null $value Value to set for the alertType property.
     */
-    public function setAlertType(?string $value): void {
+    public function setAlertType(?AlertTypeEnum $value): void {
         $this->alertType = $value;
     }
 

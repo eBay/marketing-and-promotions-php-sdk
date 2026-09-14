@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that defines the fields for the <b>BulkUpdateKeyword</b> request.
+ * A type that defines the fields for the bulk request to update keywords.
 */
 class BulkUpdateKeywordRequest implements AdditionalDataHolder, Parsable 
 {

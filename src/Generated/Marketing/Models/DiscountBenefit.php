@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This container defines the discount as either a monetary amount or a percentage of the sales price.  <p class="tablenote"><b>Important!:</b> You must populate one and only one of the fields in this container: <ul><li><b>amountOffItem</b></li> <li><b>amountOffOrder</b></li> <li><b>percentageOffItem</b></li> <li><b>percentageOffOrder</b></li></ul></p>  <p class="tablenote"><b>Tip:</b> Refer to <a href="/api-docs/sell/static/marketing/pm-specifying-discounts.html">Configuring discounts for threshold discounts</a> for information and examples on how to combine <b>discountBenefit</b> and <b>discountSpecification</b> values to create different types of discounts.</p>
+ * This container defines the discount as either a monetary amount or a percentage applied to the sales price.
 */
 class DiscountBenefit implements AdditionalDataHolder, Parsable 
 {
@@ -32,12 +32,12 @@ class DiscountBenefit implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amountOffItem A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $amountOffItem The monetary amount that is discounted off an item (or items) when the discount criteria is met.  <br><br>For <b>threshold discounts</b>, where the buyer triggers the discount, the valid values for this field are:  <br>&nbsp; <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>15</code>, <code>20</code>, <code>25</code>, <br> &nbsp; <code>30<c/ode>, <code>35</code>, <code>40</code>, <code>45</code>, <code>50</code>, <code>55</code>, <code>60</code>, <code>65</code>, <br> &nbsp; <code>70</code>, <code>75</code>, <code>80</code>, <code>85</code>, <code>90</code>, <code>95</code>, <code>100/<code>, <code>110</code>, <br> &nbsp; <code>120</code>, <code>125</code>, <code>150</code>, <code>200</code>, <code>250</code>  <br><br>For <b>markdown</b> discounts, the range is greater, as outlined below and detailed more precisely <a href="/api-docs/sell/static/marketing/pm-amountoffitems-values.html" target="_blank">here</a>: <ul><li>$1 increments from $5 to $100</li><li>$5 increments from $105 to $1,000</li><li>$100 increments from $1,100 to $15,000</li></ul>
     */
     private ?Amount $amountOffItem = null;
     
     /**
-     * @var Amount|null $amountOffOrder A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $amountOffOrder Used for threshold discounts, this is the monetary amount that is discounted off an order when the discount criteria is met. Because this field is valid only for orders, it's not a valid combination to use with markdown discounts.  <br><br><b>Valid values</b> for the associated <code>amountOffOrder.</code><b>value</b> field:  <br> &nbsp; <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>15</code>, <code>20</code>, <code>25</code>, <br> &nbsp; <code>30</code>, <code>35</code>, <code>40</code>, <code>45</code>, <code>50</code>, <code>55</code>, <code>60</code>, <code>65</code>, <br> &nbsp; <code>70</code>, <code>75</code>, <code>80</code>, <code>85</code>, <code>90</code>, <code>95</code>, <code>100</code>, <code>110</code>, <br> &nbsp; <code>120</code>, <code>125</code>, <code>150</code>, <code>200</code>, <code>250</code>
     */
     private ?Amount $amountOffOrder = null;
     
@@ -76,7 +76,7 @@ class DiscountBenefit implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amountOffItem property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the amountOffItem property value. The monetary amount that is discounted off an item (or items) when the discount criteria is met.  <br><br>For <b>threshold discounts</b>, where the buyer triggers the discount, the valid values for this field are:  <br>&nbsp; <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>15</code>, <code>20</code>, <code>25</code>, <br> &nbsp; <code>30<c/ode>, <code>35</code>, <code>40</code>, <code>45</code>, <code>50</code>, <code>55</code>, <code>60</code>, <code>65</code>, <br> &nbsp; <code>70</code>, <code>75</code>, <code>80</code>, <code>85</code>, <code>90</code>, <code>95</code>, <code>100/<code>, <code>110</code>, <br> &nbsp; <code>120</code>, <code>125</code>, <code>150</code>, <code>200</code>, <code>250</code>  <br><br>For <b>markdown</b> discounts, the range is greater, as outlined below and detailed more precisely <a href="/api-docs/sell/static/marketing/pm-amountoffitems-values.html" target="_blank">here</a>: <ul><li>$1 increments from $5 to $100</li><li>$5 increments from $105 to $1,000</li><li>$100 increments from $1,100 to $15,000</li></ul>
      * @return Amount|null
     */
     public function getAmountOffItem(): ?Amount {
@@ -84,7 +84,7 @@ class DiscountBenefit implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amountOffOrder property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the amountOffOrder property value. Used for threshold discounts, this is the monetary amount that is discounted off an order when the discount criteria is met. Because this field is valid only for orders, it's not a valid combination to use with markdown discounts.  <br><br><b>Valid values</b> for the associated <code>amountOffOrder.</code><b>value</b> field:  <br> &nbsp; <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>15</code>, <code>20</code>, <code>25</code>, <br> &nbsp; <code>30</code>, <code>35</code>, <code>40</code>, <code>45</code>, <code>50</code>, <code>55</code>, <code>60</code>, <code>65</code>, <br> &nbsp; <code>70</code>, <code>75</code>, <code>80</code>, <code>85</code>, <code>90</code>, <code>95</code>, <code>100</code>, <code>110</code>, <br> &nbsp; <code>120</code>, <code>125</code>, <code>150</code>, <code>200</code>, <code>250</code>
      * @return Amount|null
     */
     public function getAmountOffOrder(): ?Amount {
@@ -142,7 +142,7 @@ class DiscountBenefit implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amountOffItem property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the amountOffItem property value. The monetary amount that is discounted off an item (or items) when the discount criteria is met.  <br><br>For <b>threshold discounts</b>, where the buyer triggers the discount, the valid values for this field are:  <br>&nbsp; <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>15</code>, <code>20</code>, <code>25</code>, <br> &nbsp; <code>30<c/ode>, <code>35</code>, <code>40</code>, <code>45</code>, <code>50</code>, <code>55</code>, <code>60</code>, <code>65</code>, <br> &nbsp; <code>70</code>, <code>75</code>, <code>80</code>, <code>85</code>, <code>90</code>, <code>95</code>, <code>100/<code>, <code>110</code>, <br> &nbsp; <code>120</code>, <code>125</code>, <code>150</code>, <code>200</code>, <code>250</code>  <br><br>For <b>markdown</b> discounts, the range is greater, as outlined below and detailed more precisely <a href="/api-docs/sell/static/marketing/pm-amountoffitems-values.html" target="_blank">here</a>: <ul><li>$1 increments from $5 to $100</li><li>$5 increments from $105 to $1,000</li><li>$100 increments from $1,100 to $15,000</li></ul>
      * @param Amount|null $value Value to set for the amountOffItem property.
     */
     public function setAmountOffItem(?Amount $value): void {
@@ -150,7 +150,7 @@ class DiscountBenefit implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amountOffOrder property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the amountOffOrder property value. Used for threshold discounts, this is the monetary amount that is discounted off an order when the discount criteria is met. Because this field is valid only for orders, it's not a valid combination to use with markdown discounts.  <br><br><b>Valid values</b> for the associated <code>amountOffOrder.</code><b>value</b> field:  <br> &nbsp; <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>15</code>, <code>20</code>, <code>25</code>, <br> &nbsp; <code>30</code>, <code>35</code>, <code>40</code>, <code>45</code>, <code>50</code>, <code>55</code>, <code>60</code>, <code>65</code>, <br> &nbsp; <code>70</code>, <code>75</code>, <code>80</code>, <code>85</code>, <code>90</code>, <code>95</code>, <code>100</code>, <code>110</code>, <br> &nbsp; <code>120</code>, <code>125</code>, <code>150</code>, <code>200</code>, <code>250</code>
      * @param Amount|null $value Value to set for the amountOffOrder property.
     */
     public function setAmountOffOrder(?Amount $value): void {

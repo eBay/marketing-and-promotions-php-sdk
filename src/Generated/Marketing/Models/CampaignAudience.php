@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This is the object for a single email campaign audience.
+ * This type defines the object for a single email campaign audience.
 */
 class CampaignAudience implements AdditionalDataHolder, Parsable 
 {
@@ -32,9 +32,9 @@ class CampaignAudience implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $audienceType This enum value indicates the audience type. For the complete list of audience types and their associated enum values, see <a href="/api-docs/sell/marketing/types/api:AudienceTypeEnum">AudienceTypeEnum</a>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:AudienceTypeEnum'>eBay API documentation</a>
+     * @var AudienceTypeEnum|null $audienceType This enum value indicates the audience type. For the complete list of audience types and their associated enum values, see <b>AudienceTypeEnum</b>.
     */
-    private ?string $audienceType = null;
+    private ?AudienceTypeEnum $audienceType = null;
     
     /**
      * @var string|null $code The unique code for an audience. 
@@ -71,10 +71,10 @@ class CampaignAudience implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the audienceType property value. This enum value indicates the audience type. For the complete list of audience types and their associated enum values, see <a href="/api-docs/sell/marketing/types/api:AudienceTypeEnum">AudienceTypeEnum</a>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:AudienceTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the audienceType property value. This enum value indicates the audience type. For the complete list of audience types and their associated enum values, see <b>AudienceTypeEnum</b>.
+     * @return AudienceTypeEnum|null
     */
-    public function getAudienceType(): ?string {
+    public function getAudienceType(): ?AudienceTypeEnum {
         return $this->audienceType;
     }
 
@@ -93,7 +93,7 @@ class CampaignAudience implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'audienceType' => fn(ParseNode $n) => $o->setAudienceType($n->getStringValue()),
+            'audienceType' => fn(ParseNode $n) => $o->setAudienceType($n->getEnumValue(AudienceTypeEnum::class)),
             'code' => fn(ParseNode $n) => $o->setCode($n->getStringValue()),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
         ];
@@ -112,7 +112,7 @@ class CampaignAudience implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('audienceType', $this->getAudienceType());
+        $writer->writeEnumValue('audienceType', $this->getAudienceType());
         $writer->writeStringValue('code', $this->getCode());
         $writer->writeStringValue('name', $this->getName());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -127,10 +127,10 @@ class CampaignAudience implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the audienceType property value. This enum value indicates the audience type. For the complete list of audience types and their associated enum values, see <a href="/api-docs/sell/marketing/types/api:AudienceTypeEnum">AudienceTypeEnum</a>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:AudienceTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the audienceType property.
+     * Sets the audienceType property value. This enum value indicates the audience type. For the complete list of audience types and their associated enum values, see <b>AudienceTypeEnum</b>.
+     * @param AudienceTypeEnum|null $value Value to set for the audienceType property.
     */
-    public function setAudienceType(?string $value): void {
+    public function setAudienceType(?AudienceTypeEnum $value): void {
         $this->audienceType = $value;
     }
 

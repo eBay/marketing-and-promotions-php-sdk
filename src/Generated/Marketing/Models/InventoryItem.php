@@ -37,6 +37,11 @@ class InventoryItem implements AdditionalDataHolder, Parsable
     private ?string $inventoryReferenceId = null;
     
     /**
+     * @var InventoryReferenceTypeEnum|null $inventoryReferenceType Indicates the type of the <b>inventoryReferenceId</b>, which can be either <code>INVENTORY_ITEM</code> or <code>INVENTORY_ITEM_GROUP</code>. <br><br><b>Note:</b> This value is not currently returned in the response.
+    */
+    private ?InventoryReferenceTypeEnum $inventoryReferenceType = null;
+    
+    /**
      * Instantiates a new InventoryItem and sets the default values.
     */
     public function __construct() {
@@ -68,6 +73,7 @@ class InventoryItem implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'inventoryReferenceId' => fn(ParseNode $n) => $o->setInventoryReferenceId($n->getStringValue()),
+            'inventoryReferenceType' => fn(ParseNode $n) => $o->setInventoryReferenceType($n->getEnumValue(InventoryReferenceTypeEnum::class)),
         ];
     }
 
@@ -80,11 +86,20 @@ class InventoryItem implements AdditionalDataHolder, Parsable
     }
 
     /**
+     * Gets the inventoryReferenceType property value. Indicates the type of the <b>inventoryReferenceId</b>, which can be either <code>INVENTORY_ITEM</code> or <code>INVENTORY_ITEM_GROUP</code>. <br><br><b>Note:</b> This value is not currently returned in the response.
+     * @return InventoryReferenceTypeEnum|null
+    */
+    public function getInventoryReferenceType(): ?InventoryReferenceTypeEnum {
+        return $this->inventoryReferenceType;
+    }
+
+    /**
      * Serializes information the current object
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('inventoryReferenceId', $this->getInventoryReferenceId());
+        $writer->writeEnumValue('inventoryReferenceType', $this->getInventoryReferenceType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -102,6 +117,14 @@ class InventoryItem implements AdditionalDataHolder, Parsable
     */
     public function setInventoryReferenceId(?string $value): void {
         $this->inventoryReferenceId = $value;
+    }
+
+    /**
+     * Sets the inventoryReferenceType property value. Indicates the type of the <b>inventoryReferenceId</b>, which can be either <code>INVENTORY_ITEM</code> or <code>INVENTORY_ITEM_GROUP</code>. <br><br><b>Note:</b> This value is not currently returned in the response.
+     * @param InventoryReferenceTypeEnum|null $value Value to set for the inventoryReferenceType property.
+    */
+    public function setInventoryReferenceType(?InventoryReferenceTypeEnum $value): void {
+        $this->inventoryReferenceType = $value;
     }
 
 }

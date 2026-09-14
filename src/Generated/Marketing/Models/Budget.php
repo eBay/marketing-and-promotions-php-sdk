@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A container for the budget details of a Promoted Listings campaign that uses the Cost Per Click (CPC) funding model.<br /><br /><span class="tablenote"><b>Note:</b> This container will only be returned for campaigns using the CPC funding model; it does not apply to the Cost Per Sale (CPS) funding model.</span>
+ * The daily budget limit for the Cost Per Click (CPC) Promoted Listings campaign.<br><br><i>Required if</i> the campaign's funding model is CPC.<br><br>This will be a dollar value. All clicks using the keywords defined for the campaign will go towards expending the daily budget. Once the daily budget is exceeded for the campaign, all Promoted Listings under the campaign will be turned off until the next day.<br><br>When running an offsite campaign, eBay may spend more or less than the seller's daily budget to capitalize on interested buyers, but will not exceed 2x the daily budget. The average over the course of the campaign will not exceed the provided daily budget. This value is used to calculate a total monthly budget by multiplying 30.4 by the provided daily budget. Over the course of the campaign, eBay will not charge more than this total budget per month.<br><br>If a campaign ends prematurely, however, the seller may be charged up to 2x their daily budget on a daily basis, as the campaign may have not had the chance to average the budget out over time.<br><br><b>Valid Values</b>:<ul><li><code>50.00</code></li><li><code>100.00</code></li></ul>
 */
 class Budget implements AdditionalDataHolder, Parsable 
 {
@@ -32,14 +32,14 @@ class Budget implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $amount The allocated budget amount for a CPC Promoted Listings campaign.
     */
     private ?Amount $amount = null;
     
     /**
-     * @var string|null $budgetStatus The budget status for a CPC Promoted Listings campaign. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:BudgetStatusEnum'>eBay API documentation</a>
+     * @var BudgetStatusEnum|null $budgetStatus The budget status for a CPC Promoted Listings campaign.
     */
-    private ?string $budgetStatus = null;
+    private ?BudgetStatusEnum $budgetStatus = null;
     
     /**
      * Instantiates a new Budget and sets the default values.
@@ -66,7 +66,7 @@ class Budget implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the amount property value. The allocated budget amount for a CPC Promoted Listings campaign.
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -74,10 +74,10 @@ class Budget implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the budgetStatus property value. The budget status for a CPC Promoted Listings campaign. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:BudgetStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the budgetStatus property value. The budget status for a CPC Promoted Listings campaign.
+     * @return BudgetStatusEnum|null
     */
-    public function getBudgetStatus(): ?string {
+    public function getBudgetStatus(): ?BudgetStatusEnum {
         return $this->budgetStatus;
     }
 
@@ -89,7 +89,7 @@ class Budget implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'amount' => fn(ParseNode $n) => $o->setAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'budgetStatus' => fn(ParseNode $n) => $o->setBudgetStatus($n->getStringValue()),
+            'budgetStatus' => fn(ParseNode $n) => $o->setBudgetStatus($n->getEnumValue(BudgetStatusEnum::class)),
         ];
     }
 
@@ -99,7 +99,7 @@ class Budget implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('amount', $this->getAmount());
-        $writer->writeStringValue('budgetStatus', $this->getBudgetStatus());
+        $writer->writeEnumValue('budgetStatus', $this->getBudgetStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -112,7 +112,7 @@ class Budget implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the amount property value. The allocated budget amount for a CPC Promoted Listings campaign.
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {
@@ -120,10 +120,10 @@ class Budget implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the budgetStatus property value. The budget status for a CPC Promoted Listings campaign. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/pls:BudgetStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the budgetStatus property.
+     * Sets the budgetStatus property value. The budget status for a CPC Promoted Listings campaign.
+     * @param BudgetStatusEnum|null $value Value to set for the budgetStatus property.
     */
-    public function setBudgetStatus(?string $value): void {
+    public function setBudgetStatus(?BudgetStatusEnum $value): void {
         $this->budgetStatus = $value;
     }
 

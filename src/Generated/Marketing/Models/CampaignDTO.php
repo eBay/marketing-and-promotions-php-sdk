@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * email campaign instance body
+ *  This type defines the email campaign instance body.
 */
 class CampaignDTO implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class CampaignDTO implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<CampaignAudience>|null $audiences The audiences that the email campaign is being sent to. See <a href="/api-docs/sell/marketing/types/api:AudienceTypeEnum">AudienceTypeEnum</a> for a list of audience types.
+     * @var array<CampaignAudience>|null $audiences The audiences that the email campaign is being sent to. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.audiencetypeenum">AudienceTypeEnum</a> for a list of audience types.
     */
     private ?array $audiences = null;
     
@@ -47,14 +47,14 @@ class CampaignDTO implements AdditionalDataHolder, Parsable
     private ?string $emailCampaignId = null;
     
     /**
-     * @var string|null $emailCampaignStatus The email campaign status. See <a href="/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum">EmailCampaignStatusEnum</a> for information on statuses. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum'>eBay API documentation</a>
+     * @var EmailCampaignStatusEnum|null $emailCampaignStatus The email campaign status. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.emailcampaignstatusenum">EmailCampaignStatusEnum</a> for information on statuses.
     */
-    private ?string $emailCampaignStatus = null;
+    private ?EmailCampaignStatusEnum $emailCampaignStatus = null;
     
     /**
-     * @var string|null $emailCampaignType The email campaign type. See <a href="/api-docs/sell/marketing/types/api:CampaignTypeEnum">CampaignTypeEnum</a> for definitions of email campaign types. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:CampaignTypeEnum'>eBay API documentation</a>
+     * @var CampaignTypeEnum|null $emailCampaignType The email campaign type. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.campaigntypeenum">CampaignTypeEnum</a> for definitions of email campaign types.
     */
-    private ?string $emailCampaignType = null;
+    private ?CampaignTypeEnum $emailCampaignType = null;
     
     /**
      * @var string|null $marketplaceId The eBay marketplace where the email campaign is active.
@@ -72,9 +72,9 @@ class CampaignDTO implements AdditionalDataHolder, Parsable
     private ?string $scheduleDate = null;
     
     /**
-     * @var string|null $scheduleDateType The schedule type used for sending the email campaign. See <a href="/api-docs/sell/marketing/types/api:ScheduleDateTypeEnum">ScheduleDateTypeEnum</a> for available schedule types. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ScheduleDateTypeEnum'>eBay API documentation</a>
+     * @var ScheduleDateTypeEnum|null $scheduleDateType The schedule type used for sending the email campaign. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.scheduledatetypeenum">ScheduleDateTypeEnum</a> for available schedule types.
     */
-    private ?string $scheduleDateType = null;
+    private ?ScheduleDateTypeEnum $scheduleDateType = null;
     
     /**
      * @var string|null $sentDate The date and time that the email campaign was last sent, given in UTC format.
@@ -111,7 +111,7 @@ class CampaignDTO implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the audiences property value. The audiences that the email campaign is being sent to. See <a href="/api-docs/sell/marketing/types/api:AudienceTypeEnum">AudienceTypeEnum</a> for a list of audience types.
+     * Gets the audiences property value. The audiences that the email campaign is being sent to. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.audiencetypeenum">AudienceTypeEnum</a> for a list of audience types.
      * @return array<CampaignAudience>|null
     */
     public function getAudiences(): ?array {
@@ -135,18 +135,18 @@ class CampaignDTO implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the emailCampaignStatus property value. The email campaign status. See <a href="/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum">EmailCampaignStatusEnum</a> for information on statuses. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the emailCampaignStatus property value. The email campaign status. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.emailcampaignstatusenum">EmailCampaignStatusEnum</a> for information on statuses.
+     * @return EmailCampaignStatusEnum|null
     */
-    public function getEmailCampaignStatus(): ?string {
+    public function getEmailCampaignStatus(): ?EmailCampaignStatusEnum {
         return $this->emailCampaignStatus;
     }
 
     /**
-     * Gets the emailCampaignType property value. The email campaign type. See <a href="/api-docs/sell/marketing/types/api:CampaignTypeEnum">CampaignTypeEnum</a> for definitions of email campaign types. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:CampaignTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the emailCampaignType property value. The email campaign type. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.campaigntypeenum">CampaignTypeEnum</a> for definitions of email campaign types.
+     * @return CampaignTypeEnum|null
     */
-    public function getEmailCampaignType(): ?string {
+    public function getEmailCampaignType(): ?CampaignTypeEnum {
         return $this->emailCampaignType;
     }
 
@@ -160,12 +160,12 @@ class CampaignDTO implements AdditionalDataHolder, Parsable
             'audiences' => fn(ParseNode $n) => $o->setAudiences($n->getCollectionOfObjectValues([CampaignAudience::class, 'createFromDiscriminatorValue'])),
             'creationDate' => fn(ParseNode $n) => $o->setCreationDate($n->getStringValue()),
             'emailCampaignId' => fn(ParseNode $n) => $o->setEmailCampaignId($n->getStringValue()),
-            'emailCampaignStatus' => fn(ParseNode $n) => $o->setEmailCampaignStatus($n->getStringValue()),
-            'emailCampaignType' => fn(ParseNode $n) => $o->setEmailCampaignType($n->getStringValue()),
+            'emailCampaignStatus' => fn(ParseNode $n) => $o->setEmailCampaignStatus($n->getEnumValue(EmailCampaignStatusEnum::class)),
+            'emailCampaignType' => fn(ParseNode $n) => $o->setEmailCampaignType($n->getEnumValue(CampaignTypeEnum::class)),
             'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
             'modificationDate' => fn(ParseNode $n) => $o->setModificationDate($n->getStringValue()),
             'scheduleDate' => fn(ParseNode $n) => $o->setScheduleDate($n->getStringValue()),
-            'scheduleDateType' => fn(ParseNode $n) => $o->setScheduleDateType($n->getStringValue()),
+            'scheduleDateType' => fn(ParseNode $n) => $o->setScheduleDateType($n->getEnumValue(ScheduleDateTypeEnum::class)),
             'sentDate' => fn(ParseNode $n) => $o->setSentDate($n->getStringValue()),
             'subject' => fn(ParseNode $n) => $o->setSubject($n->getStringValue()),
         ];
@@ -196,10 +196,10 @@ class CampaignDTO implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the scheduleDateType property value. The schedule type used for sending the email campaign. See <a href="/api-docs/sell/marketing/types/api:ScheduleDateTypeEnum">ScheduleDateTypeEnum</a> for available schedule types. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ScheduleDateTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the scheduleDateType property value. The schedule type used for sending the email campaign. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.scheduledatetypeenum">ScheduleDateTypeEnum</a> for available schedule types.
+     * @return ScheduleDateTypeEnum|null
     */
-    public function getScheduleDateType(): ?string {
+    public function getScheduleDateType(): ?ScheduleDateTypeEnum {
         return $this->scheduleDateType;
     }
 
@@ -227,12 +227,12 @@ class CampaignDTO implements AdditionalDataHolder, Parsable
         $writer->writeCollectionOfObjectValues('audiences', $this->getAudiences());
         $writer->writeStringValue('creationDate', $this->getCreationDate());
         $writer->writeStringValue('emailCampaignId', $this->getEmailCampaignId());
-        $writer->writeStringValue('emailCampaignStatus', $this->getEmailCampaignStatus());
-        $writer->writeStringValue('emailCampaignType', $this->getEmailCampaignType());
+        $writer->writeEnumValue('emailCampaignStatus', $this->getEmailCampaignStatus());
+        $writer->writeEnumValue('emailCampaignType', $this->getEmailCampaignType());
         $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeStringValue('modificationDate', $this->getModificationDate());
         $writer->writeStringValue('scheduleDate', $this->getScheduleDate());
-        $writer->writeStringValue('scheduleDateType', $this->getScheduleDateType());
+        $writer->writeEnumValue('scheduleDateType', $this->getScheduleDateType());
         $writer->writeStringValue('sentDate', $this->getSentDate());
         $writer->writeStringValue('subject', $this->getSubject());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -247,7 +247,7 @@ class CampaignDTO implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the audiences property value. The audiences that the email campaign is being sent to. See <a href="/api-docs/sell/marketing/types/api:AudienceTypeEnum">AudienceTypeEnum</a> for a list of audience types.
+     * Sets the audiences property value. The audiences that the email campaign is being sent to. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.audiencetypeenum">AudienceTypeEnum</a> for a list of audience types.
      * @param array<CampaignAudience>|null $value Value to set for the audiences property.
     */
     public function setAudiences(?array $value): void {
@@ -271,18 +271,18 @@ class CampaignDTO implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the emailCampaignStatus property value. The email campaign status. See <a href="/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum">EmailCampaignStatusEnum</a> for information on statuses. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:EmailCampaignStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the emailCampaignStatus property.
+     * Sets the emailCampaignStatus property value. The email campaign status. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.emailcampaignstatusenum">EmailCampaignStatusEnum</a> for information on statuses.
+     * @param EmailCampaignStatusEnum|null $value Value to set for the emailCampaignStatus property.
     */
-    public function setEmailCampaignStatus(?string $value): void {
+    public function setEmailCampaignStatus(?EmailCampaignStatusEnum $value): void {
         $this->emailCampaignStatus = $value;
     }
 
     /**
-     * Sets the emailCampaignType property value. The email campaign type. See <a href="/api-docs/sell/marketing/types/api:CampaignTypeEnum">CampaignTypeEnum</a> for definitions of email campaign types. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:CampaignTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the emailCampaignType property.
+     * Sets the emailCampaignType property value. The email campaign type. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.campaigntypeenum">CampaignTypeEnum</a> for definitions of email campaign types.
+     * @param CampaignTypeEnum|null $value Value to set for the emailCampaignType property.
     */
-    public function setEmailCampaignType(?string $value): void {
+    public function setEmailCampaignType(?CampaignTypeEnum $value): void {
         $this->emailCampaignType = $value;
     }
 
@@ -311,10 +311,10 @@ class CampaignDTO implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the scheduleDateType property value. The schedule type used for sending the email campaign. See <a href="/api-docs/sell/marketing/types/api:ScheduleDateTypeEnum">ScheduleDateTypeEnum</a> for available schedule types. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/api:ScheduleDateTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the scheduleDateType property.
+     * Sets the scheduleDateType property value. The schedule type used for sending the email campaign. See <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.scheduledatetypeenum">ScheduleDateTypeEnum</a> for available schedule types.
+     * @param ScheduleDateTypeEnum|null $value Value to set for the scheduleDateType property.
     */
-    public function setScheduleDateType(?string $value): void {
+    public function setScheduleDateType(?ScheduleDateTypeEnum $value): void {
         $this->scheduleDateType = $value;
     }
 

@@ -16,6 +16,7 @@
 
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Email_campaign\Audience;
 
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\Error;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\GetEmailCampaignAudiencesResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -44,18 +45,23 @@ class AudienceRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method retrieves all available email newsletter audiences for the <a href="/api-docs/sell/marketing/types/api:CampaignTypeEnum">email campaign type</a> specified by the <b>emailCampaignType</b> path parameter.<br><br>Use the optional <b>limit</b> and <b>offset</b> path parameters to paginate the results and to control which records are returned, respectively.
+     * This method retrieves all available email newsletter audiences for the <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.campaigntypeenum">email campaign type</a> specified by the <b>emailCampaignType</b> path parameter.<br><br>Use the optional <b>limit</b> and <b>offset</b> path parameters to paginate the results and to control which records are returned, respectively.
      * @param AudienceRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<GetEmailCampaignAudiencesResponse|null>
      * @throws Exception
     */
     public function get(?AudienceRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetEmailCampaignAudiencesResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetEmailCampaignAudiencesResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method retrieves all available email newsletter audiences for the <a href="/api-docs/sell/marketing/types/api:CampaignTypeEnum">email campaign type</a> specified by the <b>emailCampaignType</b> path parameter.<br><br>Use the optional <b>limit</b> and <b>offset</b> path parameters to paginate the results and to control which records are returned, respectively.
+     * This method retrieves all available email newsletter audiences for the <a href="/develop/api/sell/marketing_api#sell-marketing_api-email_campaign-getemailcampaigns.campaigntypeenum">email campaign type</a> specified by the <b>emailCampaignType</b> path parameter.<br><br>Use the optional <b>limit</b> and <b>offset</b> path parameters to paginate the results and to control which records are returned, respectively.
      * @param AudienceRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
