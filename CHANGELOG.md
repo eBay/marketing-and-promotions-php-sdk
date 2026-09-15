@@ -10,17 +10,17 @@
 
 | Operation | Previous parameters | Current parameters |
 | --- | --- | --- |
-| `createEmailCampaign` | `(CreateEmailCampaignRequest, ?string, ?RequestOptions)` | `(CreateEmailCampaignRequest, ?string, ?string, ?RequestOptions)` |
-| `findCampaignByAdReference` | `(?string, ?string, ?string, ?string, ?RequestOptions)` | `(?string, ?FindCampaignInventoryReferenceType, ?string, ?string, ?RequestOptions)` |
-| `getAd` | `(string $adId, string $campaignId, ?string $accessToken, ?RequestOptions $requestOptions)` | `(string $adId, string $campaignId, ?AdByIdFieldgroups $fieldgroups, ?string $accessToken, ?RequestOptions $requestOptions)` |
-| `getAdGroups` | `(string, ?string, ?string, ?string, ?string, ?RequestOptions)` | `(string, ?AdGroupStatus, ?string, ?string, ?string, ?RequestOptions)` |
+| `createEmailCampaign` | `(CreateEmailCampaignRequest $body, ?string $accessToken, ?RequestOptions $requestOptions)` | `(CreateEmailCampaignRequest $body, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `findCampaignByAdReference` | `(?string $inventoryReferenceId, ?string $inventoryReferenceType, ?string $listingId, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?string $inventoryReferenceId, ?FindCampaignInventoryReferenceType $inventoryReferenceType, ?string $listingId, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getAd` | `(string $campaignId, string $adId, ?string $accessToken, ?RequestOptions $requestOptions)` | `(string $adId, string $campaignId, ?AdByIdFieldgroups $fieldgroups, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getAdGroups` | `(string $campaignId, ?string $adGroupStatus, ?string $limit, ?string $offset, ?string $accessToken, ?RequestOptions $requestOptions)` | `(string $campaignId, ?AdGroupStatus $adGroupStatus, ?string $limit, ?string $offset, ?string $accessToken, ?RequestOptions $requestOptions)` |
 | `getAds` | `(string $campaignId, ?string $adGroupIds, ?string $adStatus, ?string $limit, ?string $listingIds, ?string $offset, ?string $accessToken, ?RequestOptions $requestOptions)` | `(string $campaignId, ?string $adGroupIds, ?AdStatus $adStatus, ?string $limit, ?string $listingIds, ?string $offset, ?AdsFieldgroups $fieldgroups, ?string $accessToken, ?RequestOptions $requestOptions)` |
-| `getAdsByInventoryReference` | `(string, ?string, ?string, ?string, ?RequestOptions)` | `(string, ?string, ?AdsInventoryReferenceType, ?string, ?RequestOptions)` |
+| `getAdsByInventoryReference` | `(string $campaignId, ?string $inventoryReferenceId, ?string $inventoryReferenceType, ?string $accessToken, ?RequestOptions $requestOptions)` | `(string $campaignId, ?string $inventoryReferenceId, ?AdsInventoryReferenceType $inventoryReferenceType, ?string $accessToken, ?RequestOptions $requestOptions)` |
 | `getCampaigns` | `(?string $campaignName, ?string $campaignStatus, ?string $campaignTargetingTypes, ?string $channels, ?string $endDateRange, ?string $fundingStrategy, ?string $limit, ?string $offset, ?string $startDateRange, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?string $campaignName, ?CampaignStatus $campaignStatus, ?CampaignTargetingTypes $campaignTargetingTypes, ?CampaignChannels $channels, ?string $endDateRange, ?CampaignFundingStrategy $fundingStrategy, ?string $limit, ?string $offset, ?string $startDateRange, ?string $marketplaceId, ?string $accessToken, ?RequestOptions $requestOptions)` |
-| `getKeywords` | `(string, ?string, ?string, ?string, ?string, ?string, ?RequestOptions)` | `(string, ?string, ?KeywordStatus, ?string, ?string, ?string, ?RequestOptions)` |
-| `getListingSet` | `(string, ?string, ?string, ?string, ?string, ?string, ?string, ?RequestOptions)` | `(string, ?string, ?string, ?string, ?string, ?ItemMarkdownStatus, ?string, ?RequestOptions)` |
-| `getNegativeKeywords` | `(?string, ?string, ?string, ?string, ?string, ?string, ?RequestOptions)` | `(?string, ?string, ?string, ?NegativeKeywordStatus, ?string, ?string, ?RequestOptions)` |
-| `suggestBudget` | `(?string, ?RequestOptions)` | `(?string, ?string, ?RequestOptions)` |
+| `getKeywords` | `(string $campaignId, ?string $adGroupIds, ?string $keywordStatus, ?string $limit, ?string $offset, ?string $accessToken, ?RequestOptions $requestOptions)` | `(string $campaignId, ?string $adGroupIds, ?KeywordStatus $keywordStatus, ?string $limit, ?string $offset, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getListingSet` | `(string $promotionId, ?string $limit, ?string $offset, ?string $q, ?string $sort, ?string $status, ?string $accessToken, ?RequestOptions $requestOptions)` | `(string $promotionId, ?string $limit, ?string $offset, ?string $q, ?string $sort, ?ItemMarkdownStatus $status, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getNegativeKeywords` | `(?string $adGroupIds, ?string $campaignIds, ?string $limit, ?string $negativeKeywordStatus, ?string $offset, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?string $adGroupIds, ?string $campaignIds, ?string $limit, ?NegativeKeywordStatus $negativeKeywordStatus, ?string $offset, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `suggestBudget` | `(?string $accessToken, ?RequestOptions $requestOptions)` | `(?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
 
 Generated type aliases used above:
 
@@ -44,7 +44,7 @@ Generated type aliases used above:
 
 | Operation | Previous parameters | Current parameters |
 | --- | --- | --- |
-| `findListingRecommendations` | `(FindListingRecommendationRequest, ?string, ?string, ?string, ?string, ?RequestOptions)` | `(FindListingRecommendationRequest, ?string, ?int, ?int, ?string, ?string, ?RequestOptions)` |
+| `findListingRecommendations` | `(FindListingRecommendationRequest $body, ?string $filter, ?string $limit, ?string $offset, ?string $accessToken, ?RequestOptions $requestOptions)` | `(FindListingRecommendationRequest $body, ?string $filter, ?int $limit, ?int $offset, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
 
 ### Added
 
