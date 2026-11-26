@@ -29,6 +29,7 @@ use EBay\MarketingAndPromotions\Generated\Marketing\Negative_keyword\Negative_ke
 use EBay\MarketingAndPromotions\Generated\Marketing\Promotion_report\Promotion_reportRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Promotion_summary_report\Promotion_summary_reportRequestBuilder;
 use EBay\MarketingAndPromotions\Generated\Marketing\Promotion\PromotionRequestBuilder;
+use EBay\MarketingAndPromotions\Generated\Marketing\Seller_promotional_offers\Seller_promotional_offersRequestBuilder;
 use Microsoft\Kiota\Abstractions\ApiClientBuilder;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
 use Microsoft\Kiota\Abstractions\RequestAdapter;
@@ -134,6 +135,13 @@ class MarketingApiClient extends BaseRequestBuilder
     */
     public function promotion_summary_report(): Promotion_summary_reportRequestBuilder {
         return new Promotion_summary_reportRequestBuilder($this->pathParameters, $this->requestAdapter);
+    }
+    
+    /**
+     * Seller promotional offers
+    */
+    public function seller_promotional_offers(): Seller_promotional_offersRequestBuilder {
+        return new Seller_promotional_offersRequestBuilder($this->pathParameters, $this->requestAdapter);
     }
     
     /**

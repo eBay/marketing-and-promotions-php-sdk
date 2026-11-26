@@ -52,7 +52,7 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
     private ?string $description = null;
     
     /**
-     * @var string|null $endDate The date and time the discount ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). The value supplied for <b>endDate</b> must be at least 24 hours after the value supplied for the <b>startDate</b> of the markdown discount.<br><br>For display purposes, convert this time into the local time of the seller.  <br><br><b>Max value:</b><ul><li><code>14</code> days for the AT, CH, DE, ES, FR, IE, IT, and UK, marketplaces.</li>  <li><code>45</code> days for all other marketplaces.</li></ul>
+     * @var string|null $endDate The date and time the discount ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). The value supplied for <b>endDate</b> must be at least 24 hours after the value supplied for the <b>startDate</b> of the markdown discount.<br><br>For display purposes, convert this time into the local time of the seller.  <br><br><b>Max duration for markdown discounts:</b><ul><li><code>14</code> days for the AT, CH, IE, and UK marketplaces.</li> <li><code>30</code> days for DE, ES, FR, IT, and TW marketplaces.</li>  <li><code>45</code> days for all other marketplaces.</li></ul>
     */
     private ?string $endDate = null;
     
@@ -148,7 +148,7 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the endDate property value. The date and time the discount ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). The value supplied for <b>endDate</b> must be at least 24 hours after the value supplied for the <b>startDate</b> of the markdown discount.<br><br>For display purposes, convert this time into the local time of the seller.  <br><br><b>Max value:</b><ul><li><code>14</code> days for the AT, CH, DE, ES, FR, IE, IT, and UK, marketplaces.</li>  <li><code>45</code> days for all other marketplaces.</li></ul>
+     * Gets the endDate property value. The date and time the discount ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). The value supplied for <b>endDate</b> must be at least 24 hours after the value supplied for the <b>startDate</b> of the markdown discount.<br><br>For display purposes, convert this time into the local time of the seller.  <br><br><b>Max duration for markdown discounts:</b><ul><li><code>14</code> days for the AT, CH, IE, and UK marketplaces.</li> <li><code>30</code> days for DE, ES, FR, IT, and TW marketplaces.</li>  <li><code>45</code> days for all other marketplaces.</li></ul>
      * @return string|null
     */
     public function getEndDate(): ?string {
@@ -294,7 +294,7 @@ class ItemPriceMarkdown implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the endDate property value. The date and time the discount ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). The value supplied for <b>endDate</b> must be at least 24 hours after the value supplied for the <b>startDate</b> of the markdown discount.<br><br>For display purposes, convert this time into the local time of the seller.  <br><br><b>Max value:</b><ul><li><code>14</code> days for the AT, CH, DE, ES, FR, IE, IT, and UK, marketplaces.</li>  <li><code>45</code> days for all other marketplaces.</li></ul>
+     * Sets the endDate property value. The date and time the discount ends, in UTC format (<code>yyyy-MM-ddThh:mm:ssZ</code>). The value supplied for <b>endDate</b> must be at least 24 hours after the value supplied for the <b>startDate</b> of the markdown discount.<br><br>For display purposes, convert this time into the local time of the seller.  <br><br><b>Max duration for markdown discounts:</b><ul><li><code>14</code> days for the AT, CH, IE, and UK marketplaces.</li> <li><code>30</code> days for DE, ES, FR, IT, and TW marketplaces.</li>  <li><code>45</code> days for all other marketplaces.</li></ul>
      * @param string|null $value Value to set for the endDate property.
     */
     public function setEndDate(?string $value): void {

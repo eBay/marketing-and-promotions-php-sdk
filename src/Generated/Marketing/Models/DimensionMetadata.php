@@ -42,7 +42,7 @@ class DimensionMetadata implements AdditionalDataHolder, Parsable
     private ?string $dimensionKey = null;
     
     /**
-     * @var array<DimensionKeyAnnotation>|null $dimensionKeyAnnotations An list of annotation keys associated with the specified dimension of the report.
+     * @var array<DimensionKeyAnnotation>|null $dimensionKeyAnnotations A list of annotation keys associated with the specified dimension of the report.
     */
     private ?array $dimensionKeyAnnotations = null;
     
@@ -87,7 +87,7 @@ class DimensionMetadata implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the dimensionKeyAnnotations property value. An list of annotation keys associated with the specified dimension of the report.
+     * Gets the dimensionKeyAnnotations property value. A list of annotation keys associated with the specified dimension of the report.
      * @return array<DimensionKeyAnnotation>|null
     */
     public function getDimensionKeyAnnotations(): ?array {
@@ -143,7 +143,7 @@ class DimensionMetadata implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the dimensionKeyAnnotations property value. An list of annotation keys associated with the specified dimension of the report.
+     * Sets the dimensionKeyAnnotations property value. A list of annotation keys associated with the specified dimension of the report.
      * @param array<DimensionKeyAnnotation>|null $value Value to set for the dimensionKeyAnnotations property.
     */
     public function setDimensionKeyAnnotations(?array $value): void {

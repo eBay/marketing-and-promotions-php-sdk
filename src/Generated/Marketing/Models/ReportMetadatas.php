@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the metadata used by the all report types.
+ * This type defines the metadata used by all report types.
 */
 class ReportMetadatas implements AdditionalDataHolder, Parsable 
 {

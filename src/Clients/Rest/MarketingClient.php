@@ -83,12 +83,15 @@ use EBay\MarketingAndPromotions\Generated\Marketing\Models\Keyword;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\KeywordPagedCollectionResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\NegativeKeyword;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\NegativeKeywordPagedCollectionResponse;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\PromotionSignUpRequest;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\PromotionSignUpResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\PromotionsPagedCollection;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\PromotionsReportPagedCollection;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\ReportMetadata;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\ReportMetadatas;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\ReportTask;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\ReportTaskPagedCollection;
+use EBay\MarketingAndPromotions\Generated\Marketing\Models\SellerPromotionalOffersResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\SuggestBudgetResponse;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\SuggestMaxCpcRequest;
 use EBay\MarketingAndPromotions\Generated\Marketing\Models\SuggestMaxCpcResponse;
@@ -544,7 +547,7 @@ final class MarketingClient
         ?string $limit = null,
         ?string $offset = null,
         ?string $startDateRange = null,
-        ?string $marketplaceId = null,
+        ?\EBay\MarketingAndPromotions\Generated\Marketing\Models\MarketplaceIdEnum $marketplaceId = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?CampaignPagedCollectionResponse
@@ -1460,6 +1463,50 @@ final class MarketingClient
             $api->ad_campaign()->byCampaign_id($campaignId)->bulk_upsert_video_ads_preferences()->put(
                 $body,
                 new \EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\Item\Bulk_upsert_video_ads_preferences\Bulk_upsert_video_ads_preferencesRequestBuilderPutRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getSellerPromotionalOffers(
+        ?string $xEBAYCMARKETPLACEID = null,
+        ?string $acceptLanguage = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?SellerPromotionalOffersResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        if ($xEBAYCMARKETPLACEID !== null) {
+            $headers["X-EBAY-C-MARKETPLACE-ID"] = $xEBAYCMARKETPLACEID;
+        }
+        if ($acceptLanguage !== null) {
+            $headers["Accept-Language"] = $acceptLanguage;
+        }
+        return $this->call($accessToken, fn($api) =>
+            $api->seller_promotional_offers()->get(
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Seller_promotional_offers\Seller_promotional_offersRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function activatePromotion(
+        PromotionSignUpRequest $body,
+        ?string $xEBAYCMARKETPLACEID = null,
+        ?string $acceptLanguage = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?PromotionSignUpResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        if ($xEBAYCMARKETPLACEID !== null) {
+            $headers["X-EBAY-C-MARKETPLACE-ID"] = $xEBAYCMARKETPLACEID;
+        }
+        if ($acceptLanguage !== null) {
+            $headers["Accept-Language"] = $acceptLanguage;
+        }
+        return $this->call($accessToken, fn($api) =>
+            $api->seller_promotional_offers()->activate_promotion()->post(
+                $body,
+                new \EBay\MarketingAndPromotions\Generated\Marketing\Seller_promotional_offers\Activate_promotion\Activate_promotionRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

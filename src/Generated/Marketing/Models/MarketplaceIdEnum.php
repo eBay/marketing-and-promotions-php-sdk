@@ -19,10 +19,12 @@ namespace EBay\MarketingAndPromotions\Generated\Marketing\Models;
 use Microsoft\Kiota\Abstractions\Enum;
 
 class MarketplaceIdEnum extends Enum {
-    public const E_B_A_Y__A_T = "EBAY_AT";
-    public const E_B_A_Y__A_U = "EBAY_AU";
-    public const E_B_A_Y__B_E = "EBAY_BE";
+    public const E_B_A_Y__U_S = "EBAY_US";
     public const E_B_A_Y__C_A = "EBAY_CA";
+    public const E_B_A_Y__G_B = "EBAY_GB";
+    public const E_B_A_Y__A_U = "EBAY_AU";
+    public const E_B_A_Y__A_T = "EBAY_AT";
+    public const E_B_A_Y__B_E = "EBAY_BE";
     public const E_B_A_Y__C_H = "EBAY_CH";
     public const E_B_A_Y__C_N = "EBAY_CN";
     public const E_B_A_Y__C_Z = "EBAY_CZ";
@@ -31,7 +33,6 @@ class MarketplaceIdEnum extends Enum {
     public const E_B_A_Y__E_S = "EBAY_ES";
     public const E_B_A_Y__F_I = "EBAY_FI";
     public const E_B_A_Y__F_R = "EBAY_FR";
-    public const E_B_A_Y__G_B = "EBAY_GB";
     public const E_B_A_Y__G_R = "EBAY_GR";
     public const E_B_A_Y__H_K = "EBAY_HK";
     public const E_B_A_Y__H_U = "EBAY_HU";
@@ -55,7 +56,6 @@ class MarketplaceIdEnum extends Enum {
     public const E_B_A_Y__S_G = "EBAY_SG";
     public const E_B_A_Y__T_H = "EBAY_TH";
     public const E_B_A_Y__T_W = "EBAY_TW";
-    public const E_B_A_Y__U_S = "EBAY_US";
     public const E_B_A_Y__V_N = "EBAY_VN";
     public const E_B_A_Y__Z_A = "EBAY_ZA";
     public const E_B_A_Y__H_A_L_F__U_S = "EBAY_HALF_US";

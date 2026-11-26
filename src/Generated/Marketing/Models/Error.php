@@ -39,7 +39,7 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     private ?string $category = null;
     
     /**
-     * @var string|null $domain Name for the primary system where the error occurred. This is relevant for application errors.
+     * @var string|null $domain Name for the primary system where the error occurred.
     */
     private ?string $domain = null;
     
@@ -69,12 +69,12 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     private ?array $outputRefIds = null;
     
     /**
-     * @var array<ErrorParameter>|null $parameters An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned.
+     * @var array<ErrorParameter>|null $parameters An array of name/value pairs that describe details the error condition.
     */
     private ?array $parameters = null;
     
     /**
-     * @var string|null $subdomain Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc.
+     * @var string|null $subdomain Further helps indicate which subsystem the error is coming from.
     */
     private ?string $subdomain = null;
     
@@ -119,7 +119,7 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the domain property value. Name for the primary system where the error occurred. This is relevant for application errors.
+     * Gets the domain property value. Name for the primary system where the error occurred.
      * @return string|null
     */
     public function getDomain(): ?string {
@@ -192,7 +192,7 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the parameters property value. An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned.
+     * Gets the parameters property value. An array of name/value pairs that describe details the error condition.
      * @return array<ErrorParameter>|null
     */
     public function getParameters(): ?array {
@@ -208,7 +208,7 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the subdomain property value. Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc.
+     * Gets the subdomain property value. Further helps indicate which subsystem the error is coming from.
      * @return string|null
     */
     public function getSubdomain(): ?string {
@@ -249,7 +249,7 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the domain property value. Name for the primary system where the error occurred. This is relevant for application errors.
+     * Sets the domain property value. Name for the primary system where the error occurred.
      * @param string|null $value Value to set for the domain property.
     */
     public function setDomain(?string $value): void {
@@ -297,7 +297,7 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the parameters property value. An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned.
+     * Sets the parameters property value. An array of name/value pairs that describe details the error condition.
      * @param array<ErrorParameter>|null $value Value to set for the parameters property.
     */
     public function setParameters(?array $value): void {
@@ -305,7 +305,7 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the subdomain property value. Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc.
+     * Sets the subdomain property value. Further helps indicate which subsystem the error is coming from.
      * @param string|null $value Value to set for the subdomain property.
     */
     public function setSubdomain(?string $value): void {

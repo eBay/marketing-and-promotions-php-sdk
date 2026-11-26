@@ -103,7 +103,7 @@ class ReportTask implements AdditionalDataHolder, Parsable
     private ?string $reportId = null;
     
     /**
-     * @var string|null $reportName An eBay-assigned name for the report that's created by the <b>createReportTask</b> call. This name is unique for the seller.
+     * @var string|null $reportName An eBay-assigned name for the report that's created by the <b>createReportTask</b> method. This name is unique for the seller.
     */
     private ?string $reportName = null;
     
@@ -332,7 +332,7 @@ class ReportTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the reportName property value. An eBay-assigned name for the report that's created by the <b>createReportTask</b> call. This name is unique for the seller.
+     * Gets the reportName property value. An eBay-assigned name for the report that's created by the <b>createReportTask</b> method. This name is unique for the seller.
      * @return string|null
     */
     public function getReportName(): ?string {
@@ -546,7 +546,7 @@ class ReportTask implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the reportName property value. An eBay-assigned name for the report that's created by the <b>createReportTask</b> call. This name is unique for the seller.
+     * Sets the reportName property value. An eBay-assigned name for the report that's created by the <b>createReportTask</b> method. This name is unique for the seller.
      * @param string|null $value Value to set for the reportName property.
     */
     public function setReportName(?string $value): void {

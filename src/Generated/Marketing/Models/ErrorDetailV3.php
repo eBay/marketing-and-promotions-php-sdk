@@ -24,7 +24,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * This type defines the fields returned in an error condition.
+ * The errors or warnings object type.
 */
 class ErrorDetailV3 extends ApiException implements AdditionalDataHolder, Parsable 
 {
