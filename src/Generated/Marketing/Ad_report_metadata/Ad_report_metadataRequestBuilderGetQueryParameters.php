@@ -17,7 +17,7 @@
 namespace EBay\MarketingAndPromotions\Generated\Marketing\Ad_report_metadata;
 
 /**
- * This call retrieves information that details the fields used in each of the Promoted Listings reports. Use the returned information to configure the different types of Promoted Listings reports.</br></br> You can retrieve metadata for all report types,funding models and channels, or you can filter based on funding model and/or channel.<br/><br/><span class="tablenote"><b>Note:</b> The reporting of some data related to sales and ad-fees may require a 72-hour (<b>maximum</b>) adjustment period which is often referred to as the <i>Reconciliation Period</i>. Such adjustment periods should, on average, be minimal. However, at any given time, the <b>payments</b> tab may be used to view those amounts that have actually been charged.</span>
+ * This method retrieves information that details the fields used in each of the Promoted Listings reports. Use the returned information to configure the different types of Promoted Listings reports.</br></br> You can retrieve metadata for all report types,funding models and channels, or you can filter based on funding model and/or channel.<br/><br/><span class="tablenote"><b>Note:</b> The reporting of some data related to sales and ad-fees may require a 72-hour (<b>maximum</b>) adjustment period which is often referred to as the <i>Reconciliation Period</i>. Such adjustment periods should, on average, be minimal. However, at any given time, the <b>payments</b> tab may be used to view those amounts that have actually been charged.</span>
 */
 class Ad_report_metadataRequestBuilderGetQueryParameters 
 {

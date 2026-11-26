@@ -1,5 +1,33 @@
 # ChangeLog
 
+## 0.3.0 (11/26/2026)
+
+### Breaking changes
+
+- The following operations changed signature on `MarketingClient`:
+| Operation | Previous signature | New signature |
+| --- | --- | --- |
+| `getCampaigns` | `getCampaigns(?string campaignName, ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\GetCampaign_statusQueryParameterType campaignStatus, ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\GetCampaign_targeting_typesQueryParameterType campaignTargetingTypes, ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\GetChannelsQueryParameterType channels, ?string endDateRange, ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\GetFunding_strategyQueryParameterType fundingStrategy, ?string limit, ?string offset, ?string startDateRange, ?string marketplaceId, ?string accessToken, ?RequestOptions requestOptions)` | `getCampaigns(?string campaignName, ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\GetCampaign_statusQueryParameterType campaignStatus, ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\GetCampaign_targeting_typesQueryParameterType campaignTargetingTypes, ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\GetChannelsQueryParameterType channels, ?string endDateRange, ?\EBay\MarketingAndPromotions\Generated\Marketing\Ad_campaign\GetFunding_strategyQueryParameterType fundingStrategy, ?string limit, ?string offset, ?string startDateRange, ?\EBay\MarketingAndPromotions\Generated\Marketing\Models\MarketplaceIdEnum marketplaceId, ?string accessToken, ?RequestOptions requestOptions)` |
+
+### Security
+
+- `KiotaAuthProvider` created with an empty `$allowedHosts` list no longer returns the access token for every host. It now requires the URL's host to be in the list.
+
+### Added
+
+- The following operations were added to `MarketingClient`:
+  - `activatePromotion`
+  - `getSellerPromotionalOffers`
+
+- Local mock servers: a base URL may use plain `http` when its host is a loopback host (`127.0.0.1`, `::1` or `localhost`) that you also pass in `$allowedHosts`, for example `allowedHosts: ['127.0.0.1']`. Every other host still requires `https`. `MarketingAndPromotionsConfiguration::LOOPBACK_HOSTS` lists the loopback hosts.
+- `MarketingAndPromotionsConfiguration::untrustedReason()` says why a URL may not receive the access token, and `MarketingAndPromotionsConfiguration::normalizeHost()` normalizes a host the same way the SDK compares hosts.
+
+### Changed
+
+- Updated the `marketing` OpenAPI document to the latest definitions.
+- Hosts are compared lowercased and without IPv6 brackets, so `[::1]` and `::1` match.
+- A rejected base URL now says whether the scheme or the host is not trusted.
+
 ## 0.2.0 (09/14/2026)
 
 ### Breaking changes

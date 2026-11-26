@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * A type that defines the fields used by the <b>keyword</b> requests.
+ * A type that defines the fields used by the <b>Keyword</b> method.
 */
 class KeywordRequest implements AdditionalDataHolder, Parsable 
 {
